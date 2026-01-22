@@ -116,7 +116,7 @@ export default function Home() {
                       htmlFor="url"
                       className="block text-sm font-semibold text-apple-gray mb-2"
                     >
-                      Website URL
+                      Page URL
                     </label>
                     <input
                       id="url"
@@ -149,7 +149,8 @@ export default function Home() {
                       className="w-full px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
                     />
                     <p className="mt-2 text-sm text-gray-500">
-                      We'll send your full report here.
+                      You'll see your short report right away. We'll send your
+                      full report here.
                     </p>
                   </div>
 
@@ -201,8 +202,7 @@ export default function Home() {
                 </div>
 
                 <p className="mt-6 text-center text-xs text-gray-500">
-                  This diagnostic tool is now in beta and scans only a home page
-                  on your site (more coming soon).
+                  This diagnostic tool is now in beta.
                 </p>
               </motion.form>
 
