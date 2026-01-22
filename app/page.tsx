@@ -202,7 +202,13 @@ export default function Home() {
                 </div>
 
                 <p className="mt-6 text-center text-xs text-gray-500">
-                  This diagnostic tool is now in beta.
+                  Created by{" "}
+                  <a
+                    href="https://www.maxpetrusenko.com/"
+                    className="text-apple-blue"
+                  >
+                    @max_petrusenko
+                  </a>
                 </p>
               </motion.form>
 
