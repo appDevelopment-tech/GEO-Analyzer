@@ -27,9 +27,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-    const email = session.customer_email;
+  if (event.type === "charge.succeeded") {
+    const session = event.data.object as Stripe.Charge;
+    const email = session.billing_details.email;
 
     if (email) {
       // Fetch the latest report for this email
