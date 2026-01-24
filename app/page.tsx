@@ -87,52 +87,7 @@ export default function Home() {
               className="max-w-2xl mx-auto"
             >
               <Hero />
-              {/* Why get the full report? */}
-              <div className="flex flex-col items-center justify-center mt-8 mb-8">
-                <span className="flex items-center gap-2 mb-2">
-                  <svg
-                    className="w-7 h-7 text-green-500"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="text-lg font-semibold text-green-700">
-                    Unlock Your Full GEO Report
-                  </span>
-                </span>
-                <p className="max-w-xl text-base md:text-lg text-gray-700 bg-green-50 border border-green-200 rounded-xl px-6 py-4 shadow-sm">
-                  <span className="font-bold">
-                    Why settle for a surface score?
-                  </span>{" "}
-                  Your full GEO report reveals exactly{" "}
-                  <span className="text-green-700 font-semibold">
-                    what’s holding your site back
-                  </span>{" "}
-                  from AI-driven visibility and how to fix it—fast. Get:
-                  <ul className="list-disc list-inside mt-2 mb-2 text-left">
-                    <li>
-                      Actionable, prioritized fixes for your content and tech
-                      stack
-                    </li>
-                    <li>Evidence-based insights with real page citations</li>
-                    <li>Competitive benchmarks and trust signals</li>
-                    <li>Direct, expert recommendations for Week 1 impact</li>
-                  </ul>
-                  <span className="text-green-700 font-semibold">
-                    Don’t let your competitors outrank you in the new AI search
-                    era.
-                  </span>{" "}
-                  Invest in your site’s future—get the full report and start
-                  winning today!
-                </p>
-              </div>
+
               <Form
                 url={url}
                 setUrl={setUrl}
