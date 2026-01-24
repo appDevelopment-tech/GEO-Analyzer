@@ -129,9 +129,9 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   type="button"
                   onClick={() => handleStripeCheckout(email)}
-                  className="w-full bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  Pay $9.99 for Full Report
+                  Get a Full Report
                 </motion.button>
               </div>
 

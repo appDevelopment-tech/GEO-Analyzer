@@ -48,6 +48,8 @@ export async function POST(req: NextRequest) {
       if (data && !error) {
         // Send the report via email
         await sendReport(email, data.domain, data.full_report);
+      } else {
+        console.error("Supabase error fetching report:", email, data, error);
       }
       const id = data.id;
       await supabase
