@@ -28,8 +28,8 @@ export const Hero = () => (
         cursorBlinkDuration={0.5}
         className="text-5xl md:text-6xl font-bold text-light-grey mb-6 leading-tight bg-gradient-to-r from-apple-blue to-cyan-500 bg-clip-text text-transparent"
       />
-      <div className="flex flex-col md:flex-row items-center justify-center mb-4 gap-1">
-        <p className="text-xl text-light-grey leading-relaxed">
+      <div className="flex flex-col md:flex-row items-center justify-center mb-4">
+        <p className="text-xl text-light-grey leading-relaxed mr-1">
           Get an evidence-based diagnostic report on your website's
         </p>
         <RotatingText

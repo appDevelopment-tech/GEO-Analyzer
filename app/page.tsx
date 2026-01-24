@@ -34,10 +34,6 @@ export default function Home() {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
 
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
-  );
-
   async function handleStripeCheckout(email: string) {
     const res = await fetch("/api/checkout", {
       method: "POST",
@@ -100,8 +96,6 @@ export default function Home() {
                 error={error}
                 handleAnalyze={handleAnalyze}
               />
-
-              {/* Features */}
               <Features />
             </motion.div>
           ) : (
@@ -117,7 +111,7 @@ export default function Home() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl md:text-5xl font-bold text-apple-gray mb-4"
+                  className="text-4xl md:text-5xl font-bold text-light-grey mb-4"
                 >
                   Your GEO Analysis
                 </motion.h2>
@@ -125,17 +119,20 @@ export default function Home() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-lg text-gray-600"
+                  className="text-lg text-gray-200"
                 >
                   Here's how AI sees your website
                 </motion.p>
-                <button
+                <motion.button
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                   type="button"
                   onClick={() => handleStripeCheckout(email)}
-                  className="bg-apple-blue text-white px-6 py-3 rounded-xl font-semibold"
+                  className="w-full bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  Pay $4.99 for Full Report
-                </button>
+                  Pay $9.99 for Full Report
+                </motion.button>
               </div>
 
               <ScoreCard

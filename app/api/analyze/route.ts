@@ -101,7 +101,6 @@ export async function POST(request: NextRequest) {
         section_scores: geoScore.section_scores,
         top_hesitation: geoScore.top_ai_hesitations[0] || null,
       },
-      message: "Full report sent to your email",
     });
   } catch (error: any) {
     console.error("Analysis error:", error);
