@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { crawlWebsite } from "@/lib/crawler";
 import { analyzeWithOpenAI } from "@/lib/analyzer";
-import { sendReport } from "@/lib/email";
 import { createClient } from "@supabase/supabase-js";
+
+type Report = {
+  id: number;
+  email: string;
+  full_report: string;
+  result: string;
+  domain: string;
+  created_at: string;
+  webhook_result: string | boolean | null;
+  email_result: string | boolean | null;
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -64,22 +74,22 @@ export async function POST(request: NextRequest) {
     // await sendReport(email, domain, geoScore);
 
     //Step 3 now is to save to supabase
-    const dbResult = await supabase.from("Reports").insert([
-      {
-        email,
-        full_report: JSON.stringify(geoScore),
-        result: "pending",
-        domain: normalizedUrl,
-      },
-    ]);
+    const dbResult: any = await supabase
+      .from("Reports")
+      .insert([
+        {
+          email,
+          full_report: JSON.stringify(geoScore),
+          result: "pending",
+          domain: normalizedUrl,
+        },
+      ])
+      .select();
+    const id = dbResult.data && dbResult.data[0]?.id;
     // Optionally, update the result field after insert if you want to store 'success' or 'error'
     const status = dbResult.error ? "error" : "success";
     if (dbResult.data) {
-      await supabase
-        .from("Reports")
-        .update({ result: status })
-        .eq("email", email)
-        .eq("domain", normalizedUrl);
+      await supabase.from("Reports").update({ result: status }).eq("id", id);
     }
 
     // Step 4: Return partial report for immediate display

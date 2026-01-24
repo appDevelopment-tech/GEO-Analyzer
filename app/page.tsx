@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Form } from "@/components/Form";
 import { Features } from "@/components/Features";
+import { loadStripe } from "@stripe/stripe-js";
 
 interface AnalysisResult {
   overall_score: number;
@@ -32,6 +33,20 @@ export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState("");
+
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+  );
+
+  async function handleStripeCheckout(email: string) {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const { url } = await res.json();
+    window.location.href = url;
+  }
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,6 +129,13 @@ export default function Home() {
                 >
                   Here's how AI sees your website
                 </motion.p>
+                <button
+                  type="button"
+                  onClick={() => handleStripeCheckout(email)}
+                  className="bg-apple-blue text-white px-6 py-3 rounded-xl font-semibold"
+                >
+                  Pay $4.99 for Full Report
+                </button>
               </div>
 
               <ScoreCard
