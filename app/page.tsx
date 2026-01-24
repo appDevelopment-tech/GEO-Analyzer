@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScoreCard from "@/components/ScoreCard";
+import TextType from "@/components/TextType";
+import { Footer } from "@/components/Footer";
+import RotatingText from "@/components/RotatingText";
 
 interface AnalysisResult {
   overall_score: number;
@@ -58,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-apple-light">
+    <main className="min-h-screen">
       {/* Header */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
@@ -67,7 +70,7 @@ export default function Home() {
         className="py-6 px-4"
       >
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-2xl font-bold text-apple-gray">GEO Analyzer</h1>
+          <h1 className="text-2xl font-bold text-apple-light">GEO Analyzer</h1>
         </div>
       </motion.header>
 
@@ -88,17 +91,39 @@ export default function Home() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-center mb-12"
               >
-                <h2 className="text-5xl md:text-6xl font-bold text-apple-gray mb-6 leading-tight">
-                  Can AI confidently
-                  <br />
-                  <span className="bg-gradient-to-r from-apple-blue to-cyan-500 bg-clip-text text-transparent">
-                    recommend your site?
-                  </span>
-                </h2>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Get an evidence-based diagnostic report on your website's AI
-                  recommendation readiness
-                </p>
+                <TextType
+                  text={["Rank #1 in", "AI Search Results"]}
+                  typingSpeed={75}
+                  pauseDuration={1500}
+                  showCursor
+                  cursorCharacter="_"
+                  deletingSpeed={50}
+                  variableSpeed={{ min: 60, max: 120 }}
+                  cursorBlinkDuration={0.5}
+                  className="text-5xl md:text-6xl font-bold text-light-grey mb-6 leading-tight bg-gradient-to-r from-apple-blue to-cyan-500 bg-clip-text text-transparent"
+                />
+                <div className="flex flex-col md:flex-row items-center justify-center mb-4 gap-1">
+                  <p className="text-xl text-light-grey leading-relaxed">
+                    Get an evidence-based diagnostic report on your website's
+                  </p>
+                  <RotatingText
+                    texts={[
+                      "AI readiness",
+                      "AI visibility",
+                      "discoverability",
+                      "GEO score",
+                    ]}
+                    mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg min-w-[9.5rem]" // adjust as needed
+                    staggerFrom={"last"}
+                    initial={{ y: "100%" }}
+                    animate={{ y: 0 }}
+                    exit={{ y: "-120%" }}
+                    staggerDuration={0.025}
+                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                    rotationInterval={2000}
+                  />
+                </div>
               </motion.div>
 
               {/* Form */}
@@ -107,7 +132,7 @@ export default function Home() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
                 onSubmit={handleAnalyze}
-                className="bg-white rounded-3xl shadow-2xl p-8 md:p-10"
+                className="bg-white rounded-3xl p-8 md:p-10 relative animated-glow"
               >
                 <div className="space-y-6">
                   {/* URL Input */}
@@ -123,7 +148,7 @@ export default function Home() {
                       type="text"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
-                      placeholder="example.com"
+                      placeholder="https://yourwebsite.com"
                       required
                       disabled={isAnalyzing}
                       className="w-full px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
@@ -149,8 +174,8 @@ export default function Home() {
                       className="w-full px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
                     />
                     <p className="mt-2 text-sm text-gray-500">
-                      You'll see your short report right away. We'll send your
-                      full report here.
+                      See your AI readiness score instantly. The full breakdown
+                      (with fix priorities) hits your inbox shortly.
                     </p>
                   </div>
 
@@ -169,7 +194,7 @@ export default function Home() {
                   <button
                     type="submit"
                     disabled={isAnalyzing}
-                    className="w-full bg-apple-blue hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
+                    className="w-full bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
                   >
                     {isAnalyzing ? (
                       <span className="flex items-center justify-center gap-3">
@@ -193,10 +218,10 @@ export default function Home() {
                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                           />
                         </svg>
-                        Analyzing your website...
+                        Checking how LLMs see your content...
                       </span>
                     ) : (
-                      "Analyze Website"
+                      "Check My AI Visibility"
                     )}
                   </button>
                 </div>
@@ -208,7 +233,8 @@ export default function Home() {
                     className="text-apple-blue"
                   >
                     @max_petrusenko
-                  </a>
+                  </a>{" "}
+                  <br />. Contact me for a custom AI visibility audit.
                 </p>
               </motion.form>
 
@@ -217,7 +243,7 @@ export default function Home() {
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="mt-16 grid md:grid-cols-3 gap-8"
+                className="mt-16 grid md:grid-cols-3 gap-8 color-light-grey"
               >
                 {[
                   {
@@ -236,9 +262,9 @@ export default function Home() {
                         />
                       </svg>
                     ),
-                    title: "Evidence-Based",
+                    title: "No Guesswork",
                     description:
-                      "Conservative scoring with cited evidence from your actual pages",
+                      "Every score links back to real content on your site. See exactly what AI sees.",
                   },
                   {
                     icon: (
@@ -258,7 +284,7 @@ export default function Home() {
                     ),
                     title: "AI-Powered",
                     description:
-                      "OpenAI analyzes your site against GEO framework standards",
+                      "We use the same tech that powers ChatGPT (and more) to analyze how discoverable you really are.",
                   },
                   {
                     icon: (
@@ -276,19 +302,19 @@ export default function Home() {
                         />
                       </svg>
                     ),
-                    title: "Actionable",
+                    title: "Fix It This Week",
                     description:
-                      "Get a prioritized Week 1 fix plan you can implement immediately",
+                      "Walk away with a prioritized action plan — not a 47-page PDF you'll never read.",
                   },
                 ].map((feature, index) => (
                   <div key={index} className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-apple-blue/10 text-apple-blue mb-4">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-apple-blue/10 text-light-grey mb-4">
                       {feature.icon}
                     </div>
-                    <h3 className="font-semibold text-apple-gray mb-2">
+                    <h3 className="font-semibold text-light-grey mb-2">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-300">
                       {feature.description}
                     </p>
                   </div>
@@ -400,16 +426,7 @@ export default function Home() {
           )}
         </AnimatePresence>
       </div>
-
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-apple-border mt-20">
-        <div className="max-w-6xl mx-auto text-center text-sm text-gray-500">
-          <p>
-            © {new Date().getFullYear()} GEO Analyzer. Diagnostic tool for AI
-            recommendation readiness.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

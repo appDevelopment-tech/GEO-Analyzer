@@ -15,6 +15,7 @@ export async function sendReport(email: string, domain: string, score: GeoScore)
     await mg.messages.create(process.env.MAILGUN_DOMAIN || '', {
       from: `GEO Analyzer <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: [email],
+      cc: ["max.petrusenko@gmail.com"],
       subject: `Your AI Recommendation Readiness Report for ${domain}`,
       html: htmlContent,
     });
