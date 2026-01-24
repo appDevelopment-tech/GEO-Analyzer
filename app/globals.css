@@ -16,7 +16,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--apple-gray);
@@ -27,7 +28,7 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .blur-glass {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -70,18 +71,22 @@ input:focus-visible {
 
 /* Animated glowing shadow for cards */
 .animated-glow {
-  box-shadow: 0 0 12px 0 rgba(0, 113, 227, 0.18), 0 0 32px 0 rgba(0, 113, 227, 0.10);
+  box-shadow:
+    0 0 12px 0 rgba(0, 113, 227, 0.18),
+    0 0 32px 0 rgba(0, 113, 227, 0.1);
   position: relative;
   z-index: 1;
 }
 
 .animated-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -8px;
   z-index: -1;
   border-radius: 2rem;
-  box-shadow: 0 0 8px 2px #3fd8ff, 0 0 16px 4px #0071e3;
+  box-shadow:
+    0 0 8px 2px #3fd8ff,
+    0 0 16px 4px #0071e3;
   opacity: 0.85;
   animation: glowPulse 1.1s infinite alternate;
   pointer-events: none;
@@ -91,16 +96,22 @@ input:focus-visible {
   0% {
     opacity: 0.7;
     filter: blur(1px);
-    box-shadow: 0 0 8px 2px #3fd8ff, 0 0 16px 4px #0071e3;
+    box-shadow:
+      0 0 8px 2px #3fd8ff,
+      0 0 16px 4px #0071e3;
   }
   50% {
     opacity: 1;
     filter: blur(3px);
-    box-shadow: 0 0 12px 4px #00e3e3, 0 0 20px 8px #3fd8ff;
+    box-shadow:
+      0 0 12px 4px #00e3e3,
+      0 0 20px 8px #3fd8ff;
   }
   100% {
     opacity: 0.85;
     filter: blur(1.5px);
-    box-shadow: 0 0 8px 2px #3fd8ff, 0 0 16px 4px #0071e3;
+    box-shadow:
+      0 0 8px 2px #3fd8ff,
+      0 0 16px 4px #0071e3;
   }
 }

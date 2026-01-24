@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface ScoreCardProps {
   score: number;
@@ -15,7 +15,11 @@ interface ScoreCardProps {
   };
 }
 
-export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps) {
+export default function ScoreCard({
+  score,
+  tier,
+  sectionScores,
+}: ScoreCardProps) {
   const [displayScore, setDisplayScore] = useState(0);
 
   useEffect(() => {
@@ -38,18 +42,26 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
   }, [score]);
 
   const getScoreColor = (score: number) => {
-    if (score >= 75) return 'from-green-500 to-emerald-600';
-    if (score >= 60) return 'from-blue-500 to-cyan-600';
-    if (score >= 40) return 'from-yellow-500 to-orange-600';
-    return 'from-red-500 to-rose-600';
+    if (score >= 75) return "from-green-500 to-emerald-600";
+    if (score >= 60) return "from-blue-500 to-cyan-600";
+    if (score >= 40) return "from-yellow-500 to-orange-600";
+    return "from-red-500 to-rose-600";
   };
 
   const sections = [
-    { key: 'entity_clarity', label: 'Entity Clarity', weight: '30%' },
-    { key: 'direct_answers', label: 'Direct Answers', weight: '30%' },
-    { key: 'trust_signals', label: 'Trust Signals', weight: '20%' },
-    { key: 'competitive_positioning', label: 'Competitive Positioning', weight: '10%' },
-    { key: 'technical_accessibility', label: 'Technical Accessibility', weight: '10%' },
+    { key: "entity_clarity", label: "Entity Clarity", weight: "30%" },
+    { key: "direct_answers", label: "Direct Answers", weight: "30%" },
+    { key: "trust_signals", label: "Trust Signals", weight: "20%" },
+    {
+      key: "competitive_positioning",
+      label: "Competitive Positioning",
+      weight: "10%",
+    },
+    {
+      key: "technical_accessibility",
+      label: "Technical Accessibility",
+      weight: "10%",
+    },
   ];
 
   return (
@@ -58,7 +70,7 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${getScoreColor(score)} p-12 text-white shadow-2xl mb-12`}
       >
         <div className="relative z-10 text-center">
@@ -70,16 +82,16 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
           >
             Overall GEO Score
           </motion.p>
-          
+
           <motion.div
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6, type: 'spring' }}
+            transition={{ delay: 0.4, duration: 0.6, type: "spring" }}
             className="text-8xl font-bold mb-4"
           >
             {displayScore}
           </motion.div>
-          
+
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -108,8 +120,9 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
 
         <div className="space-y-8">
           {sections.map((section, index) => {
-            const sectionScore = sectionScores[section.key as keyof typeof sectionScores];
-            
+            const sectionScore =
+              sectionScores[section.key as keyof typeof sectionScores];
+
             return (
               <motion.div
                 key={section.key}
@@ -143,7 +156,7 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
                     transition={{
                       delay: 1.2 + index * 0.1,
                       duration: 1.2,
-                      ease: 'easeOut',
+                      ease: "easeOut",
                     }}
                     className={`h-full rounded-full bg-gradient-to-r ${getScoreColor(sectionScore)}`}
                   />
@@ -162,8 +175,18 @@ export default function ScoreCard({ score, tier, sectionScores }: ScoreCardProps
         className="mt-8 text-center"
       >
         <div className="inline-flex items-center gap-2 px-6 py-3 bg-green-50 rounded-full">
-          <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-5 h-5 text-green-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
           <p className="text-sm font-medium text-green-900">
             Full report sent to your email

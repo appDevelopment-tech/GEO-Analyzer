@@ -1,5 +1,5 @@
-import OpenAI from 'openai';
-import { CrawlData, GeoScore } from '@/types/geo';
+import OpenAI from "openai";
+import { CrawlData, GeoScore } from "@/types/geo";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -49,9 +49,11 @@ Tier mapping:
 
 Be specific and evidence-based. Focus on the top 3 AI hesitations.`;
 
-export async function analyzeWithOpenAI(crawlData: CrawlData[]): Promise<GeoScore> {
+export async function analyzeWithOpenAI(
+  crawlData: CrawlData[],
+): Promise<GeoScore> {
   try {
-    const summary = crawlData.map(page => ({
+    const summary = crawlData.map((page) => ({
       url: page.url,
       title: page.title,
       metaDescription: page.metaDescription,
@@ -64,27 +66,27 @@ export async function analyzeWithOpenAI(crawlData: CrawlData[]): Promise<GeoScor
     }));
 
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: "gpt-4o",
       messages: [
         {
-          role: 'system',
+          role: "system",
           content: SCORING_PROMPT,
         },
         {
-          role: 'user',
+          role: "user",
           content: `Analyze this website data:\n\n${JSON.stringify(summary, null, 2)}`,
         },
       ],
-      response_format: { type: 'json_object' },
+      response_format: { type: "json_object" },
       temperature: 0.3,
     });
 
-    const result = JSON.parse(response.choices[0].message.content || '{}');
-    
+    const result = JSON.parse(response.choices[0].message.content || "{}");
+
     // Validate and return
     return {
       overall_score: result.overall_score || 0,
-      tier: result.tier || 'Invisible to AI',
+      tier: result.tier || "Invisible to AI",
       section_scores: result.section_scores || {
         entity_clarity: 0,
         direct_answers: 0,
@@ -97,7 +99,7 @@ export async function analyzeWithOpenAI(crawlData: CrawlData[]): Promise<GeoScor
       limitations: result.limitations || [],
     };
   } catch (error) {
-    console.error('OpenAI analysis failed:', error);
-    throw new Error('Failed to analyze website with AI');
+    console.error("OpenAI analysis failed:", error);
+    throw new Error("Failed to analyze website with AI");
   }
 }

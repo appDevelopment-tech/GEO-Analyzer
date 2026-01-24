@@ -1,18 +1,22 @@
-import formData from 'form-data';
-import Mailgun from 'mailgun.js';
-import { GeoScore } from '@/types/geo';
+import formData from "form-data";
+import Mailgun from "mailgun.js";
+import { GeoScore } from "@/types/geo";
 
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({
-  username: 'api',
-  key: process.env.MAILGUN_API_KEY || '',
+  username: "api",
+  key: process.env.MAILGUN_API_KEY || "",
 });
 
-export async function sendReport(email: string, domain: string, score: GeoScore): Promise<void> {
+export async function sendReport(
+  email: string,
+  domain: string,
+  score: GeoScore,
+): Promise<void> {
   const htmlContent = generateReportHTML(domain, score);
 
   try {
-    await mg.messages.create(process.env.MAILGUN_DOMAIN || '', {
+    await mg.messages.create(process.env.MAILGUN_DOMAIN || "", {
       from: `GEO Analyzer <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: [email],
       cc: ["max.petrusenko@gmail.com"],
@@ -20,8 +24,8 @@ export async function sendReport(email: string, domain: string, score: GeoScore)
       html: htmlContent,
     });
   } catch (error) {
-    console.error('Failed to send email:', error);
-    throw new Error('Failed to send report email');
+    console.error("Failed to send email:", error);
+    throw new Error("Failed to send report email");
   }
 }
 
@@ -39,17 +43,17 @@ function generateReportHTML(domain: string, score: GeoScore): string {
         <div style="margin-top: 8px;">
           <strong style="font-size: 13px; color: #86868b;">Evidence:</strong>
           <ul style="margin: 4px 0 0 20px; padding: 0; color: #6e6e73; font-size: 13px;">
-            ${h.evidence.map(e => `<li>${e}</li>`).join('')}
+            ${h.evidence.map((e) => `<li>${e}</li>`).join("")}
           </ul>
         </div>
       </div>
-    `
+    `,
     )
-    .join('');
+    .join("");
 
   const fixPlanHTML = score.week1_fix_plan
     .map((fix, i) => `<li style="margin-bottom: 8px;">${i + 1}. ${fix}</li>`)
-    .join('');
+    .join("");
 
   return `
 <!DOCTYPE html>
@@ -100,7 +104,7 @@ function generateReportHTML(domain: string, score: GeoScore): string {
         <div style="margin-bottom: 16px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
             <span style="color: #1d1d1f; font-size: 15px; font-weight: 500; text-transform: capitalize;">
-              ${key.replace(/_/g, ' ')}
+              ${key.replace(/_/g, " ")}
             </span>
             <span style="color: #0071e3; font-size: 15px; font-weight: 600;">
               ${value}
@@ -110,9 +114,9 @@ function generateReportHTML(domain: string, score: GeoScore): string {
             <div style="background: linear-gradient(90deg, #0071e3 0%, #00c6ff 100%); height: 100%; width: ${value}%; border-radius: 4px;"></div>
           </div>
         </div>
-      `
+      `,
         )
-        .join('')}
+        .join("")}
     </div>
 
     <!-- Top AI Hesitations -->
@@ -136,7 +140,7 @@ function generateReportHTML(domain: string, score: GeoScore): string {
     <!-- Footer -->
     <div style="text-align: center; padding-top: 32px; border-top: 1px solid #d2d2d7;">
       <p style="margin: 0 0 8px 0; color: #86868b; font-size: 13px;">
-        This is a diagnostic report, not an exhaustive audit.
+        This is a diagnostic report, not an exhaustive audit. For more information, please contact <a href="mailto:max.petrusenko@gmail.com">me</a> directly.
       </p>
       <p style="margin: 0; color: #86868b; font-size: 13px;">
         © ${new Date().getFullYear()} GEO Analyzer. All rights reserved.

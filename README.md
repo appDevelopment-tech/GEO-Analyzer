@@ -52,12 +52,14 @@ MAILGUN_DOMAIN=mg.yourdomain.com
 ### 3. Get API Keys
 
 **OpenAI API Key:**
+
 1. Visit https://platform.openai.com
 2. Sign up or log in
 3. Navigate to API Keys section
 4. Create a new secret key
 
 **Mailgun API Key:**
+
 1. Visit https://www.mailgun.com
 2. Sign up for a free account
 3. Verify your domain or use sandbox domain for testing
@@ -82,7 +84,9 @@ npm start
 ## How It Works
 
 ### 1. Website Crawling
+
 The app crawls up to 8 pages from the submitted URL:
+
 - Homepage (/)
 - About page
 - Contact page
@@ -90,6 +94,7 @@ The app crawls up to 8 pages from the submitted URL:
 - Blog/content pages
 
 For each page, it extracts:
+
 - Title and meta description
 - Headings (H1, H2, H3)
 - Text content (first 2000 words)
@@ -97,7 +102,9 @@ For each page, it extracts:
 - Signals: entity mentions, locations, dates, hedging words
 
 ### 2. Signal Extraction
+
 Before AI analysis, deterministic signals are extracted:
+
 - **Entity Signals**: Business name variations, location mentions
 - **Direct Answer Signals**: 40-60 word answer blocks, Q&A patterns
 - **Structural Signals**: Heading quality, paragraph length
@@ -105,9 +112,11 @@ Before AI analysis, deterministic signals are extracted:
 - **Competitive Positioning**: Differentiation language
 
 ### 3. AI Scoring
+
 OpenAI GPT-4 analyzes the extracted data against the GEO framework:
 
 **Scoring Weights:**
+
 - Entity Clarity: 30%
 - Direct Answers: 30%
 - Trust & Specificity: 20%
@@ -115,6 +124,7 @@ OpenAI GPT-4 analyzes the extracted data against the GEO framework:
 - Technical Accessibility: 10%
 
 **Score Tiers:**
+
 - 0-39: Invisible to AI
 - 40-59: Weak / inconsistent
 - 60-74: Functional AI presence
@@ -122,6 +132,7 @@ OpenAI GPT-4 analyzes the extracted data against the GEO framework:
 - 90-100: Primary citation candidate
 
 ### 4. Report Delivery
+
 - **Partial Report**: Displayed immediately in browser with animated score cards
 - **Full Report**: Sent via email with detailed hesitations and fix plan
 
@@ -150,6 +161,7 @@ geo-analyzer/
 ## Customization
 
 ### Modify Scoring Weights
+
 Edit `lib/analyzer.ts` and update the `SCORING_PROMPT`:
 
 ```typescript
@@ -162,21 +174,24 @@ Scoring weights:
 ```
 
 ### Change Crawl Scope
+
 Edit `lib/crawler.ts` and modify `pathsToCrawl`:
 
 ```typescript
 const pathsToCrawl = [
-  '/',
-  '/about',
-  '/services',
+  "/",
+  "/about",
+  "/services",
   // Add your custom paths
 ];
 ```
 
 ### Customize Email Template
+
 Edit `lib/email.ts` and modify the `generateReportHTML` function.
 
 ### Adjust Animation Timing
+
 Edit `components/ScoreCard.tsx` and `app/page.tsx` to modify Framer Motion transitions:
 
 ```typescript
@@ -196,6 +211,7 @@ transition={{ delay: 0.5, duration: 0.6 }}
 ### Other Platforms
 
 The app can be deployed to any platform that supports Next.js:
+
 - Netlify
 - Railway
 - Render
@@ -211,16 +227,19 @@ The app can be deployed to any platform that supports Next.js:
 ## Troubleshooting
 
 **Crawling Fails:**
+
 - Check if the website blocks crawlers
 - Verify the URL is accessible and uses HTTPS
 - Some sites require JavaScript rendering (limitation)
 
 **Email Not Sending:**
+
 - Verify Mailgun domain is verified
 - Check API keys are correct
 - For sandbox domain, add recipient as authorized
 
 **OpenAI Errors:**
+
 - Ensure API key has sufficient credits
 - Check for rate limiting (wait and retry)
 - Verify model name is correct (gpt-4o)
