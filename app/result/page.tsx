@@ -1,14 +1,16 @@
 "use client";
 
 import { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 function ResultContent() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"success" | "error" | "loading">(
     "loading",
   );
+  const router = useRouter();
 
   useEffect(() => {
     const sessionId = searchParams.get("session_id");
@@ -61,6 +63,16 @@ function ResultContent() {
               ? "Please wait while we verify your payment."
               : "We couldn't process your payment. Please try again or contact support."}
         </p>
+        <motion.button
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          type="button"
+          onClick={() => router.push("/")}
+          className="bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
+        >
+          Back to Home
+        </motion.button>
         {/* Add your cute GIFs here! */}
       </div>
     </main>
