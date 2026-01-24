@@ -1,14 +1,14 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function SuccessPage() {
+function ResultContent() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"success" | "error">("success");
 
   useEffect(() => {
-    // If Stripe returns an error param, show error state
     if (searchParams.get("error")) {
       setStatus("error");
     }
@@ -39,5 +39,13 @@ export default function SuccessPage() {
         {/* Add your cute GIFs here! */}
       </div>
     </main>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense>
+      <ResultContent />
+    </Suspense>
   );
 }
