@@ -43,7 +43,7 @@ export const Form = ({
           placeholder="https://yourwebsite.com"
           required
           disabled={isAnalyzing}
-          className="w-full px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
+          className="w-full text-apple-gray px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
         />
       </div>
 
@@ -63,7 +63,7 @@ export const Form = ({
           placeholder="you@example.com"
           required
           disabled={isAnalyzing}
-          className="w-full px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
+          className="w-full text-apple-gray px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
         />
         <p className="mt-2 text-sm text-gray-500">
           See your AI readiness score instantly, no credit card required.

@@ -30,6 +30,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // --- RATE LIMITING: 3 requests per email per hour ---
+    const now = new Date();
+    const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000).toISOString();
+    // Count reports for this email in the last hour
+    const { count, error: countError } = await supabase
+      .from("Reports")
+      .select("id", { count: "exact", head: true })
+      .eq("email", email)
+      .gte("created_at", oneHourAgo);
+    if (countError) {
+      console.error("Rate limit count error:", countError);
+      return NextResponse.json(
+        { error: "Rate limit check failed. Please try again later." },
+        { status: 500 },
+      );
+    }
+    if ((count ?? 0) >= 3) {
+      return NextResponse.json(
+        { error: "Rate limit exceeded: Only 3 analyses allowed per hour." },
+        { status: 429 },
+      );
+    }
+    // --- END RATE LIMITING ---
+
     // Validate URL
     let normalizedUrl = url;
     if (!url.startsWith("http")) {
