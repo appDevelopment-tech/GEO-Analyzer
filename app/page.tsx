@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Form } from "@/components/Form";
 import { Features } from "@/components/Features";
-import { loadStripe } from "@stripe/stripe-js";
+import { Info } from "@/components/Info";
 
 interface AnalysisResult {
   overall_score: number;
@@ -75,7 +75,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <Header />
       <div className="max-w-6xl mx-auto px-4 py-12 md:py-20">
         <AnimatePresence mode="wait">
           {!result ? (
@@ -87,7 +86,6 @@ export default function Home() {
               className="max-w-2xl mx-auto"
             >
               <Hero />
-
               <Form
                 url={url}
                 setUrl={setUrl}
@@ -98,6 +96,7 @@ export default function Home() {
                 handleAnalyze={handleAnalyze}
               />
               <Features />
+              <Info />
             </motion.div>
           ) : (
             <motion.div

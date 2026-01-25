@@ -118,7 +118,7 @@ export const Form = ({
     </div>
 
     <p className="mt-6 text-center text-xs text-gray-500">
-      Created by{" "}
+      GEO Analyzer. Created by{" "}
       <a href="https://www.maxpetrusenko.com/" className="text-apple-blue">
         @max_petrusenko
       </a>{" "}
