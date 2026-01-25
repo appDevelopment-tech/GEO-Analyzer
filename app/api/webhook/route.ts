@@ -31,6 +31,9 @@ export async function POST(req: NextRequest) {
     const session = event.data.object as Stripe.Charge;
     const email = session.billing_details.email;
 
+    console.log("Charge succeeded for email:", email);
+    console.log("Charge details:", session);
+
     if (email) {
       // Fetch the latest report for this email
       const supabase = createClient(
@@ -44,6 +47,8 @@ export async function POST(req: NextRequest) {
         .order("created_at", { ascending: false })
         .limit(1)
         .single();
+
+      console.log("Fetched report from Supabase:", data, error);
 
       if (data && !error) {
         // Send the report via email
