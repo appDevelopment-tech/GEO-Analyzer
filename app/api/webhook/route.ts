@@ -52,7 +52,8 @@ export async function POST(req: NextRequest) {
 
       if (data && !error) {
         // Send the report via email
-        await sendReport(email, data.domain, data.full_report);
+        const score = JSON.parse(data.full_report);
+        await sendReport(email, data.domain, score);
       } else {
         console.error("Supabase error fetching report:", email, data, error);
       }

@@ -18,7 +18,10 @@ export const Hero = () => (
       className="text-center mb-12"
     >
       <TextType
-        text={["Rank #1 in", "AI Search Results"]}
+        text={[
+          "Rank #1 in AI Search Results",
+          "Boost Your Website's AI Readiness",
+        ]}
         typingSpeed={75}
         pauseDuration={1500}
         showCursor
