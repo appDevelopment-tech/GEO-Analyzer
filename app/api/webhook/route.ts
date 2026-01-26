@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
             await supabase
               .from("Reports")
               .update({ webhook_result: `email_error: ${mailErr}` })
-              .eq("report_id", data.id);
+              .eq("report_id", reportId);
             return NextResponse.json(
               { error: "Email send error" },
               { status: 500 },
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
           await supabase
             .from("Reports")
             .update({ webhook_result: error ? String(error) : "success" })
-            .eq("report_id", data.id);
+            .eq("report_id", reportId);
         } catch (updateErr) {
           console.error("Error updating webhook_result:", updateErr);
         }
