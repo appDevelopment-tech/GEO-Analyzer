@@ -31,8 +31,23 @@ export default function ReportPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
-        <div className="text-lg text-gray-600">Loading report...</div>
+      <main className="min-h-screen flex items-center justify-center bg-apple-gray">
+        <div className="flex flex-col items-center">
+          <div className="relative w-20 h-20 mb-6">
+            <span
+              className="absolute inset-0 rounded-full border-4 border-t-apple-blue border-b-cyan-400 border-l-transparent border-r-transparent animate-spin"
+              style={{
+                borderTopColor: "#2563eb",
+                borderBottomColor: "#06b6d4",
+              }}
+            ></span>
+            <span className="absolute inset-2 rounded-full bg-white opacity-80"></span>
+            <span className="absolute inset-4 rounded-full bg-gradient-to-br from-apple-blue to-cyan-400 opacity-60"></span>
+          </div>
+          <div className="text-xl font-semibold text-apple-light drop-shadow-lg animate-pulse">
+            Loading your GEO report...
+          </div>
+        </div>
       </main>
     );
   }
