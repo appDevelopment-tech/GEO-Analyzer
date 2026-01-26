@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 interface Props {
   url: string;
   setUrl: (url: string) => void;
-  email: string;
-  setEmail: (email: string) => void;
   isAnalyzing: boolean;
   error: string;
   handleAnalyze: (e: React.FormEvent) => void;
@@ -13,8 +11,6 @@ interface Props {
 export const Form = ({
   url,
   setUrl,
-  email,
-  setEmail,
   isAnalyzing,
   error,
   handleAnalyze,
@@ -45,29 +41,6 @@ export const Form = ({
           disabled={isAnalyzing}
           className="w-full text-apple-gray px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
         />
-      </div>
-
-      {/* Email Input */}
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-semibold text-apple-gray mb-2"
-        >
-          Email Address
-        </label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@example.com"
-          required
-          disabled={isAnalyzing}
-          className="w-full text-apple-gray px-5 py-4 rounded-xl border-2 border-apple-border focus:border-apple-blue focus:outline-none transition-colors text-lg disabled:bg-gray-50 disabled:cursor-not-allowed"
-        />
-        <p className="mt-2 text-sm text-gray-500">
-          See your AI readiness score instantly, no credit card required.
-        </p>
       </div>
 
       {/* Error Message */}

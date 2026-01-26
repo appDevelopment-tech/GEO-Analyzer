@@ -8,13 +8,20 @@ const mg = mailgun.client({
   key: process.env.MAILGUN_API_KEY || "",
 });
 
+import { createClient } from "@supabase/supabase-js";
+
 export async function sendReport(
   email: string,
   domain: string,
   score: GeoScore,
+  reportId: string,
 ): Promise<void> {
   const htmlContent = generateReportHTML(domain, score);
-
+  const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_API_KEY!,
+  );
+  let emailResult: string | boolean = true;
   try {
     await mg.messages.create(process.env.MAILGUN_DOMAIN || "", {
       from: `GEO Analyzer <noreply@${process.env.MAILGUN_DOMAIN}>`,
@@ -22,8 +29,19 @@ export async function sendReport(
       subject: `Your AI Recommendation Readiness Report for ${domain}`,
       html: htmlContent,
     });
+    emailResult = true;
   } catch (error) {
     console.error("Failed to send email:", error);
+    emailResult = error instanceof Error ? error.message : String(error);
+  }
+  // Update Supabase Reports.email_result
+  if (reportId) {
+    await supabase
+      .from("Reports")
+      .update({ email_result: emailResult })
+      .eq("id", reportId);
+  }
+  if (emailResult !== true) {
     throw new Error("Failed to send report email");
   }
 }

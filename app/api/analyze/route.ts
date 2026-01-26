@@ -21,11 +21,11 @@ export async function POST(request: NextRequest) {
       process.env.SUPABASE_API_KEY!,
     );
     const body = await request.json();
-    const { url, email } = body;
+    const { url} = body;
 
-    if (!url || !email) {
+    if (!url) {
       return NextResponse.json(
-        { error: "URL and email are required" },
+        { error: "URL is required" },
         { status: 400 },
       );
     }
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     const { count, error: countError } = await supabase
       .from("Reports")
       .select("id", { count: "exact", head: true })
-      .eq("email", email)
+      .eq("domain", url)
       .gte("created_at", oneHourAgo);
     if (countError) {
       console.error("Rate limit count error:", countError);
@@ -69,14 +69,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 },
-      );
-    }
+    // // Validate email
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // if (!emailRegex.test(email)) {
+    //   return NextResponse.json(
+    //     { error: "Invalid email format" },
+    //     { status: 400 },
+    //   );
+    // }
 
     // Step 1: Crawl the website
     const crawlData = await crawlWebsite(normalizedUrl);
@@ -102,7 +102,6 @@ export async function POST(request: NextRequest) {
       .from("Reports")
       .insert([
         {
-          email,
           full_report: JSON.stringify(geoScore),
           result: "pending",
           domain: normalizedUrl,
