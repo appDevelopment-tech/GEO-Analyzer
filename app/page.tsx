@@ -27,7 +27,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url, email }),
       });
 
       const data = await response.json();

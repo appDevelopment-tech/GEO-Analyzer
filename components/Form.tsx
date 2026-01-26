@@ -121,7 +121,8 @@ export const Form = ({
       <a href="https://www.maxpetrusenko.com/" className="text-apple-blue">
         @max_petrusenko
       </a>{" "}
-      <br />. Contact me for a custom AI visibility audit.
+      <br />. <a href="mailto:hello@maxpetrusenko.com">Contact me </a>
+      for a custom AI visibility audit.
     </p>
   </motion.form>
 );

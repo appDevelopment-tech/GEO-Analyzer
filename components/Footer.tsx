@@ -89,7 +89,8 @@ export const Footer = () => (
       <div className="text-center text-sm text-gray-200 pt-8 border-t border-gray-700">
         <p>
           © {new Date().getFullYear()} GEO Analyzer. Diagnostic tool for AI
-          recommendation readiness.
+          recommendation readiness. For support, please email{" "}
+          <a href="mailto:hello@maxpetrusenko.com">me</a>.
         </p>
       </div>
     </div>
