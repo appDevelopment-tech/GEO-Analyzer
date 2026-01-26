@@ -3,17 +3,6 @@ import { crawlWebsite } from "@/lib/crawler";
 import { analyzeWithOpenAI } from "@/lib/analyzer";
 import { createClient } from "@supabase/supabase-js";
 
-type Report = {
-  id: number;
-  email: string;
-  full_report: string;
-  result: string;
-  domain: string;
-  created_at: string;
-  webhook_result: string | boolean | null;
-  email_result: string | boolean | null;
-};
-
 export async function POST(request: NextRequest) {
   try {
     const supabase = createClient(
@@ -68,16 +57,6 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
-
-    // // Validate email
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   return NextResponse.json(
-    //     { error: "Invalid email format" },
-    //     { status: 400 },
-    //   );
-    // }
-
     // Step 1: Crawl the website
     const crawlData = await crawlWebsite(normalizedUrl);
 
@@ -93,10 +72,6 @@ export async function POST(request: NextRequest) {
     // Step 2: Analyze with OpenAI
     const geoScore = await analyzeWithOpenAI(crawlData);
 
-    // Step 3: Send full report via email
-    // const domain = new URL(normalizedUrl).hostname;
-    // await sendReport(email, domain, geoScore);
-
     //Step 3 now is to save to supabase
     const dbResult: any = await supabase
       .from("Reports")
@@ -108,15 +83,16 @@ export async function POST(request: NextRequest) {
         },
       ])
       .select();
-    const id = dbResult.data && dbResult.data[0]?.id;
+    const id = dbResult.data && dbResult.data[0]?.report_id;
     // Optionally, update the result field after insert if you want to store 'success' or 'error'
     const status = dbResult.error ? "error" : "success";
     if (dbResult.data) {
-      await supabase.from("Reports").update({ result: status }).eq("id", id);
+      await supabase.from("Reports").update({ result: status }).eq("report_id", id);
     }
 
     // Step 4: Return partial report for immediate display
     return NextResponse.json({
+      report_id: id,
       success: true,
       report: {
         overall_score: geoScore.overall_score,
