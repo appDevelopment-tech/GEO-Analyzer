@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
@@ -51,7 +50,10 @@ export async function POST(req: NextRequest) {
             .single());
         } catch (dbErr) {
           console.error("Supabase DB error fetching report:", dbErr);
-          return NextResponse.json({ error: "Database error" }, { status: 500 });
+          return NextResponse.json(
+            { error: "Database error" },
+            { status: 500 },
+          );
         }
 
         if (data && !error) {
@@ -65,11 +67,17 @@ export async function POST(req: NextRequest) {
               .from("Reports")
               .update({ webhook_result: `email_error: ${mailErr}` })
               .eq("report_id", data.id);
-            return NextResponse.json({ error: "Email send error" }, { status: 500 });
+            return NextResponse.json(
+              { error: "Email send error" },
+              { status: 500 },
+            );
           }
         } else {
           console.error("Supabase error fetching report:", email, data, error);
-          return NextResponse.json({ error: "Report not found" }, { status: 404 });
+          return NextResponse.json(
+            { error: "Report not found" },
+            { status: 404 },
+          );
         }
 
         // Update webhook_result to indicate success
@@ -82,8 +90,13 @@ export async function POST(req: NextRequest) {
           console.error("Error updating webhook_result:", updateErr);
         }
       } else {
-        console.warn("Missing email or reportId in Stripe charge.succeeded event");
-        return NextResponse.json({ error: "Missing email or reportId" }, { status: 400 });
+        console.warn(
+          "Missing email or reportId in Stripe charge.succeeded event",
+        );
+        return NextResponse.json(
+          { error: "Missing email or reportId" },
+          { status: 400 },
+        );
       }
     } else {
       // Optionally log unhandled event types
@@ -94,6 +107,9 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("Unexpected error in Stripe webhook handler:", err);
     // Always return 200 to Stripe to avoid retries unless you want Stripe to retry
-    return NextResponse.json({ error: "Internal server error" }, { status: 200 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 200 },
+    );
   }
 }

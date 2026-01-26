@@ -26,7 +26,12 @@ export async function POST(req: NextRequest) {
     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     metadata: {
-      report_id: id,
+      report_id: String(id),
+    },
+    payment_intent_data: {
+      metadata: {
+        report_id: String(id),
+      },
     },
   });
   return NextResponse.json({ url: session.url });
