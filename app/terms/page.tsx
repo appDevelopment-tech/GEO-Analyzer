@@ -248,10 +248,10 @@ export default function TermsPage() {
               <p>For questions about these Terms, please contact us at:</p>
               <p>
                 <a
-                  href="mailto:contact@geoanalyzer.app"
+                  href="mailto:hello@maxpetrusenko.com"
                   className="text-blue-400 hover:underline"
                 >
-                  contact@geoanalyzer.app
+                  hello@maxpetrusenko.com
                 </a>
               </p>
             </div>

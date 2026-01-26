@@ -153,10 +153,10 @@ export default function ContactPage() {
           <div className="bg-gray-800 rounded-xl p-6">
             <h3 className="text-xl font-semibold text-white mb-3">Email</h3>
             <a
-              href="mailto:contact@geoanalyzer.app"
+              href="mailto:hello@maxpetrusenko.com"
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
-              contact@geoanalyzer.app
+              hello@maxpetrusenko.com
             </a>
             <p className="text-gray-400 text-sm mt-2">
               Response time: Within 24 hours on business days
@@ -167,10 +167,10 @@ export default function ContactPage() {
               Business Inquiries
             </h3>
             <a
-              href="mailto:business@geoanalyzer.app"
+              href="mailto:hello@maxpetrusenko.com"
               className="text-blue-400 hover:text-blue-300 transition-colors"
             >
-              business@geoanalyzer.app
+              hello@max_petrusenko.com
             </a>
             <p className="text-gray-400 text-sm mt-2">
               For partnerships, enterprise plans, and media inquiries

@@ -90,7 +90,7 @@ export const Footer = () => (
         <p>
           © {new Date().getFullYear()} GEO Analyzer. Diagnostic tool for AI
           recommendation readiness. For support, please email{" "}
-          <a href="mailto:hello@maxpetrusenko.com">me</a>.
+          <a href="mailto:hello@maxpetrusenko.com">us</a>.
         </p>
       </div>
     </div>

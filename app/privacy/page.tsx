@@ -201,10 +201,10 @@ export default function PrivacyPage() {
               <p className="text-sm">
                 To exercise these rights, contact us at{" "}
                 <a
-                  href="mailto:contact@geoanalyzer.app"
+                  href="mailto:hello@maxpetrusenko.com"
                   className="text-blue-400 hover:underline"
                 >
-                  contact@geoanalyzer.app
+                  hello@maxpetrusenko.com
                 </a>
               </p>
             </div>
@@ -260,10 +260,10 @@ export default function PrivacyPage() {
               </p>
               <p>
                 <a
-                  href="mailto:contact@geoanalyzer.app"
+                  href="mailto:hello@maxpetrusenko.com"
                   className="text-blue-400 hover:underline"
                 >
-                  contact@geoanalyzer.app
+                  hello@maxpetrusenko.com
                 </a>
               </p>
             </div>

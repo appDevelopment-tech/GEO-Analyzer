@@ -157,7 +157,7 @@ function generateReportHTML(domain: string, score: GeoScore): string {
     <!-- Footer -->
     <div style="text-align: center; padding-top: 32px; border-top: 1px solid #d2d2d7;">
       <p style="margin: 0 0 8px 0; color: #86868b; font-size: 13px;">
-        This is a diagnostic report, not an exhaustive audit. For more information, please contact <a href="mailto:max.petrusenko@gmail.com">me</a> directly.
+        This is a diagnostic report, not an exhaustive audit. For more information, please contact <a href="mailto:hello@maxpetrusenko.com">us</a> directly.
       </p>
       <p style="margin: 0; color: #86868b; font-size: 13px;">
         © ${new Date().getFullYear()} GEO Analyzer. All rights reserved.
