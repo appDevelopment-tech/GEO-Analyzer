@@ -47,6 +47,8 @@ export default function ReportPage() {
     );
   }
 
+  console.log("Report data:", report);
+
   return (
     <main className="min-h-screen p-10">
       <div className="max-w-6xl mx-auto"></div>
