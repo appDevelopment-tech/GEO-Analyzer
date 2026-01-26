@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { Footer } from "@/components/Footer";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
 
@@ -187,20 +188,7 @@ export default function TermsPage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-700 mt-16">
-        <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400">© 2025 GeoAnalyzer. All rights reserved.</p>
-          <nav className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
