@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
       .from("Reports")
       .select("id", { count: "exact", head: true })
       .eq("domain", url)
+      .eq("email", email)
       .gte("created_at", oneHourAgo);
     if (countError) {
       console.error("Rate limit count error:", countError);
@@ -89,6 +90,7 @@ export async function POST(request: NextRequest) {
           full_report: JSON.stringify(geoScore),
           result: "pending",
           domain: normalizedUrl,
+          email: email,
         },
       ])
       .select();
