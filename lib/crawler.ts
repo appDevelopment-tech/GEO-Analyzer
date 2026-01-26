@@ -28,7 +28,17 @@ export async function crawlPage(url: string): Promise<CrawlData> {
     const html = await response.text();
     const $ = cheerio.load(html);
 
-    // Remove script and style tags
+    // Extract JSON-LD FIRST (before removing scripts)
+    const jsonLd: any[] = [];
+    $('script[type="application/ld+json"]').each((_, el) => {
+      try {
+        jsonLd.push(JSON.parse($(el).html() || "{}"));
+      } catch (e) {
+        // Skip invalid JSON-LD
+      }
+    });
+
+    // Remove script and style tags (JSON-LD already extracted)
     $("script, style, nav, footer").remove();
 
     // Extract headings
@@ -51,16 +61,6 @@ export async function crawlPage(url: string): Promise<CrawlData> {
       .slice(0, 2000)
       .join(" ");
 
-    // Extract JSON-LD
-    const jsonLd: any[] = [];
-    $('script[type="application/ld+json"]').each((_, el) => {
-      try {
-        jsonLd.push(JSON.parse($(el).html() || "{}"));
-      } catch (e) {
-        // Skip invalid JSON-LD
-      }
-    });
-
     // Signal extraction
     const signals = {
       entityMentions: extractEntityMentions($, textContent),
@@ -75,6 +75,8 @@ export async function crawlPage(url: string): Promise<CrawlData> {
       title: $("title").text() || "",
       metaDescription: $('meta[name="description"]').attr("content") || "",
       headings: { h1, h2, h3 },
+      html,
+      cleanedHtml: $.html() || "",
       textContent,
       jsonLd,
       signals,
@@ -141,27 +143,46 @@ function countHedgingWords(text: string): number {
 function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
   const blocks: string[] = [];
 
-  // Look for FAQ patterns
-  $("h2, h3").each((_, el) => {
-    const heading = $(el).text();
-    if (
-      heading.includes("?") ||
-      heading.toLowerCase().includes("what") ||
-      heading.toLowerCase().includes("how") ||
-      heading.toLowerCase().includes("why")
-    ) {
-      const nextP = $(el).next("p");
-      if (nextP.length) {
-        const text = nextP.text().trim();
-        const wordCount = text.split(" ").length;
-        if (wordCount >= 40 && wordCount <= 60) {
-          blocks.push(text);
+  // Q&A heading patterns
+  const questionPatterns = [
+    /\?/,
+    /\bwhat\b/i,
+    /\bwho\b/i,
+    /\bwhere\b/i,
+    /\bwhen\b/i,
+    /\bwhy\b/i,
+    /\bhow\b/i,
+    /\bwhich\b/i,
+  ];
+
+  $("h1, h2, h3, h4").each((_, el) => {
+    const heading = $(el).text().trim();
+    const isQuestion = questionPatterns.some((p) => p.test(heading));
+
+    if (isQuestion) {
+      // Collect all sibling content until next heading
+      const contentParts: string[] = [];
+      let currentEl = $(el).next();
+
+      while (currentEl.length && !currentEl.is("h1, h2, h3, h4")) {
+        const text = currentEl.text().trim();
+        if (text && text.length > 10) {
+          contentParts.push(text);
         }
+        currentEl = currentEl.next();
+        // Stop after collecting reasonable content
+        if (contentParts.join(" ").split(/\s+/).length > 100) break;
+      }
+
+      const fullAnswer = contentParts.join(" ").trim();
+      const wordCount = fullAnswer.split(/\s+/).length;
+      if (wordCount >= 15 && wordCount <= 150) {
+        blocks.push(`Q: ${heading}\nA: ${fullAnswer}`);
       }
     }
   });
 
-  return blocks.slice(0, 3);
+  return blocks.slice(0, 5);
 }
 
 export async function crawlWebsite(url: string): Promise<CrawlData[]> {

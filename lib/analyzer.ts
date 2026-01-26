@@ -63,10 +63,11 @@ export async function analyzeWithOpenAI(
       hedgingWordCount: page.signals.hedgingWords,
       directAnswerBlocks: page.signals.directAnswerBlocks,
       hasJsonLd: page.jsonLd.length > 0,
+      jsonLd: page.jsonLd,
     }));
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-5.2",
       messages: [
         {
           role: "system",
@@ -83,7 +84,10 @@ export async function analyzeWithOpenAI(
 
     const result = JSON.parse(response.choices[0].message.content || "{}");
 
-    // Validate and return
+    // Collect all FAQs and JSON-LD from crawled pages
+    const allFaqs = crawlData.flatMap((p) => p.signals.directAnswerBlocks);
+    const allJsonLd = crawlData.flatMap((p) => p.jsonLd);
+
     return {
       overall_score: result.overall_score || 0,
       tier: result.tier || "Invisible to AI",
@@ -97,6 +101,8 @@ export async function analyzeWithOpenAI(
       top_ai_hesitations: result.top_ai_hesitations || [],
       week1_fix_plan: result.week1_fix_plan || [],
       limitations: result.limitations || [],
+      extracted_faqs: allFaqs,
+      extracted_json_ld: allJsonLd,
     };
   } catch (error) {
     console.error("OpenAI analysis failed:", error);
