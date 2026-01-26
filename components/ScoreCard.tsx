@@ -27,7 +27,6 @@ export default function ScoreCard({
   const [displayScore, setDisplayScore] = useState(0);
 
   async function handleStripeCheckout(id: string, email: string) {
-    console.log("Initiating checkout for report ID:", id, "and email:", email);
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
