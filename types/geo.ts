@@ -30,6 +30,8 @@ export interface CrawlData {
   url: string;
   title: string;
   metaDescription: string;
+  html: string;
+  cleanedHtml: string;
   headings: {
     h1: string[];
     h2: string[];
