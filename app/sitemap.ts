@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

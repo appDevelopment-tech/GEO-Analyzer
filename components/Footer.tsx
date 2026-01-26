@@ -10,7 +10,10 @@ export const Footer = () => (
           <h3 className="text-sm font-semibold text-white mb-3">Product</h3>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <Link href="/pricing" className="hover:text-white transition-colors">
+              <Link
+                href="/pricing"
+                className="hover:text-white transition-colors"
+              >
                 Pricing
               </Link>
             </li>
@@ -42,12 +45,18 @@ export const Footer = () => (
           <h3 className="text-sm font-semibold text-white mb-3">Company</h3>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">
+              <Link
+                href="/about"
+                className="hover:text-white transition-colors"
+              >
                 About
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-white transition-colors">
+              <Link
+                href="/contact"
+                className="hover:text-white transition-colors"
+              >
                 Contact
               </Link>
             </li>
@@ -58,12 +67,18 @@ export const Footer = () => (
           <h3 className="text-sm font-semibold text-white mb-3">Legal</h3>
           <ul className="space-y-2 text-sm text-gray-300">
             <li>
-              <Link href="/privacy" className="hover:text-white transition-colors">
+              <Link
+                href="/privacy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="hover:text-white transition-colors">
+              <Link
+                href="/terms"
+                className="hover:text-white transition-colors"
+              >
                 Terms
               </Link>
             </li>

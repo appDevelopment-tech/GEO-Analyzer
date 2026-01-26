@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
         // Send the report via email
         await supabase
           .from("Reports")
-          .update({ email: email})
+          .update({ email: email })
           .eq("report_id", reportId);
         const score = JSON.parse(data.full_report);
         await sendReport(email, data.domain, score, reportId);

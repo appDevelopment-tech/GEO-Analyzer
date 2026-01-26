@@ -81,6 +81,7 @@ export default function ReportPage() {
             score={report.full_report.overall_score}
             tier={report.full_report.tier}
             sectionScores={report.full_report.section_scores}
+            email={report.email}
           />
 
           {/* Top Hesitation */}

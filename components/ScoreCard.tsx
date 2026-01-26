@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 interface ScoreCardProps {
   score: number;
+  email: string;
   tier: string;
   sectionScores: {
     entity_clarity: number;
@@ -20,15 +21,16 @@ export default function ScoreCard({
   score,
   tier,
   sectionScores,
+  email,
 }: ScoreCardProps) {
   const { id } = useParams();
   const [displayScore, setDisplayScore] = useState(0);
 
-  async function handleStripeCheckout(id: string) {
+  async function handleStripeCheckout(id: string, email: string) {
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
+      body: JSON.stringify({ id, email }),
     });
     const { url } = await res.json();
     window.open(url, "_blank");
@@ -212,7 +214,7 @@ export default function ScoreCard({
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           type="button"
-          onClick={() => handleStripeCheckout(id as string)}
+          onClick={() => handleStripeCheckout(id as string, email)}
           className="w-full mt-2 bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
         >
           Get a Full Report

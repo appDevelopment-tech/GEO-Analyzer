@@ -3,11 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const supabase = createClient(
     process.env.SUPABASE_URL!,
-    process.env.SUPABASE_API_KEY!
+    process.env.SUPABASE_API_KEY!,
   );
   const { id } = params;
   if (!id) {

@@ -10,11 +10,11 @@ export async function POST(request: NextRequest) {
       process.env.SUPABASE_API_KEY!,
     );
     const body = await request.json();
-    const { url} = body;
+    const { url, email } = body;
 
-    if (!url) {
+    if (!url || !email) {
       return NextResponse.json(
-        { error: "URL is required" },
+        { error: "URL and email are required" },
         { status: 400 },
       );
     }
@@ -57,6 +57,15 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 },
+      );
+    }
+
     // Step 1: Crawl the website
     const crawlData = await crawlWebsite(normalizedUrl);
 
@@ -87,7 +96,10 @@ export async function POST(request: NextRequest) {
     // Optionally, update the result field after insert if you want to store 'success' or 'error'
     const status = dbResult.error ? "error" : "success";
     if (dbResult.data) {
-      await supabase.from("Reports").update({ result: status }).eq("report_id", id);
+      await supabase
+        .from("Reports")
+        .update({ result: status })
+        .eq("report_id", id);
     }
 
     // Step 4: Return partial report for immediate display

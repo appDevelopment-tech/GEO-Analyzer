@@ -178,7 +178,7 @@ Scoring weights:
 Edit `lib/crawler.ts` and modify `pathsToCrawl`. Current v1.1 crawls homepage only:
 
 ```typescript
-const pathsToCrawl = ["/"];  // Homepage only for lean analysis
+const pathsToCrawl = ["/"]; // Homepage only for lean analysis
 ```
 
 ### Customize Email Template

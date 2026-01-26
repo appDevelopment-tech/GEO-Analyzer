@@ -7,7 +7,9 @@ export function JsonLd() {
       <Script
         id="schema-organization"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ORGANIZATION_JSON_LD),
+        }}
       />
       <Script
         id="schema-website"

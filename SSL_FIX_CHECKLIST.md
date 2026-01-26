@@ -1,6 +1,7 @@
 # SSL Fix Implementation Checklist
 
 ## Problem
+
 - Netlify URL (geoanalyzerapp.netlify.app) works
 - Custom domain (geo-analyzer.com) shows `ERR_SSL_PROTOCOL_ERROR`
 - Root cause: SSL/TLS misconfiguration between Cloudflare and Netlify
@@ -10,6 +11,7 @@
 ## Implementation Steps
 
 ### Step 1: Netlify Domain Setup
+
 - [ ] Go to Netlify Dashboard → geo-analyzer project → Domain settings
 - [ ] Verify `geo-analyzer.com` is added as a custom domain
 - [ ] Verify domain shows as **Active** with valid SSL certificate
@@ -18,14 +20,15 @@
 ---
 
 ### Step 2: Cloudflare DNS Settings
+
 Go to: Cloudflare Dashboard → DNS → Records for geo-analyzer.com
 
 **Required setup:**
 
-| Type | Name | Content | Proxy Status |
-|------|------|---------|--------------|
+| Type  | Name                    | Content                    | Proxy Status           |
+| ----- | ----------------------- | -------------------------- | ---------------------- |
 | CNAME | geo-analyzer.com (or @) | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
-| CNAME | www | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
+| CNAME | www                     | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
 
 - [ ] Root CNAME points to `geoanalyzerapp.netlify.app`
 - [ ] www CNAME points to `geoanalyzerapp.netlify.app`
@@ -34,6 +37,7 @@ Go to: Cloudflare Dashboard → DNS → Records for geo-analyzer.com
 ---
 
 ### Step 3: Cloudflare SSL/TLS Mode (CRITICAL)
+
 Go to: Cloudflare → SSL/TLS → Overview
 
 **Required setting:** **Full (strict)**
@@ -42,6 +46,7 @@ Go to: Cloudflare → SSL/TLS → Overview
 - [ ] If already on Full (strict), try: Full → wait 2 min → test → Full (strict)
 
 **Mode reference:**
+
 - Flexible: Origin doesn't support HTTPS (DO NOT USE)
 - Full: Origin has self-signed cert
 - Full (strict): Origin has valid CA cert (CORRECT for Netlify)
@@ -49,6 +54,7 @@ Go to: Cloudflare → SSL/TLS → Overview
 ---
 
 ### Step 4: Edge Certificates
+
 Go to: Cloudflare → SSL/TLS → Edge Certificates
 
 - [ ] "Always Use HTTPS" is **ON**
@@ -60,6 +66,7 @@ Go to: Cloudflare → SSL/TLS → Edge Certificates
 ---
 
 ### Step 5: Purge Cloudflare Cache
+
 Go to: Cloudflare → Caching → Configuration
 
 - [ ] Click "Purge Everything"
@@ -69,6 +76,7 @@ Go to: Cloudflare → Caching → Configuration
 ---
 
 ### Step 6: Update Application Configuration
+
 After SSL is working, update the BASE_URL:
 
 - [ ] Change `NEXT_PUBLIC_BASE_URL` from `https://geoanalyzerapp.netlify.app` to `https://geo-analyzer.com`
@@ -82,12 +90,14 @@ After SSL is working, update the BASE_URL:
 ### If still failing after above steps:
 
 **Try DNS-Only Mode (bypass Cloudflare proxy):**
+
 1. Click orange cloud → turn gray (DNS only)
 2. Wait 30 seconds, test site
 3. If works: issue is Cloudflare SSL config
 4. If fails: issue is Netlify domain setup
 
 **Origin Certificate Method:**
+
 1. Cloudflare → SSL/TLS → Origin Server → Create Certificate
 2. Download certificate and key
 3. Upload to Netlify → Domain settings → TLS certificates
@@ -112,6 +122,7 @@ curl -I https://geo-analyzer.com
 ## Expected Result
 
 After completing all steps:
+
 - https://geo-analyzer.com loads without SSL errors
 - No "Not Secure" warnings in browser
 - HTTPS padlock appears in address bar

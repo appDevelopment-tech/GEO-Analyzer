@@ -1,14 +1,17 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
 
 export const metadata: Metadata = {
   title: "Contact – GeoAnalyzer",
-  description: "Get in touch with the GeoAnalyzer team. We're here to help with questions about GEO audits, pricing, and improving your AI recommendation readiness.",
+  description:
+    "Get in touch with the GeoAnalyzer team. We're here to help with questions about GEO audits, pricing, and improving your AI recommendation readiness.",
   openGraph: {
     title: "Contact – GeoAnalyzer",
-    description: "Get in touch with the GeoAnalyzer team. We're here to help with questions about GEO audits, pricing, and improving your AI recommendation readiness.",
+    description:
+      "Get in touch with the GeoAnalyzer team. We're here to help with questions about GEO audits, pricing, and improving your AI recommendation readiness.",
     url: `${baseUrl}/contact`,
   },
   alternates: {
@@ -26,13 +29,22 @@ export default function ContactPage() {
             GeoAnalyzer
           </Link>
           <nav className="flex gap-6">
-            <Link href="/pricing" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="/pricing"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               Pricing
             </Link>
-            <Link href="/docs" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="/docs"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               How It Works
             </Link>
-            <Link href="/faq" className="text-gray-300 hover:text-white transition-colors">
+            <Link
+              href="/faq"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
               FAQ
             </Link>
           </nav>
@@ -46,18 +58,24 @@ export default function ContactPage() {
             How can I contact GeoAnalyzer?
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            The fastest way to reach us is via email at contact@geoanalyzer.app. We typically
-            respond within 24 hours on business days. For questions about your report, pricing,
-            or technical issues, please include your order number or website URL for faster service.
+            The fastest way to reach us is via email at contact@geoanalyzer.app.
+            We typically respond within 24 hours on business days. For questions
+            about your report, pricing, or technical issues, please include your
+            order number or website URL for faster service.
           </p>
         </section>
 
         {/* Contact Form */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-white mb-8">Send us a message</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">
+            Send us a message
+          </h2>
           <form className="bg-gray-800 rounded-xl p-8 space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Name
               </label>
               <input
@@ -70,7 +88,10 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Email
               </label>
               <input
@@ -83,7 +104,10 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="subject"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Subject
               </label>
               <select
@@ -100,7 +124,10 @@ export default function ContactPage() {
               </select>
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
                 Message
               </label>
               <textarea
@@ -136,7 +163,9 @@ export default function ContactPage() {
             </p>
           </div>
           <div className="bg-gray-800 rounded-xl p-6">
-            <h3 className="text-xl font-semibold text-white mb-3">Business Inquiries</h3>
+            <h3 className="text-xl font-semibold text-white mb-3">
+              Business Inquiries
+            </h3>
             <a
               href="mailto:business@geoanalyzer.app"
               className="text-blue-400 hover:text-blue-300 transition-colors"
@@ -151,18 +180,30 @@ export default function ContactPage() {
 
         {/* Quick Links */}
         <section className="mt-16 bg-gray-800 rounded-xl p-8">
-          <h2 className="text-2xl font-bold text-white mb-6">Looking for answers?</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Looking for answers?
+          </h2>
           <p className="text-gray-300 mb-6">
-            Before reaching out, check our FAQ for quick answers to common questions about GEO,
-            scoring, and pricing.
+            Before reaching out, check our FAQ for quick answers to common
+            questions about GEO, scoring, and pricing.
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
               href="/faq"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-xl transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
               </svg>
               View FAQ
             </Link>
@@ -170,8 +211,18 @@ export default function ContactPage() {
               href="/docs"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-xl transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
               </svg>
               How It Works
             </Link>
@@ -182,12 +233,20 @@ export default function ContactPage() {
       {/* Footer */}
       <footer className="border-t border-gray-700 mt-16">
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400">© 2025 GeoAnalyzer. All rights reserved.</p>
+          <p className="text-gray-400">
+            © 2025 GeoAnalyzer. All rights reserved.
+          </p>
           <nav className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/privacy"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+            <Link
+              href="/terms"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
               Terms of Service
             </Link>
           </nav>

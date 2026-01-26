@@ -3,24 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const sections = [
   {
-    question: "How much does it cost?",
-    answer: (
-      <>
-        <span className="block mb-2 text-gray-700">
-          You get a short GEO analysis report for free — no strings attached.
-          This gives you a quick snapshot of your site's AI visibility and top
-          issues.
-        </span>
-        <span className="block mb-2 text-gray-700">
-          If you want a full, detailed report with prioritized action items and
-          a week-one fix plan, you can purchase it for a one-time fee. The full
-          report shows exactly what to fix and why, so you can win more AI
-          recommendations.
-        </span>
-      </>
-    ),
-  },
-  {
     question: "What is GEO?",
     answer: (
       <>
@@ -115,6 +97,25 @@ const sections = [
         </ul>
         <span className="block mb-2 text-gray-700">
           If you're not in the answer, you don't exist to the user.
+        </span>
+      </>
+    ),
+  },
+  {
+    question: "How much does it cost?",
+    answer: (
+      <>
+        <span className="block mb-2 text-gray-700">
+          You get a short GEO analysis report for free — no strings attached.
+          This gives you a quick snapshot of your site's AI visibility and top
+          issues.
+        </span>
+        <span className="block mb-2 text-gray-700">
+          If you want a full, detailed report with prioritized action items and
+          a week-one fix plan, you can purchase it for a one-time fee ($9.50).
+          That’s less than the price of two cups of coffee—an easy investment
+          for a big boost in AI visibility. The full report shows exactly what
+          to fix and why, so you can win more AI recommendations right away.
         </span>
       </>
     ),

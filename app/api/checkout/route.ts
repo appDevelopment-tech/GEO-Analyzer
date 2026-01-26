@@ -8,7 +8,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req: NextRequest) {
-  const { id } = await req.json();
+  const { id, email } = await req.json();
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: [
@@ -16,12 +16,13 @@ export async function POST(req: NextRequest) {
         price_data: {
           currency: "usd",
           product_data: { name: "GEO Full Report" },
-          unit_amount: 999,
+          unit_amount: 199,
         },
         quantity: 1,
       },
     ],
     mode: "payment",
+    customer_email: email,
     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     metadata: {

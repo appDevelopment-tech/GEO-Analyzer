@@ -3,7 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -11,8 +12,17 @@ export const metadata: Metadata = {
     default: "GeoAnalyzer – GEO/AI Visibility Audit Tool",
     template: "%s – GeoAnalyzer",
   },
-  description: "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning for generative engines.",
-  keywords: ["GEO", "Generative Engine Optimization", "AI SEO", "AI visibility", "entity optimization", "AI citation", "answer engine optimization"],
+  description:
+    "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning for generative engines.",
+  keywords: [
+    "GEO",
+    "Generative Engine Optimization",
+    "AI SEO",
+    "AI visibility",
+    "entity optimization",
+    "AI citation",
+    "answer engine optimization",
+  ],
   authors: [{ name: "GeoAnalyzer" }],
   creator: "GeoAnalyzer",
   publisher: "GeoAnalyzer",
@@ -32,7 +42,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: baseUrl,
     title: "GeoAnalyzer – GEO/AI Visibility Audit Tool",
-    description: "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
+    description:
+      "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
     siteName: "GeoAnalyzer",
     images: [
       {
@@ -46,7 +57,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "GeoAnalyzer – GEO/AI Visibility Audit Tool",
-    description: "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
+    description:
+      "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
     images: ["/og-image.png"],
   },
   alternates: {
@@ -63,9 +75,23 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
       </head>
       <body>
         {children}

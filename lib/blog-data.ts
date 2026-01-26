@@ -11,7 +11,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "what-is-geo-vs-seo",
     title: "What is GEO vs SEO? The Key Differences for AI Engines",
-    description: "Understand how Generative Engine Optimization (GEO) differs from traditional SEO and what you need to do to rank in AI search results.",
+    description:
+      "Understand how Generative Engine Optimization (GEO) differs from traditional SEO and what you need to do to rank in AI search results.",
     date: "2025-01-15",
     category: "fundamentals",
     content: "",
@@ -19,7 +20,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-ai-engines-choose-citations",
     title: "How AI Engines Choose Citations for Recommendations",
-    description: "Learn the factors that determine which sources AI chatbots cite when answering user questions.",
+    description:
+      "Learn the factors that determine which sources AI chatbots cite when answering user questions.",
     date: "2025-01-18",
     category: "fundamentals",
     content: "",
@@ -27,7 +29,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "entity-clarity-checklist",
     title: "Entity Clarity Checklist for Better AI Rankings",
-    description: "A practical checklist to ensure your brand entity is clear and consistent across the web for AI engines.",
+    description:
+      "A practical checklist to ensure your brand entity is clear and consistent across the web for AI engines.",
     date: "2025-01-20",
     category: "fundamentals",
     content: "",
@@ -35,7 +38,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "geo-audit-template",
     title: "GEO Audit Template (Free) - Complete Guide",
-    description: "Download and use our free GEO audit template to assess your website's AI recommendation readiness.",
+    description:
+      "Download and use our free GEO audit template to assess your website's AI recommendation readiness.",
     date: "2025-01-22",
     category: "audits",
     content: "",
@@ -43,7 +47,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "direct-answer-block-examples",
     title: "Direct Answer Block Examples That Convert",
-    description: "See real examples of direct answer blocks that help both users and AI engines understand your content quickly.",
+    description:
+      "See real examples of direct answer blocks that help both users and AI engines understand your content quickly.",
     date: "2025-01-24",
     category: "audits",
     content: "",

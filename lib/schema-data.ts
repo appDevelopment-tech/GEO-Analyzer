@@ -1,4 +1,5 @@
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
 
 export const ORGANIZATION_JSON_LD = {
   "@context": "https://schema.org",
@@ -6,7 +7,8 @@ export const ORGANIZATION_JSON_LD = {
   name: "GeoAnalyzer",
   url: baseUrl,
   logo: `${baseUrl}/logo.png`,
-  description: "GeoAnalyzer helps websites optimize for AI recommendation engines through GEO audits and actionable insights.",
+  description:
+    "GeoAnalyzer helps websites optimize for AI recommendation engines through GEO audits and actionable insights.",
   sameAs: [
     // Add social links when available
   ],
@@ -22,7 +24,8 @@ export const WEBSITE_JSON_LD = {
   "@type": "WebSite",
   name: "GeoAnalyzer",
   url: baseUrl,
-  description: "Analyze your website's readiness for AI recommendations and generative engine optimization.",
+  description:
+    "Analyze your website's readiness for AI recommendations and generative engine optimization.",
   potentialAction: {
     "@type": "SearchAction",
     target: {
@@ -37,7 +40,9 @@ export const WEBSITE_JSON_LD = {
   },
 };
 
-export function generateFAQPageSchema(faqs: Array<{ question: string; answer: string }>) {
+export function generateFAQPageSchema(
+  faqs: Array<{ question: string; answer: string }>,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

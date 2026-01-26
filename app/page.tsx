@@ -13,6 +13,7 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
   const router = useRouter();
 
   const handleAnalyze = async (e: React.FormEvent) => {
@@ -61,6 +62,8 @@ export default function Home() {
             isAnalyzing={isAnalyzing}
             error={error}
             handleAnalyze={handleAnalyze}
+            email={email}
+            setEmail={setEmail}
           />
           <Features />
           <Info />
