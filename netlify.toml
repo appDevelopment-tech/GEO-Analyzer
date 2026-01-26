@@ -1,0 +1,39 @@
+# GeoAnalyzer Netlify Configuration
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Prevent deploy previews from being indexed by search engines
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Block indexing on deploy previews
+    X-Robots-Tag = "noindex, nofollow"
+
+# Add security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Redirects for clean URLs
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/how-it-works"
+  to = "/docs"
+  status = 301
