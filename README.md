@@ -5,7 +5,7 @@ A sleek, Apple-inspired Next.js web application that analyzes websites for their
 ## Features
 
 - **Evidence-Based Analysis**: Conservative scoring with cited evidence from actual page content
-- **AI-Powered Scoring**: OpenAI GPT-4 analyzes sites against the GEO framework
+- **AI-Powered Scoring**: OpenAI GPT-5.2 analyzes sites against the GEO framework
 - **Beautiful UI**: Apple-inspired design with smooth animations and transitions
 - **Instant Partial Report**: See your score immediately in the browser
 - **Full Email Report**: Detailed analysis sent directly to your inbox
@@ -17,7 +17,7 @@ A sleek, Apple-inspired Next.js web application that analyzes websites for their
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **AI Analysis**: OpenAI GPT-4
+- **AI Analysis**: OpenAI GPT-5.2
 - **Email Delivery**: Mailgun
 - **Web Crawling**: Cheerio
 
@@ -113,7 +113,7 @@ Before AI analysis, deterministic signals are extracted:
 
 ### 3. AI Scoring
 
-OpenAI GPT-4 analyzes the extracted data against the GEO framework:
+OpenAI GPT-5.2 analyzes the extracted data against the GEO framework:
 
 **Scoring Weights:**
 
@@ -175,15 +175,10 @@ Scoring weights:
 
 ### Change Crawl Scope
 
-Edit `lib/crawler.ts` and modify `pathsToCrawl`:
+Edit `lib/crawler.ts` and modify `pathsToCrawl`. Current v1.1 crawls homepage only:
 
 ```typescript
-const pathsToCrawl = [
-  "/",
-  "/about",
-  "/services",
-  // Add your custom paths
-];
+const pathsToCrawl = ["/"];  // Homepage only for lean analysis
 ```
 
 ### Customize Email Template
@@ -220,7 +215,7 @@ The app can be deployed to any platform that supports Next.js:
 
 ## Cost Considerations
 
-- **OpenAI API**: ~$0.01-0.03 per analysis (GPT-4 usage)
+- **OpenAI API**: ~$0.02-0.05 per analysis (GPT-5.2 usage)
 - **Mailgun**: Free tier includes 5,000 emails/month
 - **Hosting**: Vercel free tier is sufficient for moderate traffic
 
@@ -242,7 +237,7 @@ The app can be deployed to any platform that supports Next.js:
 
 - Ensure API key has sufficient credits
 - Check for rate limiting (wait and retry)
-- Verify model name is correct (gpt-4o)
+- Verify model name is correct (gpt-5.2)
 
 ## License
 

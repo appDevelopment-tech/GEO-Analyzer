@@ -16,6 +16,9 @@ export interface GeoScore {
   }>;
   week1_fix_plan: string[];
   limitations: string[];
+  // Extracted data shown in report
+  extracted_faqs: string[];
+  extracted_json_ld: any[];
 }
 
 export interface AnalysisRequest {
@@ -27,6 +30,8 @@ export interface CrawlData {
   url: string;
   title: string;
   metaDescription: string;
+  html: string;
+  cleanedHtml: string;
   headings: {
     h1: string[];
     h2: string[];
