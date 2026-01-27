@@ -65,7 +65,7 @@ export default function AboutPage() {
             What is GeoAnalyzer?
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            GeoAnalyzer is a GEO (Generative Engine Optimization) tool that
+            GeoAnalyzer is a AEO/GEO (Generative Engine Optimization) tool that
             helps websites understand and improve their readiness for AI
             recommendation engines. We analyze your site using the same signals
             that AI chatbots and answer engines consider when choosing sources
