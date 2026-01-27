@@ -9,7 +9,7 @@ const baseUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "GeoAnalyzer – GEO/AI Visibility Audit Tool",
+    default: "GeoAnalyzer – GEO/AI/AEO Visibility Audit Tool",
     template: "%s – GeoAnalyzer",
   },
   description:
@@ -22,6 +22,17 @@ export const metadata: Metadata = {
     "entity optimization",
     "AI citation",
     "answer engine optimization",
+    "AEO",
+    "AI recommendation readiness",
+    "structured data for AI",
+    "ChatGPT SEO",
+    "Perplexity AI optimization",
+    "Claude AI SEO",
+    "AI trust signals",
+    "competitive positioning for AI",
+    "technical accessibility for AI",
+    "AI content optimization",
+    "AI ranking factors",
   ],
   authors: [{ name: "GeoAnalyzer" }],
   creator: "GeoAnalyzer",
@@ -41,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: baseUrl,
-    title: "GeoAnalyzer – GEO/AI Visibility Audit Tool",
+    title: "GeoAnalyzer – GEO/AEO/AI Visibility Audit Tool",
     description:
       "Analyze your website's readiness for AI recommendations. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
     siteName: "GeoAnalyzer",

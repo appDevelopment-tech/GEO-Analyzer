@@ -8,11 +8,11 @@ const baseUrl =
 export const metadata: Metadata = {
   title: "Blog – GeoAnalyzer",
   description:
-    "Learn about Generative Engine Optimization (GEO), AI citation strategies, and how to improve your website's visibility in AI search results.",
+    "Learn about Generative Engine Optimization (GEO), AEO, AI citation strategies, and how to improve your website's visibility in AI search results.",
   openGraph: {
     title: "Blog – GeoAnalyzer",
     description:
-      "Learn about Generative Engine Optimization (GEO), AI citation strategies, and how to improve your website's visibility in AI search results.",
+      "Learn about Generative Engine Optimization (GEO), AEO, AI citation strategies, and how to improve your website's visibility in AI search results.",
     url: `${baseUrl}/blog`,
   },
   alternates: {
@@ -163,7 +163,7 @@ export default function BlogPage() {
       <footer className="border-t border-gray-700 mt-16">
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400">
-            © 2025 GeoAnalyzer. All rights reserved.
+            © 2026 GeoAnalyzer. All rights reserved.
           </p>
           <nav className="flex gap-6 text-sm">
             <Link

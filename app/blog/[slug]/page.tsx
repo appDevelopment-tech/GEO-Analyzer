@@ -21,7 +21,7 @@ const blogContent: Record<
       "GEO (Generative Engine Optimization) focuses on making your content citable by AI chatbots and answer engines like ChatGPT, Claude, and Perplexity. SEO (Search Engine Optimization) focuses on ranking in traditional search results like Google and Bing. While both aim to increase visibility, GEO prioritizes direct answers, entity clarity, and structured data that AI systems use when choosing sources to cite.",
     sections: [
       {
-        heading: "The Key Differences Between SEO and GEO",
+        heading: "The Key Differences Between SEO and GEO/AEO",
         content:
           "Traditional SEO optimizes for search engine algorithms that rank websites based on keywords, backlinks, and technical factors. GEO optimizes for AI engines that synthesize information from multiple sources to generate direct answers. This fundamental difference means your GEO strategy needs to emphasize different signals.",
       },

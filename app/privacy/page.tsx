@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  const lastUpdated = "January 26, 2025";
+  const lastUpdated = "January 26, 2026";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
@@ -275,7 +275,7 @@ export default function PrivacyPage() {
       <footer className="border-t border-gray-700 mt-16">
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400">
-            © 2025 GeoAnalyzer. All rights reserved.
+            © 2026 GeoAnalyzer. All rights reserved.
           </p>
           <nav className="flex gap-6 text-sm">
             <Link

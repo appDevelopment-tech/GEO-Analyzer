@@ -8,11 +8,11 @@ const baseUrl =
 export const metadata: Metadata = {
   title: "Terms of Service – GeoAnalyzer",
   description:
-    "GeoAnalyzer's terms of service. Understand the terms and conditions for using our GEO analysis service.",
+    "GeoAnalyzer's terms of service. Understand the terms and conditions for using our GEO/AEO/AI analysis service.",
   openGraph: {
     title: "Terms of Service – GeoAnalyzer",
     description:
-      "GeoAnalyzer's terms of service. Understand the terms and conditions for using our GEO analysis service.",
+      "GeoAnalyzer's terms of service. Understand the terms and conditions for using our GEO/AEO/AI analysis service.",
     url: `${baseUrl}/terms`,
   },
   alternates: {
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
-  const lastUpdated = "January 26, 2025";
+  const lastUpdated = "January 26, 2026";
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">

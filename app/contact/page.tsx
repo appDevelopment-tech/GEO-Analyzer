@@ -58,10 +58,10 @@ export default function ContactPage() {
             How can I contact GeoAnalyzer?
           </h1>
           <p className="text-lg text-gray-700 leading-relaxed">
-            The fastest way to reach us is via email at contact@geoanalyzer.app.
+            The fastest way to reach us is via email at hello@maxpetrusenko.com.
             We typically respond within 24 hours on business days. For questions
             about your report, pricing, or technical issues, please include your
-            order number or website URL for faster service.
+            report number or website URL for faster service.
           </p>
         </section>
 
@@ -234,7 +234,7 @@ export default function ContactPage() {
       <footer className="border-t border-gray-700 mt-16">
         <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400">
-            © 2025 GeoAnalyzer. All rights reserved.
+            © 2026 GeoAnalyzer. All rights reserved.
           </p>
           <nav className="flex gap-6 text-sm">
             <Link
