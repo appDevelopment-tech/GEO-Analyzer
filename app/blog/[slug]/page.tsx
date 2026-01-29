@@ -131,6 +131,47 @@ const blogContent: Record<
       },
     ],
   },
+  "how-to-win-ai-citations": {
+    directAnswer:
+      "AI engines cite sources based on four pillars: entity clarity, direct answer structure, trust signals, and technical accessibility. ChatGPT favors Wikipedia-style factual content with clear attribution. Perplexity prioritizes fresh content and community discussions like Reddit. Google AI Overviews distributes citations across diverse source types. Winning citations requires structured data (FAQPage schema), clear Q&A formatting, factual accuracy, and consistent entity information across the web.",
+    sections: [
+      {
+        heading: "Understanding How AI Engines Choose Citations",
+        content:
+          "Each major AI platform has distinct citation patterns. ChatGPT shows strongest preference for Wikipedia and sources with clear, verifiable facts. When ChatGPT Browse fetches live results, it provides reliable citations; when answering from training data, it provides none. Perplexity emphasizes Reddit (6.6% of citations compared to 2.2% for Google AI Overviews) and rewards freshness with indexing within hours. Google AI Overviews takes a more distributed approach, citing blogs, community discussions, and user-generated content. These differences mean your strategy should account for which platforms matter most for your audience.",
+      },
+      {
+        heading: "The Four Pillars of Citation-Worthy Content",
+        content:
+          "Entity clarity comes first. Before an AI can recommend you, it must understand what you offer. This requires Organization schema on your homepage, consistent NAP (name, address, phone) across the web, and a comprehensive About page. Direct answers are the second pillar. AI engines extract content from FAQ pages, Q&A sections, and pages with clear question headings. Structure matters more than length. A well-structured 500-word FAQ often outperforms a 3,000-word meandering article. Trust signals form the third pillar. Reviews, backlinks from authoritative domains, security indicators, and media mentions all signal credibility. Fourth is technical accessibility. Your robots.txt must allow AI crawlers, your site should use HTTPS, and your content needs proper schema markup.",
+      },
+      {
+        heading: "Schema Markup: The Technical Foundation",
+        content:
+          "JSON-LD is the preferred format for structured data. The four schemas that consistently drive citations are Organization, FAQPage, Article, and Person. Organization schema should include your name, logo, URL, description, and contact information. Use @id attributes to create persistent identifiers that survive URL changes. FAQPage schema explicitly tells AI engines that your content contains question-answer pairs, making it significantly easier to extract. Article schema with author, datePublished, and publisher information helps establish content provenance. Common mistakes to avoid include invalid nesting, missing required properties, and conflicting markup types on the same page.",
+      },
+      {
+        heading: "Content Patterns That Win Citations",
+        content:
+          "Analysis of 8,000+ citations reveals clear patterns. Comparison posts that cover multiple products or services perform exceptionally well. Thinkific, LearnWorlds, Monday.com, and Pipedrive all earn citations through comprehensive comparison content. Data-driven posts with original research, statistics, or surveys have high citation potential. How-to guides with step-by-step instructions are frequently cited. What doesn't work: overly promotional content, opinion pieces without factual backing, thin content, and pages with unclear structure. The key is providing objective, verifiable information that helps AI answer user questions accurately.",
+      },
+      {
+        heading: "Platform-Specific Optimization Tactics",
+        content:
+          "For ChatGPT, focus on encyclopedic content. Neutral tone, comprehensive coverage, clear structure, and verifiable claims mirror what ChatGPT finds in Wikipedia. Include specific numbers, dates, and named sources. For Perplexity, freshness matters. Publish current information, update timestamps, cover trending topics, and engage in community platforms that Perplexity indexes. For Google AI Overviews, diversify your content types. Blog posts, forum discussions, user-generated content, and local business citations all contribute. Google's distributed approach means authority across multiple content formats increases your odds.",
+      },
+      {
+        heading: "Measuring Citation Success",
+        content:
+          "Traditional metrics like rankings and impressions don't capture AEO performance. The new metrics are Citation Frequency (how often you're mentioned across platforms), Share of Voice (your citations versus competitors), Attribution Quality (does the citation include your brand name, URL, or just a generic reference), and Cross-Platform Coverage (presence across ChatGPT, Perplexity, Google AI, Claude, Copilot). Track these manually by querying AI engines about your brand and industry, or use emerging AEO measurement tools. The goal is not just appearing in citations but owning the conversation around your category.",
+      },
+      {
+        heading: "Implementing Your AEO Strategy",
+        content:
+          "Start with an audit. Check if your homepage has Organization schema. Verify your NAP is consistent across major directories. Review your top pages for direct answer structure. Identify content gaps where competitors earn citations. Then prioritize fixes. Schema markup is quick to implement and high impact. Restructuring key pages into Q&A format takes more time but pays dividends. Building trust signals is a long-term effort. Set realistic timelines. Schema can be done in a day. Content restructuring might take weeks. Trust building is ongoing. Measure results monthly, not daily. AI citation patterns emerge over time, not overnight.",
+      },
+    ],
+  },
 };
 
 export async function generateStaticParams() {

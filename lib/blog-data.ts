@@ -53,4 +53,13 @@ export const blogPosts: BlogPost[] = [
     category: "audits",
     content: "",
   },
+  {
+    slug: "how-to-win-ai-citations",
+    title: "How to Win AI Citations: The AEO Playbook for 2026",
+    description:
+      "Learn the proven strategies to get your brand cited by ChatGPT, Perplexity, Google AI Overviews, and other AI engines.",
+    date: "2026-01-29",
+    category: "fundamentals",
+    content: "",
+  },
 ];
