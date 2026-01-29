@@ -1,0 +1,226 @@
+# BACKLINK OUTREACH TEMPLATES
+# Copy and customize these for outreach
+
+## GUEST POST PITCH
+Subject: Article idea: How AI is changing search (and what marketers should do)
+
+Hi [Name],
+
+I've been following [Publication] and loved your recent piece on [Article Title]—great insights on [Specific Point].
+
+I'd like to contribute an article on "GEO vs AEO: The Simple Guide Marketers Need to Know."
+
+This is a hot topic right now—Reddit's r/SEO and r/DigitalMarketing communities are asking these questions daily, but there's genuine confusion about the terminology and how to actually implement it.
+
+What the article would cover:
+- Simple explanation of GEO vs AEO (no jargon)
+- Practical checklist marketers can implement today
+- Real data on what makes AI engines cite certain sources
+- Free tools for measuring AI recommendation readiness
+
+I run GeoAnalyzer (geoanalyzer.netlify.app), a free tool that helps websites optimize for AI recommendations from ChatGPT, Claude, and Gemini. We've analyzed 1,000+ websites, so I have hands-on data and insights to share.
+
+Would you be interested in this piece? Happy to adjust the angle to better fit your audience.
+
+Best,
+[Name]
+GeoAnalyzer Founder
+[Email] | [LinkedIn]
+
+
+## RESOURCE PAGE OUTREACH
+Subject: Resource for [Website Name]'s tools page
+
+Hi [Name],
+
+I found your [Page Name] page while researching AI marketing tools—really comprehensive list!
+
+I noticed you don't have any GEO/AEO optimization tools listed. GeoAnalyzer is a free tool that helps websites check if they're optimized for AI recommendations from ChatGPT, Claude, and Gemini.
+
+We're used by [X] marketers and have been featured in:
+- [Mention 1 if any]
+- [Mention 2 if any]
+
+Would you consider adding it? Here's a quick description:
+
+"GeoAnalyzer - Free tool to check your website's AI recommendation readiness. Get your GEO score in 60 seconds and see how well you're optimized for ChatGPT, Claude, and Gemini citations."
+
+URL: https://geoanalyzer.netlify.app
+
+Either way, thanks for curating such a helpful resource!
+
+Best,
+[Name]
+
+
+## BROKEN LINK OUTREACH
+Subject: Broken link on [Page Title]
+
+Hi [Name],
+
+I was reading your article "[Article Title]" and found it really helpful—until I hit a broken link.
+
+The link to [Broken URL/Description] is returning a 404 error.
+
+I actually wrote a guide covering this same topic if you're looking for a replacement:
+https://geoanalyzer.netlify.app/blog/[relevant-post]
+
+It covers [brief 1-sentence description of what the article covers].
+
+Either way, hope this helps! Thanks for the great content.
+
+Best,
+[Name]
+
+
+## HARO RESPONSE TEMPLATE
+Query: [Copy the exact query title]
+
+**Answer:**
+[Write 2-3 direct, quotable sentences answering their question. No fluff.]
+
+**Additional Context:**
+[One sentence establishing your credibility - "I run GeoAnalyzer and we've analyzed X websites..." OR "I've worked in SEO for X years, specifically focusing on AI optimization..."]
+
+**Contact:**
+[Name], GeoAnalyzer Founder
+[Email]
+[Phone if requested]
+
+
+## PODCAST GUEST PITCH
+Subject: Guest idea: How to optimize for AI search (the new SEO)
+
+Hi [Name],
+
+Big fan of the podcast—especially your episode with [Guest] on [Topic].
+
+I'd love to come on as a guest to discuss "GEO and AEO: The New Frontier of Search."
+
+This is what marketers are asking about on Reddit daily, but there's not much practical guidance out there. I can share:
+
+- Real data from 1,000+ website analyses on what makes AI engines cite certain sources
+- The SEO vs GEO distinction (and why smart marketers do both)
+- Practical checklist listeners can implement today
+- Case studies of brands already winning in AI search
+
+I run GeoAnalyzer, so I have hands-on data and can explain this in simple, actionable terms.
+
+Would you be interested in having me on? Happy to send over more talking points.
+
+Best,
+[Name]
+[LinkedIn Profile]
+
+
+## PARTNERSHIP OUTREACH
+Subject: Partnership opportunity: [Their Product] x GeoAnalyzer
+
+Hi [Name],
+
+I've been using [Their Product] for [Time Period] and love how it [Specific Benefit].
+
+I run GeoAnalyzer, a free tool that helps websites optimize for AI recommendations from ChatGPT and Claude. We're looking to partner with complementary tools that our users would benefit from.
+
+I see a few ways we could work together:
+1. Co-marketing: We feature you in our newsletter, you feature us in yours
+2. Content swap: Guest post exchange on relevant topics
+3. Bundle offer: Discount for both tools together
+4. Data sharing: We can provide anonymized insights on AI optimization trends
+
+Would you be open to exploring this? No pressure—just think there's mutual benefit.
+
+Best,
+[Name]
+GeoAnalyzer Founder
+
+
+## TESTIMONIAL OFFER
+Subject: Quick testimonial for [Product]
+
+Hi [Name],
+
+I've been using [Product] for GeoAnalyzer and wanted to offer a testimonial:
+
+"[Product] has been instrumental for GeoAnalyzer. We use it for [specific use case], and it's helped us [specific result]. The [feature] is particularly valuable because [reason]. Highly recommend for [target user]."
+
+Feel free to use this anywhere—website, marketing, case studies. Just let me know if you need anything else!
+
+Would you consider linking back to geoanalyzer.netlify.app as part of the attribution?
+
+Best,
+[Name]
+
+
+## FOLLOW-UP (send 5-7 days after initial)
+Subject: Re: [Previous subject line]
+
+Hi [Name],
+
+Just wanted to bump this to the top of your inbox in case it got buried.
+
+[Brief 1-sentence reminder of value proposition - no need to re-explain everything]
+
+Let me know if you're interested or if I can provide any additional information.
+
+Best,
+[Name]
+
+
+## REDDIT VALUE POST (not promotional, value-first)
+Subreddit: r/SEO, r/DigitalMarketing, etc.
+
+Title: [Question from the subreddit or "Analyzing 1,000+ websites: What makes AI cite certain sources"]
+
+[Provide genuinely helpful answer to their question. Share unique insights from your data.]
+
+---
+
+I run GeoAnalyzer and we've analyzed [X] websites specifically for AI recommendation readiness. Here's what the data shows:
+
+[Share 2-3 specific, actionable insights - don't just promote]
+
+The biggest surprise has been [interesting finding]. Most sites think they're doing well on [factor], but our data shows [contradicting insight].
+
+Happy to run a free analysis for anyone who wants to check their site. Just drop your URL.
+
+[What are you all seeing? Have you noticed AI changes affecting your traffic?]
+
+
+## LINKEDIN INSIGHT POST
+
+[Hook: Something surprising from your data]
+
+After analyzing 1,000+ websites for AI recommendation readiness, here's what surprised me most:
+
+[3-4 bullet points with insights]
+
+The takeaway? [Actionable advice]
+
+We built GeoAnalyzer to help with this—it's free if anyone wants to check their site: geoanalyzer.netlify.app
+
+[Question to engage comments]
+
+#SEO #GEO #AEO #ChatGPT #AI #Marketing
+
+
+## INFLUENCER OUTREACH
+Subject: Quick question about your content on [Topic]
+
+Hi [Influencer Name],
+
+I've been following your content on [Topic]—really loved your recent video/post on [Specific Content].
+
+Quick question: Have you covered GEO/AEO (optimizing for AI search) yet? It's the next wave after SEO, and I'm not seeing many creators talking about it practically.
+
+I run GeoAnalyzer—a free tool to check if your site is ready for ChatGPT citations. I'd be happy to:
+- Provide a free analysis for you/your audience
+- Share data/insights for your content
+- Do a collab if it fits your channel
+
+No pressure—just think your audience would find this valuable given your focus on [Topic].
+
+Let me know if you're interested.
+
+Best,
+[Name]
