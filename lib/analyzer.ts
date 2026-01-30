@@ -1,4 +1,4 @@
-import { CrawlData, GeoScore } from "@/types/geo";
+import { CrawlData, GeoScore, PageRemediation } from "@/types/geo";
 
 const Z_AI_API_KEY = process.env.Z_AI_GLM_API_KEY;
 const Z_AI_API_URL = "https://api.z.ai/api/paas/v4/chat/completions";
@@ -387,6 +387,18 @@ export async function analyzeWithOpenAI(
       .slice(0, 5)
       .map((c) => `[${c.change_type}] ${c.placement}: ${c.exact_example_text?.slice(0, 80)}...`);
 
+    // Store raw page remediations for detailed report
+    const pageRemediations: PageRemediation[] = pageResults.map((r) => ({
+      url: r.url || "",
+      page_type: r.page_type || "other",
+      diagnosis: {
+        page_score: r.diagnosis?.page_score,
+        dominant_gap: r.diagnosis?.dominant_gap || "direct_answer_quality",
+        ai_hesitation: r.diagnosis?.ai_hesitation || "",
+      },
+      recommended_changes: r.recommended_changes || [],
+    }));
+
     return {
       overall_score: avgScore,
       tier: mapScoreToTier(avgScore),
@@ -396,6 +408,8 @@ export async function analyzeWithOpenAI(
       limitations: ["Analysis based on crawled content only"],
       extracted_faqs: allFaqs,
       extracted_json_ld: allJsonLd,
+      page_remediations: pageRemediations,
+      payment_status: "free", // Default to free, updated to paid after Stripe webhook
     };
   } catch (error) {
     console.error("GLM analysis failed:", error);

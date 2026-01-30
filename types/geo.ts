@@ -1,3 +1,22 @@
+export interface RemediationChange {
+  priority: "high" | "medium" | "low";
+  change_type: "direct_answer" | "faq" | "json_ld" | "entity_clarity" | "trust_signal";
+  placement: string;
+  exact_example_text: string;
+  example_json_ld?: string;
+}
+
+export interface PageRemediation {
+  url: string;
+  page_type: "homepage" | "service" | "article" | "category" | "other";
+  diagnosis: {
+    page_score?: number;
+    dominant_gap: "direct_answer_quality" | "entity_clarity" | "trust_signals" | "structured_data_quality";
+    ai_hesitation: string;
+  };
+  recommended_changes: RemediationChange[];
+}
+
 export interface GeoScore {
   overall_score: number;
   tier: string;
@@ -19,6 +38,10 @@ export interface GeoScore {
   // Extracted data shown in report
   extracted_faqs: string[];
   extracted_json_ld: any[];
+  // Per-page remediation details (for full report)
+  page_remediations?: PageRemediation[];
+  // Payment status (free = 1 page shown, paid = all pages shown)
+  payment_status?: "free" | "paid";
 }
 
 export interface AnalysisRequest {
