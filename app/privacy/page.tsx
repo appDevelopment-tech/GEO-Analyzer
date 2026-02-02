@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   title: "Privacy Policy – GeoAnalyzer",

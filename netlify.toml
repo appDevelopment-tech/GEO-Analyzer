@@ -10,12 +10,8 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Prevent deploy previews from being indexed by search engines
-[[headers]]
-  for = "/*"
-  [headers.values]
-    # Block indexing on deploy previews
-    X-Robots-Tag = "noindex, nofollow"
+# Note: Netlify automatically adds X-Robots-Tag: noindex to deploy previews
+# Production builds are indexable by default
 
 # Add security headers
 [[headers]]

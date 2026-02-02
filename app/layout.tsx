@@ -4,7 +4,7 @@ import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 
 const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

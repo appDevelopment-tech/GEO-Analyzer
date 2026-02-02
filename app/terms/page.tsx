@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 
 const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geoanalyzer.netlify.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   title: "Terms of Service – GeoAnalyzer",
