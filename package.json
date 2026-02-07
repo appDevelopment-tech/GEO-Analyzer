@@ -19,6 +19,7 @@
     "mailgun.js": "^10.2.1",
     "motion": "^12.29.0",
     "next": "14.2.3",
+    "playwright": "^1.58.0",
     "openai": "^4.47.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
