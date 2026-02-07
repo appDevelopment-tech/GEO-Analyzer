@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
           result: "pending",
           domain: normalizedUrl,
           email: email,
+          payment_status: "free", // Default to free, updated to paid after Stripe webhook
         },
       ])
       .select();
@@ -105,14 +106,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Step 4: Return partial report for immediate display
+    const firstPageRemediation = (geoScore.page_remediations || [])[0];
+
     return NextResponse.json({
       report_id: id,
       success: true,
+      payment_status: "free",
+      total_pages: (geoScore.page_remediations || []).length,
       report: {
         overall_score: geoScore.overall_score,
         tier: geoScore.tier,
         section_scores: geoScore.section_scores,
         top_hesitation: geoScore.top_ai_hesitations[0] || null,
+        // First page remediation (free preview)
+        page_remediations: firstPageRemediation ? [firstPageRemediation] : [],
       },
     });
   } catch (error: any) {

@@ -59,6 +59,20 @@ export async function POST(req: NextRequest) {
         if (data && !error) {
           try {
             const score = JSON.parse(data.full_report);
+
+            // Update payment_status to paid and include in full_report JSON
+            score.payment_status = "paid";
+
+            await supabase
+              .from("Reports")
+              .update({
+                payment_status: "paid",
+                paid_at: new Date().toISOString(),
+                full_report: JSON.stringify(score),
+              })
+              .eq("report_id", reportId);
+
+            // Send full report email with all pages
             await sendReport(email, data.domain, score, reportId);
           } catch (mailErr) {
             console.error("Error sending report email:", mailErr);

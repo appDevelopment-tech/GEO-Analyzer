@@ -10,12 +10,8 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Prevent deploy previews from being indexed by search engines
-[[headers]]
-  for = "/*"
-  [headers.values]
-    # Block indexing on deploy previews
-    X-Robots-Tag = "noindex, nofollow"
+# Note: Netlify automatically adds X-Robots-Tag: noindex to deploy previews
+# Production builds are indexable by default
 
 # Add security headers
 [[headers]]
@@ -36,4 +32,12 @@
 [[redirects]]
   from = "/how-it-works"
   to = "/docs"
+  status = 301
+
+# Force HTTPS (www canonical)
+# Netlify handles http→https automatically
+# Non-www to www redirect (only for root domain, avoid loops)
+[[redirects]]
+  from = "https://geo-analyzer.com"
+  to = "https://www.geo-analyzer.com/"
   status = 301
