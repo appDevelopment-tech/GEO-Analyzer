@@ -1,11 +1,11 @@
-# GEO Analyzer - AI Recommendation Readiness Scanner
+# GEO/AEO Analyzer - AI Recommendation Readiness Scanner
 
-A sleek, Apple-inspired Next.js web application that analyzes websites for their AI recommendation readiness using the GEO (Generative Engine Optimization) framework.
+A sleek, Apple-inspired Next.js web application that analyzes websites for their AI recommendation readiness using the GEO/AEO (Generative Engine Optimization / Answer Engine Optimization) framework.
 
 ## Features
 
 - **Evidence-Based Analysis**: Conservative scoring with cited evidence from actual page content
-- **AI-Powered Scoring**: OpenAI GPT-5.2 analyzes sites against the GEO framework
+- **AI-Powered Scoring**: OpenAI GPT-5.2 analyzes sites against the GEO/AEO framework
 - **Beautiful UI**: Apple-inspired design with smooth animations and transitions
 - **Instant Partial Report**: See your score immediately in the browser
 - **Full Email Report**: Detailed analysis sent directly to your inbox
@@ -113,7 +113,7 @@ Before AI analysis, deterministic signals are extracted:
 
 ### 3. AI Scoring
 
-OpenAI GPT-5.2 analyzes the extracted data against the GEO framework:
+OpenAI GPT-5.2 analyzes the extracted data against the GEO/AEO framework:
 
 **Scoring Weights:**
 
@@ -154,7 +154,7 @@ geo-analyzer/
 │   ├── analyzer.ts               # OpenAI integration
 │   └── email.ts                  # Mailgun email service
 ├── types/
-│   └── geo.ts                    # TypeScript type definitions
+│   └── geo.ts                    # TypeScript type definitions (GEO/AEO)
 └── public/                       # Static assets
 ```
 

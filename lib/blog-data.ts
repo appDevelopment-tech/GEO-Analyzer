@@ -10,9 +10,9 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "what-is-geo-vs-seo",
-    title: "What is GEO vs SEO? The Key Differences for AI Engines",
+    title: "What is GEO/AEO vs SEO? The Key Differences for AI Engines",
     description:
-      "Understand how Generative Engine Optimization (GEO) differs from traditional SEO and what you need to do to rank in AI search results.",
+      "Understand how Generative Engine Optimization (GEO/AEO) differs from traditional SEO and what you need to do to rank in AI search results.",
     date: "2026-01-15",
     category: "fundamentals",
     content: "",
@@ -37,9 +37,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: "geo-audit-template",
-    title: "GEO Audit Template (Free) - Complete Guide",
+    title: "GEO/AEO Audit Template (Free) - Complete Guide",
     description:
-      "Download and use our free GEO audit template to assess your website's AI recommendation readiness.",
+      "Download and use our free GEO/AEO audit template to assess your website's AI recommendation readiness.",
     date: "2026-01-22",
     category: "audits",
     content: "",

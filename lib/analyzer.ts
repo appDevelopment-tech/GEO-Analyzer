@@ -88,7 +88,7 @@ export async function analyzeWithOpenAI(
     const allFaqs = crawlData.flatMap((p) => p.signals.directAnswerBlocks);
     const allJsonLd = crawlData.flatMap((p) => p.jsonLd);
 
-    return {
+      return {
       overall_score: result.overall_score || 0,
       tier: result.tier || "Invisible to AI",
       section_scores: result.section_scores || {

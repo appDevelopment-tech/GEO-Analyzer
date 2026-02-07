@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 
@@ -9,7 +8,7 @@ const baseUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "GeoAnalyzer – GEO/AI/AEO Visibility Audit Tool",
+    default: "GeoAnalyzer – AI/AEO Visibility Audit Tool",
     template: "%s – GeoAnalyzer",
   },
   description:

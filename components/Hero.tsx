@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import RotatingText from "./RotatingText";
 import TextType from "./TextType";
+import { LimitedOfferBadge } from "./LimitedOfferBadge";
 
 export const Hero = () => (
   <motion.div
@@ -34,10 +35,10 @@ export const Hero = () => (
         </p>
         <RotatingText
           texts={[
+            "AEO score",
             "AI readiness",
             "AI visibility",
             "discoverability",
-            "GEO score",
           ]}
           mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg min-w-[9.5rem]" // adjust as needed
           staggerFrom={"last"}

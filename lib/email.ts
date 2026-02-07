@@ -24,7 +24,7 @@ export async function sendReport(
   let emailResult: string | boolean = true;
   try {
     await mg.messages.create(process.env.MAILGUN_DOMAIN || "", {
-      from: `GEO Analyzer <noreply@${process.env.MAILGUN_DOMAIN}>`,
+      from: `GEO/AEO Analyzer <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: [email],
       subject: `Your AI Recommendation Readiness Report for ${domain}`,
       html: htmlContent,
@@ -85,7 +85,7 @@ function generateReportHTML(domain: string, score: GeoScore): string {
     <!-- Header -->
     <div style="text-align: center; margin-bottom: 40px;">
       <h1 style="margin: 0 0 8px 0; color: #1d1d1f; font-size: 32px; font-weight: 700;">
-        GEO Analyzer
+        GEO/AEO Analyzer
       </h1>
       <p style="margin: 0; color: #6e6e73; font-size: 16px;">
         AI Recommendation Readiness Report. If you have questions about the findings, just reply to this email.
@@ -160,7 +160,7 @@ function generateReportHTML(domain: string, score: GeoScore): string {
         This is a diagnostic report, not an exhaustive audit. For more information, please contact <a href="mailto:hello@maxpetrusenko.com">us</a> directly.
       </p>
       <p style="margin: 0; color: #86868b; font-size: 13px;">
-        © ${new Date().getFullYear()} GEO Analyzer. All rights reserved.
+        © ${new Date().getFullYear()} GEO/AEO Analyzer. All rights reserved.
       </p>
     </div>
 

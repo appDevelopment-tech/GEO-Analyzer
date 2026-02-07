@@ -88,7 +88,7 @@ export const Footer = () => (
       {/* Copyright */}
       <div className="text-center text-sm text-gray-200 pt-8 border-t border-gray-700">
         <p>
-          © {new Date().getFullYear()} GEO Analyzer. Diagnostic tool for AI
+          © {new Date().getFullYear()} GEO/AEO Analyzer. Diagnostic tool for AI
           recommendation readiness. For support, please email{" "}
           <a href="mailto:hello@maxpetrusenko.com">us</a>.
         </p>

@@ -8,7 +8,7 @@ export const ORGANIZATION_JSON_LD = {
   url: baseUrl,
   logo: `${baseUrl}/logo.png`,
   description:
-    "GeoAnalyzer helps websites optimize for AI recommendation engines through GEO audits and actionable insights.",
+    "GeoAnalyzer helps websites optimize for AI recommendation engines through GEO/AEO audits and actionable insights.",
   sameAs: [
     // Add social links when available
   ],
@@ -66,8 +66,8 @@ export function generateSoftwareApplicationSchema() {
     operatingSystem: "Web",
     offers: {
       "@type": "Offer",
-      name: "Full GEO Report",
-      price: "19.00",
+      name: "Full GEO/AEO Report",
+      price: "9.50",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
     },
@@ -98,7 +98,7 @@ export function generateBlogPostingSchema(post: {
     dateModified: post.datePublished,
     author: {
       "@type": "Organization",
-      name: "GeoAnalyzer",
+      name: "GeoAnalyzer (GEO/AEO)",
     },
     publisher: {
       "@type": "Organization",

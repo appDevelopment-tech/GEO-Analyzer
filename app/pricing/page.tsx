@@ -10,11 +10,11 @@ const baseUrl =
 export const metadata: Metadata = {
   title: "Pricing – GeoAnalyzer",
   description:
-    "Simple, transparent pricing for comprehensive GEO audits. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
+    "Simple, transparent pricing for comprehensive GEO/AEO audits. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
   openGraph: {
     title: "Pricing – GeoAnalyzer",
     description:
-      "Simple, transparent pricing for comprehensive GEO audits. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
+      "Simple, transparent pricing for comprehensive GEO/AEO audits. Get actionable insights on entity clarity, direct answers, trust signals, and competitive positioning.",
     url: `${baseUrl}/pricing`,
   },
   alternates: {
@@ -73,7 +73,7 @@ export default function PricingPage() {
               What does GeoAnalyzer cost?
             </h1>
             <p className="text-lg text-gray-700 leading-relaxed">
-              GeoAnalyzer offers a free preliminary score. For comprehensive GEO
+              GeoAnalyzer offers a free preliminary score. For comprehensive GEO/AEO
               audits with detailed recommendations, the full report costs $19.
               Each report includes entity clarity analysis, direct answer
               optimization, trust signal evaluation, competitive positioning,
@@ -105,7 +105,7 @@ export default function PricingPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span>Overall GEO score (0-100)</span>
+                    <span>Overall GEO/AEO score (0-100)</span>
                   </li>
                   <li className="flex items-start gap-3 text-gray-300">
                     <svg

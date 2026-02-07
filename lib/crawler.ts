@@ -17,7 +17,7 @@ export async function crawlPage(url: string): Promise<CrawlData> {
   try {
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; GEO-Analyzer/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; GEO/AEO-Analyzer/1.0)",
       },
     });
 
