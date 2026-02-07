@@ -45,7 +45,7 @@ export default function ReportPage() {
             <span className="absolute inset-4 rounded-full bg-gradient-to-br from-apple-blue to-cyan-400 opacity-60"></span>
           </div>
           <div className="text-xl font-semibold text-apple-light drop-shadow-lg animate-pulse">
-            Loading your GEO report...
+            Loading your GEO/AEO report...
           </div>
         </div>
       </main>
@@ -80,7 +80,7 @@ export default function ReportPage() {
               transition={{ duration: 0.5 }}
               className="text-4xl md:text-5xl font-bold text-light-grey mb-4"
             >
-              Your GEO Analysis
+              Your GEO/AEO Analysis
             </motion.h2>
             <motion.p
               initial={{ y: 20, opacity: 0 }}

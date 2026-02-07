@@ -7,11 +7,11 @@ const baseUrl =
 export const metadata: Metadata = {
   title: "Privacy Policy – GeoAnalyzer",
   description:
-    "GeoAnalyzer's privacy policy. Learn how we collect, use, and protect your data when you use our GEO analysis service.",
+    "GeoAnalyzer's privacy policy. Learn how we collect, use, and protect your data when you use our GEO/AEO analysis service.",
   openGraph: {
     title: "Privacy Policy – GeoAnalyzer",
     description:
-      "GeoAnalyzer's privacy policy. Learn how we collect, use, and protect your data when you use our GEO analysis service.",
+      "GeoAnalyzer's privacy policy. Learn how we collect, use, and protect your data when you use our GEO/AEO analysis service.",
     url: `${baseUrl}/privacy`,
   },
   alternates: {
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-white">Crawled content:</strong>{" "}
-                  Publicly accessible pages from your website, analyzed for GEO
+                  Publicly accessible pages from your website, analyzed for GEO/AEO
                   signals
                 </li>
               </ul>
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
             <div className="space-y-4 text-gray-300">
               <p>We use your information to:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Perform GEO analysis on your website</li>
+                <li>Perform GEO/AEO analysis on your website</li>
                 <li>Generate and deliver your report</li>
                 <li>Process payments (via Stripe)</li>
                 <li>Send essential service communications</li>

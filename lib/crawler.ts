@@ -440,7 +440,7 @@ export async function detectJsRenderingOnline(url: string): Promise<JsDetectionR
   try {
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; GEO-Analyzer/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; GEO/AEO-Analyzer/1.0)",
       },
     });
 

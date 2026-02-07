@@ -1,4 +1,4 @@
-# GeoAnalyzer Netlify Configuration
+# GeoAnalyzer (GEO/AEO) Netlify Configuration
 
 [build]
   command = "npm run build"

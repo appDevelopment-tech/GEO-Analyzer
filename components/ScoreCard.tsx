@@ -94,7 +94,7 @@ export default function ScoreCard({
             transition={{ delay: 0.2, duration: 0.5 }}
             className="text-sm font-semibold uppercase tracking-wider opacity-90 mb-3"
           >
-            Overall GEO Score
+            Overall GEO/AEO Score
           </motion.p>
 
           <motion.div

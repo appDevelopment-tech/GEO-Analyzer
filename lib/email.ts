@@ -104,9 +104,9 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
   <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
 
     <!-- Header -->
-    <div style="text-align: center; margin-bottom: 32px;">
-      <h1 style="margin: 0 0 8px 0; color: #1d1d1f; font-size: 28px; font-weight: 700;">
-        GEO Analyzer
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h1 style="margin: 0 0 8px 0; color: #1d1d1f; font-size: 32px; font-weight: 700;">
+        GEO/AEO Analyzer
       </h1>
       <p style="margin: 0; color: #6e6e73; font-size: 15px;">
         Your AI Recommendation Readiness Report is ready
@@ -186,7 +186,7 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
         Questions? Just reply to this email.
       </p>
       <p style="margin: 0; color: #86868b; font-size: 13px;">
-        © ${new Date().getFullYear()} GEO Analyzer. All rights reserved.
+        © ${new Date().getFullYear()} GEO/AEO Analyzer. All rights reserved.
       </p>
     </div>
 

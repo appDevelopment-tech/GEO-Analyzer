@@ -2,8 +2,8 @@
 
 ## Problem
 
-- Netlify URL (geoanalyzerapp.netlify.app) works
-- Custom domain (geo-analyzer.com) shows `ERR_SSL_PROTOCOL_ERROR`
+- Netlify URL (geoanalyzerapp.netlify.app) works (GEO/AEO)
+- Custom domain (geo-analyzer.com) shows `ERR_SSL_PROTOCOL_ERROR` (GEO/AEO)
 - Root cause: SSL/TLS misconfiguration between Cloudflare and Netlify
 
 ---
@@ -12,26 +12,26 @@
 
 ### Step 1: Netlify Domain Setup
 
-- [ ] Go to Netlify Dashboard → geo-analyzer project → Domain settings
-- [ ] Verify `geo-analyzer.com` is added as a custom domain
+- [ ] Go to Netlify Dashboard → geo-analyzer project (GEO/AEO) → Domain settings
+- [ ] Verify `geo-analyzer.com` (GEO/AEO) is added as a custom domain
 - [ ] Verify domain shows as **Active** with valid SSL certificate
-- [ ] If only www.geo-analyzer.com exists, add bare domain too
+- [ ] If only www.geo-analyzer.com exists (GEO/AEO), add bare domain too
 
 ---
 
 ### Step 2: Cloudflare DNS Settings
 
-Go to: Cloudflare Dashboard → DNS → Records for geo-analyzer.com
+Go to: Cloudflare Dashboard → DNS → Records for geo-analyzer.com (GEO/AEO)
 
 **Required setup:**
 
 | Type  | Name                    | Content                    | Proxy Status           |
 | ----- | ----------------------- | -------------------------- | ---------------------- |
-| CNAME | geo-analyzer.com (or @) | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
-| CNAME | www                     | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
+| CNAME | geo-analyzer.com (or @) (GEO/AEO) | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
+| CNAME | www (GEO/AEO)           | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
 
-- [ ] Root CNAME points to `geoanalyzerapp.netlify.app`
-- [ ] www CNAME points to `geoanalyzerapp.netlify.app`
+- [ ] Root CNAME (GEO/AEO) points to `geoanalyzerapp.netlify.app`
+- [ ] www CNAME (GEO/AEO) points to `geoanalyzerapp.netlify.app`
 - [ ] Both have **orange cloud** (Proxied) enabled
 
 ---
@@ -71,7 +71,7 @@ Go to: Cloudflare → Caching → Configuration
 
 - [ ] Click "Purge Everything"
 - [ ] Wait 30 seconds
-- [ ] Test https://geo-analyzer.com
+- [ ] Test https://geo-analyzer.com (GEO/AEO)
 
 ---
 
@@ -79,7 +79,7 @@ Go to: Cloudflare → Caching → Configuration
 
 After SSL is working, update the BASE_URL:
 
-- [ ] Change `NEXT_PUBLIC_BASE_URL` from `https://geoanalyzerapp.netlify.app` to `https://geo-analyzer.com`
+- [ ] Change `NEXT_PUBLIC_BASE_URL` from `https://geoanalyzerapp.netlify.app` to `https://geo-analyzer.com` (GEO/AEO)
 - [ ] Update Stripe success/cancel URLs if needed
 - [ ] Redeploy to Netlify
 
@@ -108,13 +108,13 @@ After SSL is working, update the BASE_URL:
 
 ```bash
 # Check DNS propagation
-dig geo-analyzer.com
+dig geo-analyzer.com (GEO/AEO)
 
 # Check SSL certificate
-openssl s_client -connect geo-analyzer.com:443 -servername geo-analyzer.com
+openssl s_client -connect geo-analyzer.com:443 -servername geo-analyzer.com (GEO/AEO)
 
 # Check HTTP status
-curl -I https://geo-analyzer.com
+curl -I https://geo-analyzer.com (GEO/AEO)
 ```
 
 ---
@@ -123,6 +123,6 @@ curl -I https://geo-analyzer.com
 
 After completing all steps:
 
-- https://geo-analyzer.com loads without SSL errors
+- https://geo-analyzer.com (GEO/AEO) loads without SSL errors
 - No "Not Secure" warnings in browser
 - HTTPS padlock appears in address bar

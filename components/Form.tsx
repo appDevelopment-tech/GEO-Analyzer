@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { LimitedOfferBadge } from "./LimitedOfferBadge";
 
 interface Props {
   url: string;
@@ -9,7 +10,6 @@ interface Props {
   email: string;
   setEmail: (email: string) => void;
 }
-
 export const Form = ({
   url,
   setUrl,
@@ -26,6 +26,8 @@ export const Form = ({
     onSubmit={handleAnalyze}
     className="bg-white rounded-3xl p-8 md:p-10 relative animated-glow"
   >
+    {/* Overlay badge */}
+    <LimitedOfferBadge />
     <div className="space-y-6">
       {/* URL Input */}
       <div>
@@ -117,11 +119,11 @@ export const Form = ({
     </div>
 
     <p className="mt-6 text-center text-xs text-gray-500">
-      GEO Analyzer. Created by{" "}
+      GEO/AEO Analyzer. Created by{" "}
       <a href="https://www.maxpetrusenko.com/" className="text-apple-blue">
         @max_petrusenko
       </a>{" "}
-      <br />. <a href="mailto:hello@maxpetrusenko.com">Contact us </a>
+      <br />. <a href="mailto:hello@maxpetrusenko.com">Contact me </a>
       for a custom AI visibility audit.
     </p>
   </motion.form>

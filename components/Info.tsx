@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const sections = [
   {
-    question: "What is GEO?",
+    question: "What is GEO/AEO?",
     answer: (
       <>
         <span className="block mb-2 text-gray-800 font-semibold">
-          Generative Engine Optimization (GEO) is how you get your business
+          Generative Engine Optimization (GEO/AEO) is how you get your business
           recommended by AI tools like ChatGPT, Perplexity, and Claude.
         </span>
         <span className="block mb-2 text-gray-700">
@@ -15,8 +15,8 @@ const sections = [
           answers.
         </span>
         <span className="block mb-2 text-gray-700">
-          When someone asks, <i>"What's the best CRM for small teams?"</i> — GEO
-          determines whether AI mentions you or your competitor.
+          When someone asks, <i>"What's the best CRM for small teams?"</i> —
+          GEO/AEO determines whether AI mentions you or your competitor.
         </span>
         <span className="block mb-2 text-gray-700">
           AI doesn't return 10 blue links. It returns one answer — maybe two. If
@@ -30,7 +30,7 @@ const sections = [
     ),
   },
   {
-    question: "Why does GEO matter now?",
+    question: "Why does GEO/AEO matter now?",
     answer: (
       <>
         <span className="block mb-2 text-gray-700">
@@ -52,7 +52,7 @@ const sections = [
     ),
   },
   {
-    question: "How does the GEO report help me?",
+    question: "How does the GEO/AEO report help me?",
     answer: (
       <>
         <span className="block mb-2 text-gray-700">
@@ -72,11 +72,11 @@ const sections = [
     ),
   },
   {
-    question: "How is GEO different from SEO?",
+    question: "How is GEO/AEO different from SEO?",
     answer: (
       <>
         <span className="block mb-2 text-gray-700">
-          SEO is about ranking on Google. GEO is about being the answer AI
+          SEO is about ranking on Google. GEO/AEO is about being the answer AI
           recommends. The signals, data, and strategies are different — and so
           are the rewards.
         </span>
@@ -106,9 +106,9 @@ const sections = [
     answer: (
       <>
         <span className="block mb-2 text-gray-700">
-          You get a short GEO analysis report for free — no strings attached.
-          This gives you a quick snapshot of your site's AI visibility and top
-          issues.
+          You get a short GEO/AEO analysis report for free — no strings
+          attached. This gives you a quick snapshot of your site's AI visibility
+          and top issues.
         </span>
         <span className="block mb-2 text-gray-700">
           If you want a full, detailed report with prioritized action items and
