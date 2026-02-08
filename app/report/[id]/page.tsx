@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ScoreCard from "@/components/ScoreCard";
-import CitationScorePanel from "@/components/CitationScorePanel";
 import AIQueryPanel from "@/components/AIQueryPanel";
 import AIBlindSpotsPanel from "@/components/AIBlindSpotsPanel";
 import FixRoadmapPanel from "@/components/FixRoadmapPanel";
-import JsonLdPanel from "@/components/JsonLdPanel";
 
 export default function ReportPage() {
   const { id } = useParams();
@@ -79,7 +77,6 @@ export default function ReportPage() {
   }
 
   const isLocked = report.is_locked !== false;
-  const isPaid = report.payment_status === "paid";
   const paymentStatus = report.payment_status || "free";
   const fullReport = report.full_report;
 
@@ -121,14 +118,6 @@ export default function ReportPage() {
             onCheckout={handleStripeCheckout}
             paymentStatus={paymentStatus}
           />
-
-          {/* AI Citation Probability */}
-          {fullReport.ai_citation_score != null && (
-            <CitationScorePanel
-              score={fullReport.ai_citation_score}
-              delay={2.0}
-            />
-          )}
 
           {/* How AI Sees You */}
           {fullReport.ai_query_simulations &&
@@ -205,22 +194,11 @@ export default function ReportPage() {
               />
             )}
 
-          {/* JSON-LD Schema Blocks */}
-          {fullReport.generated_json_ld &&
-            fullReport.generated_json_ld.length > 0 && (
-              <JsonLdPanel
-                blocks={fullReport.generated_json_ld}
-                isLocked={isLocked}
-                onUnlock={handleStripeCheckout}
-                delay={4.0}
-              />
-            )}
-
           {/* New Analysis Button */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 4.8, duration: 0.5 }}
+            transition={{ delay: 4.0, duration: 0.5 }}
             className="text-center mt-12"
           >
             <button
