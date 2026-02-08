@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   title: "Privacy Policy – GeoAnalyzer",
@@ -86,8 +85,8 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-white">Crawled content:</strong>{" "}
-                  Publicly accessible pages from your website, analyzed for GEO/AEO
-                  signals
+                  Publicly accessible pages from your website, analyzed for
+                  GEO/AEO signals
                 </li>
               </ul>
             </div>

@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

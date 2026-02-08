@@ -45,25 +45,73 @@ export const DEFAULT_SITE_CONFIG = {
 
     // Core entity pages
     { match: "about", priority: 2, category: "trust" as const, include: true },
-    { match: "contact", priority: 2, category: "trust" as const, include: true },
+    {
+      match: "contact",
+      priority: 2,
+      category: "trust" as const,
+      include: true,
+    },
 
     // Service/Product pages
-    { match: "service", priority: 3, category: "product" as const, include: true },
-    { match: "product", priority: 3, category: "product" as const, include: true },
-    { match: "pricing", priority: 3, category: "product" as const, include: true },
+    {
+      match: "service",
+      priority: 3,
+      category: "product" as const,
+      include: true,
+    },
+    {
+      match: "product",
+      priority: 3,
+      category: "product" as const,
+      include: true,
+    },
+    {
+      match: "pricing",
+      priority: 3,
+      category: "product" as const,
+      include: true,
+    },
 
     // Trust and FAQ
     { match: "faq", priority: 4, category: "info" as const, include: true },
-    { match: "testimonial", priority: 4, category: "trust" as const, include: true },
+    {
+      match: "testimonial",
+      priority: 4,
+      category: "trust" as const,
+      include: true,
+    },
     { match: "review", priority: 4, category: "trust" as const, include: true },
 
     // Blog
-    { match: "/blog", priority: 5, category: "category" as const, include: true },
+    {
+      match: "/blog",
+      priority: 5,
+      category: "category" as const,
+      include: true,
+    },
     { match: "/blog/", priority: 6, category: "blog" as const, include: true },
 
     // Skip low-value
-    { match: "privacy", priority: 10, category: "legal" as const, include: false, reason: "Legal page" },
-    { match: "terms", priority: 10, category: "legal" as const, include: false, reason: "Legal page" },
-    { match: "cookie", priority: 10, category: "legal" as const, include: false, reason: "Legal page" },
+    {
+      match: "privacy",
+      priority: 10,
+      category: "legal" as const,
+      include: false,
+      reason: "Legal page",
+    },
+    {
+      match: "terms",
+      priority: 10,
+      category: "legal" as const,
+      include: false,
+      reason: "Legal page",
+    },
+    {
+      match: "cookie",
+      priority: 10,
+      category: "legal" as const,
+      include: false,
+      reason: "Legal page",
+    },
   ] as const,
 } as const;

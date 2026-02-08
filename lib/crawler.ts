@@ -1,7 +1,12 @@
 import * as cheerio from "cheerio";
 import { CrawlData } from "@/types/geo";
 import { filterUrls, type SiteConfig } from "@/lib/url";
-import { chromium, type Browser, type Page, type BrowserContext } from "playwright";
+import {
+  chromium,
+  type Browser,
+  type Page,
+  type BrowserContext,
+} from "playwright";
 
 const HEDGING_WORDS = [
   "may",
@@ -32,18 +37,18 @@ const CRAWLER_CONFIG = {
   browserTimeout: 25000,
   /** Resource patterns to block for speed */
   blockedResources: [
-    '**/*.png',
-    '**/*.jpg',
-    '**/*.jpeg',
-    '**/*.gif',
-    '**/*.svg',
-    '**/*.webp',
-    '**/*.css',
-    '**/*.woff',
-    '**/*.woff2',
-    '**/*.ttf',
-    '**/*.eot',
-    '**/*.ico',
+    "**/*.png",
+    "**/*.jpg",
+    "**/*.jpeg",
+    "**/*.gif",
+    "**/*.svg",
+    "**/*.webp",
+    "**/*.css",
+    "**/*.woff",
+    "**/*.woff2",
+    "**/*.ttf",
+    "**/*.eot",
+    "**/*.ico",
   ],
 } as const;
 
@@ -87,10 +92,10 @@ async function getBrowser(): Promise<Browser> {
     globalBrowser = await chromium.launch({
       headless: true,
       args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
       ],
     });
     browserRefCount = 0;
@@ -102,9 +107,12 @@ async function getBrowser(): Promise<Browser> {
 /**
  * Create a new page with optimized resource blocking
  */
-async function createOptimizedPage(browser: Browser): Promise<{ context: BrowserContext; page: Page }> {
+async function createOptimizedPage(
+  browser: Browser,
+): Promise<{ context: BrowserContext; page: Page }> {
   const context = await browser.newContext({
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    userAgent:
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
   });
 
   const page = await context.newPage();
@@ -244,7 +252,8 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
       const response = await fetch(url, {
         headers: {
           "User-Agent": "Mozilla/5.0 (compatible; GEO-Analyzer/1.0)",
-          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          Accept:
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "Accept-Language": "en-US,en;q=0.9",
           "Accept-Encoding": "gzip, deflate, br",
         },
@@ -272,7 +281,9 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
     }
   }
 
-  throw new Error(`Failed to fetch ${url}: ${lastError?.message || 'Unknown error'}`);
+  throw new Error(
+    `Failed to fetch ${url}: ${lastError?.message || "Unknown error"}`,
+  );
 }
 
 /**
@@ -332,7 +343,9 @@ async function crawlPageBrowser(url: string): Promise<CrawlData> {
     }
   }
 
-  throw new Error(`Failed to browser crawl ${url}: ${lastError?.message || 'Unknown error'}`);
+  throw new Error(
+    `Failed to browser crawl ${url}: ${lastError?.message || "Unknown error"}`,
+  );
 }
 
 /**
@@ -353,15 +366,47 @@ export interface JsDetectionResult {
  * Known JS framework/CMS patterns for detection
  */
 const JS_FRAMEWORK_PATTERNS = [
-  { name: 'Wix', pattern: /wix-static|static\.wixstatic\.com|wix-context/, confidence: 0.95 },
-  { name: 'Squarespace', pattern: /squarespace|squarespace\-context/, confidence: 0.9 },
-  { name: 'Webflow', pattern: /w\-static|webflow\-context|data\-wf\-site/, confidence: 0.9 },
-  { name: 'React (empty root)', pattern: /<div\s+id=["']root["']\s*><\/div>\s*<\/?body>/i, confidence: 0.85 },
-  { name: 'Next.js', pattern: /__NEXT_DATA__|id="__NEXT"/, confidence: 0.95 },
-  { name: 'Vue', pattern: /<div\s+id=["']app["']\s*><\/div>\s*<\/?body>/i, confidence: 0.85 },
-  { name: 'Angular', pattern: /<app-root|ng-version|<router\-outlet/, confidence: 0.9 },
-  { name: 'Shopify', pattern: /Shopify\.theme|shopify\-context/, confidence: 0.95 },
-  { name: 'BigCommerce', pattern: /stencilconnect|bigcommerce/, confidence: 0.9 },
+  {
+    name: "Wix",
+    pattern: /wix-static|static\.wixstatic\.com|wix-context/,
+    confidence: 0.95,
+  },
+  {
+    name: "Squarespace",
+    pattern: /squarespace|squarespace\-context/,
+    confidence: 0.9,
+  },
+  {
+    name: "Webflow",
+    pattern: /w\-static|webflow\-context|data\-wf\-site/,
+    confidence: 0.9,
+  },
+  {
+    name: "React (empty root)",
+    pattern: /<div\s+id=["']root["']\s*><\/div>\s*<\/?body>/i,
+    confidence: 0.85,
+  },
+  { name: "Next.js", pattern: /__NEXT_DATA__|id="__NEXT"/, confidence: 0.95 },
+  {
+    name: "Vue",
+    pattern: /<div\s+id=["']app["']\s*><\/div>\s*<\/?body>/i,
+    confidence: 0.85,
+  },
+  {
+    name: "Angular",
+    pattern: /<app-root|ng-version|<router\-outlet/,
+    confidence: 0.9,
+  },
+  {
+    name: "Shopify",
+    pattern: /Shopify\.theme|shopify\-context/,
+    confidence: 0.95,
+  },
+  {
+    name: "BigCommerce",
+    pattern: /stencilconnect|bigcommerce/,
+    confidence: 0.9,
+  },
 ];
 
 /**
@@ -391,13 +436,14 @@ export function detectJsRendering(html: string): JsDetectionResult {
   const bodyLength = $("body").html()?.length || 0;
 
   // Empty/minimal body with lots of scripts suggests JS rendering
-  const bodyToScriptRatio = scriptCount > 0 ? bodyLength / (scriptCount * 1000) : 1;
+  const bodyToScriptRatio =
+    scriptCount > 0 ? bodyLength / (scriptCount * 1000) : 1;
   const isEmptyBody = bodyContent.length < 200 && htmlLength > 10000;
 
   if (isEmptyBody && scriptCount >= 3) {
     return {
       isJsRendered: true,
-      framework: 'Unknown',
+      framework: "Unknown",
       confidence: 0.7,
       reason: `Minimal body content (${bodyContent.length} chars) with ${scriptCount} scripts`,
     };
@@ -407,19 +453,22 @@ export function detectJsRendering(html: string): JsDetectionResult {
   if (/<div\s+id=["']root["']\s*><\/div>/.test(html) && scriptCount > 2) {
     return {
       isJsRendered: true,
-      framework: 'React (likely)',
+      framework: "React (likely)",
       confidence: 0.75,
-      reason: 'Empty root div with multiple scripts',
+      reason: "Empty root div with multiple scripts",
     };
   }
 
   // Heuristic: Check for SPA navigation scripts
-  if (/react|react-dom|vue|angular|next|nuxt/i.test(html) && bodyContent.length < 500) {
+  if (
+    /react|react-dom|vue|angular|next|nuxt/i.test(html) &&
+    bodyContent.length < 500
+  ) {
     return {
       isJsRendered: true,
-      framework: 'SPA (likely)',
+      framework: "SPA (likely)",
       confidence: 0.6,
-      reason: 'SPA library detected with minimal body content',
+      reason: "SPA library detected with minimal body content",
     };
   }
 
@@ -428,7 +477,7 @@ export function detectJsRendering(html: string): JsDetectionResult {
     isJsRendered: false,
     framework: undefined,
     confidence: 0.5,
-    reason: 'No JS rendering indicators found',
+    reason: "No JS rendering indicators found",
   };
 }
 
@@ -436,7 +485,9 @@ export function detectJsRendering(html: string): JsDetectionResult {
  * Auto-detect if a site needs browser rendering
  * This is a convenience wrapper that fetches and detects
  */
-export async function detectJsRenderingOnline(url: string): Promise<JsDetectionResult> {
+export async function detectJsRenderingOnline(
+  url: string,
+): Promise<JsDetectionResult> {
   try {
     const response = await fetch(url, {
       headers: {
@@ -458,7 +509,7 @@ export async function detectJsRenderingOnline(url: string): Promise<JsDetectionR
     return {
       isJsRendered: true, // Assume JS on error to be safe
       confidence: 0.5,
-      reason: 'Fetch failed, using browser as fallback',
+      reason: "Fetch failed, using browser as fallback",
     };
   }
 }
@@ -485,7 +536,7 @@ async function crawlPage(url: string, useBrowser: boolean): Promise<CrawlData> {
  */
 async function crawlConcurrent(
   urls: string[],
-  useBrowser: boolean
+  useBrowser: boolean,
 ): Promise<Map<string, CrawlData>> {
   const results = new Map<string, CrawlData>();
   const errors = new Map<string, Error>();
@@ -496,7 +547,7 @@ async function crawlConcurrent(
 
     // Crawl this batch concurrently
     const batchResults = await Promise.allSettled(
-      batch.map((url) => crawlPage(url, useBrowser))
+      batch.map((url) => crawlPage(url, useBrowser)),
     );
 
     // Collect results
@@ -519,7 +570,9 @@ async function crawlConcurrent(
   }
 
   if (errors.size > 0) {
-    console.warn(`[Crawler] ${errors.size}/${urls.length} pages failed to crawl`);
+    console.warn(
+      `[Crawler] ${errors.size}/${urls.length} pages failed to crawl`,
+    );
   }
 
   return results;
@@ -627,7 +680,10 @@ function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
 /**
  * Extract all internal links from a page with priority scoring
  */
-function extractLinks(html: string, pageUrl: URL): Array<{ url: string; priority: number }> {
+function extractLinks(
+  html: string,
+  pageUrl: URL,
+): Array<{ url: string; priority: number }> {
   const $ = cheerio.load(html);
   const links: Array<{ url: string; priority: number }> = [];
   const seen = new Set<string>();
@@ -638,7 +694,12 @@ function extractLinks(html: string, pageUrl: URL): Array<{ url: string; priority
       if (!href) return;
 
       // Skip anchors, mailto, tel, javascript
-      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) {
+      if (
+        href.startsWith("#") ||
+        href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        href.startsWith("javascript:")
+      ) {
         return;
       }
 
@@ -743,7 +804,7 @@ export interface CrawlResult {
  */
 export async function crawlWebsiteDetailed(
   url: string,
-  options: CrawlOptions = {}
+  options: CrawlOptions = {},
 ): Promise<CrawlResult> {
   const { maxPages = 1, siteConfig, urlList, useBrowser = "auto" } = options;
   const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
@@ -755,13 +816,17 @@ export async function crawlWebsiteDetailed(
   if (useBrowser === "auto") {
     // Detect from the first page
     try {
-      const detectionHtml = await (await fetch(normalizedUrl, {
-        headers: { "User-Agent": "Mozilla/5.0" },
-      })).text();
+      const detectionHtml = await (
+        await fetch(normalizedUrl, {
+          headers: { "User-Agent": "Mozilla/5.0" },
+        })
+      ).text();
       detectionResult = detectJsRendering(detectionHtml);
       detectedUseBrowser = detectionResult.isJsRendered;
 
-      console.log(`[Crawler] JS Detection: ${detectionResult.isJsRendered ? 'Using browser' : 'Using fetch'} (${detectionResult.reason})`);
+      console.log(
+        `[Crawler] JS Detection: ${detectionResult.isJsRendered ? "Using browser" : "Using fetch"} (${detectionResult.reason})`,
+      );
     } catch {
       // If detection fails, play safe and use browser
       detectedUseBrowser = true;
@@ -808,7 +873,7 @@ export async function crawlWebsiteDetailed(
     const batchSize = Math.min(
       CRAWLER_CONFIG.concurrency,
       maxPages - results.length,
-      toCrawl.length
+      toCrawl.length,
     );
 
     const batch: Array<{ url: string; priority: number }> = [];
@@ -827,7 +892,7 @@ export async function crawlWebsiteDetailed(
     // Crawl batch concurrently
     const batchResults = await crawlConcurrent(
       batch.map((b) => b.url),
-      detectedUseBrowser
+      detectedUseBrowser,
     );
 
     // Process results and discover new links
@@ -842,7 +907,10 @@ export async function crawlWebsiteDetailed(
           const cleanLink = link.split("#")[0].replace(/\/$/, "");
           allDiscovered.add(cleanLink);
           if (results.length < maxPages) {
-            if (!crawled.has(cleanLink) && !toCrawl.some((item) => item.url === link)) {
+            if (
+              !crawled.has(cleanLink) &&
+              !toCrawl.some((item) => item.url === link)
+            ) {
               toCrawl.push({ url: link, priority });
             }
           }
@@ -880,7 +948,7 @@ export async function crawlWebsiteDetailed(
  */
 export async function crawlWebsite(
   url: string,
-  options: CrawlOptions = {}
+  options: CrawlOptions = {},
 ): Promise<CrawlData[]> {
   const result = await crawlWebsiteDetailed(url, options);
   return result.pages;

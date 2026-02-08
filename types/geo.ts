@@ -1,6 +1,19 @@
+export interface AIQuerySimulation {
+  query: string;
+  mentioned: boolean;
+  position: number | null;
+  snippet: string;
+  competitors_mentioned: string[];
+}
+
 export interface RemediationChange {
   priority: "high" | "medium" | "low";
-  change_type: "direct_answer" | "faq" | "json_ld" | "entity_clarity" | "trust_signal";
+  change_type:
+    | "direct_answer"
+    | "faq"
+    | "json_ld"
+    | "entity_clarity"
+    | "trust_signal";
   placement: string;
   exact_example_text: string;
   example_json_ld?: string;
@@ -11,7 +24,11 @@ export interface PageRemediation {
   page_type: "homepage" | "service" | "article" | "category" | "other";
   diagnosis: {
     page_score?: number;
-    dominant_gap: "direct_answer_quality" | "entity_clarity" | "trust_signals" | "structured_data_quality";
+    dominant_gap:
+      | "direct_answer_quality"
+      | "entity_clarity"
+      | "trust_signals"
+      | "structured_data_quality";
     ai_hesitation: string;
   };
   recommended_changes: RemediationChange[];
@@ -38,6 +55,8 @@ export interface GeoScore {
   // Extracted data shown in report
   extracted_faqs: string[];
   extracted_json_ld: any[];
+  // AI query simulations ("How AI Sees You")
+  ai_query_simulations?: AIQuerySimulation[];
   // Per-page remediation details (for full report)
   page_remediations?: PageRemediation[];
   // Payment status (free = 1 page shown, paid = all pages shown)

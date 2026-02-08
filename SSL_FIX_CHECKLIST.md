@@ -25,10 +25,10 @@ Go to: Cloudflare Dashboard → DNS → Records for geo-analyzer.com (GEO/AEO)
 
 **Required setup:**
 
-| Type  | Name                    | Content                    | Proxy Status           |
-| ----- | ----------------------- | -------------------------- | ---------------------- |
+| Type  | Name                              | Content                    | Proxy Status           |
+| ----- | --------------------------------- | -------------------------- | ---------------------- |
 | CNAME | geo-analyzer.com (or @) (GEO/AEO) | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
-| CNAME | www (GEO/AEO)           | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
+| CNAME | www (GEO/AEO)                     | geoanalyzerapp.netlify.app | Proxied (orange cloud) |
 
 - [ ] Root CNAME (GEO/AEO) points to `geoanalyzerapp.netlify.app`
 - [ ] www CNAME (GEO/AEO) points to `geoanalyzerapp.netlify.app`

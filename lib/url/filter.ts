@@ -4,7 +4,13 @@
  * Filters and classifies URLs based on site-specific patterns.
  */
 
-import type { SiteConfig, UrlCategory, UrlFilterResult, UrlPattern, PriorityLevel } from "./types";
+import type {
+  SiteConfig,
+  UrlCategory,
+  UrlFilterResult,
+  UrlPattern,
+  PriorityLevel,
+} from "./types";
 
 /**
  * Normalize URL for comparison (removes trailing slash, hash, etc.)
@@ -51,7 +57,7 @@ function matchesPattern(url: URL, pattern: UrlPattern): boolean {
  */
 export function classifyUrl(
   rawUrl: string,
-  config: SiteConfig
+  config: SiteConfig,
 ): UrlFilterResult {
   let url: URL;
   try {
@@ -67,7 +73,10 @@ export function classifyUrl(
   }
 
   // Check if same domain
-  if (url.hostname !== config.domain && url.hostname !== `www.${config.domain}`) {
+  if (
+    url.hostname !== config.domain &&
+    url.hostname !== `www.${config.domain}`
+  ) {
     return {
       url: rawUrl,
       priority: 10,
@@ -104,7 +113,7 @@ export function classifyUrl(
  */
 export function filterUrls(
   urls: readonly string[],
-  config: SiteConfig
+  config: SiteConfig,
 ): readonly UrlFilterResult[] {
   const seen = new Set<string>();
   const results: UrlFilterResult[] = [];
@@ -136,7 +145,7 @@ export function filterUrls(
  */
 export function getCrawlableUrls(
   results: readonly UrlFilterResult[],
-  limit?: number
+  limit?: number,
 ): readonly string[] {
   const crawlable = results.filter((r) => r.shouldCrawl);
   const limited = limit ? crawlable.slice(0, limit) : crawlable;
