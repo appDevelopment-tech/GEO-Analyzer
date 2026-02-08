@@ -34,10 +34,3 @@
   to = "/docs"
   status = 301
 
-# Force HTTPS (www canonical)
-# Netlify handles http→https automatically
-# Non-www to www redirect (only for root domain, avoid loops)
-[[redirects]]
-  from = "https://geo-analyzer.com"
-  to = "https://www.geo-analyzer.com/"
-  status = 301

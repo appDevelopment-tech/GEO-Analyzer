@@ -1,9 +1,6 @@
 import formData from "form-data";
 import Mailgun from "mailgun.js";
 import { GeoScore, PageRemediation } from "@/types/geo";
-import { writeFile, unlink } from "fs/promises";
-import { join } from "path";
-import { tmpdir } from "os";
 
 const mailgun = new Mailgun(formData);
 const mg = mailgun.client({
@@ -30,13 +27,8 @@ export async function sendReport(
   // Generate detailed HTML attachment
   const detailedHTML = generateDetailedReportHTML(domain, score, isPaid);
 
-  // Create temp file for attachment
-  const filename = `geo-report-${domain.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.html`;
-  const tempFilePath = join(tmpdir(), filename);
-
+  // Send email with HTML report as inline or string attachment (no temp file)
   try {
-    await writeFile(tempFilePath, detailedHTML, "utf-8");
-
     const supabase = createClient(
       process.env.SUPABASE_URL!,
       process.env.SUPABASE_API_KEY!,
@@ -51,8 +43,9 @@ export async function sendReport(
         html: shortEmailBody,
         attachment: [
           {
-            filename: filename,
-            data: tempFilePath,
+            filename: `geo-report-${domain.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.html`,
+            data: detailedHTML,
+            contentType: "text/html",
           },
         ],
       };
@@ -63,11 +56,6 @@ export async function sendReport(
       console.error("Failed to send email:", error);
       emailResult = error instanceof Error ? error.message : String(error);
     }
-
-    // Clean up temp file
-    try {
-      await unlink(tempFilePath);
-    } catch {}
 
     // Update Supabase Reports.email_result
     if (reportId) {
@@ -80,12 +68,7 @@ export async function sendReport(
     if (emailResult !== true) {
       throw new Error("Failed to send report email");
     }
-  } catch (error) {
-    // Clean up temp file on error
-    try {
-      await unlink(tempFilePath);
-    } catch {}
-    throw error;
+  }
   }
 }
 
