@@ -35,3 +35,5 @@ export async function GET(
     full_report: report,
   });
 }
+
+export const runtime = 'edge';

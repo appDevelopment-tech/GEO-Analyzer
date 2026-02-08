@@ -36,3 +36,5 @@ export async function POST(req: NextRequest) {
   });
   return NextResponse.json({ url: session.url });
 }
+
+export const runtime = 'edge';

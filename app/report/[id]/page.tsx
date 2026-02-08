@@ -173,3 +173,4 @@ export default function ReportPage() {
     </main>
   );
 }
+export const runtime = "edge";
