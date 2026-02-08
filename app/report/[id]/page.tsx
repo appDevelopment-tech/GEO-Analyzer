@@ -65,7 +65,7 @@ export default function ReportPage() {
   return (
     <main className="min-h-screen p-10">
       <div className="max-w-6xl mx-auto"></div>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         <motion.div
           key="results"
           initial={{ opacity: 0 }}

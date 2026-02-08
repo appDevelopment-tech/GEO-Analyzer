@@ -285,13 +285,15 @@ function mapScoreToTier(score: number): string {
   return "Invisible to AI";
 }
 
-export async function analyzeWithOpenAI(
+export async function analyzeWithGLM(
   crawlData: CrawlData[],
 ): Promise<GeoScore> {
   try {
     // Collect all FAQs and JSON-LD from crawled pages upfront
     const allFaqs = crawlData.flatMap((p) => p.signals.directAnswerBlocks);
     const allJsonLd = crawlData.flatMap((p) => p.jsonLd);
+    console.log(`Collected ${allFaqs.length} FAQ blocks and ${allJsonLd.length} JSON-LD blocks from crawl data.`);
+    console.log(crawlData);
 
     if (crawlData.length === 0) {
       return {
@@ -331,6 +333,8 @@ export async function analyzeWithOpenAI(
           },
         };
 
+        console.log("Sending page payload to GLM:", pagePayload);
+
         const response = await callGLM([
           {
             role: "system",
@@ -342,6 +346,8 @@ export async function analyzeWithOpenAI(
           },
         ]);
 
+        console.log("Received GLM response for page:", response);
+
         return JSON.parse(response.choices[0].message.content || "{}");
       })
     );
@@ -350,6 +356,7 @@ export async function analyzeWithOpenAI(
     const avgScore = Math.round(
       pageResults.reduce((sum, r) => sum + (r.diagnosis?.page_score || 0), 0) / pageResults.length
     );
+    console.log(`Average page score across ${avgScore}`);
 
     // Count dominant gaps
     const gapCounts = pageResults.reduce((acc, r) => {
@@ -357,6 +364,8 @@ export async function analyzeWithOpenAI(
       if (gap) acc[gap] = (acc[gap] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
+
+    console.log("Dominant gap counts:", gapCounts);
 
     const topGap = (Object.entries(gapCounts) as Array<[string, number]>).sort((a, b) => b[1] - a[1])[0]?.[0] || "direct_answer_quality";
 
@@ -379,6 +388,7 @@ export async function analyzeWithOpenAI(
         evidence: [r.url || "Unknown URL"],
         affected_urls: [r.url || ""],
       }));
+      console.log("Top AI hesitations:", topAiHesitations);
 
     // Build week 1 fix plan from recommended changes
     const allChanges = pageResults.flatMap((r) => r.recommended_changes || []);
@@ -398,6 +408,18 @@ export async function analyzeWithOpenAI(
       },
       recommended_changes: r.recommended_changes || [],
     }));
+
+    console.log("Final aggregated GeoScore:", {
+      overall_score: avgScore,
+      tier: mapScoreToTier(avgScore),
+      section_scores: sectionScores,
+      top_ai_hesitations: topAiHesitations,
+      week1_fix_plan: highPriorityChanges.length > 0 ? highPriorityChanges : ["Review all pages for missing direct answers and structured data"],
+      limitations: ["Analysis based on crawled content only"],
+      extracted_faqs: allFaqs,
+      extracted_json_ld: allJsonLd,
+      page_remediations: pageRemediations,
+    });
 
     return {
       overall_score: avgScore,

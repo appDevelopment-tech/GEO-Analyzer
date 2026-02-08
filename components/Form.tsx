@@ -27,7 +27,7 @@ export const Form = ({
     className="bg-white rounded-3xl p-8 md:p-10 relative animated-glow"
   >
     {/* Overlay badge */}
-    <LimitedOfferBadge />
+    {/* <LimitedOfferBadge /> */}
     <div className="space-y-6">
       {/* URL Input */}
       <div>

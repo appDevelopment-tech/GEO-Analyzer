@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { crawlWebsite } from "@/lib/crawler";
-import { analyzeWithOpenAI } from "@/lib/analyzer";
+import { analyzeWithOpenAI } from "@/lib/analyzer-v1";
 import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: NextRequest) {
@@ -79,8 +79,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 2: Analyze with OpenAI
+    // Step 2: Analyze with GLM
     const geoScore = await analyzeWithOpenAI(crawlData);
+    console.log("GLM analysis completed:", geoScore);
 
     //Step 3 now is to save to supabase
     const dbResult: any = await supabase
@@ -91,10 +92,10 @@ export async function POST(request: NextRequest) {
           result: "pending",
           domain: normalizedUrl,
           email: email,
-          payment_status: "free", // Default to free, updated to paid after Stripe webhook
         },
       ])
       .select();
+      console.log("Database insert result:", dbResult);
     const id = dbResult.data && dbResult.data[0]?.report_id;
     // Optionally, update the result field after insert if you want to store 'success' or 'error'
     const status = dbResult.error ? "error" : "success";
