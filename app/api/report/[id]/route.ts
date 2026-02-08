@@ -70,19 +70,6 @@ export async function GET(
           i === 0 ? item : "Unlock full report for this fix",
       );
     }
-
-    // Redact generated JSON-LD: keep first block, placeholder rest
-    if (report.generated_json_ld && report.generated_json_ld.length > 1) {
-      report.generated_json_ld = report.generated_json_ld.map(
-        (block: any, i: number) =>
-          i === 0
-            ? block
-            : {
-                ...block,
-                code: '{ "Unlock full report to see this schema" }',
-              },
-      );
-    }
   }
 
   return NextResponse.json({
