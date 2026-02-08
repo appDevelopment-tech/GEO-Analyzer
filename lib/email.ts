@@ -90,7 +90,7 @@ export async function sendReport(
 }
 
 function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: number): string {
-  const isPaid = score.payment_status === "paid";
+  const isPaid = true; //we don't have free email!!
   const totalPages = score.page_remediations?.length || 0;
 
   return `
@@ -412,7 +412,7 @@ function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boo
       <h3>🔓 Unlock All ${totalPages} Page Remediations</h3>
       <p>You have ${totalPages - 1} more pages with detailed recommendations waiting.</p>
       <p style="font-size: 14px;">Get exact copy, JSON-LD examples, and placement instructions for every page.</p>
-      <a href="https://geo-analyzer.com/pricing" class="upsell-btn">Upgrade to Full Report - $9.50</a>
+      <a href="https://geo-analyzer.com/pricing" class="upsell-btn">Upgrade to Full Report - $19.50</a>
     </div>
     ` : ''}
 

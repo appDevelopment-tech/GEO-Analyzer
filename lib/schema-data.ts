@@ -67,7 +67,7 @@ export function generateSoftwareApplicationSchema() {
     offers: {
       "@type": "Offer",
       name: "Full GEO/AEO Report",
-      price: "9.50",
+      price: "19.50",
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
     },
