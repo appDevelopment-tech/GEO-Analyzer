@@ -6,6 +6,13 @@ export interface AIQuerySimulation {
   competitors_mentioned: string[];
 }
 
+export interface GeneratedJsonLd {
+  type: string;
+  label: string;
+  description: string;
+  code: string;
+}
+
 export interface RemediationChange {
   priority: "high" | "medium" | "low";
   change_type:
@@ -57,6 +64,10 @@ export interface GeoScore {
   extracted_json_ld: any[];
   // AI query simulations ("How AI Sees You")
   ai_query_simulations?: AIQuerySimulation[];
+  // AI Citation Score — estimated probability AI cites this site (0-100)
+  ai_citation_score?: number;
+  // Auto-generated JSON-LD blocks ready to copy-paste
+  generated_json_ld?: GeneratedJsonLd[];
   // Per-page remediation details (for full report)
   page_remediations?: PageRemediation[];
   // Payment status (free = 1 page shown, paid = all pages shown)
