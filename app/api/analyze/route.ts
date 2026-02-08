@@ -81,7 +81,6 @@ export async function POST(request: NextRequest) {
 
     // Step 2: Analyze with GLM
     const geoScore = await analyzeWithOpenAI(crawlData);
-    console.log("GLM analysis completed:", geoScore);
 
     //Step 3 now is to save to supabase
     const dbResult: any = await supabase
@@ -95,7 +94,6 @@ export async function POST(request: NextRequest) {
         },
       ])
       .select();
-      console.log("Database insert result:", dbResult);
     const id = dbResult.data && dbResult.data[0]?.report_id;
     // Optionally, update the result field after insert if you want to store 'success' or 'error'
     const status = dbResult.error ? "error" : "success";
@@ -131,5 +129,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-export const runtime = 'nodejs';
