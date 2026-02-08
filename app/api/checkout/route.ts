@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         price_data: {
           currency: "usd",
           product_data: { name: "GEO/AEO/AI Full Report" },
-          unit_amount: 0.99, //450 cents = $4.50
+          unit_amount: 100, //450 cents = $4.50
         },
         quantity: 1,
       },
