@@ -6,8 +6,7 @@ import { blogPosts } from "@/lib/blog-data";
 import { generateBlogPostingSchema } from "@/lib/schema-data";
 import { Footer } from "@/components/Footer";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 const blogContent: Record<
   string,

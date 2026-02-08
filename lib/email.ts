@@ -31,7 +31,7 @@ export async function sendReport(
   const detailedHTML = generateDetailedReportHTML(domain, score, isPaid);
 
   // Create temp file for attachment
-  const filename = `geo-report-${domain.replace(/[^a-z0-9]/gi, '-')}-${Date.now()}.html`;
+  const filename = `geo-report-${domain.replace(/[^a-z0-9]/gi, "-")}-${Date.now()}.html`;
   const tempFilePath = join(tmpdir(), filename);
 
   try {
@@ -89,7 +89,11 @@ export async function sendReport(
   }
 }
 
-function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: number): string {
+function generateShortEmailBody(
+  domain: string,
+  score: GeoScore,
+  pagesToShow: number,
+): string {
   const isPaid = true; //we don't have free email!!
   const totalPages = score.page_remediations?.length || 0;
 
@@ -143,7 +147,9 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
         <li>JSON-LD schema examples ready to implement</li>
         <li>Placement instructions for each change</li>
       </ul>
-      ${!isPaid && totalPages > 1 ? `
+      ${
+        !isPaid && totalPages > 1
+          ? `
       <div style="margin-top: 20px; padding: 16px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
         <p style="margin: 0 0 8px 0; color: #92400e; font-size: 14px; font-weight: 600;">
           Free Report Preview
@@ -152,7 +158,9 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
           This free report shows remediation for 1 of ${totalPages} pages analyzed. Upgrade to get all ${totalPages} pages.
         </p>
       </div>
-      ` : ''}
+      `
+          : ""
+      }
     </div>
 
     <!-- Quick Summary -->
@@ -175,7 +183,7 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
           Pages Analyzed
         </p>
         <p style="margin: 0; color: #1d1d1f; font-size: 15px;">
-          ${totalPages} page${totalPages !== 1 ? 's' : ''} analyzed (${isPaid ? 'all included' : `1 shown in free report`})
+          ${totalPages} page${totalPages !== 1 ? "s" : ""} analyzed (${isPaid ? "all included" : `1 shown in free report`})
         </p>
       </div>
     </div>
@@ -196,7 +204,11 @@ function generateShortEmailBody(domain: string, score: GeoScore, pagesToShow: nu
   `;
 }
 
-function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boolean): string {
+function generateDetailedReportHTML(
+  domain: string,
+  score: GeoScore,
+  isPaid: boolean,
+): string {
   const pages = score.page_remediations || [];
   const pagesToShow = isPaid ? pages : pages.slice(0, 1);
   const totalPages = pages.length;
@@ -350,7 +362,7 @@ function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boo
     <div class="score-large">${score.overall_score}</div>
     <div class="tier">${score.tier}</div>
     <p style="margin: 16px 0 0 0; opacity: 0.8;">
-      Generated on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      Generated on ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
     </p>
   </div>
 
@@ -401,12 +413,14 @@ function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boo
     <!-- Page Remediations -->
     <h2 style="font-size: 28px; font-weight: 700; margin: 0 0 24px 0; color: #1d1d1f;">
       Page-by-Page Remediations
-      ${!isPaid && totalPages > 1 ? `<span style="font-size: 18px; font-weight: 400; color: #f59e0b;"> (1 of ${totalPages} shown)</span>` : ''}
+      ${!isPaid && totalPages > 1 ? `<span style="font-size: 18px; font-weight: 400; color: #f59e0b;"> (1 of ${totalPages} shown)</span>` : ""}
     </h2>
 
     ${pagesHTML}
 
-    ${!isPaid && totalPages > 1 ? `
+    ${
+      !isPaid && totalPages > 1
+        ? `
     <!-- Upsell for Free Users -->
     <div class="upsell">
       <h3>🔓 Unlock All ${totalPages} Page Remediations</h3>
@@ -414,7 +428,9 @@ function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boo
       <p style="font-size: 14px;">Get exact copy, JSON-LD examples, and placement instructions for every page.</p>
       <a href="https://geo-analyzer.com/pricing" class="upsell-btn">Upgrade to Full Report - $19.50</a>
     </div>
-    ` : ''}
+    `
+        : ""
+    }
 
   </div>
 
@@ -429,7 +445,10 @@ function generateDetailedReportHTML(domain: string, score: GeoScore, isPaid: boo
   `;
 }
 
-function generatePageRemediationHTML(page: PageRemediation, pageNumber: number): string {
+function generatePageRemediationHTML(
+  page: PageRemediation,
+  pageNumber: number,
+): string {
   const changesHTML = page.recommended_changes
     .map((change) => generateChangeHTML(change))
     .join("");
@@ -443,7 +462,7 @@ function generatePageRemediationHTML(page: PageRemediation, pageNumber: number):
         </div>
         <div class="page-badges">
           <span class="badge badge-type">${page.page_type}</span>
-          ${page.diagnosis.page_score !== undefined ? `<span class="badge badge-score">Score: ${page.diagnosis.page_score}</span>` : ''}
+          ${page.diagnosis.page_score !== undefined ? `<span class="badge badge-score">Score: ${page.diagnosis.page_score}</span>` : ""}
         </div>
       </div>
 
@@ -455,7 +474,7 @@ function generatePageRemediationHTML(page: PageRemediation, pageNumber: number):
           ${page.diagnosis.ai_hesitation}
         </p>
         <p style="margin: 8px 0 0 0; font-size: 13px; color: #92400e;">
-          <strong>Primary Issue:</strong> ${page.diagnosis.dominant_gap.replace(/_/g, ' ')}
+          <strong>Primary Issue:</strong> ${page.diagnosis.dominant_gap.replace(/_/g, " ")}
         </p>
       </div>
 
@@ -476,16 +495,16 @@ function generateChangeHTML(change: {
   example_json_ld?: string;
 }): string {
   const priorityColors: Record<string, string> = {
-    high: 'priority-high',
-    medium: 'priority-medium',
-    low: 'priority-low',
+    high: "priority-high",
+    medium: "priority-medium",
+    low: "priority-low",
   };
 
   return `
     <div class="change-card">
       <div class="change-header">
-        <span class="change-label ${priorityColors[change.priority] || ''}">${change.priority.toUpperCase()}</span>
-        <span class="change-label change-type">${change.change_type.replace(/_/g, ' ')}</span>
+        <span class="change-label ${priorityColors[change.priority] || ""}">${change.priority.toUpperCase()}</span>
+        <span class="change-label change-type">${change.change_type.replace(/_/g, " ")}</span>
       </div>
 
       <p class="placement">
@@ -495,23 +514,27 @@ function generateChangeHTML(change: {
       <p style="margin: 0 0 8px 0; font-size: 13px; color: #86868b;">Copy to add:</p>
       <div class="copy-block">${escapeHtml(change.exact_example_text)}</div>
 
-      ${change.example_json_ld ? `
+      ${
+        change.example_json_ld
+          ? `
       <details class="jsonld-details">
         <summary>View JSON-LD Schema</summary>
         <pre>${escapeHtml(change.example_json_ld)}</pre>
       </details>
-      ` : ''}
+      `
+          : ""
+      }
     </div>
   `;
 }
 
 function escapeHtml(text: string): string {
   const map: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
   };
   return text.replace(/[&<>"']/g, (m) => map[m] || m);
 }

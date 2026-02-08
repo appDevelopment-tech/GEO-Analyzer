@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ScoreCard from "@/components/ScoreCard";
+import AIQueryPanel from "@/components/AIQueryPanel";
+import AIBlindSpotsPanel from "@/components/AIBlindSpotsPanel";
+import FixRoadmapPanel from "@/components/FixRoadmapPanel";
 
 export default function ReportPage() {
   const { id } = useParams();
@@ -28,6 +31,17 @@ export default function ReportPage() {
         setLoading(false);
       });
   }, [id]);
+
+  async function handleStripeCheckout() {
+    if (!id || !report?.email) return;
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, email: report.email }),
+    });
+    const { url } = await res.json();
+    window.open(url, "_blank");
+  }
 
   if (loading) {
     return (
@@ -62,6 +76,10 @@ export default function ReportPage() {
     );
   }
 
+  const isLocked = report.is_locked !== false;
+  const paymentStatus = report.payment_status || "free";
+  const fullReport = report.full_report;
+
   return (
     <main className="min-h-screen p-10">
       <div className="max-w-6xl mx-auto"></div>
@@ -88,62 +106,99 @@ export default function ReportPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-lg text-gray-200"
             >
-              Here's how AI sees your website
+              Here&apos;s how AI sees your website
             </motion.p>
           </div>
 
           <ScoreCard
-            score={report.full_report.overall_score}
-            tier={report.full_report.tier}
-            sectionScores={report.full_report.section_scores}
+            score={fullReport.overall_score}
+            tier={fullReport.tier}
+            sectionScores={fullReport.section_scores}
             email={report.email}
+            onCheckout={handleStripeCheckout}
+            paymentStatus={paymentStatus}
           />
 
-          {/* Top Hesitation */}
-          {report.full_report.top_ai_hesitations && (
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 2.2, duration: 0.6 }}
-              className="max-w-3xl mx-auto mt-12 bg-white rounded-3xl shadow-xl p-8 md:p-10"
-            >
-              <h3 className="text-2xl font-bold text-apple-gray mb-6">
-                Primary AI Hesitation
-              </h3>
-              <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-xl">
-                <h4 className="font-semibold text-apple-gray mb-2">
-                  {report.full_report.top_ai_hesitations[0].issue}
-                </h4>
-                <p className="text-gray-700 mb-4">
-                  {report.full_report.top_ai_hesitations[0].why_ai_hesitates}
-                </p>
-                {report.full_report.top_ai_hesitations[0].evidence.length >
-                  0 && (
-                  <div className="mt-4 pt-4 border-t border-amber-200">
-                    <p className="text-sm font-semibold text-gray-600 mb-2">
-                      Evidence:
-                    </p>
-                    <ul className="text-sm text-gray-600 space-y-1">
-                      {report.full_report.top_ai_hesitations[0].evidence.map(
-                        (e: string) => (
-                          <li key={e} className="flex items-start gap-2">
-                            <span className="text-amber-500 mt-1">•</span>
-                            <span>{e}</span>
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          )}
+          {/* How AI Sees You */}
+          {fullReport.ai_query_simulations &&
+            fullReport.ai_query_simulations.length > 0 && (
+              <AIQueryPanel
+                simulations={fullReport.ai_query_simulations}
+                isLocked={isLocked}
+                onUnlock={handleStripeCheckout}
+                delay={2.4}
+              />
+            )}
+
+          {/* Top Hesitation (always visible) */}
+          {fullReport.top_ai_hesitations &&
+            fullReport.top_ai_hesitations.length > 0 && (
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 2.8, duration: 0.6 }}
+                className="max-w-3xl mx-auto mt-10 bg-white rounded-3xl shadow-xl p-8 md:p-10"
+              >
+                <h3 className="text-2xl font-bold text-apple-gray mb-6">
+                  Primary AI Hesitation
+                </h3>
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-xl">
+                  <h4 className="font-semibold text-apple-gray mb-2">
+                    {fullReport.top_ai_hesitations[0].issue}
+                  </h4>
+                  <p className="text-gray-700 mb-4">
+                    {fullReport.top_ai_hesitations[0].why_ai_hesitates}
+                  </p>
+                  {fullReport.top_ai_hesitations[0].evidence.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-amber-200">
+                      <p className="text-sm font-semibold text-gray-600 mb-2">
+                        Evidence:
+                      </p>
+                      <ul className="text-sm text-gray-600 space-y-1">
+                        {fullReport.top_ai_hesitations[0].evidence.map(
+                          (e: string) => (
+                            <li key={e} className="flex items-start gap-2">
+                              <span className="text-amber-500 mt-1">
+                                &bull;
+                              </span>
+                              <span>{e}</span>
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            )}
+
+          {/* AI Blind Spots (blurred for free) */}
+          {fullReport.top_ai_hesitations &&
+            fullReport.top_ai_hesitations.length > 1 && (
+              <AIBlindSpotsPanel
+                hesitations={fullReport.top_ai_hesitations}
+                isLocked={isLocked}
+                onUnlock={handleStripeCheckout}
+                delay={3.2}
+              />
+            )}
+
+          {/* Fix Roadmap (blurred for free) */}
+          {fullReport.week1_fix_plan &&
+            fullReport.week1_fix_plan.length > 0 && (
+              <FixRoadmapPanel
+                fixPlan={fullReport.week1_fix_plan}
+                isLocked={isLocked}
+                onUnlock={handleStripeCheckout}
+                delay={3.6}
+              />
+            )}
 
           {/* New Analysis Button */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 3.2, duration: 0.5 }}
+            transition={{ delay: 4.0, duration: 0.5 }}
             className="text-center mt-12"
           >
             <button
@@ -173,4 +228,3 @@ export default function ReportPage() {
     </main>
   );
 }
-export const runtime = "nodejs";

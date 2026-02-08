@@ -2,8 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/lib/blog-data";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   title: "Blog – GeoAnalyzer",

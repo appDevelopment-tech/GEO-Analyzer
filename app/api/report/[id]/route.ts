@@ -30,10 +30,51 @@ export async function GET(
       // fallback to raw string
     }
   }
+
+  const isPaid = data.payment_status === "paid";
+
+  // Server-side redaction for free users
+  if (!isPaid && typeof report === "object" && report !== null) {
+    // Redact AI query simulations: keep first, placeholder rest
+    if (report.ai_query_simulations && report.ai_query_simulations.length > 1) {
+      report.ai_query_simulations = report.ai_query_simulations.map(
+        (sim: any, i: number) =>
+          i === 0
+            ? sim
+            : {
+                ...sim,
+                snippet: "Unlock full report to see this result",
+                competitors_mentioned: [],
+              },
+      );
+    }
+
+    // Redact hesitations: keep first fully, placeholder rest
+    if (report.top_ai_hesitations && report.top_ai_hesitations.length > 1) {
+      report.top_ai_hesitations = report.top_ai_hesitations.map(
+        (h: any, i: number) =>
+          i === 0
+            ? h
+            : {
+                ...h,
+                why_ai_hesitates: "Unlock full report to see details",
+                evidence: ["Details available in full report"],
+              },
+      );
+    }
+
+    // Redact fix plan: keep first, placeholder rest
+    if (report.week1_fix_plan && report.week1_fix_plan.length > 1) {
+      report.week1_fix_plan = report.week1_fix_plan.map(
+        (item: string, i: number) =>
+          i === 0 ? item : "Unlock full report for this fix",
+      );
+    }
+  }
+
   return NextResponse.json({
     ...data,
     full_report: report,
+    is_locked: !isPaid,
   });
 }
-
-export const runtime = 'nodejs';

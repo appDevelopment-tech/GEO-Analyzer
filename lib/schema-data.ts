@@ -1,5 +1,4 @@
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const ORGANIZATION_JSON_LD = {
   "@context": "https://schema.org",

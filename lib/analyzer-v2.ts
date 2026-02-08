@@ -3,7 +3,9 @@ import { CrawlData, GeoScore, PageRemediation } from "@/types/geo";
 const Z_AI_API_KEY = process.env.Z_AI_GLM_API_KEY;
 const Z_AI_API_URL = "https://api.z.ai/api/paas/v4/chat/completions";
 
-async function callGLM(messages: Array<{ role: string; content: string }>): Promise<any> {
+async function callGLM(
+  messages: Array<{ role: string; content: string }>,
+): Promise<any> {
   if (!Z_AI_API_KEY) {
     throw new Error("Z_AI_GLM_API_KEY is not set");
   }
@@ -292,7 +294,9 @@ export async function analyzeWithGLM(
     // Collect all FAQs and JSON-LD from crawled pages upfront
     const allFaqs = crawlData.flatMap((p) => p.signals.directAnswerBlocks);
     const allJsonLd = crawlData.flatMap((p) => p.jsonLd);
-    console.log(`Collected ${allFaqs.length} FAQ blocks and ${allJsonLd.length} JSON-LD blocks from crawl data.`);
+    console.log(
+      `Collected ${allFaqs.length} FAQ blocks and ${allJsonLd.length} JSON-LD blocks from crawl data.`,
+    );
     console.log(crawlData);
 
     if (crawlData.length === 0) {
@@ -326,10 +330,20 @@ export async function analyzeWithGLM(
             title: page.title || undefined,
             meta_description: page.metaDescription || undefined,
             h1: page.headings.h1[0] || undefined,
-            headings: [...page.headings.h1, ...page.headings.h2, ...page.headings.h3],
+            headings: [
+              ...page.headings.h1,
+              ...page.headings.h2,
+              ...page.headings.h3,
+            ],
             main_text_excerpt: page.textContent.slice(0, 3000),
-            json_ld_blocks: page.jsonLd.length > 0 ? page.jsonLd.map((ld) => JSON.stringify(ld)) : undefined,
-            notes: page.textContent.length > 3000 ? "Content truncated for analysis" : undefined,
+            json_ld_blocks:
+              page.jsonLd.length > 0
+                ? page.jsonLd.map((ld) => JSON.stringify(ld))
+                : undefined,
+            notes:
+              page.textContent.length > 3000
+                ? "Content truncated for analysis"
+                : undefined,
           },
         };
 
@@ -349,25 +363,32 @@ export async function analyzeWithGLM(
         console.log("Received GLM response for page:", response);
 
         return JSON.parse(response.choices[0].message.content || "{}");
-      })
+      }),
     );
 
     // Aggregate scores across pages
     const avgScore = Math.round(
-      pageResults.reduce((sum, r) => sum + (r.diagnosis?.page_score || 0), 0) / pageResults.length
+      pageResults.reduce((sum, r) => sum + (r.diagnosis?.page_score || 0), 0) /
+        pageResults.length,
     );
     console.log(`Average page score across ${avgScore}`);
 
     // Count dominant gaps
-    const gapCounts = pageResults.reduce((acc, r) => {
-      const gap = r.diagnosis?.dominant_gap;
-      if (gap) acc[gap] = (acc[gap] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const gapCounts = pageResults.reduce(
+      (acc, r) => {
+        const gap = r.diagnosis?.dominant_gap;
+        if (gap) acc[gap] = (acc[gap] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
 
     console.log("Dominant gap counts:", gapCounts);
 
-    const topGap = (Object.entries(gapCounts) as Array<[string, number]>).sort((a, b) => b[1] - a[1])[0]?.[0] || "direct_answer_quality";
+    const topGap =
+      (Object.entries(gapCounts) as Array<[string, number]>).sort(
+        (a, b) => b[1] - a[1],
+      )[0]?.[0] || "direct_answer_quality";
 
     // Build section scores based on gaps
     const sectionScores: GeoScore["section_scores"] = {
@@ -388,14 +409,17 @@ export async function analyzeWithGLM(
         evidence: [r.url || "Unknown URL"],
         affected_urls: [r.url || ""],
       }));
-      console.log("Top AI hesitations:", topAiHesitations);
+    console.log("Top AI hesitations:", topAiHesitations);
 
     // Build week 1 fix plan from recommended changes
     const allChanges = pageResults.flatMap((r) => r.recommended_changes || []);
     const highPriorityChanges = allChanges
       .filter((c) => c.priority === "high")
       .slice(0, 5)
-      .map((c) => `[${c.change_type}] ${c.placement}: ${c.exact_example_text?.slice(0, 80)}...`);
+      .map(
+        (c) =>
+          `[${c.change_type}] ${c.placement}: ${c.exact_example_text?.slice(0, 80)}...`,
+      );
 
     // Store raw page remediations for detailed report
     const pageRemediations: PageRemediation[] = pageResults.map((r) => ({
@@ -414,7 +438,10 @@ export async function analyzeWithGLM(
       tier: mapScoreToTier(avgScore),
       section_scores: sectionScores,
       top_ai_hesitations: topAiHesitations,
-      week1_fix_plan: highPriorityChanges.length > 0 ? highPriorityChanges : ["Review all pages for missing direct answers and structured data"],
+      week1_fix_plan:
+        highPriorityChanges.length > 0
+          ? highPriorityChanges
+          : ["Review all pages for missing direct answers and structured data"],
       limitations: ["Analysis based on crawled content only"],
       extracted_faqs: allFaqs,
       extracted_json_ld: allJsonLd,
@@ -426,7 +453,10 @@ export async function analyzeWithGLM(
       tier: mapScoreToTier(avgScore),
       section_scores: sectionScores,
       top_ai_hesitations: topAiHesitations,
-      week1_fix_plan: highPriorityChanges.length > 0 ? highPriorityChanges : ["Review all pages for missing direct answers and structured data"],
+      week1_fix_plan:
+        highPriorityChanges.length > 0
+          ? highPriorityChanges
+          : ["Review all pages for missing direct answers and structured data"],
       limitations: ["Analysis based on crawled content only"],
       extracted_faqs: allFaqs,
       extracted_json_ld: allJsonLd,

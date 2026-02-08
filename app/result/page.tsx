@@ -22,6 +22,7 @@ function ResultContent() {
     fetch(`/api/stripe-session?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log("Stripe session data:", data); // Debug log
         if (data.payment_status === "paid") {
           setStatus("success");
         } else {

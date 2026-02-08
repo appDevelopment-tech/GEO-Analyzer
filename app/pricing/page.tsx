@@ -4,8 +4,7 @@ import Link from "next/link";
 import { generateSoftwareApplicationSchema } from "@/lib/schema-data";
 import { Footer } from "@/components/Footer";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
 export const metadata: Metadata = {
   title: "Pricing – GeoAnalyzer",
@@ -73,11 +72,11 @@ export default function PricingPage() {
               What does GeoAnalyzer cost?
             </h1>
             <p className="text-lg text-gray-700 leading-relaxed">
-              GeoAnalyzer offers a free preliminary score. For comprehensive GEO/AEO
-              audits with detailed recommendations, the full report costs $19.
-              Each report includes entity clarity analysis, direct answer
-              optimization, trust signal evaluation, competitive positioning,
-              and technical accessibility assessment.
+              GeoAnalyzer offers a free preliminary score. For comprehensive
+              GEO/AEO audits with detailed recommendations, the full report
+              costs $19. Each report includes entity clarity analysis, direct
+              answer optimization, trust signal evaluation, competitive
+              positioning, and technical accessibility assessment.
             </p>
           </section>
 
