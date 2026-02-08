@@ -173,4 +173,4 @@ export default function ReportPage() {
     </main>
   );
 }
-export const runtime = "edge";
+export const runtime = "nodejs";
