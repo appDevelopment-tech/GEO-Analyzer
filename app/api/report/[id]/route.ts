@@ -78,5 +78,3 @@ export async function GET(
     is_locked: !isPaid,
   });
 }
-
-export const runtime = "nodejs";
