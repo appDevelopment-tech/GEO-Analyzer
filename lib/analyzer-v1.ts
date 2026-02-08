@@ -1,5 +1,10 @@
 import OpenAI from "openai";
-import { CrawlData, GeoScore, AIQuerySimulation } from "@/types/geo";
+import {
+  CrawlData,
+  GeoScore,
+  AIQuerySimulation,
+  GeneratedJsonLd,
+} from "@/types/geo";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -233,6 +238,202 @@ function simulateAIQueries(
   }
 }
 
+/**
+ * Calculate AI Citation Score — a single memorable percentage
+ * representing likelihood of being cited by AI assistants.
+ */
+function calculateCitationScore(
+  sectionScores: {
+    entity_clarity: number;
+    direct_answers: number;
+    trust_signals: number;
+    competitive_positioning: number;
+    technical_accessibility: number;
+  },
+  overallScore: number,
+  hasJsonLd: boolean,
+  hasFaqs: boolean,
+  hasDirectAnswers: boolean,
+): number {
+  // Weighted formula based on what AI engines prioritize
+  let score =
+    sectionScores.entity_clarity * 0.25 +
+    sectionScores.direct_answers * 0.25 +
+    sectionScores.trust_signals * 0.2 +
+    sectionScores.competitive_positioning * 0.15 +
+    sectionScores.technical_accessibility * 0.15;
+
+  // Bonuses for key signals
+  if (hasJsonLd) score += 5;
+  if (hasFaqs) score += 4;
+  if (hasDirectAnswers) score += 3;
+
+  // Penalties for critical gaps
+  if (sectionScores.entity_clarity < 30) score -= 10;
+  if (sectionScores.direct_answers < 30) score -= 8;
+  if (!hasJsonLd && !hasFaqs) score -= 5;
+
+  // Normalize to 0-100 and round
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+/**
+ * Auto-generate JSON-LD blocks based on crawl data.
+ * These are ready-to-paste schema markup snippets.
+ */
+function generateJsonLdBlocks(
+  crawlData: CrawlData[],
+  domain: string,
+): GeneratedJsonLd[] {
+  const blocks: GeneratedJsonLd[] = [];
+  const homepage = crawlData[0];
+  if (!homepage) return blocks;
+
+  const domainClean = domain
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/\/$/, "");
+  const brandName =
+    domainClean.split(".")[0].charAt(0).toUpperCase() +
+    domainClean.split(".")[0].slice(1);
+
+  const entities = crawlData.flatMap((p) => p.signals.entityMentions);
+  const locations = crawlData.flatMap((p) => p.signals.locationMentions);
+  const faqs = crawlData.flatMap((p) => p.signals.directAnswerBlocks);
+  const existingJsonLd = crawlData.flatMap((p) => p.jsonLd);
+  const existingTypes = existingJsonLd
+    .map((j) => j?.["@type"])
+    .filter(Boolean);
+
+  // 1. Organization schema (if not already present)
+  if (!existingTypes.includes("Organization")) {
+    const orgSchema: any = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: brandName,
+      url: domain,
+      description:
+        homepage.metaDescription || `${brandName} — ${homepage.title}`,
+    };
+    if (locations[0]) {
+      orgSchema.address = {
+        "@type": "PostalAddress",
+        addressLocality: locations[0],
+      };
+    }
+    blocks.push({
+      type: "Organization",
+      label: "Organization Schema",
+      description:
+        "Tells AI engines who you are, what you do, and where you're located. This is the foundation of entity clarity.",
+      code: JSON.stringify(orgSchema, null, 2),
+    });
+  }
+
+  // 2. FAQPage schema from extracted Q&A blocks
+  if (faqs.length > 0 && !existingTypes.includes("FAQPage")) {
+    const faqItems = faqs.slice(0, 5).map((faq) => {
+      const parts = faq.split("\nA: ");
+      const question = (parts[0] || "").replace(/^Q:\s*/, "").trim();
+      const answer = (parts[1] || "").trim();
+      return {
+        "@type": "Question",
+        name: question || "Question",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: answer || "Answer content here",
+        },
+      };
+    });
+
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqItems,
+    };
+
+    blocks.push({
+      type: "FAQPage",
+      label: "FAQ Schema",
+      description:
+        "Structures your Q&A content so AI can directly extract and cite your answers. High impact for direct answer scores.",
+      code: JSON.stringify(faqSchema, null, 2),
+    });
+  }
+
+  // 3. WebSite schema with search action (if not present)
+  if (!existingTypes.includes("WebSite")) {
+    const websiteSchema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: brandName,
+      url: domain,
+      description:
+        homepage.metaDescription || homepage.title,
+    };
+
+    blocks.push({
+      type: "WebSite",
+      label: "WebSite Schema",
+      description:
+        "Establishes your site identity in knowledge graphs. Helps AI connect your pages as a unified entity.",
+      code: JSON.stringify(websiteSchema, null, 2),
+    });
+  }
+
+  // 4. LocalBusiness schema (if location detected and not present)
+  if (
+    locations.length > 0 &&
+    !existingTypes.includes("LocalBusiness") &&
+    !existingTypes.includes("Organization")
+  ) {
+    const localSchema: any = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: brandName,
+      url: domain,
+      description:
+        homepage.metaDescription || `${brandName} in ${locations[0]}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: locations[0],
+      },
+    };
+
+    blocks.push({
+      type: "LocalBusiness",
+      label: "Local Business Schema",
+      description:
+        "Critical for local AI queries. Helps AI recommend you for location-specific questions.",
+      code: JSON.stringify(localSchema, null, 2),
+    });
+  }
+
+  // 5. BreadcrumbList schema
+  if (!existingTypes.includes("BreadcrumbList") && crawlData.length > 1) {
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: crawlData.slice(0, 4).map((page, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: page.title || `Page ${i + 1}`,
+        item: page.url,
+      })),
+    };
+
+    blocks.push({
+      type: "BreadcrumbList",
+      label: "Breadcrumb Schema",
+      description:
+        "Helps AI understand your site structure and page hierarchy. Improves technical accessibility score.",
+      code: JSON.stringify(breadcrumbSchema, null, 2),
+    });
+  }
+
+  return blocks;
+}
+
 export async function analyzeWithOpenAI(
   crawlData: CrawlData[],
 ): Promise<GeoScore> {
@@ -288,6 +489,23 @@ export async function analyzeWithOpenAI(
       result.overall_score || 0,
     );
 
+    // Calculate AI Citation Score
+    const hasJsonLd = crawlData.some((p) => p.jsonLd.length > 0);
+    const hasFaqs = crawlData.some(
+      (p) => p.signals.directAnswerBlocks.length > 0,
+    );
+    const hasDirectAnswers = scores.direct_answers > 50;
+    const aiCitationScore = calculateCitationScore(
+      scores,
+      result.overall_score || 0,
+      hasJsonLd,
+      hasFaqs,
+      hasDirectAnswers,
+    );
+
+    // Generate JSON-LD blocks
+    const generatedJsonLd = generateJsonLdBlocks(crawlData, domain);
+
     return {
       overall_score: result.overall_score || 0,
       tier: result.tier || "Invisible to AI",
@@ -304,6 +522,8 @@ export async function analyzeWithOpenAI(
       extracted_faqs: allFaqs,
       extracted_json_ld: allJsonLd,
       ai_query_simulations: aiQuerySimulations,
+      ai_citation_score: aiCitationScore,
+      generated_json_ld: generatedJsonLd,
     };
   } catch (error) {
     console.error("OpenAI analysis failed:", error);
