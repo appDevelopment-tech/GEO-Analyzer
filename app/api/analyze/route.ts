@@ -67,19 +67,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 1: Crawl the website
+    // Step 1: Fetch the website (always returns at least one item, never throws)
     const crawlData = await crawlWebsite(normalizedUrl);
 
-    if (crawlData.length === 0) {
-      return NextResponse.json(
-        {
-          error: "Unable to crawl website. Please check the URL and try again.",
-        },
-        { status: 400 },
-      );
-    }
-
-    // Step 2: Analyze with GLM
+    // Step 2: Analyze with AI
     const geoScore = await analyzeWithOpenAI(crawlData);
 
     //Step 3 now is to save to supabase

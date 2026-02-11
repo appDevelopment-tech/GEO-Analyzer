@@ -237,30 +237,39 @@ export async function analyzeWithOpenAI(
   crawlData: CrawlData[],
 ): Promise<GeoScore> {
   try {
+    // Compact payload — no pretty-print, trimmed text, sliced arrays
     const summary = crawlData.map((page) => ({
       url: page.url,
       title: page.title,
-      metaDescription: page.metaDescription,
-      headings: page.headings,
-      entityMentions: page.signals.entityMentions,
-      locationMentions: page.signals.locationMentions,
-      hedgingWordCount: page.signals.hedgingWords,
-      directAnswerBlocks: page.signals.directAnswerBlocks,
-      hasJsonLd: page.jsonLd.length > 0,
-      jsonLd: page.jsonLd,
+      meta: page.metaDescription,
+      h1: page.headings.h1.slice(0, 3),
+      h2: page.headings.h2.slice(0, 5),
+      entities: page.signals.entityMentions.slice(0, 3),
+      locations: page.signals.locationMentions.slice(0, 3),
+      hedging: page.signals.hedgingWords,
+      answers: page.signals.directAnswerBlocks.slice(0, 3),
+      jsonLd: page.jsonLd.slice(0, 2),
+      text: page.textContent.split(" ").slice(0, 600).join(" "),
     }));
 
+    // Detect if fetch was blocked (empty data)
+    const hasContent = summary.some(
+      (p) => p.text.length > 50 || (p.title && p.title.length > 0),
+    );
+    const siteDomain = (() => {
+      try { return new URL(summary[0]?.url || "").hostname; }
+      catch { return summary[0]?.url || "unknown"; }
+    })();
+
+    const userMsg = hasContent
+      ? JSON.stringify(summary)
+      : `Domain: ${siteDomain}\nURL: ${summary[0]?.url}\n\nThe site blocked our fetch (403/timeout). Analyze using your training knowledge about this domain. If you recognize it, provide a real analysis. If not, infer from the domain name and score conservatively. Add "Live crawl data was unavailable" to limitations.`;
+
     const response = await openai.chat.completions.create({
-      model: "gpt-5.2",
+      model: "gpt-4o-mini",
       messages: [
-        {
-          role: "system",
-          content: SCORING_PROMPT,
-        },
-        {
-          role: "user",
-          content: `Analyze this website data:\n\n${JSON.stringify(summary, null, 2)}`,
-        },
+        { role: "system", content: SCORING_PROMPT },
+        { role: "user", content: userMsg },
       ],
       response_format: { type: "json_object" },
       temperature: 0.3,
