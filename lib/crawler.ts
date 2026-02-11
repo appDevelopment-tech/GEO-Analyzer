@@ -1,12 +1,8 @@
 import * as cheerio from "cheerio";
 import { CrawlData } from "@/types/geo";
 import { filterUrls, type SiteConfig } from "@/lib/url";
-import {
-  chromium,
-  type Browser,
-  type Page,
-  type BrowserContext,
-} from "playwright";
+import puppeteer from "puppeteer-core";
+import type { Browser, Page } from "puppeteer-core";
 
 const HEDGING_WORDS = [
   "may",
@@ -35,21 +31,13 @@ const CRAWLER_CONFIG = {
   retryDelay: 1000,
   /** Browser timeout (ms) */
   browserTimeout: 25000,
-  /** Resource patterns to block for speed */
-  blockedResources: [
-    "**/*.png",
-    "**/*.jpg",
-    "**/*.jpeg",
-    "**/*.gif",
-    "**/*.svg",
-    "**/*.webp",
-    "**/*.css",
-    "**/*.woff",
-    "**/*.woff2",
-    "**/*.ttf",
-    "**/*.eot",
-    "**/*.ico",
-  ],
+  /** Resource types to block for speed */
+  blockedResourceTypes: [
+    "image",
+    "stylesheet",
+    "font",
+    "media",
+  ] as const,
 } as const;
 
 // ============================================================================
@@ -77,7 +65,7 @@ function setCached(url: string, data: CrawlData): void {
 }
 
 // ============================================================================
-// BROWSER POOL
+// BROWSER POOL — puppeteer-core + @sparticuz/chromium (serverless-safe)
 // ============================================================================
 
 /** Singleton browser instance reused across all pages */
@@ -85,19 +73,54 @@ let globalBrowser: Browser | null = null;
 let browserRefCount = 0;
 
 /**
- * Get or create the shared browser instance
+ * Get or create the shared browser instance.
+ * Uses @sparticuz/chromium on serverless (Lambda/Netlify),
+ * falls back to local Chromium in dev.
  */
 async function getBrowser(): Promise<Browser> {
-  if (!globalBrowser) {
-    globalBrowser = await chromium.launch({
-      headless: true,
-      args: [
+  if (!globalBrowser || !globalBrowser.connected) {
+    let executablePath: string;
+    let args: string[];
+
+    try {
+      // On serverless: use bundled chromium from @sparticuz/chromium
+      const chromium = (await import("@sparticuz/chromium")).default;
+      executablePath = await chromium.executablePath();
+      args = chromium.args;
+    } catch {
+      // Local dev fallback: expect chromium/chrome in PATH
+      const possiblePaths = [
+        "/usr/bin/google-chrome",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/chromium",
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      ];
+
+      const fs = await import("fs");
+      executablePath = possiblePaths.find((p) => fs.existsSync(p)) || "";
+
+      if (!executablePath) {
+        throw new Error(
+          "No Chromium binary found. Install Chrome or set CHROME_PATH.",
+        );
+      }
+
+      args = [
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
         "--disable-gpu",
-      ],
+      ];
+    }
+
+    globalBrowser = await puppeteer.launch({
+      executablePath,
+      args,
+      headless: true,
+      defaultViewport: { width: 1280, height: 720 },
     });
+
     browserRefCount = 0;
   }
   browserRefCount++;
@@ -105,32 +128,11 @@ async function getBrowser(): Promise<Browser> {
 }
 
 /**
- * Create a new page with optimized resource blocking
- */
-async function createOptimizedPage(
-  browser: Browser,
-): Promise<{ context: BrowserContext; page: Page }> {
-  const context = await browser.newContext({
-    userAgent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-  });
-
-  const page = await context.newPage();
-
-  // Block unnecessary resources for faster loading
-  for (const pattern of CRAWLER_CONFIG.blockedResources) {
-    await page.route(pattern, (route) => route.abort());
-  }
-
-  return { context, page };
-}
-
-/**
  * Close the browser if no more references
  */
 async function maybeCloseBrowser(): Promise<void> {
   browserRefCount--;
-  if (browserRefCount <= 0 && globalBrowser?.isConnected()) {
+  if (browserRefCount <= 0 && globalBrowser?.connected) {
     await globalBrowser.close();
     globalBrowser = null;
     browserRefCount = 0;
@@ -141,7 +143,7 @@ async function maybeCloseBrowser(): Promise<void> {
  * Close browser forcefully (for cleanup)
  */
 export async function closeBrowser(): Promise<void> {
-  if (globalBrowser?.isConnected()) {
+  if (globalBrowser?.connected) {
     await globalBrowser.close();
     globalBrowser = null;
     browserRefCount = 0;
@@ -160,7 +162,7 @@ export interface CrawlOptions {
   urlList?: readonly string[];
   /** Use headless browser for JS-rendered sites (Wix, React, Next.js, etc.)
    *  - false: use fetch (fast, for static sites)
-   *  - true: use Playwright (for JS-rendered sites)
+   *  - true: use browser (for JS-rendered sites)
    *  - "auto": auto-detect based on HTML signatures
    */
   useBrowser?: boolean | "auto";
@@ -239,11 +241,8 @@ function delay(ms: number): Promise<void> {
  * Includes retry logic with exponential backoff
  */
 async function crawlPageFetch(url: string): Promise<CrawlData> {
-  // Check cache first
   const cached = getCached(url);
-  if (cached) {
-    return cached;
-  }
+  if (cached) return cached;
 
   let lastError: Error | null = null;
 
@@ -265,15 +264,10 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
 
       const html = await response.text();
       const result = parseHtmlContent(html, url);
-
-      // Cache the result
       setCached(url, result);
-
       return result;
     } catch (error) {
       lastError = error as Error;
-
-      // Exponential backoff retry
       if (attempt < CRAWLER_CONFIG.maxRetries) {
         const retryDelay = CRAWLER_CONFIG.retryDelay * Math.pow(2, attempt);
         await delay(retryDelay);
@@ -287,55 +281,66 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
 }
 
 /**
- * Crawl a single page using headless browser (for JS-rendered sites like Wix, React, etc.)
- * Uses shared browser pool for efficiency
+ * Crawl a single page using headless browser (for JS-rendered sites)
+ * Uses puppeteer-core + @sparticuz/chromium for serverless compatibility
  */
 async function crawlPageBrowser(url: string): Promise<CrawlData> {
-  // Check cache first
   const cached = getCached(url);
-  if (cached) {
-    return cached;
-  }
+  if (cached) return cached;
 
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= CRAWLER_CONFIG.maxRetries; attempt++) {
-    let context: BrowserContext | undefined;
+    let page: Page | undefined;
     try {
       const browser = await getBrowser();
-      const { context: ctx, page } = await createOptimizedPage(browser);
-      context = ctx;
+      page = await browser.newPage();
 
-      // Navigate with shorter timeout since we're blocking resources
+      // Set user agent
+      await page.setUserAgent(
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      );
+
+      // Block unnecessary resources for speed
+      await page.setRequestInterception(true);
+      page.on("request", (req) => {
+        const type = req.resourceType();
+        if (
+          (CRAWLER_CONFIG.blockedResourceTypes as readonly string[]).includes(
+            type,
+          )
+        ) {
+          req.abort();
+        } else {
+          req.continue();
+        }
+      });
+
+      // Navigate with timeout
       await page.goto(url, {
         waitUntil: "domcontentloaded",
         timeout: CRAWLER_CONFIG.browserTimeout,
       });
 
-      // Short wait for any dynamic content
-      await delay(500);
+      // Short wait for dynamic content to render
+      await delay(1500);
 
       const html = await page.content();
       const result = parseHtmlContent(html, url);
 
-      // Close context and release browser reference
-      await context.close();
+      await page.close();
       await maybeCloseBrowser();
 
-      // Cache the result
       setCached(url, result);
-
       return result;
     } catch (error) {
       lastError = error as Error;
 
-      // Clean up context on error
       try {
-        if (context) await context.close();
+        if (page) await page.close();
         await maybeCloseBrowser();
       } catch {}
 
-      // Exponential backoff retry
       if (attempt < CRAWLER_CONFIG.maxRetries) {
         const retryDelay = CRAWLER_CONFIG.retryDelay * Math.pow(2, attempt);
         await delay(retryDelay);
@@ -352,13 +357,9 @@ async function crawlPageBrowser(url: string): Promise<CrawlData> {
  * Detection result for JS-rendered sites
  */
 export interface JsDetectionResult {
-  /** Whether the site appears to use JS rendering */
   isJsRendered: boolean;
-  /** Detected framework/CMS (if any) */
   framework?: string;
-  /** Confidence score (0-1) */
   confidence: number;
-  /** Reasoning for the detection */
   reason: string;
 }
 
@@ -411,13 +412,10 @@ const JS_FRAMEWORK_PATTERNS = [
 
 /**
  * Auto-detect if a site uses JavaScript rendering
- * @param html - The HTML content (from fetch)
- * @returns Detection result with framework identified
  */
 export function detectJsRendering(html: string): JsDetectionResult {
   const $ = cheerio.load(html);
 
-  // Check for known framework patterns
   for (const { name, pattern, confidence } of JS_FRAMEWORK_PATTERNS) {
     if (pattern.test(html)) {
       return {
@@ -429,15 +427,11 @@ export function detectJsRendering(html: string): JsDetectionResult {
     }
   }
 
-  // Heuristic: Check body content vs script ratio
   const bodyContent = $("body").text().trim();
   const scriptCount = $("script").length;
   const htmlLength = html.length;
   const bodyLength = $("body").html()?.length || 0;
 
-  // Empty/minimal body with lots of scripts suggests JS rendering
-  const bodyToScriptRatio =
-    scriptCount > 0 ? bodyLength / (scriptCount * 1000) : 1;
   const isEmptyBody = bodyContent.length < 200 && htmlLength > 10000;
 
   if (isEmptyBody && scriptCount >= 3) {
@@ -449,7 +443,6 @@ export function detectJsRendering(html: string): JsDetectionResult {
     };
   }
 
-  // Heuristic: Check for client-side hydration markers
   if (/<div\s+id=["']root["']\s*><\/div>/.test(html) && scriptCount > 2) {
     return {
       isJsRendered: true,
@@ -459,7 +452,6 @@ export function detectJsRendering(html: string): JsDetectionResult {
     };
   }
 
-  // Heuristic: Check for SPA navigation scripts
   if (
     /react|react-dom|vue|angular|next|nuxt/i.test(html) &&
     bodyContent.length < 500
@@ -472,7 +464,6 @@ export function detectJsRendering(html: string): JsDetectionResult {
     };
   }
 
-  // Default: assume static rendering
   return {
     isJsRendered: false,
     framework: undefined,
@@ -482,8 +473,7 @@ export function detectJsRendering(html: string): JsDetectionResult {
 }
 
 /**
- * Auto-detect if a site needs browser rendering
- * This is a convenience wrapper that fetches and detects
+ * Auto-detect if a site needs browser rendering (fetch + detect)
  */
 export async function detectJsRenderingOnline(
   url: string,
@@ -507,7 +497,7 @@ export async function detectJsRenderingOnline(
     return detectJsRendering(html);
   } catch {
     return {
-      isJsRendered: true, // Assume JS on error to be safe
+      isJsRendered: true,
       confidence: 0.5,
       reason: "Fetch failed, using browser as fallback",
     };
@@ -530,9 +520,6 @@ async function crawlPage(url: string, useBrowser: boolean): Promise<CrawlData> {
 
 /**
  * Crawl multiple URLs concurrently with rate limiting
- * @param urls - URLs to crawl
- * @param useBrowser - Whether to use browser rendering
- * @returns Map of URL -> CrawlData or Error
  */
 async function crawlConcurrent(
   urls: string[],
@@ -541,16 +528,13 @@ async function crawlConcurrent(
   const results = new Map<string, CrawlData>();
   const errors = new Map<string, Error>();
 
-  // Process in batches for politeness
   for (let i = 0; i < urls.length; i += CRAWLER_CONFIG.concurrency) {
     const batch = urls.slice(i, i + CRAWLER_CONFIG.concurrency);
 
-    // Crawl this batch concurrently
     const batchResults = await Promise.allSettled(
       batch.map((url) => crawlPage(url, useBrowser)),
     );
 
-    // Collect results
     for (let j = 0; j < batch.length; j++) {
       const result = batchResults[j];
       const url = batch[j];
@@ -563,7 +547,6 @@ async function crawlConcurrent(
       }
     }
 
-    // Politeness delay between batches (except on last batch)
     if (i + CRAWLER_CONFIG.concurrency < urls.length) {
       await delay(CRAWLER_CONFIG.batchDelay);
     }
@@ -580,8 +563,6 @@ async function crawlConcurrent(
 
 function extractEntityMentions($: cheerio.CheerioAPI, text: string): string[] {
   const mentions: string[] = [];
-
-  // Look for "X is a Y" patterns
   const patterns = [
     /(\w+(?:\s+\w+)*)\s+is\s+an?\s+([^.]+)/gi,
     /(\w+(?:\s+\w+)*)\s+specializes?\s+in\s+([^.]+)/gi,
@@ -635,7 +616,6 @@ function countHedgingWords(text: string): number {
 function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
   const blocks: string[] = [];
 
-  // Q&A heading patterns
   const questionPatterns = [
     /\?/,
     /\bwhat\b/i,
@@ -652,7 +632,6 @@ function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
     const isQuestion = questionPatterns.some((p) => p.test(heading));
 
     if (isQuestion) {
-      // Collect all sibling content until next heading
       const contentParts: string[] = [];
       let currentEl = $(el).next();
 
@@ -662,7 +641,6 @@ function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
           contentParts.push(text);
         }
         currentEl = currentEl.next();
-        // Stop after collecting reasonable content
         if (contentParts.join(" ").split(/\s+/).length > 100) break;
       }
 
@@ -693,7 +671,6 @@ function extractLinks(
       const href = $(el).attr("href");
       if (!href) return;
 
-      // Skip anchors, mailto, tel, javascript
       if (
         href.startsWith("#") ||
         href.startsWith("mailto:") ||
@@ -705,9 +682,7 @@ function extractLinks(
 
       const absoluteUrl = new URL(href, pageUrl);
 
-      // Only include same-origin links
       if (absoluteUrl.origin === pageUrl.origin) {
-        // Remove hash and trailing slash for deduplication
         const cleanUrl = absoluteUrl.href.split("#")[0].replace(/\/$/, "");
         if (!seen.has(cleanUrl)) {
           seen.add(cleanUrl);
@@ -725,45 +700,23 @@ function extractLinks(
   return links;
 }
 
-/**
- * @deprecated Use the new URL filtering system from @/lib/url instead
- * This function is kept for backward compatibility
- */
 function getPagePriority(pathname: string): number {
   const path = pathname.toLowerCase();
-
-  // Priority 1: Homepage
   if (path === "" || path === "/") return 1;
-
-  // Priority 2: Core entity pages
   if (path.includes("about")) return 2;
   if (path.includes("contact")) return 2;
-
-  // Priority 3: Service/Product pages
   if (path.includes("service") || path.includes("services")) return 3;
   if (path.includes("product") || path.includes("products")) return 3;
   if (path.includes("pricing")) return 3;
   if (path.includes("portfolio") || path.includes("work")) return 3;
-
-  // Priority 4: Trust and FAQ pages
   if (path.includes("faq")) return 4;
   if (path.includes("review") || path.includes("testimonial")) return 4;
   if (path.includes("case-stud") || path.includes("casestud")) return 4;
-
-  // Priority 5: Team/credentials
   if (path.includes("team")) return 5;
-
-  // Priority 6: Blog index
   if (path === "/blog" || path === "/blog/") return 6;
-
-  // Priority 8: Individual blog posts (but limit these)
   if (path.includes("/blog/")) return 8;
-
-  // Priority 10: Low-value pages
   if (path.includes("privacy") || path.includes("terms")) return 20;
   if (path.includes("cookie") || path.includes("legal")) return 20;
-
-  // Priority 7: Other content pages
   return 7;
 }
 
@@ -779,28 +732,6 @@ export interface CrawlResult {
 
 /**
  * Crawl a website with configurable page limit, dynamically discovering links
- * Uses smart prioritization to crawl important pages first
- *
- * @param url - The website URL to crawl
- * @param options - Crawl options (maxPages, siteConfig, urlList, useBrowser)
- *
- * @example
- * ```ts
- * // Basic crawl with default prioritization
- * const result = await crawlWebsiteDetailed("https://example.com", { maxPages: 10 });
- *
- * // For JS-rendered sites (Wix, React, Next.js, etc.)
- * const result = await crawlWebsiteDetailed("https://example.com", {
- *   maxPages: 10,
- *   useBrowser: true,
- * });
- *
- * // With site-specific config
- * const result = await crawlWebsiteDetailed("https://example.com", {
- *   maxPages: 50,
- *   siteConfig: mySiteConfig,
- * });
- * ```
  */
 export async function crawlWebsiteDetailed(
   url: string,
@@ -809,12 +740,10 @@ export async function crawlWebsiteDetailed(
   const { maxPages = 1, siteConfig, urlList, useBrowser = "auto" } = options;
   const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
 
-  // Auto-detect JS rendering if needed
   let detectedUseBrowser = false;
   let detectionResult: JsDetectionResult | undefined;
 
   if (useBrowser === "auto") {
-    // Detect from the first page
     try {
       const detectionHtml = await (
         await fetch(normalizedUrl, {
@@ -828,22 +757,18 @@ export async function crawlWebsiteDetailed(
         `[Crawler] JS Detection: ${detectionResult.isJsRendered ? "Using browser" : "Using fetch"} (${detectionResult.reason})`,
       );
     } catch {
-      // If detection fails, play safe and use browser
       detectedUseBrowser = true;
     }
   } else {
     detectedUseBrowser = useBrowser;
   }
 
-  // Priority queue: stores {url, priority}
   const toCrawl: Array<{ url: string; priority: number }> = [];
   const crawled = new Set<string>();
   const results: CrawlData[] = [];
   const allDiscovered = new Set<string>();
 
-  // Use provided URL list or start with homepage
   if (urlList && urlList.length > 0) {
-    // Filter URLs through site config if provided
     const filtered = siteConfig
       ? filterUrls(urlList, siteConfig)
       : urlList.map((u) => ({
@@ -860,16 +785,13 @@ export async function crawlWebsiteDetailed(
       }
     }
   } else {
-    // Start with homepage for discovery mode
     toCrawl.push({ url: normalizedUrl, priority: 1 });
     allDiscovered.add(normalizedUrl);
   }
 
   while (toCrawl.length > 0 && results.length < maxPages) {
-    // Sort by priority (lower number = higher priority)
     toCrawl.sort((a, b) => a.priority - b.priority);
 
-    // Take next batch of URLs to crawl
     const batchSize = Math.min(
       CRAWLER_CONFIG.concurrency,
       maxPages - results.length,
@@ -889,19 +811,16 @@ export async function crawlWebsiteDetailed(
 
     if (batch.length === 0) continue;
 
-    // Crawl batch concurrently
     const batchResults = await crawlConcurrent(
       batch.map((b) => b.url),
       detectedUseBrowser,
     );
 
-    // Process results and discover new links
     for (const { url } of batch) {
       const data = batchResults.get(url);
       if (data) {
         results.push(data);
 
-        // Discover links from this page
         const discoveredLinks = extractLinks(data.html, new URL(url));
         for (const { url: link, priority } of discoveredLinks) {
           const cleanLink = link.split("#")[0].replace(/\/$/, "");
@@ -918,7 +837,6 @@ export async function crawlWebsiteDetailed(
       }
     }
 
-    // Politeness delay between batches (already handled in crawlConcurrent, but extra here too)
     if (results.length < maxPages && toCrawl.length > 0) {
       await delay(CRAWLER_CONFIG.batchDelay);
     }
@@ -927,7 +845,6 @@ export async function crawlWebsiteDetailed(
   const totalDiscovered = allDiscovered.size;
   const maxPagesReached = results.length >= maxPages;
 
-  // Suggest enterprise for large sites
   let suggestedAction: string | undefined;
   if (totalDiscovered > maxPages * 2) {
     suggestedAction = `Your site has ${totalDiscovered} pages but we analyzed ${maxPages}. For comprehensive analysis of all pages, contact us for enterprise pricing.`;
