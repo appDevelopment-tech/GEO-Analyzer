@@ -60,7 +60,9 @@ export default function Home() {
         throw new Error(data.error || `Analysis failed (HTTP ${response.status})`);
       }
 
-      router.push(`/report/${data.report_id}`);
+      // Pass the URL so the report page can trigger the worker
+      const analysisUrl = encodeURIComponent(data.url || url);
+      router.push(`/report/${data.report_id}?url=${analysisUrl}`);
     } catch (err: any) {
       const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
       console.error(`[Analyze] Failed after ${elapsed}s:`, err);

@@ -26,8 +26,8 @@ const CRAWLER_CONFIG = {
   maxRetries: 1,
   /** Initial retry delay (ms) - exponential backoff */
   retryDelay: 400,
-  /** Fetch timeout (ms) — tight to stay within Netlify's 26s budget */
-  fetchTimeout: 6000,
+  /** Fetch timeout (ms) — 5s leaves ~20s for OpenAI within Netlify's 26s budget */
+  fetchTimeout: 5000,
 } as const;
 
 // ============================================================================
@@ -41,7 +41,7 @@ const crawlCache = new Map<string, { data: CrawlData; timestamp: number }>();
 
 async function fetchPage(url: string): Promise<CrawlData> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 10_000);
+  const timer = setTimeout(() => controller.abort(), CRAWLER_CONFIG.fetchTimeout);
 
   try {
     const res = await fetch(url, {

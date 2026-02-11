@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { crawlWebsite } from "@/lib/crawler";
-import { analyzeWithOpenAI } from "@/lib/analyzer-v1";
 import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: NextRequest) {
@@ -74,34 +72,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 1: Fetch the website
-    step = "crawl";
-    console.log(`[Analyze ${lap()}] Crawling ${normalizedUrl}...`);
-    const crawlData = await crawlWebsite(normalizedUrl);
-    console.log(`[Analyze ${lap()}] Crawl done — ${crawlData.length} page(s), textLen=${crawlData[0]?.textContent?.length ?? 0}`);
-
-    if (crawlData.length === 0) {
-      return NextResponse.json(
-        { error: "Unable to crawl website. Please check the URL and try again.", _debug_step: step },
-        { status: 400 },
-      );
-    }
-
-    // Step 2: Analyze with AI
-    step = "openai";
-    console.log(`[Analyze ${lap()}] Sending to OpenAI...`);
-    const geoScore = await analyzeWithOpenAI(crawlData);
-    console.log(`[Analyze ${lap()}] OpenAI done — score=${geoScore.overall_score}, tier=${geoScore.tier}`);
-
-    // Step 3: Save to Supabase
+    // Step 1: Create a "processing" row in Supabase immediately
     step = "supabase-insert";
-    console.log(`[Analyze ${lap()}] Inserting into Supabase...`);
+    console.log(`[Analyze ${lap()}] Creating processing row...`);
     const dbResult: any = await supabase
       .from("Reports")
       .insert([
         {
-          full_report: JSON.stringify(geoScore),
-          result: "success",
+          full_report: null,
+          result: "processing",
           domain: normalizedUrl,
           email: email,
         },
@@ -109,30 +88,25 @@ export async function POST(request: NextRequest) {
       .select();
 
     const id = dbResult.data && dbResult.data[0]?.report_id;
-    console.log(`[Analyze ${lap()}] Supabase done — report_id=${id}, error=${dbResult.error?.message ?? "none"}`);
+    console.log(`[Analyze ${lap()}] Row created — report_id=${id}`);
 
-    if (dbResult.error) {
+    if (dbResult.error || !id) {
       console.error("Supabase insert error:", dbResult.error);
+      return NextResponse.json(
+        { error: "Failed to create report. Please try again.", _debug_step: step },
+        { status: 500 },
+      );
     }
 
-    // Step 4: Return partial report for immediate display
-    step = "response";
-    const firstPageRemediation = (geoScore.page_remediations || [])[0];
-
+    // Step 2: Return immediately — FE will trigger the worker
+    console.log(`[Analyze ${lap()}] Returning report_id=${id} (processing)`);
     return NextResponse.json({
       report_id: id,
       success: true,
-      payment_status: "free",
-      total_pages: (geoScore.page_remediations || []).length,
-      _debug_step: step,
+      status: "processing",
+      url: normalizedUrl,
+      _debug_step: "created",
       _debug_elapsed: lap(),
-      report: {
-        overall_score: geoScore.overall_score,
-        tier: geoScore.tier,
-        section_scores: geoScore.section_scores,
-        top_hesitation: geoScore.top_ai_hesitations[0] || null,
-        page_remediations: firstPageRemediation ? [firstPageRemediation] : [],
-      },
     });
   } catch (error: any) {
     const elapsed = lap();
