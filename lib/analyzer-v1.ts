@@ -73,7 +73,7 @@ export async function analyzeWithOpenAI(
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: SCORING_PROMPT },
-        { role: "user", content: JSON.stringify(summary) },
+        { role: "user", content: userMsg },
       ],
       response_format: { type: "json_object" },
       temperature: 0.3,
