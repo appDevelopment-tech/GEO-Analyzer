@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 1: Crawl the website
+    // Step 1: Fetch the website (always returns at least one item, never throws)
     const crawlData = await crawlWebsite(normalizedUrl);
 
     if (crawlData.length === 0) {
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 2: Analyze with AI (pass lightweight data — no raw HTML)
+    // Step 2: Analyze with AI
     const geoScore = await analyzeWithOpenAI(crawlData);
 
     // Step 3: Save to Supabase — insert with "success" directly (skip extra update round-trip)
