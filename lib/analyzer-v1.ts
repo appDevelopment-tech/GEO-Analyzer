@@ -56,6 +56,19 @@ export async function analyzeWithOpenAI(
       text: trimWords(page.textContent, 600),
     }));
 
+    // Detect if fetch was blocked (empty data)
+    const hasContent = summary.some(
+      (p) => p.text.length > 50 || (p.title && p.title.length > 0),
+    );
+    const siteDomain = (() => {
+      try { return new URL(summary[0]?.url || "").hostname; }
+      catch { return summary[0]?.url || "unknown"; }
+    })();
+
+    const userMsg = hasContent
+      ? JSON.stringify(summary)
+      : `Domain: ${siteDomain}\nURL: ${summary[0]?.url}\n\nThe site blocked our fetch (403/timeout). Analyze using your training knowledge about this domain. If you recognize it, provide a real analysis. If not, infer from the domain name and score conservatively. Add "Live crawl data was unavailable" to limitations.`;
+
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
