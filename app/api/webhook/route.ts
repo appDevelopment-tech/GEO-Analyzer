@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
             .from("Reports")
             .select("*")
             .eq("email", email)
-            .order("created_at", { ascending: false })
-            .limit(1)
-            .single());
+            .eq("report_id", reportId)
+            .single()
+          )
         } catch (dbErr) {
           console.error("Supabase DB error fetching report:", dbErr);
           return NextResponse.json(
@@ -59,18 +59,6 @@ export async function POST(req: NextRequest) {
         if (data && !error) {
           try {
             const score = JSON.parse(data.full_report);
-
-            // Update payment_status to paid and include in full_report JSON
-            score.payment_status = "paid";
-
-            await supabase
-              .from("Reports")
-              .update({
-                payment_status: "paid",
-                paid_at: new Date().toISOString(),
-                full_report: JSON.stringify(score),
-              })
-              .eq("report_id", reportId);
 
             // Send full report email with all pages
             await sendReport(email, data.domain, score, reportId);
