@@ -41,19 +41,19 @@ export async function analyzeWithOpenAI(
   crawlData: CrawlData[],
 ): Promise<GeoScore> {
   try {
-    // Build a compact payload — no pretty-print, trimmed text, compact JSON-LD
+    // Build a compact payload — minimal tokens for fast AI response
     const summary = crawlData.map((page) => ({
       url: page.url,
       title: page.title,
       meta: page.metaDescription,
-      h1: page.headings.h1.slice(0, 3),
-      h2: page.headings.h2.slice(0, 5),
+      h1: page.headings.h1.slice(0, 2),
+      h2: page.headings.h2.slice(0, 4),
       entities: page.signals.entityMentions.slice(0, 3),
-      locations: page.signals.locationMentions.slice(0, 3),
+      locations: page.signals.locationMentions.slice(0, 2),
       hedging: page.signals.hedgingWords,
-      answers: page.signals.directAnswerBlocks.slice(0, 3),
+      answers: page.signals.directAnswerBlocks.slice(0, 2),
       jsonLd: compactJsonLd(page.jsonLd),
-      text: trimWords(page.textContent, 600),
+      text: trimWords(page.textContent, 400),
     }));
 
     const response = await openai.chat.completions.create({
@@ -64,6 +64,7 @@ export async function analyzeWithOpenAI(
       ],
       response_format: { type: "json_object" },
       temperature: 0.3,
+      max_tokens: 2500,
     });
 
     const result = JSON.parse(response.choices[0].message.content || "{}");

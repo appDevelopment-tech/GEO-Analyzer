@@ -79,29 +79,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 2: Analyze with GLM
+    // Step 2: Analyze with AI (pass lightweight data — no raw HTML)
     const geoScore = await analyzeWithOpenAI(crawlData);
 
-    //Step 3 now is to save to supabase
+    // Step 3: Save to Supabase — insert with "success" directly (skip extra update round-trip)
     const dbResult: any = await supabase
       .from("Reports")
       .insert([
         {
           full_report: JSON.stringify(geoScore),
-          result: "pending",
+          result: "success",
           domain: normalizedUrl,
           email: email,
         },
       ])
       .select();
+
     const id = dbResult.data && dbResult.data[0]?.report_id;
-    // Optionally, update the result field after insert if you want to store 'success' or 'error'
-    const status = dbResult.error ? "error" : "success";
-    if (dbResult.data) {
-      await supabase
-        .from("Reports")
-        .update({ result: status })
-        .eq("report_id", id);
+
+    if (dbResult.error) {
+      console.error("Supabase insert error:", dbResult.error);
     }
 
     // Step 4: Return partial report for immediate display

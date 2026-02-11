@@ -20,15 +20,15 @@ const HEDGING_WORDS = [
 
 const CRAWLER_CONFIG = {
   /** Maximum concurrent page crawls */
-  concurrency: 3,
+  concurrency: 5,
   /** Delay between batch requests (ms) for politeness */
-  batchDelay: 200,
+  batchDelay: 100,
   /** Maximum retries per page */
   maxRetries: 1,
   /** Initial retry delay (ms) - exponential backoff */
-  retryDelay: 800,
-  /** Fetch timeout (ms) */
-  fetchTimeout: 8000,
+  retryDelay: 400,
+  /** Fetch timeout (ms) — tight to stay within Netlify's 26s budget */
+  fetchTimeout: 6000,
 } as const;
 
 // ============================================================================
@@ -107,13 +107,13 @@ function parseHtmlContent(html: string, url: string): CrawlData {
     .map((_, el) => $(el).text().trim())
     .get();
 
-  // Extract text content (first 800 words — enough for AI analysis)
+  // Extract text content (first 500 words — enough for AI analysis)
   const textContent = $("body")
     .text()
     .replace(/\s+/g, " ")
     .trim()
     .split(" ")
-    .slice(0, 800)
+    .slice(0, 500)
     .join(" ");
 
   // Signal extraction
