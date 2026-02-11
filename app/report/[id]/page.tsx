@@ -10,6 +10,7 @@ import FixRoadmapPanel from "@/components/FixRoadmapPanel";
 import JsonLdBlock from "@/components/JsonLdBlock";
 import CompetitorSnapshot from "@/components/CompetitorSnapshot";
 import UnlockCTA from "@/components/UnlockCTA";
+import CopyBlocksPanel from "@/components/CopyBlocksPanel";
 
 export default function ReportPage() {
   const { id } = useParams();
@@ -184,11 +185,13 @@ export default function ReportPage() {
             delay={3.2}
           />
 
-          {/* 5. Who AI Picks Instead — always free, motivating */}
+          {/* 5. Who AI Picks Instead — names always free, scores/strengths paid */}
           {fullReport.ai_query_simulations &&
             fullReport.ai_query_simulations.length > 0 && (
               <CompetitorSnapshot
                 simulations={fullReport.ai_query_simulations}
+                realCompetitors={fullReport.real_competitors}
+                isLocked={isLocked}
                 delay={3.6}
               />
             )}
@@ -220,11 +223,21 @@ export default function ReportPage() {
               />
             )}
 
+          {/* 9. Copy Blocks — blurred for free */}
+          {fullReport.copy_blocks && fullReport.copy_blocks.length > 0 && (
+            <CopyBlocksPanel
+              blocks={fullReport.copy_blocks}
+              isLocked={isLocked}
+              onUnlock={handleStripeCheckout}
+              delay={5.2}
+            />
+          )}
+
           {/* New Analysis Button */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 5.2, duration: 0.5 }}
+            transition={{ delay: 5.6, duration: 0.5 }}
             className="text-center mt-12"
           >
             <button

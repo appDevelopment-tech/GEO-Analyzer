@@ -22,13 +22,13 @@ const CRAWLER_CONFIG = {
   /** Maximum concurrent page crawls */
   concurrency: 3,
   /** Delay between batch requests (ms) for politeness */
-  batchDelay: 300,
+  batchDelay: 200,
   /** Maximum retries per page */
-  maxRetries: 2,
+  maxRetries: 1,
   /** Initial retry delay (ms) - exponential backoff */
-  retryDelay: 1000,
+  retryDelay: 800,
   /** Fetch timeout (ms) */
-  fetchTimeout: 15000,
+  fetchTimeout: 8000,
 } as const;
 
 // ============================================================================
@@ -107,13 +107,13 @@ function parseHtmlContent(html: string, url: string): CrawlData {
     .map((_, el) => $(el).text().trim())
     .get();
 
-  // Extract text content (first 2000 words)
+  // Extract text content (first 800 words — enough for AI analysis)
   const textContent = $("body")
     .text()
     .replace(/\s+/g, " ")
     .trim()
     .split(" ")
-    .slice(0, 2000)
+    .slice(0, 800)
     .join(" ");
 
   // Signal extraction

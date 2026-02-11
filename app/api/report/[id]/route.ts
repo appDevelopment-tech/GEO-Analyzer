@@ -70,6 +70,21 @@ export async function GET(
           i === 0 ? item : "Unlock full report for this fix",
       );
     }
+
+    // Redact real competitor details: keep names, hide scores + strengths
+    if (report.real_competitors && report.real_competitors.length > 0) {
+      report.real_competitors = report.real_competitors.map((c: any) => ({
+        name: c.name,
+        url: c.url,
+        ai_readiness_estimate: undefined,
+        strengths: [],
+      }));
+    }
+
+    // Redact copy blocks entirely for free users
+    if (report.copy_blocks) {
+      report.copy_blocks = undefined;
+    }
   }
 
   return NextResponse.json({

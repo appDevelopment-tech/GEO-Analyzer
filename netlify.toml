@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[functions]
+  # Maximum timeout for serverless functions (26s on Pro, 10s on free).
+  # The analyze endpoint streams SSE so the *time-to-first-byte* is fast,
+  # but this gives extra safety margin for validation + rate-limit checks.
+  external_node_modules = ["pdfkit"]
+  node_bundler = "esbuild"
