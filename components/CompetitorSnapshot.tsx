@@ -1,28 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AIQuerySimulation, RealCompetitor } from "@/types/geo";
+import { AIQuerySimulation } from "@/types/geo";
 
 interface CompetitorSnapshotProps {
   simulations: AIQuerySimulation[];
-  realCompetitors?: RealCompetitor[];
-  isLocked?: boolean;
   delay?: number;
 }
 
 /**
- * Shows real competitors and their AI readiness — motivating, always partially free.
- * Free users see names + mention counts. Paid users also see AI readiness scores + strengths.
+ * Shows who AI mentions instead of this site — motivating, always free.
+ * Pulls competitor data from the first AI query simulation result.
  */
 export default function CompetitorSnapshot({
   simulations,
-  realCompetitors,
-  isLocked = true,
   delay = 3.4,
 }: CompetitorSnapshotProps) {
   if (!simulations || simulations.length === 0) return null;
 
-  // Aggregate competitors from query simulations
+  // Aggregate all competitors across all simulations
   const competitorCounts = new Map<string, number>();
   let totalNotMentioned = 0;
 
@@ -37,42 +33,11 @@ export default function CompetitorSnapshot({
     .sort((a, b) => b[1] - a[1])
     .slice(0, 6);
 
-  if (sortedCompetitors.length === 0 && (!realCompetitors || realCompetitors.length === 0)) return null;
+  if (sortedCompetitors.length === 0 && totalNotMentioned === 0) return null;
 
   const mentionedCount = simulations.filter((s) => s.mentioned).length;
   const totalQueries = simulations.length;
   const mentionRate = Math.round((mentionedCount / totalQueries) * 100);
-
-  // Build a lookup from real competitors for enrichment
-  const competitorLookup = new Map<string, RealCompetitor>();
-  if (realCompetitors) {
-    for (const rc of realCompetitors) {
-      competitorLookup.set(rc.name.toLowerCase(), rc);
-    }
-  }
-
-  // Merge: use simulation competitors enriched with real competitor data
-  const enrichedCompetitors = sortedCompetitors.map(([name, count]) => {
-    const rc = competitorLookup.get(name.toLowerCase());
-    return { name, count, readiness: rc?.ai_readiness_estimate, strengths: rc?.strengths, url: rc?.url };
-  });
-
-  // Add real competitors not in simulations
-  if (realCompetitors) {
-    for (const rc of realCompetitors) {
-      if (!enrichedCompetitors.some((e) => e.name.toLowerCase() === rc.name.toLowerCase())) {
-        enrichedCompetitors.push({
-          name: rc.name,
-          count: 0,
-          readiness: rc.ai_readiness_estimate,
-          strengths: rc.strengths,
-          url: rc.url,
-        });
-      }
-    }
-  }
-
-  const topCompetitors = enrichedCompetitors.slice(0, 6);
 
   return (
     <motion.div
@@ -90,7 +55,7 @@ export default function CompetitorSnapshot({
         <div>
           <h3 className="text-2xl font-bold text-apple-gray">Who AI Picks Instead</h3>
           <p className="text-sm text-gray-500 mt-0.5">
-            Real competitors AI recommends when you&apos;re not cited
+            Competitors mentioned when you&apos;re not
           </p>
         </div>
       </div>
@@ -112,67 +77,35 @@ export default function CompetitorSnapshot({
           />
         </div>
         <p className="text-xs text-gray-400 mt-1.5">
-          AI mentioned you in {mentionedCount} of {totalQueries} simulated queries
+          AI mentioned you in {mentionedCount} of {totalQueries} simulated customer queries
         </p>
       </div>
 
       {/* Competitors list */}
-      {topCompetitors.length > 0 && (
+      {sortedCompetitors.length > 0 && (
         <div>
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
             Taking your spot in AI answers
           </p>
-          <div className="space-y-2">
-            {topCompetitors.map(({ name, count, readiness, strengths, url }, i) => (
+          <div className="grid grid-cols-2 gap-2">
+            {sortedCompetitors.map(([name, count], i) => (
               <motion.div
                 key={name}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: delay + 0.4 + i * 0.1, duration: 0.3 }}
-                className="flex items-center gap-3 px-4 py-3 bg-gray-50 rounded-xl border border-gray-100"
+                className="flex items-center gap-2.5 px-4 py-3 bg-gray-50 rounded-xl border border-gray-100"
               >
-                <span className="shrink-0 w-7 h-7 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">
+                <span className="shrink-0 w-6 h-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-apple-gray truncate">{name}</span>
-                    {url && (
-                      <span className="text-xs text-gray-400 truncate hidden sm:inline">{url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}</span>
-                    )}
-                  </div>
-                  {/* Strengths — visible for paid users when data exists */}
-                  {strengths && strengths.length > 0 && !isLocked && (
-                    <div className="flex gap-1.5 mt-1">
-                      {strengths.map((s, j) => (
-                        <span key={j} className="text-[10px] px-2 py-0.5 bg-orange-50 text-orange-700 rounded-full">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                {/* AI readiness score — paid only */}
-                {readiness !== undefined && !isLocked ? (
-                  <div className="text-right shrink-0">
-                    <span className={`text-sm font-bold ${readiness >= 70 ? "text-green-600" : readiness >= 45 ? "text-yellow-600" : "text-red-500"}`}>
-                      {readiness}
-                    </span>
-                    <span className="text-[10px] text-gray-400 block">AI score</span>
-                  </div>
-                ) : count > 0 ? (
-                  <span className="ml-auto text-xs text-gray-400 shrink-0">
-                    {count}x cited
-                  </span>
-                ) : null}
+                <span className="text-sm font-medium text-apple-gray truncate">{name}</span>
+                <span className="ml-auto text-xs text-gray-400 shrink-0">
+                  {count}x
+                </span>
               </motion.div>
             ))}
           </div>
-          {isLocked && realCompetitors && realCompetitors.length > 0 && (
-            <p className="text-xs text-gray-400 mt-3 text-center">
-              Unlock full report to see competitor AI readiness scores &amp; strengths
-            </p>
-          )}
         </div>
       )}
     </motion.div>

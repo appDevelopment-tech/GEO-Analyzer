@@ -6,22 +6,6 @@ export interface AIQuerySimulation {
   competitors_mentioned: string[];
 }
 
-export interface RealCompetitor {
-  name: string;
-  url?: string;
-  ai_readiness_estimate: number;
-  strengths: string[];
-}
-
-export interface CopyBlock {
-  type: "meta_description" | "faq_section" | "about_paragraph" | "page_title";
-  page_url?: string;
-  current?: string;
-  suggested: string;
-  why: string;
-  questions?: Array<{ q: string; a: string }>;
-}
-
 export interface RemediationChange {
   priority: "high" | "medium" | "low";
   change_type:
@@ -75,10 +59,6 @@ export interface GeoScore {
   ai_query_simulations?: AIQuerySimulation[];
   // Per-page remediation details (for full report)
   page_remediations?: PageRemediation[];
-  // Real competitor analysis
-  real_competitors?: RealCompetitor[];
-  // Ready-to-paste copy blocks (paid feature)
-  copy_blocks?: CopyBlock[];
   // Payment status (free = 1 page shown, paid = all pages shown)
   payment_status?: "free" | "paid";
 }
