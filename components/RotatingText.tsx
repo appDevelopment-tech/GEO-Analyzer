@@ -11,11 +11,11 @@ import React, {
 import {
   motion,
   AnimatePresence,
-  Transition,
+  type Transition,
   type VariantLabels,
   type Target,
   type TargetAndTransition,
-} from "motion/react";
+} from "framer-motion";
 
 import "./RotatingText.css";
 
