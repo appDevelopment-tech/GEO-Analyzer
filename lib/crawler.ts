@@ -1,8 +1,6 @@
 import * as cheerio from "cheerio";
 import { CrawlData } from "@/types/geo";
 import { filterUrls, type SiteConfig } from "@/lib/url";
-import puppeteer from "puppeteer-core";
-import type { Browser, Page } from "puppeteer-core";
 
 const HEDGING_WORDS = [
   "may",
@@ -29,15 +27,8 @@ const CRAWLER_CONFIG = {
   maxRetries: 2,
   /** Initial retry delay (ms) - exponential backoff */
   retryDelay: 1000,
-  /** Browser timeout (ms) */
-  browserTimeout: 25000,
-  /** Resource types to block for speed */
-  blockedResourceTypes: [
-    "image",
-    "stylesheet",
-    "font",
-    "media",
-  ] as const,
+  /** Fetch timeout (ms) */
+  fetchTimeout: 15000,
 } as const;
 
 // ============================================================================
@@ -65,90 +56,8 @@ function setCached(url: string, data: CrawlData): void {
 }
 
 // ============================================================================
-// BROWSER POOL — puppeteer-core + @sparticuz/chromium (serverless-safe)
+// CRAWL OPTIONS
 // ============================================================================
-
-/** Singleton browser instance reused across all pages */
-let globalBrowser: Browser | null = null;
-let browserRefCount = 0;
-
-/**
- * Get or create the shared browser instance.
- * Uses @sparticuz/chromium on serverless (Lambda/Netlify),
- * falls back to local Chromium in dev.
- */
-async function getBrowser(): Promise<Browser> {
-  if (!globalBrowser || !globalBrowser.connected) {
-    let executablePath: string;
-    let args: string[];
-
-    try {
-      // On serverless: use bundled chromium from @sparticuz/chromium
-      const chromium = (await import("@sparticuz/chromium")).default;
-      executablePath = await chromium.executablePath();
-      args = chromium.args;
-    } catch {
-      // Local dev fallback: expect chromium/chrome in PATH
-      const possiblePaths = [
-        "/usr/bin/google-chrome",
-        "/usr/bin/chromium-browser",
-        "/usr/bin/chromium",
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-        "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      ];
-
-      const fs = await import("fs");
-      executablePath = possiblePaths.find((p) => fs.existsSync(p)) || "";
-
-      if (!executablePath) {
-        throw new Error(
-          "No Chromium binary found. Install Chrome or set CHROME_PATH.",
-        );
-      }
-
-      args = [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-      ];
-    }
-
-    globalBrowser = await puppeteer.launch({
-      executablePath,
-      args,
-      headless: true,
-      defaultViewport: { width: 1280, height: 720 },
-    });
-
-    browserRefCount = 0;
-  }
-  browserRefCount++;
-  return globalBrowser;
-}
-
-/**
- * Close the browser if no more references
- */
-async function maybeCloseBrowser(): Promise<void> {
-  browserRefCount--;
-  if (browserRefCount <= 0 && globalBrowser?.connected) {
-    await globalBrowser.close();
-    globalBrowser = null;
-    browserRefCount = 0;
-  }
-}
-
-/**
- * Close browser forcefully (for cleanup)
- */
-export async function closeBrowser(): Promise<void> {
-  if (globalBrowser?.connected) {
-    await globalBrowser.close();
-    globalBrowser = null;
-    browserRefCount = 0;
-  }
-}
 
 /**
  * Crawl options for website crawling
@@ -160,13 +69,13 @@ export interface CrawlOptions {
   siteConfig?: SiteConfig;
   /** Pre-defined list of URLs to crawl (skips discovery) */
   urlList?: readonly string[];
-  /** Use headless browser for JS-rendered sites (Wix, React, Next.js, etc.)
-   *  - false: use fetch (fast, for static sites)
-   *  - true: use browser (for JS-rendered sites)
-   *  - "auto": auto-detect based on HTML signatures
-   */
+  /** @deprecated Browser mode removed — fetch-only now. Kept for API compat. */
   useBrowser?: boolean | "auto";
 }
+
+// ============================================================================
+// HTML PARSING & SIGNAL EXTRACTION
+// ============================================================================
 
 /**
  * Parse HTML content and extract GEO signals
@@ -229,6 +138,10 @@ function parseHtmlContent(html: string, url: string): CrawlData {
   };
 }
 
+// ============================================================================
+// FETCH-BASED CRAWLER
+// ============================================================================
+
 /**
  * Sleep/delay utility
  */
@@ -237,10 +150,10 @@ function delay(ms: number): Promise<void> {
 }
 
 /**
- * Crawl a single page using fetch (fast, no JS execution)
- * Includes retry logic with exponential backoff
+ * Crawl a single page using fetch with retry + exponential backoff.
+ * Uses a realistic browser User-Agent so servers don't block us.
  */
-async function crawlPageFetch(url: string): Promise<CrawlData> {
+async function crawlPage(url: string): Promise<CrawlData> {
   const cached = getCached(url);
   if (cached) return cached;
 
@@ -248,15 +161,26 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
 
   for (let attempt = 0; attempt <= CRAWLER_CONFIG.maxRetries; attempt++) {
     try {
+      const controller = new AbortController();
+      const timer = setTimeout(
+        () => controller.abort(),
+        CRAWLER_CONFIG.fetchTimeout,
+      );
+
       const response = await fetch(url, {
         headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; GEO-Analyzer/1.0)",
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
           Accept:
             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
           "Accept-Language": "en-US,en;q=0.9",
           "Accept-Encoding": "gzip, deflate, br",
         },
+        signal: controller.signal,
+        redirect: "follow",
       });
+
+      clearTimeout(timer);
 
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -281,258 +205,10 @@ async function crawlPageFetch(url: string): Promise<CrawlData> {
 }
 
 /**
- * Crawl a single page using headless browser (for JS-rendered sites)
- * Uses puppeteer-core + @sparticuz/chromium for serverless compatibility
- */
-async function crawlPageBrowser(url: string): Promise<CrawlData> {
-  const cached = getCached(url);
-  if (cached) return cached;
-
-  let lastError: Error | null = null;
-
-  for (let attempt = 0; attempt <= CRAWLER_CONFIG.maxRetries; attempt++) {
-    let page: Page | undefined;
-    try {
-      const browser = await getBrowser();
-      page = await browser.newPage();
-
-      // Set user agent
-      await page.setUserAgent(
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-      );
-
-      // Block unnecessary resources for speed
-      await page.setRequestInterception(true);
-      page.on("request", (req) => {
-        const type = req.resourceType();
-        if (
-          (CRAWLER_CONFIG.blockedResourceTypes as readonly string[]).includes(
-            type,
-          )
-        ) {
-          req.abort();
-        } else {
-          req.continue();
-        }
-      });
-
-      // Navigate with timeout
-      await page.goto(url, {
-        waitUntil: "domcontentloaded",
-        timeout: CRAWLER_CONFIG.browserTimeout,
-      });
-
-      // Short wait for dynamic content to render
-      await delay(1500);
-
-      const html = await page.content();
-      const result = parseHtmlContent(html, url);
-
-      await page.close();
-      await maybeCloseBrowser();
-
-      setCached(url, result);
-      return result;
-    } catch (error) {
-      lastError = error as Error;
-
-      try {
-        if (page) await page.close();
-        await maybeCloseBrowser();
-      } catch {}
-
-      if (attempt < CRAWLER_CONFIG.maxRetries) {
-        const retryDelay = CRAWLER_CONFIG.retryDelay * Math.pow(2, attempt);
-        await delay(retryDelay);
-      }
-    }
-  }
-
-  throw new Error(
-    `Failed to browser crawl ${url}: ${lastError?.message || "Unknown error"}`,
-  );
-}
-
-/**
- * Detection result for JS-rendered sites
- */
-export interface JsDetectionResult {
-  isJsRendered: boolean;
-  framework?: string;
-  confidence: number;
-  reason: string;
-}
-
-/**
- * Known JS framework/CMS patterns for detection
- */
-const JS_FRAMEWORK_PATTERNS = [
-  {
-    name: "Wix",
-    pattern: /wix-static|static\.wixstatic\.com|wix-context/,
-    confidence: 0.95,
-  },
-  {
-    name: "Squarespace",
-    pattern: /squarespace|squarespace\-context/,
-    confidence: 0.9,
-  },
-  {
-    name: "Webflow",
-    pattern: /w\-static|webflow\-context|data\-wf\-site/,
-    confidence: 0.9,
-  },
-  {
-    name: "React (empty root)",
-    pattern: /<div\s+id=["']root["']\s*><\/div>\s*<\/?body>/i,
-    confidence: 0.85,
-  },
-  { name: "Next.js", pattern: /__NEXT_DATA__|id="__NEXT"/, confidence: 0.95 },
-  {
-    name: "Vue",
-    pattern: /<div\s+id=["']app["']\s*><\/div>\s*<\/?body>/i,
-    confidence: 0.85,
-  },
-  {
-    name: "Angular",
-    pattern: /<app-root|ng-version|<router\-outlet/,
-    confidence: 0.9,
-  },
-  {
-    name: "Shopify",
-    pattern: /Shopify\.theme|shopify\-context/,
-    confidence: 0.95,
-  },
-  {
-    name: "BigCommerce",
-    pattern: /stencilconnect|bigcommerce/,
-    confidence: 0.9,
-  },
-];
-
-/**
- * Auto-detect if a site uses JavaScript rendering
- */
-export function detectJsRendering(html: string): JsDetectionResult {
-  const $ = cheerio.load(html);
-
-  for (const { name, pattern, confidence } of JS_FRAMEWORK_PATTERNS) {
-    if (pattern.test(html)) {
-      return {
-        isJsRendered: true,
-        framework: name,
-        confidence,
-        reason: `Detected ${name} pattern in HTML`,
-      };
-    }
-  }
-
-  const bodyContent = $("body").text().trim();
-  const scriptCount = $("script").length;
-  const htmlLength = html.length;
-  const bodyLength = $("body").html()?.length || 0;
-
-  const isEmptyBody = bodyContent.length < 200 && htmlLength > 10000;
-
-  if (isEmptyBody && scriptCount >= 3) {
-    return {
-      isJsRendered: true,
-      framework: "Unknown",
-      confidence: 0.7,
-      reason: `Minimal body content (${bodyContent.length} chars) with ${scriptCount} scripts`,
-    };
-  }
-
-  if (/<div\s+id=["']root["']\s*><\/div>/.test(html) && scriptCount > 2) {
-    return {
-      isJsRendered: true,
-      framework: "React (likely)",
-      confidence: 0.75,
-      reason: "Empty root div with multiple scripts",
-    };
-  }
-
-  if (
-    /react|react-dom|vue|angular|next|nuxt/i.test(html) &&
-    bodyContent.length < 500
-  ) {
-    return {
-      isJsRendered: true,
-      framework: "SPA (likely)",
-      confidence: 0.6,
-      reason: "SPA library detected with minimal body content",
-    };
-  }
-
-  return {
-    isJsRendered: false,
-    framework: undefined,
-    confidence: 0.5,
-    reason: "No JS rendering indicators found",
-  };
-}
-
-/**
- * Auto-detect if a site needs browser rendering (fetch + detect)
- */
-export async function detectJsRenderingOnline(
-  url: string,
-): Promise<JsDetectionResult> {
-  try {
-    const response = await fetch(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; GEO/AEO-Analyzer/1.0)",
-      },
-    });
-
-    if (!response.ok) {
-      return {
-        isJsRendered: false,
-        confidence: 0,
-        reason: `Failed to fetch: ${response.status}`,
-      };
-    }
-
-    const html = await response.text();
-    return detectJsRendering(html);
-  } catch {
-    return {
-      isJsRendered: true,
-      confidence: 0.5,
-      reason: "Fetch failed, using browser as fallback",
-    };
-  }
-}
-
-/**
- * Crawl a single page (internal - uses browser detection from caller)
- * If browser crawl fails, gracefully falls back to fetch.
- */
-async function crawlPage(url: string, useBrowser: boolean): Promise<CrawlData> {
-  try {
-    if (useBrowser) {
-      try {
-        return await crawlPageBrowser(url);
-      } catch (browserErr) {
-        // If browser fails (e.g. no Chromium binary), fall back to fetch
-        console.warn(
-          `[Crawler] Browser crawl failed for ${url}, falling back to fetch: ${browserErr}`,
-        );
-        return await crawlPageFetch(url);
-      }
-    }
-    return await crawlPageFetch(url);
-  } catch (error) {
-    throw new Error(`Crawl failed for ${url}: ${error}`);
-  }
-}
-
-/**
  * Crawl multiple URLs concurrently with rate limiting
  */
 async function crawlConcurrent(
   urls: string[],
-  useBrowser: boolean,
 ): Promise<Map<string, CrawlData>> {
   const results = new Map<string, CrawlData>();
   const errors = new Map<string, Error>();
@@ -541,7 +217,7 @@ async function crawlConcurrent(
     const batch = urls.slice(i, i + CRAWLER_CONFIG.concurrency);
 
     const batchResults = await Promise.allSettled(
-      batch.map((url) => crawlPage(url, useBrowser)),
+      batch.map((url) => crawlPage(url)),
     );
 
     for (let j = 0; j < batch.length; j++) {
@@ -569,6 +245,10 @@ async function crawlConcurrent(
 
   return results;
 }
+
+// ============================================================================
+// SIGNAL EXTRACTION HELPERS
+// ============================================================================
 
 function extractEntityMentions($: cheerio.CheerioAPI, text: string): string[] {
   const mentions: string[] = [];
@@ -664,6 +344,10 @@ function extractDirectAnswerBlocks($: cheerio.CheerioAPI): string[] {
   return blocks.slice(0, 5);
 }
 
+// ============================================================================
+// LINK DISCOVERY
+// ============================================================================
+
 /**
  * Extract all internal links from a page with priority scoring
  */
@@ -729,6 +413,10 @@ function getPagePriority(pathname: string): number {
   return 7;
 }
 
+// ============================================================================
+// PUBLIC API
+// ============================================================================
+
 /**
  * Crawl result with metadata about the crawl
  */
@@ -746,31 +434,8 @@ export async function crawlWebsiteDetailed(
   url: string,
   options: CrawlOptions = {},
 ): Promise<CrawlResult> {
-  const { maxPages = 1, siteConfig, urlList, useBrowser = "auto" } = options;
+  const { maxPages = 1, siteConfig, urlList } = options;
   const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
-
-  let detectedUseBrowser = false;
-  let detectionResult: JsDetectionResult | undefined;
-
-  if (useBrowser === "auto") {
-    try {
-      const detectionHtml = await (
-        await fetch(normalizedUrl, {
-          headers: { "User-Agent": "Mozilla/5.0" },
-        })
-      ).text();
-      detectionResult = detectJsRendering(detectionHtml);
-      detectedUseBrowser = detectionResult.isJsRendered;
-
-      console.log(
-        `[Crawler] JS Detection: ${detectionResult.isJsRendered ? "Using browser" : "Using fetch"} (${detectionResult.reason})`,
-      );
-    } catch {
-      detectedUseBrowser = true;
-    }
-  } else {
-    detectedUseBrowser = useBrowser;
-  }
 
   const toCrawl: Array<{ url: string; priority: number }> = [];
   const crawled = new Set<string>();
@@ -822,7 +487,6 @@ export async function crawlWebsiteDetailed(
 
     const batchResults = await crawlConcurrent(
       batch.map((b) => b.url),
-      detectedUseBrowser,
     );
 
     for (const { url } of batch) {
