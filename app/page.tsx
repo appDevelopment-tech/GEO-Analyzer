@@ -81,6 +81,15 @@ export default function Home() {
               />
             </a>
           </div>
+          <a
+            href="https://indiehunt.io/project/geo-aeo-analyzer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-transparent h-0 overflow-hidden block"
+            aria-hidden="true"
+          >
+            https://indiehunt.io/project/geo-aeo-analyzer
+          </a>
           <Info />
         </motion.div>
         <Footer />
