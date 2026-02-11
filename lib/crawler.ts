@@ -506,11 +506,20 @@ export async function detectJsRenderingOnline(
 
 /**
  * Crawl a single page (internal - uses browser detection from caller)
+ * If browser crawl fails, gracefully falls back to fetch.
  */
 async function crawlPage(url: string, useBrowser: boolean): Promise<CrawlData> {
   try {
     if (useBrowser) {
-      return await crawlPageBrowser(url);
+      try {
+        return await crawlPageBrowser(url);
+      } catch (browserErr) {
+        // If browser fails (e.g. no Chromium binary), fall back to fetch
+        console.warn(
+          `[Crawler] Browser crawl failed for ${url}, falling back to fetch: ${browserErr}`,
+        );
+        return await crawlPageFetch(url);
+      }
     }
     return await crawlPageFetch(url);
   } catch (error) {
