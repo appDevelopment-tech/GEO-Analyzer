@@ -36,6 +36,7 @@ export async function GET(
   // Server-side redaction for free users
   if (!isPaid && typeof report === "object" && report !== null) {
     // Redact AI query simulations: keep first, placeholder rest
+    // Keep competitors_mentioned visible (motivating, not sensitive)
     if (report.ai_query_simulations && report.ai_query_simulations.length > 1) {
       report.ai_query_simulations = report.ai_query_simulations.map(
         (sim: any, i: number) =>
@@ -44,7 +45,6 @@ export async function GET(
             : {
                 ...sim,
                 snippet: "Unlock full report to see this result",
-                competitors_mentioned: [],
               },
       );
     }

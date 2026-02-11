@@ -7,6 +7,9 @@ import ScoreCard from "@/components/ScoreCard";
 import AIQueryPanel from "@/components/AIQueryPanel";
 import AIBlindSpotsPanel from "@/components/AIBlindSpotsPanel";
 import FixRoadmapPanel from "@/components/FixRoadmapPanel";
+import JsonLdBlock from "@/components/JsonLdBlock";
+import CompetitorSnapshot from "@/components/CompetitorSnapshot";
+import UnlockCTA from "@/components/UnlockCTA";
 
 export default function ReportPage() {
   const { id } = useParams();
@@ -90,7 +93,7 @@ export default function ReportPage() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          {/* Results Section */}
+          {/* Title */}
           <div className="mb-12 text-center">
             <motion.h2
               initial={{ y: 20, opacity: 0 }}
@@ -110,6 +113,7 @@ export default function ReportPage() {
             </motion.p>
           </div>
 
+          {/* 1. Score Card — always visible */}
           <ScoreCard
             score={fullReport.overall_score}
             tier={fullReport.tier}
@@ -119,7 +123,7 @@ export default function ReportPage() {
             paymentStatus={paymentStatus}
           />
 
-          {/* How AI Sees You */}
+          {/* 2. How AI Sees You — first query free, rest blurred */}
           {fullReport.ai_query_simulations &&
             fullReport.ai_query_simulations.length > 0 && (
               <AIQueryPanel
@@ -130,7 +134,7 @@ export default function ReportPage() {
               />
             )}
 
-          {/* Top Hesitation (always visible) */}
+          {/* 3. Primary AI Hesitation — always visible */}
           {fullReport.top_ai_hesitations &&
             fullReport.top_ai_hesitations.length > 0 && (
               <motion.div
@@ -172,25 +176,47 @@ export default function ReportPage() {
               </motion.div>
             )}
 
-          {/* AI Blind Spots (blurred for free) */}
+          {/* 4. JSON-LD Generator — always free, copyable */}
+          <JsonLdBlock
+            domain={report.domain || ""}
+            extractedJsonLd={fullReport.extracted_json_ld || []}
+            extractedFaqs={fullReport.extracted_faqs || []}
+            delay={3.2}
+          />
+
+          {/* 5. Who AI Picks Instead — always free, motivating */}
+          {fullReport.ai_query_simulations &&
+            fullReport.ai_query_simulations.length > 0 && (
+              <CompetitorSnapshot
+                simulations={fullReport.ai_query_simulations}
+                delay={3.6}
+              />
+            )}
+
+          {/* 6. Unlock CTA — for free users, placed after free value */}
+          {isLocked && (
+            <UnlockCTA onCheckout={handleStripeCheckout} delay={4.0} />
+          )}
+
+          {/* 7. AI Blind Spots — blurred for free */}
           {fullReport.top_ai_hesitations &&
             fullReport.top_ai_hesitations.length > 1 && (
               <AIBlindSpotsPanel
                 hesitations={fullReport.top_ai_hesitations}
                 isLocked={isLocked}
                 onUnlock={handleStripeCheckout}
-                delay={3.2}
+                delay={4.4}
               />
             )}
 
-          {/* Fix Roadmap (blurred for free) */}
+          {/* 8. Fix Roadmap — blurred for free */}
           {fullReport.week1_fix_plan &&
             fullReport.week1_fix_plan.length > 0 && (
               <FixRoadmapPanel
                 fixPlan={fullReport.week1_fix_plan}
                 isLocked={isLocked}
                 onUnlock={handleStripeCheckout}
-                delay={3.6}
+                delay={4.8}
               />
             )}
 
@@ -198,7 +224,7 @@ export default function ReportPage() {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 4.0, duration: 0.5 }}
+            transition={{ delay: 5.2, duration: 0.5 }}
             className="text-center mt-12"
           >
             <button

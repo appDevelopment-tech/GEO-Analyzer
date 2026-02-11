@@ -3,40 +3,30 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PDFDocument = require("pdfkit/js/pdfkit.standalone.js");
 
-// ── Brand colours ───────────────────────────────────────────
-const BLUE = "#0071e3";
-const DARK = "#1d1d1f";
-const GRAY_TEXT = "#6e6e73";
-const LIGHT_GRAY = "#86868b";
-const BG_LIGHT = "#f5f5f7";
-const BORDER = "#d2d2d7";
-const RED = "#dc2626";
-const AMBER = "#d97706";
-const GREEN = "#16a34a";
-const LIGHT_RED = "#fee2e2";
-const LIGHT_AMBER = "#fef3c7";
-const LIGHT_GREEN = "#dcfce7";
-const LIGHT_BLUE = "#dbeafe";
+// ── Black & white palette ───────────────────────────────────
+const BLACK = "#000000";
+const DARK = "#1a1a1a";
+const BODY = "#333333";
+const GRAY = "#666666";
+const LIGHT = "#999999";
+const RULE = "#cccccc";
+const BG = "#f2f2f2";
 const WHITE = "#ffffff";
 
 const PAGE_W = 612;
 const PAGE_H = 792;
-const MARGIN = 54;
-const CONTENT_W = PAGE_W - MARGIN * 2;
+const ML = 54; // left margin
+const MR = 54;
+const CONTENT_W = PAGE_W - ML - MR; // 504
 
-const scoreColor = (score: number): string => {
-  if (score >= 75) return GREEN;
-  if (score >= 50) return AMBER;
-  return RED;
+const scoreLabel = (s: number): string => {
+  if (s >= 80) return "Strong";
+  if (s >= 60) return "Moderate";
+  if (s >= 40) return "Weak";
+  return "Critical";
 };
 
-const scoreBg = (score: number): string => {
-  if (score >= 75) return LIGHT_GREEN;
-  if (score >= 50) return LIGHT_AMBER;
-  return LIGHT_RED;
-};
-
-const formatDate = (): string =>
+const fmtDate = (): string =>
   new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -44,9 +34,8 @@ const formatDate = (): string =>
   });
 
 /**
- * Generate a PDF report from the GeoScore data.
- * Pure Node.js — no Python or system dependencies required.
- * Returns a Buffer containing the PDF.
+ * Generate a professional B&W consultant-style PDF report.
+ * Pure Node.js (standalone PDFKit) — no filesystem or Python deps.
  */
 export async function generatePdfReport(
   data: Record<string, any>,
@@ -56,628 +45,571 @@ export async function generatePdfReport(
     try {
       const doc = new PDFDocument({
         size: "LETTER",
-        margins: { top: 48, bottom: 48, left: MARGIN, right: MARGIN },
+        margins: { top: 72, bottom: 72, left: ML, right: MR },
         bufferPages: true,
         info: {
-          Title: `GEO Analyzer Report - ${domain}`,
+          Title: `GEO Analyzer — AI Visibility Audit — ${domain}`,
           Author: "GEO Analyzer",
-          Subject: "AI/AEO Visibility Audit",
+          Subject: "AI/AEO Visibility Audit Report",
         },
       });
 
       const chunks: Buffer[] = [];
-      doc.on("data", (chunk: Buffer) => chunks.push(chunk));
+      doc.on("data", (c: Buffer) => chunks.push(c));
       doc.on("end", () => resolve(Buffer.concat(chunks)));
       doc.on("error", reject);
 
-      const overall = data.overall_score || 0;
-      const tier = data.tier || "Unknown";
-      const sectionScores = data.section_scores || {};
-      const hesitations = data.top_ai_hesitations || [];
-      const fixPlan = data.week1_fix_plan || [];
-      const limitations = data.limitations || [];
-      const faqs = data.extracted_faqs || [];
-      const jsonLd = data.extracted_json_ld || [];
-      const queries = data.ai_query_simulations || [];
+      // ── Data extraction ──
+      const overall: number = data.overall_score ?? 0;
+      const tier: string = data.tier ?? "Unknown";
+      const ss = data.section_scores ?? {};
+      const hesitations: any[] = data.top_ai_hesitations ?? [];
+      const fixPlan: string[] = data.week1_fix_plan ?? [];
+      const limitations: string[] = data.limitations ?? [];
+      const faqs: any[] = data.extracted_faqs ?? [];
+      const jsonLd: any[] = data.extracted_json_ld ?? [];
+      const queries: any[] = data.ai_query_simulations ?? [];
 
-      // ────────── HELPER FUNCTIONS ──────────
+      let pageNum = 0;
 
-      let currentPage = 0;
+      // ── Helpers ──
 
-      const drawHeader = () => {
-        if (currentPage > 0) {
+      const header = () => {
+        if (pageNum > 0) {
           doc.save();
-          doc.rect(0, 0, PAGE_W, 28).fill(BLUE);
-          doc.font("Helvetica-Bold").fontSize(9).fillColor(WHITE);
-          doc.text("GEO Analyzer Report", 36, 9, { lineBreak: false });
-          doc.font("Helvetica").fontSize(8).fillColor(WHITE);
-          doc.text(domain, PAGE_W - 36 - doc.widthOfString(domain), 10, {
+          doc.font("Helvetica-Bold").fontSize(7).fillColor(LIGHT);
+          doc.text("GEO ANALYZER", ML, 28, { lineBreak: false });
+          doc.font("Helvetica").fontSize(7).fillColor(LIGHT);
+          const right = `AI VISIBILITY AUDIT  —  ${domain.toUpperCase()}`;
+          doc.text(right, PAGE_W - MR - doc.widthOfString(right), 28, {
             lineBreak: false,
           });
+          doc
+            .moveTo(ML, 42)
+            .lineTo(PAGE_W - MR, 42)
+            .lineWidth(0.5)
+            .stroke(RULE);
           doc.restore();
         }
       };
 
-      const drawFooter = () => {
+      const footer = () => {
         doc.save();
-        doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT_GRAY);
-        doc.text(
-          `Generated ${formatDate()}  |  geo-analyzer.com  |  Confidential`,
-          36,
-          PAGE_H - 30,
-          { lineBreak: false },
-        );
-        const pageText = `Page ${currentPage + 1}`;
-        doc.text(
-          pageText,
-          PAGE_W - 36 - doc.widthOfString(pageText),
-          PAGE_H - 30,
-          { lineBreak: false },
-        );
-        doc.restore();
-      };
-
-      const newPage = () => {
-        doc.addPage();
-        currentPage++;
-        drawHeader();
-        drawFooter();
-        doc.y = 48;
-      };
-
-      const checkSpace = (needed: number) => {
-        if (doc.y + needed > PAGE_H - 60) {
-          newPage();
-        }
-      };
-
-      const drawRoundedRect = (
-        x: number,
-        y: number,
-        w: number,
-        h: number,
-        r: number,
-        fill: string,
-        stroke?: string,
-      ) => {
-        doc.save();
-        doc.roundedRect(x, y, w, h, r);
-        if (fill) doc.fill(fill);
-        if (stroke) {
-          doc.roundedRect(x, y, w, h, r).stroke(stroke);
-        }
-        doc.restore();
-      };
-
-      const drawProgressBar = (
-        x: number,
-        y: number,
-        w: number,
-        h: number,
-        value: number,
-        max: number,
-        color: string,
-      ) => {
-        doc.save();
-        doc.roundedRect(x, y, w, h, h / 2).fill("#e8e8ed");
-        const filled = Math.max(0, Math.min(w * (value / max), w));
-        if (filled > 0) {
-          doc.roundedRect(x, y, filled, h, h / 2).fill(color);
-        }
-        doc.restore();
-      };
-
-      const heading1 = (text: string) => {
-        checkSpace(36);
-        doc.font("Helvetica-Bold").fontSize(22).fillColor(DARK);
-        doc.text(text, MARGIN, doc.y, { width: CONTENT_W });
-        doc.moveDown(0.4);
-      };
-
-      const heading2 = (text: string) => {
-        checkSpace(30);
-        doc.font("Helvetica-Bold").fontSize(16).fillColor(DARK);
-        doc.text(text, MARGIN, doc.y, { width: CONTENT_W });
-        doc.moveDown(0.3);
-      };
-
-      const heading3 = (text: string) => {
-        checkSpace(24);
-        doc.font("Helvetica-Bold").fontSize(13).fillColor(DARK);
-        doc.text(text, MARGIN, doc.y, { width: CONTENT_W });
-        doc.moveDown(0.2);
-      };
-
-      const bodyText = (text: string, color = DARK) => {
-        doc.font("Helvetica").fontSize(10).fillColor(color);
-        doc.text(text, MARGIN, doc.y, {
-          width: CONTENT_W,
-          align: "justify",
-          lineGap: 2,
+        doc
+          .moveTo(ML, PAGE_H - 50)
+          .lineTo(PAGE_W - MR, PAGE_H - 50)
+          .lineWidth(0.5)
+          .stroke(RULE);
+        doc.font("Helvetica").fontSize(7).fillColor(LIGHT);
+        doc.text("Confidential", ML, PAGE_H - 42, { lineBreak: false });
+        doc.text(`${fmtDate()}`, ML + 80, PAGE_H - 42, { lineBreak: false });
+        const pg = `${pageNum + 1}`;
+        doc.text(pg, PAGE_W - MR - doc.widthOfString(pg), PAGE_H - 42, {
+          lineBreak: false,
         });
-        doc.moveDown(0.3);
+        doc.restore();
       };
 
-      const smallText = (text: string, color = GRAY_TEXT) => {
-        doc.font("Helvetica").fontSize(9).fillColor(color);
-        doc.text(text, MARGIN, doc.y, { width: CONTENT_W, lineGap: 1 });
-        doc.moveDown(0.2);
+      const addPage = () => {
+        doc.addPage();
+        pageNum++;
+        header();
+        footer();
+        doc.y = 56;
       };
 
-      const captionText = (text: string) => {
-        doc.font("Helvetica").fontSize(8).fillColor(LIGHT_GRAY);
-        doc.text(text, MARGIN, doc.y, { width: CONTENT_W, lineGap: 1 });
-        doc.moveDown(0.15);
+      const space = (n: number) => {
+        if (doc.y + n > PAGE_H - 80) addPage();
+        else doc.y += n;
       };
 
-      const bulletPoint = (text: string, indent = 16) => {
-        doc.font("Helvetica").fontSize(10).fillColor(DARK);
-        doc.text(`•  ${text}`, MARGIN + indent, doc.y, {
+      const hr = (weight = 0.5, color = RULE) => {
+        space(6);
+        doc.save();
+        doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(weight).stroke(color);
+        doc.restore();
+        doc.y += 8;
+      };
+
+      const h1 = (text: string) => {
+        if (doc.y + 36 > PAGE_H - 80) addPage();
+        doc.font("Helvetica-Bold").fontSize(18).fillColor(BLACK);
+        doc.text(text.toUpperCase(), ML, doc.y, { width: CONTENT_W, characterSpacing: 1 });
+        doc.y += 4;
+        doc.save();
+        doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(1.5).stroke(BLACK);
+        doc.restore();
+        doc.y += 12;
+      };
+
+      const h2 = (text: string) => {
+        if (doc.y + 28 > PAGE_H - 80) addPage();
+        doc.font("Helvetica-Bold").fontSize(12).fillColor(DARK);
+        doc.text(text, ML, doc.y, { width: CONTENT_W });
+        doc.y += 4;
+      };
+
+      const h3 = (text: string) => {
+        if (doc.y + 22 > PAGE_H - 80) addPage();
+        doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
+        doc.text(text, ML, doc.y, { width: CONTENT_W });
+        doc.y += 2;
+      };
+
+      const body = (text: string, indent = 0) => {
+        doc.font("Helvetica").fontSize(9.5).fillColor(BODY);
+        doc.text(text, ML + indent, doc.y, {
+          width: CONTENT_W - indent,
+          lineGap: 2.5,
+        });
+        doc.y += 4;
+      };
+
+      const small = (text: string, indent = 0) => {
+        doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+        doc.text(text, ML + indent, doc.y, {
           width: CONTENT_W - indent,
           lineGap: 2,
         });
-        doc.moveDown(0.15);
+        doc.y += 3;
       };
 
-      const drawHR = () => {
-        checkSpace(16);
+      const mono = (text: string, indent = 0) => {
+        doc.font("Courier").fontSize(7.5).fillColor(GRAY);
+        doc.text(text, ML + indent, doc.y, {
+          width: CONTENT_W - indent,
+          lineGap: 1.5,
+        });
+        doc.y += 3;
+      };
+
+      const bullet = (text: string, indent = 14) => {
+        if (doc.y + 16 > PAGE_H - 80) addPage();
+        doc.font("Helvetica").fontSize(9.5).fillColor(BODY);
+        doc.text(`\u2022  ${text}`, ML + indent, doc.y, {
+          width: CONTENT_W - indent,
+          lineGap: 2.5,
+        });
+        doc.y += 3;
+      };
+
+      const numberedItem = (n: number, text: string) => {
+        if (doc.y + 20 > PAGE_H - 80) addPage();
+        const startY = doc.y;
+        doc.font("Helvetica-Bold").fontSize(9.5).fillColor(DARK);
+        doc.text(`${n}.`, ML, startY, { lineBreak: false });
+        doc.font("Helvetica").fontSize(9.5).fillColor(BODY);
+        doc.text(text, ML + 18, startY, {
+          width: CONTENT_W - 18,
+          lineGap: 2.5,
+        });
+        doc.y += 5;
+      };
+
+      // Gray box for callouts
+      const grayBox = (text: string) => {
+        doc.font("Helvetica").fontSize(9);
+        const th = doc.heightOfString(text, { width: CONTENT_W - 24, lineGap: 2 });
+        const bh = th + 16;
+        if (doc.y + bh > PAGE_H - 80) addPage();
+        const by = doc.y;
         doc.save();
-        doc
-          .moveTo(MARGIN, doc.y)
-          .lineTo(MARGIN + CONTENT_W, doc.y)
-          .lineWidth(0.5)
-          .stroke(BORDER);
+        doc.rect(ML, by, CONTENT_W, bh).fill(BG);
         doc.restore();
-        doc.y += 8;
+        doc.font("Helvetica").fontSize(9).fillColor(BODY);
+        doc.text(text, ML + 12, by + 8, { width: CONTENT_W - 24, lineGap: 2 });
+        doc.y = by + bh + 6;
       };
 
-      const coloredBox = (
-        text: string,
-        bgColor: string,
-        textColor: string,
-        fontSize = 10,
-      ) => {
-        doc.font("Helvetica").fontSize(fontSize);
-        const textH = doc.heightOfString(text, {
-          width: CONTENT_W - 28,
-          lineGap: 2,
-        });
-        const boxH = textH + 20;
+      // ═══════════════════════════════════════════════════
+      // PAGE 1 — COVER
+      // ═══════════════════════════════════════════════════
+      footer();
 
-        checkSpace(boxH + 8);
-        const y = doc.y;
+      // Top rule
+      doc.save();
+      doc.moveTo(ML, 72).lineTo(ML + CONTENT_W, 72).lineWidth(2).stroke(BLACK);
+      doc.restore();
 
-        drawRoundedRect(MARGIN, y, CONTENT_W, boxH, 6, bgColor, BORDER);
-        doc.font("Helvetica").fontSize(fontSize).fillColor(textColor);
-        doc.text(text, MARGIN + 14, y + 10, {
-          width: CONTENT_W - 28,
-          lineGap: 2,
-        });
-        doc.y = y + boxH + 6;
-      };
+      doc.y = 96;
 
-      // ═══════════════ PAGE 1: COVER ═══════════════
-      drawFooter();
+      // Brand name
+      doc.font("Helvetica-Bold").fontSize(11).fillColor(LIGHT);
+      doc.text("GEO ANALYZER", ML, doc.y, { characterSpacing: 3, width: CONTENT_W });
 
-      const coverBoxH = 320;
-      const coverY = doc.y + 10;
+      doc.y += 28;
 
-      drawRoundedRect(MARGIN, coverY, CONTENT_W, coverBoxH, 12, BLUE);
+      // Title
+      doc.font("Helvetica-Bold").fontSize(28).fillColor(BLACK);
+      doc.text("AI Visibility", ML, doc.y, { width: CONTENT_W, lineGap: 2 });
+      doc.text("Audit Report", ML, doc.y, { width: CONTENT_W, lineGap: 2 });
 
-      doc.font("Helvetica-Bold").fontSize(34).fillColor(WHITE);
-      doc.text("GEO Analyzer", MARGIN, coverY + 30, {
-        width: CONTENT_W,
-        align: "center",
-      });
+      doc.y += 20;
 
-      doc.font("Helvetica").fontSize(14).fillColor(WHITE);
-      doc.text("AI / AEO Visibility Audit Report", MARGIN, doc.y + 2, {
-        width: CONTENT_W,
-        align: "center",
-      });
+      // Thin rule
+      doc.save();
+      doc.moveTo(ML, doc.y).lineTo(ML + 80, doc.y).lineWidth(1).stroke(BLACK);
+      doc.restore();
+      doc.y += 20;
 
-      doc.moveDown(1.2);
+      // Domain
+      doc.font("Helvetica").fontSize(13).fillColor(DARK);
+      doc.text(domain, ML, doc.y, { width: CONTENT_W });
+      doc.y += 8;
+      doc.font("Helvetica").fontSize(10).fillColor(GRAY);
+      doc.text(fmtDate(), ML, doc.y, { width: CONTENT_W });
 
-      doc.font("Helvetica-Bold").fontSize(48).fillColor(WHITE);
-      doc.text(String(overall), MARGIN, doc.y, {
-        width: CONTENT_W,
-        align: "center",
-      });
-      doc.font("Helvetica").fontSize(11).fillColor(WHITE);
-      doc.text("/100", MARGIN, doc.y - 4, {
-        width: CONTENT_W,
-        align: "center",
-      });
+      // Score block — right-aligned large number
+      doc.y += 40;
+      doc.font("Helvetica").fontSize(9).fillColor(LIGHT);
+      doc.text("OVERALL SCORE", ML, doc.y, { width: CONTENT_W });
+      doc.y += 6;
+      doc.font("Helvetica-Bold").fontSize(64).fillColor(BLACK);
+      doc.text(String(overall), ML, doc.y, { width: CONTENT_W });
+      doc.font("Helvetica").fontSize(11).fillColor(GRAY);
+      doc.text(`out of 100  —  ${tier}`, ML, doc.y, { width: CONTENT_W });
 
-      doc.moveDown(0.4);
-      doc.font("Helvetica-Bold").fontSize(16).fillColor(WHITE);
-      doc.text(tier, MARGIN, doc.y, { width: CONTENT_W, align: "center" });
-
-      doc.moveDown(0.8);
-      doc.font("Helvetica").fontSize(12).fillColor(WHITE);
-      doc.text(domain, MARGIN, doc.y, { width: CONTENT_W, align: "center" });
-
-      doc.moveDown(0.3);
-      doc.font("Helvetica").fontSize(10).fillColor(WHITE);
-      doc.text(`Generated ${formatDate()}`, MARGIN, doc.y, {
-        width: CONTENT_W,
-        align: "center",
-      });
-
-      doc.y = coverY + coverBoxH + 24;
-
-      // Executive Summary
-      heading2("Executive Summary");
-      bulletPoint(
-        `Overall AI-readiness score: ${overall}/100 (${tier})`,
-      );
-      bulletPoint(
-        `Entity Clarity: ${sectionScores.entity_clarity || 0} | Direct Answers: ${sectionScores.direct_answers || 0} | Trust Signals: ${sectionScores.trust_signals || 0}`,
-      );
-      bulletPoint(
-        `Top concern: ${hesitations[0]?.issue || "None identified"}`,
-      );
-      bulletPoint(
-        `This report analyses ${domain} and provides actionable recommendations to improve visibility in AI-generated answers (ChatGPT, Perplexity, Claude, Gemini).`,
-      );
-
-      doc.moveDown(0.3);
-      doc.font("Helvetica").fontSize(8).fillColor(LIGHT_GRAY);
+      // Bottom of cover
+      doc.y = PAGE_H - 130;
+      doc.save();
+      doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.5).stroke(RULE);
+      doc.restore();
+      doc.y += 12;
+      doc.font("Helvetica").fontSize(8).fillColor(LIGHT);
       doc.text(
-        "This is a diagnostic snapshot, not an exhaustive SEO audit. Scores are modelled on how large-language-model systems weigh structured data, entity signals, and answer quality when deciding which sources to cite.",
-        MARGIN,
-        doc.y,
-        { width: CONTENT_W, lineGap: 1 },
+        "This report evaluates how well a website is positioned for citation and recommendation by AI systems such as ChatGPT, Perplexity, Claude, and Gemini. It is a diagnostic snapshot, not an exhaustive SEO audit.",
+        ML, doc.y, { width: CONTENT_W, lineGap: 2 }
       );
 
-      // ═══════════════ PAGE 2: SCORES BREAKDOWN ═══════════════
-      newPage();
+      // ═══════════════════════════════════════════════════
+      // PAGE 2 — EXECUTIVE SUMMARY & SCORE BREAKDOWN
+      // ═══════════════════════════════════════════════════
+      addPage();
 
-      heading1("Score Breakdown");
-      bodyText(
-        "Each dimension is weighted to reflect how AI systems prioritise sources. Entity Clarity and Direct Answers carry the most weight (30% each), followed by Trust Signals (20%), Competitive Positioning (10%), and Technical Accessibility (10%).",
+      h1("Executive Summary");
+
+      body(
+        `${domain} received an overall AI-readiness score of ${overall}/100, placing it in the "${tier}" tier. ` +
+        `This means the site has sufficient entity signals and structured data for AI systems to identify and occasionally cite it, ` +
+        `but there are concrete improvements that would increase citation frequency and accuracy.`
       );
-      doc.moveDown(0.4);
+      space(4);
+      body(
+        `The analysis identified ${hesitations.length} key issue${hesitations.length !== 1 ? "s" : ""} that cause AI systems to hesitate before recommending this site, ` +
+        `along with ${fixPlan.length} prioritised actions for the first week. ` +
+        `${queries.length} simulated AI queries were run to estimate current citation likelihood.`
+      );
 
-      const scoreItems = [
-        { label: "Entity Clarity", value: sectionScores.entity_clarity || 0 },
-        { label: "Direct Answers", value: sectionScores.direct_answers || 0 },
-        { label: "Trust Signals", value: sectionScores.trust_signals || 0 },
-        {
-          label: "Competitive Positioning",
-          value: sectionScores.competitive_positioning || 0,
-        },
-        {
-          label: "Technical Accessibility",
-          value: sectionScores.technical_accessibility || 0,
-        },
+      space(16);
+      h1("Score Breakdown");
+
+      body(
+        "Each dimension reflects how AI systems weigh source quality when deciding which sites to cite. " +
+        "Entity Clarity and Direct Answers carry the most weight (30% each), followed by Trust Signals (20%), " +
+        "Competitive Positioning (10%), and Technical Accessibility (10%)."
+      );
+      space(10);
+
+      // Score table
+      const dims = [
+        { label: "Entity Clarity", key: "entity_clarity",
+          desc: "How clearly the site communicates who, what, and where." },
+        { label: "Direct Answers", key: "direct_answers",
+          desc: "Whether content provides concise, extractable answers AI can cite." },
+        { label: "Trust Signals", key: "trust_signals",
+          desc: "Verifiable trust markers: credentials, policies, reviews, contact info." },
+        { label: "Competitive Positioning", key: "competitive_positioning",
+          desc: "How well the site differentiates with concrete evidence." },
+        { label: "Technical Accessibility", key: "technical_accessibility",
+          desc: "Structured data, clean HTML, machine-readability." },
       ];
 
-      for (const item of scoreItems) {
-        const y = doc.y;
-        const sc = scoreColor(item.value);
+      for (const dim of dims) {
+        const val: number = ss[dim.key] ?? 0;
+        if (doc.y + 48 > PAGE_H - 80) addPage();
 
+        const rowY = doc.y;
+
+        // Label + score on same line
         doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
-        doc.text(item.label, MARGIN, y, { lineBreak: false });
-
-        drawProgressBar(MARGIN + 160, y + 2, 200, 10, item.value, 100, sc);
-
-        doc.font("Helvetica-Bold").fontSize(12).fillColor(sc);
-        doc.text(`${item.value}/100`, MARGIN + 380, y - 1, {
+        doc.text(dim.label, ML, rowY, { lineBreak: false });
+        const scoreStr = `${val}/100  (${scoreLabel(val)})`;
+        doc.font("Helvetica-Bold").fontSize(10).fillColor(BLACK);
+        doc.text(scoreStr, ML + CONTENT_W - doc.widthOfString(scoreStr), rowY, {
           lineBreak: false,
         });
 
-        doc.y = y + 20;
+        // Progress bar
+        const barY = rowY + 16;
         doc.save();
-        doc
-          .moveTo(MARGIN, doc.y)
-          .lineTo(MARGIN + CONTENT_W, doc.y)
-          .lineWidth(0.5)
-          .stroke(BORDER);
+        doc.rect(ML, barY, CONTENT_W, 6).fill(BG);
+        const filled = Math.max(0, Math.min(CONTENT_W * (val / 100), CONTENT_W));
+        if (filled > 0) doc.rect(ML, barY, filled, 6).fill(BLACK);
         doc.restore();
-        doc.y += 8;
+
+        // Description
+        doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+        doc.text(dim.desc, ML, barY + 10, { width: CONTENT_W });
+
+        doc.y = barY + 10 + doc.heightOfString(dim.desc, { width: CONTENT_W }) + 10;
       }
 
-      doc.moveDown(0.6);
+      // ═══════════════════════════════════════════════════
+      // PAGE 3 — KEY ISSUES
+      // ═══════════════════════════════════════════════════
+      addPage();
 
-      // Dimension explanations
-      const interpretations = [
-        {
-          key: "entity_clarity",
-          title: "Entity Clarity",
-          desc: "Measures how clearly your site communicates who you are, what you do, and where you operate. AI models need unambiguous entity signals to recommend you.",
-        },
-        {
-          key: "direct_answers",
-          title: "Direct Answers",
-          desc: "Evaluates whether your content provides concise, factual answers that AI can extract and cite directly. FAQ blocks, step-by-step guides, and definition sections score well.",
-        },
-        {
-          key: "trust_signals",
-          title: "Trust Signals",
-          desc: "Assesses verifiable trust markers: author credentials, privacy policies, contact information, reviews, and published dates. AI assistants avoid recommending sites that lack accountability.",
-        },
-        {
-          key: "competitive_positioning",
-          title: "Competitive Positioning",
-          desc: "Gauges how well your site differentiates itself. Generic claims without specifics make AI prefer competitors with concrete evidence.",
-        },
-        {
-          key: "technical_accessibility",
-          title: "Technical Accessibility",
-          desc: "Checks structured data (JSON-LD, Open Graph), clean HTML, mobile-friendliness, and whether content is machine-readable without JavaScript rendering.",
-        },
-      ];
+      h1("Key Issues — Why AI Hesitates");
 
-      for (const interp of interpretations) {
-        const val = sectionScores[interp.key] || 0;
-        const sc = scoreColor(val);
-        const bg = scoreBg(val);
-
-        checkSpace(60);
-        doc.font("Helvetica-Bold").fontSize(13).fillColor(sc);
-        doc.text(`${interp.title}: ${val}/100`, MARGIN, doc.y);
-        doc.moveDown(0.1);
-
-        coloredBox(interp.desc, bg, DARK);
-      }
-
-      // ═══════════════ PAGE 3+: AI HESITATIONS ═══════════════
-      newPage();
-
-      heading1("Why AI Hesitates to Recommend You");
-      bodyText(
-        "These are the top reasons an AI assistant would hesitate before citing your site in a user-facing answer. Each issue includes supporting evidence extracted from your pages.",
+      body(
+        "The following issues were identified as the primary reasons an AI system would hesitate " +
+        "before citing this site in a user-facing answer. Each includes supporting evidence."
       );
-      doc.moveDown(0.3);
+      space(8);
 
-      for (let i = 0; i < Math.min(hesitations.length, 3); i++) {
+      for (let i = 0; i < hesitations.length; i++) {
         const h = hesitations[i];
-        const issue = h.issue || "";
-        const why = h.why_ai_hesitates || "";
-        const evidence: string[] = h.evidence || [];
-        const affected: string[] = h.affected_urls || [];
 
-        checkSpace(80);
-        heading3(`Issue ${i + 1}: ${issue}`);
-        coloredBox(`Why AI Hesitates: ${why}`, LIGHT_AMBER, "#78350f");
+        if (doc.y + 60 > PAGE_H - 80) addPage();
 
-        if (evidence.length > 0) {
-          smallText("Evidence:");
-          for (const ev of evidence.slice(0, 3)) {
-            const evShort =
-              ev.length > 200 ? ev.substring(0, 200) + "..." : ev;
-            checkSpace(20);
-            doc.font("Courier").fontSize(8).fillColor(GRAY_TEXT);
-            doc.text(`•  ${evShort}`, MARGIN + 16, doc.y, {
-              width: CONTENT_W - 16,
-              lineGap: 1,
-            });
-            doc.moveDown(0.1);
+        h2(`Issue ${i + 1}: ${h.issue || ""}`);
+        space(4);
+
+        // Why AI hesitates — in a gray box
+        grayBox(h.why_ai_hesitates || "");
+
+        // Evidence
+        if (h.evidence && h.evidence.length > 0) {
+          h3("Evidence");
+          for (const ev of h.evidence) {
+            if (doc.y + 14 > PAGE_H - 80) addPage();
+            small(`\u2014  ${ev}`, 10);
           }
+          space(2);
         }
 
-        if (affected.length > 0) {
-          captionText(`Affected: ${affected.slice(0, 3).join(", ")}`);
-        }
-        doc.moveDown(0.4);
-      }
-
-      // ═══════════════ WEEK-1 FIX PLAN ═══════════════
-      drawHR();
-      heading1("Week-1 Quick-Fix Plan");
-      bodyText(
-        "Prioritised action items you can implement this week to make the biggest improvement in your AI recommendation readiness.",
-      );
-      doc.moveDown(0.2);
-
-      for (let i = 0; i < Math.min(fixPlan.length, 5); i++) {
-        let badgeBg: string;
-        let priority: string;
-        if (i < 2) {
-          badgeBg = LIGHT_RED;
-          priority = "HIGH";
-        } else if (i < 4) {
-          badgeBg = LIGHT_AMBER;
-          priority = "MEDIUM";
-        } else {
-          badgeBg = LIGHT_BLUE;
-          priority = "LOW";
-        }
-
-        coloredBox(
-          `[${priority}] Action ${i + 1}: ${fixPlan[i]}`,
-          badgeBg,
-          DARK,
-        );
-      }
-
-      doc.moveDown(0.6);
-
-      // AI Query Simulations
-      if (queries.length > 0) {
-        checkSpace(100);
-        heading2("How AI Sees You: Query Simulations");
-        bodyText(
-          "We simulated five AI queries a user might ask and estimated whether your site would be cited in each response.",
-        );
-        doc.moveDown(0.2);
-
-        const tableLeft = MARGIN;
-        const colWidths = [300, 70, 70];
-        const tableY = doc.y;
-
-        drawRoundedRect(
-          tableLeft,
-          tableY,
-          CONTENT_W,
-          22,
-          4,
-          BG_LIGHT,
-          BORDER,
-        );
-        doc.font("Helvetica-Bold").fontSize(9).fillColor(DARK);
-        doc.text("Query", tableLeft + 8, tableY + 6, { lineBreak: false });
-        doc.text("Cited?", tableLeft + colWidths[0] + 8, tableY + 6, {
-          lineBreak: false,
-        });
-        doc.text(
-          "Position",
-          tableLeft + colWidths[0] + colWidths[1] + 8,
-          tableY + 6,
-          { lineBreak: false },
-        );
-        doc.y = tableY + 24;
-
-        for (const q of queries.slice(0, 5)) {
-          checkSpace(28);
-          const rowY = doc.y;
-          doc.font("Helvetica").fontSize(9).fillColor(GRAY_TEXT);
-          doc.text(q.query || "", tableLeft + 8, rowY, {
-            width: colWidths[0] - 16,
+        // Affected URLs
+        if (h.affected_urls && h.affected_urls.length > 0) {
+          doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+          doc.text(`Affected: ${h.affected_urls.join(", ")}`, ML + 10, doc.y, {
+            width: CONTENT_W - 10,
           });
-          const rowBottom = doc.y;
+          doc.y += 4;
+        }
 
-          const cited = q.mentioned;
-          doc
-            .font("Helvetica-Bold")
-            .fontSize(9)
-            .fillColor(cited ? GREEN : RED);
-          doc.text(cited ? "Yes" : "No", tableLeft + colWidths[0] + 8, rowY, {
+        space(12);
+        if (i < hesitations.length - 1) {
+          hr(0.25, RULE);
+        }
+      }
+
+      // ═══════════════════════════════════════════════════
+      // WEEK-1 ACTION PLAN
+      // ═══════════════════════════════════════════════════
+      if (doc.y + 100 > PAGE_H - 80) addPage();
+
+      hr(1.5, BLACK);
+      h1("Week-1 Action Plan");
+
+      body(
+        "Prioritised action items to implement this week for the greatest improvement in AI citation readiness."
+      );
+      space(6);
+
+      for (let i = 0; i < fixPlan.length; i++) {
+        numberedItem(i + 1, fixPlan[i]);
+      }
+
+      // ═══════════════════════════════════════════════════
+      // AI QUERY SIMULATIONS
+      // ═══════════════════════════════════════════════════
+      space(10);
+      if (queries.length > 0) {
+        if (doc.y + 80 > PAGE_H - 80) addPage();
+
+        hr(1.5, BLACK);
+        h1("AI Query Simulations");
+
+        body(
+          "Simulated queries were run to estimate whether this site would be cited by an AI assistant. " +
+          "Results indicate citation likelihood and estimated ranking position."
+        );
+        space(8);
+
+        // Table header
+        const colQ = 240;
+        const colC = 50;
+        const colP = 50;
+        const colS = CONTENT_W - colQ - colC - colP;
+
+        const tblY = doc.y;
+        doc.save();
+        doc.rect(ML, tblY, CONTENT_W, 16).fill(BLACK);
+        doc.restore();
+        doc.font("Helvetica-Bold").fontSize(7.5).fillColor(WHITE);
+        doc.text("QUERY", ML + 6, tblY + 4, { lineBreak: false });
+        doc.text("CITED", ML + colQ + 6, tblY + 4, { lineBreak: false });
+        doc.text("POS.", ML + colQ + colC + 6, tblY + 4, { lineBreak: false });
+        doc.text("AI RESPONSE SNIPPET", ML + colQ + colC + colP + 6, tblY + 4, { lineBreak: false });
+        doc.y = tblY + 20;
+
+        for (let qi = 0; qi < queries.length; qi++) {
+          const q = queries[qi];
+          if (doc.y + 30 > PAGE_H - 80) addPage();
+
+          const rowY = doc.y;
+
+          // Alternate row shading
+          if (qi % 2 === 0) {
+            doc.save();
+            doc.rect(ML, rowY - 2, CONTENT_W, 0).fill(BG); // placeholder
+            doc.restore();
+          }
+
+          // Query text
+          doc.font("Helvetica").fontSize(8).fillColor(DARK);
+          doc.text(q.query || "", ML + 6, rowY, { width: colQ - 12 });
+          const queryBottom = doc.y;
+
+          // Cited
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(q.mentioned ? BLACK : LIGHT);
+          doc.text(q.mentioned ? "Yes" : "No", ML + colQ + 6, rowY, { lineBreak: false });
+
+          // Position
+          doc.font("Helvetica").fontSize(8).fillColor(DARK);
+          doc.text(q.position ? `#${q.position}` : "\u2014", ML + colQ + colC + 6, rowY, {
             lineBreak: false,
           });
 
-          doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
-          const posText = q.position ? String(q.position) : "\u2014";
-          doc.text(
-            posText,
-            tableLeft + colWidths[0] + colWidths[1] + 8,
-            rowY,
-            { lineBreak: false },
-          );
+          // Snippet (truncated)
+          if (q.snippet) {
+            const snip = q.snippet.length > 120 ? q.snippet.substring(0, 120) + "\u2026" : q.snippet;
+            doc.font("Helvetica").fontSize(7).fillColor(GRAY);
+            doc.text(snip, ML + colQ + colC + colP + 6, rowY, {
+              width: colS - 12,
+            });
+          }
 
-          doc.y = rowBottom + 2;
+          doc.y = Math.max(queryBottom, doc.y) + 4;
+
+          // Row separator
           doc.save();
-          doc
-            .moveTo(tableLeft, doc.y)
-            .lineTo(tableLeft + CONTENT_W, doc.y)
-            .lineWidth(0.5)
-            .stroke(BORDER);
+          doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.25).stroke(RULE);
           doc.restore();
           doc.y += 4;
         }
       }
 
-      // ═══════════════ STRUCTURED DATA & TECHNICAL FINDINGS ═══════════════
-      drawHR();
-      heading1("Structured Data & Technical Findings");
+      // ═══════════════════════════════════════════════════
+      // STRUCTURED DATA & TECHNICAL FINDINGS
+      // ═══════════════════════════════════════════════════
+      space(10);
+      if (doc.y + 60 > PAGE_H - 80) addPage();
+
+      hr(1.5, BLACK);
+      h1("Structured Data Analysis");
 
       if (jsonLd.length > 0) {
-        heading2("Detected JSON-LD Schemas");
-
-        const typesFound = new Set<string>();
+        // Collect all @types
+        const allTypes = new Set<string>();
         for (const item of jsonLd) {
           if (typeof item === "object" && item) {
             const graph = item["@graph"] || [item];
             for (const g of graph) {
               if (typeof g === "object" && g && g["@type"]) {
                 const t = g["@type"];
-                if (Array.isArray(t)) {
-                  t.forEach((tt: string) => typesFound.add(tt));
-                } else {
-                  typesFound.add(t);
-                }
+                if (Array.isArray(t)) t.forEach((x: string) => allTypes.add(x));
+                else allTypes.add(t);
               }
             }
           }
         }
 
-        if (typesFound.size > 0) {
-          bodyText(
-            `Schema types detected: ${Array.from(typesFound).sort().join(", ")}`,
+        body(
+          `${jsonLd.length} JSON-LD block${jsonLd.length !== 1 ? "s" : ""} detected on the site. ` +
+          `Schema types found: ${allTypes.size > 0 ? Array.from(allTypes).sort().join(", ") : "none identified"}.`
+        );
+        space(4);
+
+        // Show preview of first JSON-LD
+        h3("JSON-LD Preview");
+        const ldStr = JSON.stringify(jsonLd[0], null, 2);
+        const preview = ldStr.length > 600 ? ldStr.substring(0, 600) + "\n  ..." : ldStr;
+        if (doc.y + 60 > PAGE_H - 80) addPage();
+        mono(preview, 4);
+      } else {
+        grayBox(
+          "No JSON-LD structured data detected. Adding Organization, WebSite, and FAQPage schemas " +
+          "is one of the highest-impact changes for AI citation."
+        );
+      }
+
+      // FAQ section
+      space(8);
+      h2("FAQ / Direct-Answer Content");
+      if (faqs.length > 0) {
+        body(
+          `${faqs.length} FAQ or direct-answer block${faqs.length !== 1 ? "s" : ""} detected. ` +
+          "These are valuable for AI citation as they provide concise, extractable answers."
+        );
+        for (const faq of faqs) {
+          const fs = String(faq);
+          bullet(fs.length > 200 ? fs.substring(0, 200) + "\u2026" : fs);
+        }
+      } else {
+        // Check if FAQPage schema exists in JSON-LD
+        let hasFaqSchema = false;
+        for (const item of jsonLd) {
+          if (typeof item === "object" && item) {
+            if (item["@type"] === "FAQPage") hasFaqSchema = true;
+            const graph = item["@graph"] || [];
+            for (const g of graph) {
+              if (typeof g === "object" && g && g["@type"] === "FAQPage") hasFaqSchema = true;
+            }
+          }
+        }
+
+        if (hasFaqSchema) {
+          body(
+            "No FAQ blocks were extracted from the page content, but FAQPage schema markup was detected in the JSON-LD. " +
+            "This is a positive signal — ensure the on-page FAQ content matches the schema for consistency."
           );
         } else {
-          bodyText("JSON-LD data found but no standard @type detected.");
+          grayBox(
+            "No FAQ or direct-answer blocks detected. Adding an FAQ section with FAQPage schema markup " +
+            "dramatically increases the probability of AI citation."
+          );
         }
-
-        const fullLd = JSON.stringify(jsonLd[0], null, 2);
-        let preview = fullLd.substring(0, 400);
-        if (fullLd.length > 400) preview += "\n  ...";
-
-        checkSpace(60);
-        // Measure then draw bg then text
-        doc.font("Courier").fontSize(7);
-        const previewH = doc.heightOfString(preview, {
-          width: CONTENT_W - 16,
-          lineGap: 1,
-        });
-        const previewY = doc.y;
-        drawRoundedRect(
-          MARGIN,
-          previewY,
-          CONTENT_W,
-          previewH + 8,
-          4,
-          BG_LIGHT,
-        );
-        doc.font("Courier").fontSize(7).fillColor(DARK);
-        doc.text(preview, MARGIN + 8, previewY + 4, {
-          width: CONTENT_W - 16,
-          lineGap: 1,
-        });
-        doc.moveDown(0.3);
-      } else {
-        coloredBox(
-          "No JSON-LD structured data detected. Adding Organization, WebSite, and FAQPage schemas is one of the highest-impact changes you can make.",
-          LIGHT_RED,
-          DARK,
-        );
       }
 
-      // FAQs
-      if (faqs.length > 0) {
-        heading2("Detected FAQ Content");
-        bodyText(
-          `Found ${faqs.length} FAQ / direct-answer blocks on the site. These are valuable for AI citation because they provide concise, extractable answers.`,
-        );
-
-        for (const faq of faqs) {
-          let faqStr = String(faq);
-          if (faqStr.length > 160) faqStr = faqStr.substring(0, 160) + "...";
-          checkSpace(20);
-          bulletPoint(faqStr);
-        }
-      } else {
-        coloredBox(
-          "No FAQ / direct-answer blocks detected. Adding an FAQ section with schema markup dramatically increases citation probability.",
-          LIGHT_AMBER,
-          DARK,
-        );
-      }
-
-      doc.moveDown(0.3);
-
-      // Limitations
+      // ═══════════════════════════════════════════════════
+      // LIMITATIONS & CLOSING
+      // ═══════════════════════════════════════════════════
+      space(12);
       if (limitations.length > 0) {
-        checkSpace(30);
-        doc.font("Helvetica-Bold").fontSize(9).fillColor(GRAY_TEXT);
-        doc.text("Limitations & Caveats", MARGIN, doc.y);
-        doc.moveDown(0.1);
-        captionText(limitations.join(" \u2022 "));
-        doc.moveDown(0.3);
+        hr();
+        h3("Limitations & Caveats");
+        for (const lim of limitations) {
+          bullet(lim);
+        }
       }
 
-      // Footer note
-      drawHR();
-      doc.font("Helvetica").fontSize(9).fillColor(LIGHT_GRAY);
+      space(12);
+      hr(1, BLACK);
+      space(6);
+      doc.font("Helvetica").fontSize(8.5).fillColor(GRAY);
       doc.text(
-        "This report was generated by GEO Analyzer (geo-analyzer.com). For questions or support, contact hello@maxpetrusenko.com.",
-        MARGIN,
-        doc.y,
-        { width: CONTENT_W, align: "center" },
+        "This report was generated by GEO Analyzer (geo-analyzer.com). " +
+        "For questions or support, contact hello@maxpetrusenko.com.",
+        ML, doc.y, { width: CONTENT_W, align: "center" }
+      );
+      space(4);
+      doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+      doc.text(
+        `\u00A9 ${new Date().getFullYear()} GEO Analyzer. All rights reserved.`,
+        ML, doc.y, { width: CONTENT_W, align: "center" }
       );
 
-      // Finalize
       doc.end();
     } catch (err) {
       reject(err);

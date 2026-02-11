@@ -185,53 +185,15 @@ export default function ScoreCard({
             );
           })}
         </div>
-        {!isPaid && (
-          <>
-            <h3 className="text-2xl font-bold text-blue-900 my-4">
-              Why pay for the full report?
-            </h3>
-            <p className="mb-4 text-blue-900 text-lg font-semibold">
-              The free scan shows you the problem. The full report shows you the
-              fix.
-            </p>
-            <p className="mb-4 text-blue-900">
-              AI isn't recommending you for a reason — usually several. Your
-              full report uncovers every hesitation: missing structure, weak
-              entity signals, content that&apos;s invisible to LLMs. More
-              importantly, you&apos;ll know exactly what to do about it.
-            </p>
-            <ul className="mb-4 list-disc pl-6 text-blue-900">
-              <li className="mb-2">
-                <b>Every AI hesitation explained</b> — not just flagged, but
-                broken down in plain English
-              </li>
-              <li className="mb-2">
-                <b>A 1-week action plan</b> — prioritized fixes you can start
-                Monday, not a 6-month roadmap
-              </li>
-              <li className="mb-2">
-                <b>The &ldquo;why&rdquo; behind each fix</b> — so you&apos;re
-                not just checking boxes, you&apos;re understanding the game
-              </li>
-            </ul>
-            <p className="text-blue-900 font-semibold">
-              Stop guessing why AI picks your competitors. Start fixing it.
-            </p>
-            <motion.button
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              type="button"
-              onClick={() =>
-                onCheckout
-                  ? onCheckout()
-                  : handleStripeCheckout(id as string, email)
-              }
-              className="w-full mt-2 bg-gradient-to-r from-apple-blue to-cyan-500 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              Get a Full Report
-            </motion.button>
-          </>
+        {isPaid && (
+          <div className="mt-6 pt-6 border-t border-gray-100">
+            <div className="flex items-center gap-2 text-green-600">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm font-semibold">Full report — check your email for the PDF</span>
+            </div>
+          </div>
         )}
       </motion.div>
     </div>
