@@ -148,15 +148,6 @@ function generateShortEmailBody(
           ${score.top_ai_hesitations[0]?.why_ai_hesitates || "No major issues identified"}
         </p>
       </div>
-
-      <div>
-        <p style="margin: 0 0 8px 0; color: #86868b; font-size: 12px; text-transform: uppercase;">
-          Pages Analyzed
-        </p>
-        <p style="margin: 0; color: #1d1d1f; font-size: 15px;">
-          ${totalPages} page${totalPages !== 1 ? "s" : ""} analyzed (all included in PDF)
-        </p>
-      </div>
     </div>
 
     <!-- Footer -->

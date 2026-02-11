@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[functions]
+  # Maximum timeout for serverless functions (26s on Pro, 10s on free).
+  external_node_modules = ["pdfkit"]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    # Keep the connection alive while the function works
+    Connection = "keep-alive"
+
+# Extend function timeout to Netlify Pro maximum (26 seconds)
+[functions."api/*"]
+  execution_timeout = 26

@@ -69,6 +69,8 @@ export async function generatePdfReport(
       const faqs: any[] = data.extracted_faqs ?? [];
       const jsonLd: any[] = data.extracted_json_ld ?? [];
       const queries: any[] = data.ai_query_simulations ?? [];
+      const realCompetitors: any[] = data.real_competitors ?? [];
+      const copyBlocks: any[] = data.copy_blocks ?? [];
 
       let pageNum = 0;
 
@@ -432,71 +434,277 @@ export async function generatePdfReport(
 
         body(
           "Simulated queries were run to estimate whether this site would be cited by an AI assistant. " +
-          "Results indicate citation likelihood and estimated ranking position."
+          "Results show citation likelihood, estimated ranking position, the AI response snippet, " +
+          "and which competitors AI would mention alongside (or instead of) your site."
         );
         space(8);
 
-        // Table header
-        const colQ = 240;
-        const colC = 50;
-        const colP = 50;
-        const colS = CONTENT_W - colQ - colC - colP;
-
-        const tblY = doc.y;
-        doc.save();
-        doc.rect(ML, tblY, CONTENT_W, 16).fill(BLACK);
-        doc.restore();
-        doc.font("Helvetica-Bold").fontSize(7.5).fillColor(WHITE);
-        doc.text("QUERY", ML + 6, tblY + 4, { lineBreak: false });
-        doc.text("CITED", ML + colQ + 6, tblY + 4, { lineBreak: false });
-        doc.text("POS.", ML + colQ + colC + 6, tblY + 4, { lineBreak: false });
-        doc.text("AI RESPONSE SNIPPET", ML + colQ + colC + colP + 6, tblY + 4, { lineBreak: false });
-        doc.y = tblY + 20;
-
         for (let qi = 0; qi < queries.length; qi++) {
           const q = queries[qi];
-          if (doc.y + 30 > PAGE_H - 80) addPage();
+          if (doc.y + 80 > PAGE_H - 80) addPage();
 
-          const rowY = doc.y;
+          // Query header row — number + query text + cited badge + position
+          const queryY = doc.y;
+          doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
+          doc.text(`${qi + 1}.`, ML, queryY, { lineBreak: false });
+          doc.font("Helvetica-Bold").fontSize(10).fillColor(BLACK);
+          doc.text(`"${q.query || ""}"`, ML + 18, queryY, { width: CONTENT_W - 18 - 90 });
+          const afterQuery = doc.y;
 
-          // Alternate row shading
-          if (qi % 2 === 0) {
-            doc.save();
-            doc.rect(ML, rowY - 2, CONTENT_W, 0).fill(BG); // placeholder
-            doc.restore();
-          }
-
-          // Query text
-          doc.font("Helvetica").fontSize(8).fillColor(DARK);
-          doc.text(q.query || "", ML + 6, rowY, { width: colQ - 12 });
-          const queryBottom = doc.y;
-
-          // Cited
-          doc.font("Helvetica-Bold").fontSize(8).fillColor(q.mentioned ? BLACK : LIGHT);
-          doc.text(q.mentioned ? "Yes" : "No", ML + colQ + 6, rowY, { lineBreak: false });
-
-          // Position
-          doc.font("Helvetica").fontSize(8).fillColor(DARK);
-          doc.text(q.position ? `#${q.position}` : "\u2014", ML + colQ + colC + 6, rowY, {
-            lineBreak: false,
-          });
-
-          // Snippet (truncated)
-          if (q.snippet) {
-            const snip = q.snippet.length > 120 ? q.snippet.substring(0, 120) + "\u2026" : q.snippet;
-            doc.font("Helvetica").fontSize(7).fillColor(GRAY);
-            doc.text(snip, ML + colQ + colC + colP + 6, rowY, {
-              width: colS - 12,
-            });
-          }
-
-          doc.y = Math.max(queryBottom, doc.y) + 4;
-
-          // Row separator
+          // Cited badge — right-aligned
+          const cited = q.mentioned ? "CITED" : "NOT CITED";
+          const badgeColor = q.mentioned ? BLACK : LIGHT;
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(badgeColor);
+          const badgeW = doc.widthOfString(cited) + 12;
+          const badgeX = ML + CONTENT_W - badgeW;
           doc.save();
-          doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.25).stroke(RULE);
+          doc.rect(badgeX, queryY, badgeW, 14).lineWidth(0.5).stroke(badgeColor);
           doc.restore();
-          doc.y += 4;
+          doc.text(cited, badgeX + 6, queryY + 3, { lineBreak: false });
+
+          // Position if present
+          if (q.position) {
+            doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+            doc.text(`Position #${q.position}`, badgeX - 70, queryY + 3, { lineBreak: false });
+          }
+
+          doc.y = Math.max(afterQuery, queryY + 18) + 2;
+
+          // Snippet — full text in gray box
+          if (q.snippet) {
+            grayBox(q.snippet);
+          }
+
+          // Competitors mentioned
+          const comps: string[] = q.competitors_mentioned || [];
+          if (comps.length > 0) {
+            doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+            doc.text("COMPETITORS ALSO MENTIONED", ML + 10, doc.y, { width: CONTENT_W });
+            doc.y += 2;
+            doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+            doc.text(comps.join("  \u00B7  "), ML + 10, doc.y, { width: CONTENT_W - 10 });
+            doc.y += 6;
+          }
+
+          if (qi < queries.length - 1) {
+            space(4);
+            hr(0.25, RULE);
+            space(4);
+          }
+        }
+      }
+
+      // ═══════════════════════════════════════════════════
+      // COMPETITOR LANDSCAPE
+      // ═══════════════════════════════════════════════════
+      if (realCompetitors.length > 0) {
+        space(10);
+        if (doc.y + 80 > PAGE_H - 80) addPage();
+
+        hr(1.5, BLACK);
+        h1("Competitor Landscape");
+
+        body(
+          "The following competitors were identified in your niche. " +
+          "Their estimated AI readiness scores reflect how well-positioned they are for citation by AI systems " +
+          `compared to your site\u2019s score of ${overall}/100.`
+        );
+        space(4);
+
+        // Collect which competitors are mentioned across all queries
+        const compMentionCounts: Record<string, number> = {};
+        for (const q of queries) {
+          for (const cm of (q.competitors_mentioned || [])) {
+            compMentionCounts[cm] = (compMentionCounts[cm] || 0) + 1;
+          }
+        }
+
+        space(4);
+
+        // Your site bar — for comparison
+        {
+          if (doc.y + 40 > PAGE_H - 80) addPage();
+          const yourY = doc.y;
+          doc.font("Helvetica-Bold").fontSize(10).fillColor(BLACK);
+          doc.text(`Your Site  (${domain})`, ML, yourY, { lineBreak: false });
+
+          const barY2 = yourY + 16;
+          doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+          doc.text("AI Readiness", ML, barY2 + 1, { lineBreak: false });
+
+          const barX2 = ML + 70;
+          const barW2 = CONTENT_W - 70 - 50;
+          doc.save();
+          doc.rect(barX2, barY2, barW2, 6).fill(BG);
+          const yourFilled = Math.max(0, Math.min(barW2 * (overall / 100), barW2));
+          if (yourFilled > 0) doc.rect(barX2, barY2, yourFilled, 6).fill(BLACK);
+          doc.restore();
+
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(BLACK);
+          doc.text(`${overall}/100`, barX2 + barW2 + 8, barY2 - 1, { lineBreak: false });
+          doc.y = barY2 + 14;
+          space(4);
+          hr(0.5, BLACK);
+          space(4);
+        }
+
+        for (let ci = 0; ci < realCompetitors.length; ci++) {
+          const comp = realCompetitors[ci];
+          if (doc.y + 60 > PAGE_H - 80) addPage();
+
+          const compY = doc.y;
+
+          // Name on its own line, URL below
+          doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
+          doc.text(comp.name || "Unknown", ML, compY, { width: CONTENT_W });
+
+          if (comp.url) {
+            doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+            doc.text(comp.url, ML, doc.y, { width: CONTENT_W });
+          }
+
+          // AI readiness score bar
+          const readiness: number = comp.ai_readiness_estimate ?? 0;
+          const barY = doc.y + 4;
+          const scoreText = `${readiness}/100`;
+          const delta = readiness - overall;
+          const deltaStr = delta > 0 ? `+${delta}` : `${delta}`;
+
+          doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+          doc.text("AI Readiness", ML, barY + 1, { lineBreak: false });
+
+          const barX = ML + 70;
+          const barW = CONTENT_W - 70 - 80;
+          doc.save();
+          doc.rect(barX, barY, barW, 6).fill(BG);
+          const compFilled = Math.max(0, Math.min(barW * (readiness / 100), barW));
+          if (compFilled > 0) doc.rect(barX, barY, compFilled, 6).fill(BLACK);
+          doc.restore();
+
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(DARK);
+          doc.text(scoreText, barX + barW + 8, barY - 1, { lineBreak: false });
+          doc.font("Helvetica").fontSize(7.5).fillColor(delta > 0 ? DARK : GRAY);
+          doc.text(`(${deltaStr})`, barX + barW + 44, barY - 1, { lineBreak: false });
+
+          // Strengths
+          if (comp.strengths && comp.strengths.length > 0) {
+            doc.y = barY + 12;
+            doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+            doc.text("STRENGTHS", ML + 10, doc.y, { width: CONTENT_W });
+            doc.y += 2;
+            for (const s of comp.strengths) {
+              if (doc.y + 14 > PAGE_H - 80) addPage();
+              doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+              doc.text(`\u2022  ${s}`, ML + 14, doc.y, { width: CONTENT_W - 14 });
+              doc.y += 2;
+            }
+            doc.y += 4;
+          } else {
+            doc.y = barY + 14;
+          }
+
+          // How often mentioned in AI queries
+          const mentions = compMentionCounts[comp.name] || 0;
+          if (mentions > 0) {
+            doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+            doc.text(
+              `Mentioned in ${mentions} of ${queries.length} simulated AI queries`,
+              ML + 10, doc.y, { width: CONTENT_W - 10 }
+            );
+            doc.y += 6;
+          }
+
+          if (ci < realCompetitors.length - 1) {
+            doc.save();
+            doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.25).stroke(RULE);
+            doc.restore();
+            doc.y += 6;
+          }
+        }
+      }
+
+      // ═══════════════════════════════════════════════════
+      // READY-TO-USE CONTENT BLOCKS
+      // ═══════════════════════════════════════════════════
+      if (copyBlocks.length > 0) {
+        space(10);
+        if (doc.y + 80 > PAGE_H - 80) addPage();
+
+        hr(1.5, BLACK);
+        h1("Ready-to-Use Content");
+
+        body(
+          "AI-optimized content blocks you can paste directly into your site to improve citation readiness. " +
+          "Each includes the current text (if found) and a suggested replacement."
+        );
+        space(8);
+
+        const TYPE_MAP: Record<string, string> = {
+          meta_description: "Meta Description",
+          faq_section: "FAQ Section",
+          about_paragraph: "About / Entity Block",
+          page_title: "Page Title",
+        };
+
+        for (let bi = 0; bi < copyBlocks.length; bi++) {
+          const blk = copyBlocks[bi];
+          if (doc.y + 60 > PAGE_H - 80) addPage();
+
+          const typeLabel = TYPE_MAP[blk.type] || blk.type;
+
+          // Type badge + page URL
+          h3(typeLabel);
+          if (blk.page_url) {
+            small(blk.page_url, 0);
+          }
+          space(4);
+
+          // Current value (if present)
+          if (blk.current) {
+            doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+            doc.text("CURRENT", ML, doc.y, { width: CONTENT_W });
+            doc.y += 2;
+            doc.font("Helvetica").fontSize(8.5).fillColor(GRAY);
+            doc.text(blk.current, ML + 10, doc.y, { width: CONTENT_W - 10, lineGap: 2 });
+            doc.y += 6;
+          }
+
+          // Suggested value
+          doc.font("Helvetica-Bold").fontSize(7.5).fillColor(BLACK);
+          doc.text(blk.current ? "REPLACE WITH" : "ADD THIS", ML, doc.y, { width: CONTENT_W });
+          doc.y += 2;
+
+          // Gray box for suggested text
+          grayBox(blk.suggested || "");
+
+          // FAQ questions if applicable
+          if (blk.questions && blk.questions.length > 0) {
+            doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+            doc.text("FAQ ITEMS", ML, doc.y, { width: CONTENT_W });
+            doc.y += 4;
+            for (const qa of blk.questions) {
+              if (doc.y + 24 > PAGE_H - 80) addPage();
+              doc.font("Helvetica-Bold").fontSize(8).fillColor(DARK);
+              doc.text(`Q: ${qa.q}`, ML + 10, doc.y, { width: CONTENT_W - 10 });
+              doc.y += 2;
+              doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+              doc.text(`A: ${qa.a}`, ML + 18, doc.y, { width: CONTENT_W - 18, lineGap: 2 });
+              doc.y += 4;
+            }
+            space(2);
+          }
+
+          // Why this matters
+          if (blk.why) {
+            doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+            doc.text(`Why: ${blk.why}`, ML + 10, doc.y, { width: CONTENT_W - 10, lineGap: 1.5 });
+            doc.y += 4;
+          }
+
+          if (bi < copyBlocks.length - 1) {
+            space(6);
+            hr(0.25, RULE);
+          }
         }
       }
 
@@ -510,16 +718,43 @@ export async function generatePdfReport(
       h1("Structured Data Analysis");
 
       if (jsonLd.length > 0) {
-        // Collect all @types
+        // Collect all @types and extract key entity info
         const allTypes = new Set<string>();
+        const entityDetails: { type: string; name?: string; url?: string; phone?: string; address?: string; services?: string[] }[] = [];
+
         for (const item of jsonLd) {
           if (typeof item === "object" && item) {
             const graph = item["@graph"] || [item];
             for (const g of graph) {
               if (typeof g === "object" && g && g["@type"]) {
                 const t = g["@type"];
+                const typeName = Array.isArray(t) ? t.join(", ") : t;
                 if (Array.isArray(t)) t.forEach((x: string) => allTypes.add(x));
                 else allTypes.add(t);
+
+                // Extract key entity info for display
+                const detail: typeof entityDetails[0] = { type: typeName };
+                if (g.name) detail.name = String(g.name);
+                if (g.url) detail.url = String(g.url);
+                if (g.telephone) detail.phone = String(g.telephone);
+                if (g.address && typeof g.address === "object") {
+                  const a = g.address;
+                  detail.address = [a.streetAddress, a.addressLocality, a.addressRegion, a.postalCode, a.addressCountry]
+                    .filter(Boolean).join(", ");
+                }
+                if (g.serviceType && Array.isArray(g.serviceType)) {
+                  detail.services = g.serviceType.slice(0, 6);
+                }
+                if (g.hasOfferCatalog?.itemListElement) {
+                  detail.services = g.hasOfferCatalog.itemListElement
+                    .slice(0, 6)
+                    .map((o: any) => o.itemOffered?.name || "")
+                    .filter(Boolean);
+                }
+                // Only add if it has meaningful info beyond just a type
+                if (detail.name || detail.phone || detail.services) {
+                  entityDetails.push(detail);
+                }
               }
             }
           }
@@ -531,10 +766,45 @@ export async function generatePdfReport(
         );
         space(4);
 
-        // Show preview of first JSON-LD
-        h3("JSON-LD Preview");
+        // Show key entities found in structured data
+        if (entityDetails.length > 0) {
+          h3("Key Entities in Structured Data");
+          space(2);
+          // Deduplicate by name+type
+          const seen = new Set<string>();
+          for (const ent of entityDetails) {
+            const key = `${ent.type}|${ent.name || ""}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+
+            if (doc.y + 40 > PAGE_H - 80) addPage();
+
+            doc.font("Helvetica-Bold").fontSize(9).fillColor(DARK);
+            doc.text(`${ent.type}`, ML + 10, doc.y, { lineBreak: false });
+            if (ent.name) {
+              doc.font("Helvetica").fontSize(9).fillColor(BODY);
+              doc.text(` — ${ent.name}`, ML + 10 + doc.widthOfString(ent.type) + 2, doc.y, {
+                width: CONTENT_W - doc.widthOfString(ent.type) - 14,
+              });
+            }
+            doc.y += 2;
+
+            if (ent.url) { small(`URL: ${ent.url}`, 14); }
+            if (ent.phone) { small(`Phone: ${ent.phone}`, 14); }
+            if (ent.address) { small(`Address: ${ent.address}`, 14); }
+            if (ent.services && ent.services.length > 0) {
+              small(`Services: ${ent.services.join(", ")}`, 14);
+            }
+            space(4);
+          }
+        }
+
+        space(2);
+
+        // Show compact JSON-LD preview
+        h3("JSON-LD Raw Preview");
         const ldStr = JSON.stringify(jsonLd[0], null, 2);
-        const preview = ldStr.length > 600 ? ldStr.substring(0, 600) + "\n  ..." : ldStr;
+        const preview = ldStr.length > 500 ? ldStr.substring(0, 500) + "\n  ..." : ldStr;
         if (doc.y + 60 > PAGE_H - 80) addPage();
         mono(preview, 4);
       } else {

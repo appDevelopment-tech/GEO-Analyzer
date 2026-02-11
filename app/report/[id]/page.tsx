@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ScoreCard from "@/components/ScoreCard";
 import AIQueryPanel from "@/components/AIQueryPanel";
@@ -10,30 +10,122 @@ import FixRoadmapPanel from "@/components/FixRoadmapPanel";
 import JsonLdBlock from "@/components/JsonLdBlock";
 import CompetitorSnapshot from "@/components/CompetitorSnapshot";
 import UnlockCTA from "@/components/UnlockCTA";
+import CopyBlocksPanel from "@/components/CopyBlocksPanel";
+
+const POLL_INTERVAL = 3000; // check every 3 seconds
+const MAX_POLLS = 40; // give up after ~2 minutes
+
+const ANALYSIS_STEPS = [
+  "Fetching your website content...",
+  "Extracting structured data & signals...",
+  "Running AI citation analysis...",
+  "Evaluating competitive positioning...",
+  "Generating your report...",
+];
 
 export default function ReportPage() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
   const [report, setReport] = useState<any | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [processing, setProcessing] = useState(false);
+  const [stepIndex, setStepIndex] = useState(0);
+  const pollCount = useRef(0);
+  const pollTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const workerTriggered = useRef(false);
 
+  // Capture the URL from query params once on mount (into a ref so it
+  // never causes the poll callback to be recreated).
+  const analysisUrlRef = useRef<string | null>(null);
   useEffect(() => {
-    if (!id) return;
-    fetch(`/api/report/${id}`)
+    analysisUrlRef.current = searchParams.get("url");
+  }, [searchParams]);
+
+  // Trigger the worker — fire-and-forget from the browser.
+  // The worker runs in its own Netlify function invocation.
+  const triggerWorker = useCallback((reportId: string, url: string) => {
+    if (workerTriggered.current) return;
+    workerTriggered.current = true;
+
+    console.log(`[Report] Triggering worker for report_id=${reportId}, url=${url}`);
+
+    fetch("/api/analyze-worker", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ report_id: reportId, url }),
+    })
       .then((res) => res.json())
-      .then((data: any) => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setReport(data);
+      .then((data) => console.log("[Report] Worker response:", data))
+      .catch((err) => console.error("[Report] Worker trigger failed:", err));
+  }, []);
+
+  // Poll /api/report/{id} — stable callback that only depends on `id`
+  // so re-renders don't kill the setTimeout chain.
+  const fetchReport = useCallback(async () => {
+    if (!id) return;
+
+    try {
+      const res = await fetch(`/api/report/${id}?_t=${Date.now()}`);
+      const data = await res.json();
+
+      console.log(`[Report] Poll #${pollCount.current} — status=${data.status}`);
+
+      if (data.status === "processing") {
+        // On first "processing" poll, trigger the worker
+        const url = analysisUrlRef.current;
+        if (url && !workerTriggered.current) {
+          triggerWorker(id as string, url);
         }
+
+        pollCount.current += 1;
+        setProcessing(true);
         setLoading(false);
-      })
-      .catch(() => {
-        setError("Failed to load report.");
+
+        if (pollCount.current >= MAX_POLLS) {
+          setProcessing(false);
+          setError("Analysis is taking longer than expected. Please refresh the page in a minute.");
+          return;
+        }
+
+        pollTimer.current = setTimeout(fetchReport, POLL_INTERVAL);
+        return;
+      }
+
+      if (data.status === "error" || data.error) {
+        setError(data.error || "Analysis failed. Please try again.");
+        setProcessing(false);
         setLoading(false);
-      });
-  }, [id]);
+        return;
+      }
+
+      // Success — show the report
+      setReport(data);
+      setProcessing(false);
+      setLoading(false);
+    } catch {
+      setError("Failed to load report.");
+      setProcessing(false);
+      setLoading(false);
+    }
+  }, [id, triggerWorker]); // ← no searchParams — stable across re-renders
+
+  // Start polling on mount
+  useEffect(() => {
+    fetchReport();
+    return () => {
+      if (pollTimer.current) clearTimeout(pollTimer.current);
+    };
+  }, [fetchReport]);
+
+  // Animate the step text while processing
+  useEffect(() => {
+    if (!processing) return;
+    const interval = setInterval(() => {
+      setStepIndex((prev) => (prev + 1) % ANALYSIS_STEPS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [processing]);
 
   async function handleStripeCheckout() {
     if (!id || !report?.email) return;
@@ -46,7 +138,8 @@ export default function ReportPage() {
     window.open(url, "_blank");
   }
 
-  if (loading) {
+  // Processing state — nice animated loader
+  if (processing || loading) {
     return (
       <main className="min-h-screen flex items-center justify-center bg-apple-gray">
         <div className="flex flex-col items-center">
@@ -61,9 +154,23 @@ export default function ReportPage() {
             <span className="absolute inset-2 rounded-full bg-white opacity-80"></span>
             <span className="absolute inset-4 rounded-full bg-gradient-to-br from-apple-blue to-cyan-400 opacity-60"></span>
           </div>
-          <div className="text-xl font-semibold text-apple-light drop-shadow-lg animate-pulse">
-            Loading your GEO/AEO report...
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={processing ? stepIndex : "loading"}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4 }}
+              className="text-xl font-semibold text-apple-light drop-shadow-lg text-center"
+            >
+              {processing ? ANALYSIS_STEPS[stepIndex] : "Loading your GEO/AEO report..."}
+            </motion.div>
+          </AnimatePresence>
+          {processing && (
+            <p className="mt-4 text-sm text-gray-400">
+              This usually takes 15–30 seconds
+            </p>
+          )}
         </div>
       </main>
     );
@@ -72,8 +179,16 @@ export default function ReportPage() {
   if (!id || error || !report) {
     return (
       <main className="min-h-screen flex items-center justify-center">
-        <div className="text-lg text-red-600">
-          {error || "Report not found."}
+        <div className="text-center">
+          <div className="text-lg text-red-600 mb-4">
+            {error || "Report not found."}
+          </div>
+          <button
+            onClick={() => { window.location.href = "/"; }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-apple-gray hover:bg-gray-800 text-white font-semibold rounded-xl transition-colors"
+          >
+            Try Again
+          </button>
         </div>
       </main>
     );
@@ -184,11 +299,13 @@ export default function ReportPage() {
             delay={3.2}
           />
 
-          {/* 5. Who AI Picks Instead — always free, motivating */}
+          {/* 5. Who AI Picks Instead — names always free, scores/strengths paid */}
           {fullReport.ai_query_simulations &&
             fullReport.ai_query_simulations.length > 0 && (
               <CompetitorSnapshot
                 simulations={fullReport.ai_query_simulations}
+                realCompetitors={fullReport.real_competitors}
+                isLocked={isLocked}
                 delay={3.6}
               />
             )}
@@ -220,11 +337,21 @@ export default function ReportPage() {
               />
             )}
 
+          {/* 9. Copy Blocks — blurred for free */}
+          {fullReport.copy_blocks && fullReport.copy_blocks.length > 0 && (
+            <CopyBlocksPanel
+              blocks={fullReport.copy_blocks}
+              isLocked={isLocked}
+              onUnlock={handleStripeCheckout}
+              delay={5.2}
+            />
+          )}
+
           {/* New Analysis Button */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 5.2, duration: 0.5 }}
+            transition={{ delay: 5.6, duration: 0.5 }}
             className="text-center mt-12"
           >
             <button

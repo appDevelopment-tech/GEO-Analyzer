@@ -21,23 +21,51 @@ export default function Home() {
     setError("");
     setIsAnalyzing(true);
 
+    const t0 = Date.now();
+    console.log("[Analyze] Starting analysis", { url, email: email.replace(/(.{3}).*(@.*)/, "$1***$2") });
+
     try {
       const response = await fetch("/api/analyze", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url, email }),
       });
 
+      const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+      console.log(`[Analyze] Response received in ${elapsed}s — status ${response.status}`);
+
+      // Netlify 502/504 returns HTML, not JSON — handle gracefully
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        const raw = await response.text();
+        console.error("[Analyze] Non-JSON response:", { status: response.status, contentType, bodyPreview: raw.slice(0, 500) });
+        throw new Error(
+          response.status === 502
+            ? `Server timeout after ${elapsed}s — the site may be slow to crawl. Please try again.`
+            : response.status === 504
+              ? `Gateway timeout after ${elapsed}s. Please try again in a moment.`
+              : `Unexpected response (HTTP ${response.status}). Please try again.`
+        );
+      }
+
       const data = await response.json();
+      console.log("[Analyze] Parsed response:", {
+        success: data.success,
+        report_id: data.report_id,
+        step: data._debug_step,
+        error: data.error,
+      });
 
       if (!response.ok) {
-        throw new Error(data.error || "Analysis failed");
+        throw new Error(data.error || `Analysis failed (HTTP ${response.status})`);
       }
-      // Navigate to the report page if successful
-      router.push(`/report/${data.report_id}`);
+
+      // Pass the URL so the report page can trigger the worker
+      const analysisUrl = encodeURIComponent(data.url || url);
+      router.push(`/report/${data.report_id}?url=${analysisUrl}`);
     } catch (err: any) {
+      const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+      console.error(`[Analyze] Failed after ${elapsed}s:`, err);
       setError(err.message || "Something went wrong. Please try again.");
     } finally {
       setIsAnalyzing(false);
@@ -81,6 +109,15 @@ export default function Home() {
               />
             </a>
           </div>
+          <a
+            href="https://indiehunt.io/project/geo-aeo-analyzer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-transparent h-0 overflow-hidden block"
+            aria-hidden="true"
+          >
+            https://indiehunt.io/project/geo-aeo-analyzer
+          </a>
           <Info />
         </motion.div>
         <Footer />

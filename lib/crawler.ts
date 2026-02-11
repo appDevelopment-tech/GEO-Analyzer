@@ -1,17 +1,47 @@
 import * as cheerio from "cheerio";
 import { CrawlData } from "@/types/geo";
 
-/**
- * Dead-simple website fetcher. No retries, no batching, no browser.
- * Fetches a single URL, parses HTML with Cheerio, returns structured data.
- * On ANY failure returns an empty stub so the AI analysis still runs.
- */
+const HEDGING_WORDS = [
+  "may",
+  "might",
+  "can",
+  "could",
+  "helps",
+  "holistic",
+  "possibly",
+  "sometimes",
+  "often",
+];
+
+// ============================================================================
+// CRAWLER CONFIGURATION
+// ============================================================================
+
+const CRAWLER_CONFIG = {
+  /** Maximum concurrent page crawls */
+  concurrency: 5,
+  /** Delay between batch requests (ms) for politeness */
+  batchDelay: 100,
+  /** Maximum retries per page */
+  maxRetries: 1,
+  /** Initial retry delay (ms) - exponential backoff */
+  retryDelay: 400,
+  /** Fetch timeout (ms) — 5s leaves ~20s for OpenAI within Netlify's 26s budget */
+  fetchTimeout: 5000,
+} as const;
+
+// ============================================================================
+// SIMPLE CACHE
+// ============================================================================
+
+/** Simple in-memory cache for crawl results */
+const crawlCache = new Map<string, { data: CrawlData; timestamp: number }>();
 
 // ── Fetch + parse a single URL ──────────────────────────────────
 
 async function fetchPage(url: string): Promise<CrawlData> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 10_000);
+  const timer = setTimeout(() => controller.abort(), CRAWLER_CONFIG.fetchTimeout);
 
   try {
     const res = await fetch(url, {
@@ -62,12 +92,13 @@ function parseHtml(html: string, url: string): CrawlData {
   const h2 = $("h2").map((_, el) => $(el).text().trim()).get();
   const h3 = $("h3").map((_, el) => $(el).text().trim()).get();
 
+  // Extract text content (first 500 words — enough for AI analysis)
   const textContent = $("body")
     .text()
     .replace(/\s+/g, " ")
     .trim()
     .split(" ")
-    .slice(0, 800)
+    .slice(0, 500)
     .join(" ");
 
   return {
