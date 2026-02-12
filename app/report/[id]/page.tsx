@@ -48,7 +48,9 @@ export default function ReportPage() {
     if (workerTriggered.current) return;
     workerTriggered.current = true;
 
-    console.log(`[Report] Triggering worker for report_id=${reportId}, url=${url}`);
+    console.log(
+      `[Report] Triggering worker for report_id=${reportId}, url=${url}`,
+    );
 
     fetch("/api/analyze-worker", {
       method: "POST",
@@ -69,7 +71,9 @@ export default function ReportPage() {
       const res = await fetch(`/api/report/${id}?_t=${Date.now()}`);
       const data = await res.json();
 
-      console.log(`[Report] Poll #${pollCount.current} — status=${data.status}`);
+      console.log(
+        `[Report] Poll #${pollCount.current} — status=${data.status}`,
+      );
 
       if (data.status === "processing") {
         // On first "processing" poll, trigger the worker
@@ -84,7 +88,9 @@ export default function ReportPage() {
 
         if (pollCount.current >= MAX_POLLS) {
           setProcessing(false);
-          setError("Analysis is taking longer than expected. Please refresh the page in a minute.");
+          setError(
+            "Analysis is taking longer than expected. Please refresh the page in a minute.",
+          );
           return;
         }
 
@@ -163,7 +169,9 @@ export default function ReportPage() {
               transition={{ duration: 0.4 }}
               className="text-xl font-semibold text-apple-light drop-shadow-lg text-center"
             >
-              {processing ? ANALYSIS_STEPS[stepIndex] : "Loading your GEO/AEO report..."}
+              {processing
+                ? ANALYSIS_STEPS[stepIndex]
+                : "Loading your GEO/AEO report..."}
             </motion.div>
           </AnimatePresence>
           {processing && (
@@ -184,7 +192,9 @@ export default function ReportPage() {
             {error || "Report not found."}
           </div>
           <button
-            onClick={() => { window.location.href = "/"; }}
+            onClick={() => {
+              window.location.href = "/";
+            }}
             className="inline-flex items-center gap-2 px-6 py-3 bg-apple-gray hover:bg-gray-800 text-white font-semibold rounded-xl transition-colors"
           >
             Try Again
@@ -226,6 +236,16 @@ export default function ReportPage() {
             >
               Here&apos;s how AI sees your website
             </motion.p>
+            {report.domain && (
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-base text-gray-400 mt-2"
+              >
+                {report.domain}
+              </motion.p>
+            )}
           </div>
 
           {/* 1. Score Card — always visible */}
