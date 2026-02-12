@@ -16,12 +16,13 @@ export async function POST(req: NextRequest) {
         price_data: {
           currency: "usd",
           product_data: { name: "GEO/AEO/AI Full Report" },
-          unit_amount: 100, //1950 cents = $19.50
+          unit_amount: 1950, //$19.50 (50% off $39.00)
         },
         quantity: 1,
       },
     ],
     mode: "payment",
+    allow_promotion_codes: true,
     customer_email: email,
     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
