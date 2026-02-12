@@ -83,6 +83,96 @@ export interface GeoScore {
   payment_status?: "free" | "paid";
 }
 
+// ── Deep multi-page analysis types (paid report) ──────────────
+
+export interface PageAnalysis {
+  url: string;
+  page_type:
+    | "homepage"
+    | "service"
+    | "about"
+    | "faq"
+    | "pricing"
+    | "contact"
+    | "product"
+    | "other";
+  title: string;
+  meta_description: string;
+  page_score: number;
+  scores: {
+    entity_clarity: number;
+    direct_answers: number;
+    trust_signals: number;
+    structured_data: number;
+  };
+  ai_snapshot: string;
+  dominant_gap:
+    | "entity_clarity"
+    | "direct_answers"
+    | "trust_signals"
+    | "structured_data"
+    | "content_depth";
+  fixes: Array<{
+    priority: "critical" | "high" | "medium";
+    action: string;
+    current_state: string;
+    suggested_content: string;
+    impact: string;
+  }>;
+  schema_recommendations: Array<{
+    schema_type: string;
+    exists: boolean;
+    json_ld_snippet: string;
+  }>;
+}
+
+export interface ContentStrategy {
+  priority: number;
+  title: string;
+  description: string;
+  target_queries: string[];
+  content_outline: string;
+  placement: string;
+  expected_impact: string;
+}
+
+export interface ReportDetails {
+  pages_analyzed: PageAnalysis[];
+  total_pages_crawled: number;
+  site_wide_issues: Array<{
+    issue: string;
+    severity: "critical" | "high" | "medium";
+    affected_pages: string[];
+    fix: string;
+  }>;
+  content_gaps: Array<{
+    gap: string;
+    opportunity: string;
+    suggested_queries: string[];
+  }>;
+  content_strategy: ContentStrategy[];
+  internal_linking_recommendations: Array<{
+    from_page: string;
+    to_page: string;
+    anchor_text: string;
+    reason: string;
+  }>;
+  schema_coverage: {
+    existing_types: string[];
+    missing_recommended: string[];
+    overall_schema_score: number;
+  };
+  implementation_roadmap: Array<{
+    week: number;
+    tasks: Array<{
+      task: string;
+      page: string;
+      effort: "low" | "medium" | "high";
+      impact: "low" | "medium" | "high";
+    }>;
+  }>;
+}
+
 export interface AnalysisRequest {
   url: string;
   email: string;

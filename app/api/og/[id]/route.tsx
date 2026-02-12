@@ -27,16 +27,28 @@ export async function GET(
 
   let report = data.full_report;
   if (typeof report === "string") {
-    try { report = JSON.parse(report); } catch { /* */ }
+    try {
+      report = JSON.parse(report);
+    } catch {
+      /* */
+    }
   }
 
   const score = report?.overall_score ?? 0;
   const tier = report?.tier ?? "Unknown";
-  const domain = (data.domain || "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+  const domain = (data.domain || "")
+    .replace(/^https?:\/\/(www\.)?/, "")
+    .replace(/\/$/, "");
   const sections = report?.section_scores || {};
 
   const scoreColor =
-    score >= 75 ? "#22c55e" : score >= 60 ? "#3b82f6" : score >= 40 ? "#eab308" : "#ef4444";
+    score >= 75
+      ? "#22c55e"
+      : score >= 60
+        ? "#3b82f6"
+        : score >= 40
+          ? "#eab308"
+          : "#ef4444";
 
   const dimensions = [
     { label: "Entity Clarity", value: sections.entity_clarity || 0 },
@@ -47,179 +59,176 @@ export async function GET(
   ];
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: 1200,
+        height: 630,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background:
+          "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
+        fontFamily: "system-ui, sans-serif",
+        color: "white",
+        padding: "40px 60px",
+      }}
+    >
+      {/* Top brand bar */}
       <div
         style={{
-          width: 1200,
-          height: 630,
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-          fontFamily: "system-ui, sans-serif",
-          color: "white",
-          padding: "40px 60px",
+          gap: "12px",
+          position: "absolute",
+          top: "32px",
+          left: "60px",
         }}
       >
-        {/* Top brand bar */}
         <div
           style={{
+            width: "36px",
+            height: "36px",
+            borderRadius: "10px",
+            background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
             display: "flex",
             alignItems: "center",
-            gap: "12px",
-            position: "absolute",
-            top: "32px",
-            left: "60px",
+            justifyContent: "center",
+            fontSize: "18px",
+            fontWeight: 800,
           }}
         >
-          <div
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "10px",
-              background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "18px",
-              fontWeight: 800,
-            }}
-          >
-            G
-          </div>
-          <span style={{ fontSize: "20px", fontWeight: 700, opacity: 0.9 }}>
-            GEO Analyzer
-          </span>
+          G
         </div>
+        <span style={{ fontSize: "20px", fontWeight: 700, opacity: 0.9 }}>
+          GEO Analyzer
+        </span>
+      </div>
 
-        {/* Domain */}
-        <div
-          style={{
-            fontSize: "24px",
-            opacity: 0.6,
-            marginBottom: "8px",
-            letterSpacing: "0.5px",
-          }}
-        >
-          {domain}
-        </div>
+      {/* Domain */}
+      <div
+        style={{
+          fontSize: "24px",
+          opacity: 0.6,
+          marginBottom: "8px",
+          letterSpacing: "0.5px",
+        }}
+      >
+        {domain}
+      </div>
 
-        {/* Score */}
-        <div
+      {/* Score */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: "8px",
+          marginBottom: "4px",
+        }}
+      >
+        <span
           style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: "8px",
-            marginBottom: "4px",
-          }}
-        >
-          <span
-            style={{
-              fontSize: "120px",
-              fontWeight: 800,
-              lineHeight: 1,
-              color: scoreColor,
-            }}
-          >
-            {score}
-          </span>
-          <span
-            style={{ fontSize: "36px", fontWeight: 600, opacity: 0.5 }}
-          >
-            /100
-          </span>
-        </div>
-
-        {/* Tier */}
-        <div
-          style={{
-            fontSize: "22px",
-            fontWeight: 600,
+            fontSize: "120px",
+            fontWeight: 800,
+            lineHeight: 1,
             color: scoreColor,
-            marginBottom: "32px",
-            padding: "6px 20px",
-            borderRadius: "99px",
-            border: `2px solid ${scoreColor}40`,
-            background: `${scoreColor}15`,
           }}
         >
-          {tier}
-        </div>
+          {score}
+        </span>
+        <span style={{ fontSize: "36px", fontWeight: 600, opacity: 0.5 }}>
+          /100
+        </span>
+      </div>
 
-        {/* Dimension bars */}
-        <div
-          style={{
-            display: "flex",
-            gap: "24px",
-            width: "100%",
-            maxWidth: "900px",
-          }}
-        >
-          {dimensions.map((d) => (
-            <div
-              key={d.label}
+      {/* Tier */}
+      <div
+        style={{
+          fontSize: "22px",
+          fontWeight: 600,
+          color: scoreColor,
+          marginBottom: "32px",
+          padding: "6px 20px",
+          borderRadius: "99px",
+          border: `2px solid ${scoreColor}40`,
+          background: `${scoreColor}15`,
+        }}
+      >
+        {tier}
+      </div>
+
+      {/* Dimension bars */}
+      <div
+        style={{
+          display: "flex",
+          gap: "24px",
+          width: "100%",
+          maxWidth: "900px",
+        }}
+      >
+        {dimensions.map((d) => (
+          <div
+            key={d.label}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
+              gap: "6px",
+            }}
+          >
+            <span
               style={{
-                display: "flex",
-                flexDirection: "column",
-                flex: 1,
-                gap: "6px",
+                fontSize: "12px",
+                opacity: 0.5,
+                textAlign: "center",
               }}
             >
-              <span
-                style={{
-                  fontSize: "12px",
-                  opacity: 0.5,
-                  textAlign: "center",
-                }}
-              >
-                {d.label}
-              </span>
+              {d.label}
+            </span>
+            <div
+              style={{
+                height: "8px",
+                borderRadius: "4px",
+                background: "rgba(255,255,255,0.1)",
+                overflow: "hidden",
+                display: "flex",
+              }}
+            >
               <div
                 style={{
-                  height: "8px",
+                  width: `${d.value}%`,
+                  height: "100%",
                   borderRadius: "4px",
-                  background: "rgba(255,255,255,0.1)",
-                  overflow: "hidden",
-                  display: "flex",
+                  background: "linear-gradient(90deg, #3b82f6, #06b6d4)",
                 }}
-              >
-                <div
-                  style={{
-                    width: `${d.value}%`,
-                    height: "100%",
-                    borderRadius: "4px",
-                    background: "linear-gradient(90deg, #3b82f6, #06b6d4)",
-                  }}
-                />
-              </div>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  textAlign: "center",
-                  opacity: 0.8,
-                }}
-              >
-                {d.value}
-              </span>
+              />
             </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "32px",
-            fontSize: "16px",
-            opacity: 0.4,
-          }}
-        >
-          Check your AI visibility score at geo-analyzer.com
-        </div>
+            <span
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                textAlign: "center",
+                opacity: 0.8,
+              }}
+            >
+              {d.value}
+            </span>
+          </div>
+        ))}
       </div>
-    ),
+
+      {/* CTA */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "32px",
+          fontSize: "16px",
+          opacity: 0.4,
+        }}
+      >
+        Check your AI visibility score at geo-analyzer.com
+      </div>
+    </div>,
     {
       width: 1200,
       height: 630,

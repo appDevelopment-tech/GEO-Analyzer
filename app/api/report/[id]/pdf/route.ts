@@ -41,10 +41,24 @@ export async function GET(
       }
     }
 
+    // Parse report_details if available (paid deep analysis)
+    let reportDetails = null;
+    if (data.report_details) {
+      try {
+        reportDetails =
+          typeof data.report_details === "string"
+            ? JSON.parse(data.report_details)
+            : data.report_details;
+      } catch {
+        // Non-fatal: generate PDF without deep analysis
+        console.warn("Failed to parse report_details for PDF generation");
+      }
+    }
+
     const domain = data.domain || "Unknown";
 
-    // Generate PDF
-    const pdfBuffer = await generatePdfReport(report, domain);
+    // Generate PDF — includes deep analysis sections if report_details exists
+    const pdfBuffer = await generatePdfReport(report, domain, reportDetails);
     const filename = pdfFilename(domain);
 
     // Return PDF as downloadable response

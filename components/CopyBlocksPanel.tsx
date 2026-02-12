@@ -13,9 +13,15 @@ interface CopyBlocksPanelProps {
 }
 
 const TYPE_LABELS: Record<string, { label: string; color: string }> = {
-  meta_description: { label: "Meta Description", color: "bg-blue-100 text-blue-700" },
+  meta_description: {
+    label: "Meta Description",
+    color: "bg-blue-100 text-blue-700",
+  },
   faq_section: { label: "FAQ Section", color: "bg-green-100 text-green-700" },
-  about_paragraph: { label: "About / Entity Block", color: "bg-purple-100 text-purple-700" },
+  about_paragraph: {
+    label: "About / Entity Block",
+    color: "bg-purple-100 text-purple-700",
+  },
   page_title: { label: "Page Title", color: "bg-amber-100 text-amber-700" },
 };
 
@@ -46,15 +52,35 @@ function CopyButton({ text }: { text: string }) {
     >
       {copied ? (
         <>
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
           Copied
         </>
       ) : (
         <>
-          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
+            />
           </svg>
           Copy
         </>
@@ -77,8 +103,18 @@ export default function CopyBlocksPanel({
   if (!blocks || blocks.length === 0) return null;
 
   const icon = (
-    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+      />
     </svg>
   );
 
@@ -91,12 +127,16 @@ export default function CopyBlocksPanel({
       delay={delay}
     >
       <p className="text-sm text-gray-500 mb-6">
-        AI-optimized content blocks you can copy directly into your site to improve citation readiness.
+        AI-optimized content blocks you can copy directly into your site to
+        improve citation readiness.
       </p>
 
       <div className="space-y-6">
         {blocks.map((block, i) => {
-          const typeInfo = TYPE_LABELS[block.type] || { label: block.type, color: "bg-gray-100 text-gray-700" };
+          const typeInfo = TYPE_LABELS[block.type] || {
+            label: block.type,
+            color: "bg-gray-100 text-gray-700",
+          };
 
           return (
             <motion.div
@@ -108,7 +148,9 @@ export default function CopyBlocksPanel({
             >
               {/* Header with type badge + copy button */}
               <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${typeInfo.color}`}>
+                <span
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${typeInfo.color}`}
+                >
                   {typeInfo.label}
                 </span>
                 <CopyButton text={block.suggested} />
@@ -118,8 +160,12 @@ export default function CopyBlocksPanel({
                 {/* Current value if available */}
                 {block.current && (
                   <div>
-                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Current</span>
-                    <p className="text-sm text-gray-500 mt-1 line-through decoration-red-300">{block.current}</p>
+                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                      Current
+                    </span>
+                    <p className="text-sm text-gray-500 mt-1 line-through decoration-red-300">
+                      {block.current}
+                    </p>
                   </div>
                 )}
 
@@ -129,14 +175,18 @@ export default function CopyBlocksPanel({
                     {block.current ? "Replace with" : "Add this"}
                   </span>
                   <div className="mt-1 p-3 bg-green-50 border border-green-200 rounded-xl">
-                    <p className="text-sm text-gray-800 whitespace-pre-wrap">{block.suggested}</p>
+                    <p className="text-sm text-gray-800 whitespace-pre-wrap">
+                      {block.suggested}
+                    </p>
                   </div>
                 </div>
 
                 {/* FAQ questions if applicable */}
                 {block.questions && block.questions.length > 0 && (
                   <div className="mt-2">
-                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">FAQ Items</span>
+                    <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                      FAQ Items
+                    </span>
                     <div className="mt-1 space-y-2">
                       {block.questions.map((qa, j) => (
                         <div key={j} className="text-sm">
@@ -150,8 +200,18 @@ export default function CopyBlocksPanel({
 
                 {/* Why this matters */}
                 <div className="flex items-start gap-2 pt-2 border-t border-gray-100">
-                  <svg className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-4 h-4 text-blue-500 mt-0.5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <p className="text-xs text-gray-500">{block.why}</p>
                 </div>

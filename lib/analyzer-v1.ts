@@ -1,5 +1,11 @@
 import OpenAI from "openai";
-import { CrawlData, GeoScore, AIQuerySimulation, RealCompetitor, CopyBlock } from "@/types/geo";
+import {
+  CrawlData,
+  GeoScore,
+  AIQuerySimulation,
+  RealCompetitor,
+  CopyBlock,
+} from "@/types/geo";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -30,7 +36,16 @@ function compactJsonLd(items: any[]): any[] {
     const pick: Record<string, any> = {};
     const src = item["@graph"] ? item["@graph"][0] : item;
     if (!src || typeof src !== "object") return item;
-    for (const k of ["@type", "name", "description", "url", "address", "telephone", "sameAs", "aggregateRating"]) {
+    for (const k of [
+      "@type",
+      "name",
+      "description",
+      "url",
+      "address",
+      "telephone",
+      "sameAs",
+      "aggregateRating",
+    ]) {
       if (src[k] !== undefined) pick[k] = src[k];
     }
     return pick;
@@ -61,8 +76,11 @@ export async function analyzeWithOpenAI(
       (p) => p.text.length > 50 || (p.title && p.title.length > 0),
     );
     const siteDomain = (() => {
-      try { return new URL(summary[0]?.url || "").hostname; }
-      catch { return summary[0]?.url || "unknown"; }
+      try {
+        return new URL(summary[0]?.url || "").hostname;
+      } catch {
+        return summary[0]?.url || "unknown";
+      }
     })();
 
     const userMsg = hasContent

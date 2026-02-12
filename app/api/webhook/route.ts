@@ -46,8 +46,7 @@ export async function POST(req: NextRequest) {
             .select("*")
             .eq("email", email)
             .eq("report_id", reportId)
-            .single()
-          )
+            .single());
         } catch (dbErr) {
           console.error("Supabase DB error fetching report:", dbErr);
           return NextResponse.json(

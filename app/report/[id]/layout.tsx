@@ -23,14 +23,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     let report = data.full_report;
     if (typeof report === "string") {
-      try { report = JSON.parse(report); } catch { /* */ }
+      try {
+        report = JSON.parse(report);
+      } catch {
+        /* */
+      }
     }
 
     const score = report?.overall_score ?? 0;
     const tier = report?.tier ?? "";
-    const domain = (data.domain || "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+    const domain = (data.domain || "")
+      .replace(/^https?:\/\/(www\.)?/, "")
+      .replace(/\/$/, "");
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://geo-analyzer.com";
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || "https://geo-analyzer.com";
     const ogImageUrl = `${baseUrl}/api/og/${params.id}`;
 
     return {

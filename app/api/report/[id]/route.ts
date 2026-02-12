@@ -35,11 +35,14 @@ export async function GET(
 
   // Still processing — tell the FE to keep polling
   if (data.result === "processing") {
-    return NextResponse.json({
-      report_id: id,
-      status: "processing",
-      domain: data.domain,
-    }, { headers: noCacheHeaders });
+    return NextResponse.json(
+      {
+        report_id: id,
+        status: "processing",
+        domain: data.domain,
+      },
+      { headers: noCacheHeaders },
+    );
   }
 
   // Worker failed — return the error
@@ -47,19 +50,23 @@ export async function GET(
     let errorDetail = "Analysis failed. Please try again.";
     if (data.full_report) {
       try {
-        const parsed = typeof data.full_report === "string"
-          ? JSON.parse(data.full_report)
-          : data.full_report;
+        const parsed =
+          typeof data.full_report === "string"
+            ? JSON.parse(data.full_report)
+            : data.full_report;
         errorDetail = parsed.error || errorDetail;
       } catch {
         // keep default
       }
     }
-    return NextResponse.json({
-      report_id: id,
-      status: "error",
-      error: errorDetail,
-    }, { headers: noCacheHeaders });
+    return NextResponse.json(
+      {
+        report_id: id,
+        status: "error",
+        error: errorDetail,
+      },
+      { headers: noCacheHeaders },
+    );
   }
 
   // Parse full_report if it's a string
@@ -128,10 +135,13 @@ export async function GET(
     }
   }
 
-  return NextResponse.json({
-    ...data,
-    status: "success",
-    full_report: report,
-    is_locked: !isPaid,
-  }, { headers: noCacheHeaders });
+  return NextResponse.json(
+    {
+      ...data,
+      status: "success",
+      full_report: report,
+      is_locked: !isPaid,
+    },
+    { headers: noCacheHeaders },
+  );
 }

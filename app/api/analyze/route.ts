@@ -37,13 +37,19 @@ export async function POST(request: NextRequest) {
     if (countError) {
       console.error("Rate limit count error:", countError);
       return NextResponse.json(
-        { error: "Rate limit check failed. Please try again later.", _debug_step: step },
+        {
+          error: "Rate limit check failed. Please try again later.",
+          _debug_step: step,
+        },
         { status: 500 },
       );
     }
     if ((count ?? 0) >= 3) {
       return NextResponse.json(
-        { error: "Rate limit exceeded: Only 3 analyses allowed per hour.", _debug_step: step },
+        {
+          error: "Rate limit exceeded: Only 3 analyses allowed per hour.",
+          _debug_step: step,
+        },
         { status: 429 },
       );
     }
@@ -93,7 +99,10 @@ export async function POST(request: NextRequest) {
     if (dbResult.error || !id) {
       console.error("Supabase insert error:", dbResult.error);
       return NextResponse.json(
-        { error: "Failed to create report. Please try again.", _debug_step: step },
+        {
+          error: "Failed to create report. Please try again.",
+          _debug_step: step,
+        },
         { status: 500 },
       );
     }
@@ -110,7 +119,10 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     const elapsed = lap();
-    console.error(`[Analyze ${elapsed}] FAILED at step="${step}":`, error?.message || error);
+    console.error(
+      `[Analyze ${elapsed}] FAILED at step="${step}":`,
+      error?.message || error,
+    );
     return NextResponse.json(
       {
         error: error.message || "Analysis failed. Please try again.",

@@ -1,6 +1,6 @@
 import formData from "form-data";
 import Mailgun from "mailgun.js";
-import { GeoScore } from "@/types/geo";
+import { GeoScore, ReportDetails } from "@/types/geo";
 import { generatePdfReport, pdfFilename } from "@/lib/pdf";
 import { createClient } from "@supabase/supabase-js";
 
@@ -15,6 +15,7 @@ export async function sendReport(
   domain: string,
   score: GeoScore,
   reportId: string,
+  reportDetails?: ReportDetails | null,
 ): Promise<void> {
   const shortEmailBody = generateShortEmailBody(domain, score);
 
@@ -23,17 +24,14 @@ export async function sendReport(
     process.env.SUPABASE_API_KEY!,
   );
 
-  // Generate PDF — no fallback, this must work
+  // Generate PDF — includes deep analysis if available
   const pdfName = pdfFilename(domain);
   let pdfBuffer: Buffer;
   try {
-    pdfBuffer = await generatePdfReport(score as any, domain);
-    console.log(
-      `PDF generated: ${pdfName} (${pdfBuffer.length} bytes)`,
-    );
+    pdfBuffer = await generatePdfReport(score as any, domain, reportDetails);
+    console.log(`PDF generated: ${pdfName} (${pdfBuffer.length} bytes)`);
   } catch (pdfErr) {
     console.error("PDF generation failed:", pdfErr);
-    // Update Supabase with the error so we can debug
     if (reportId) {
       await supabase
         .from("Reports")
@@ -75,10 +73,7 @@ export async function sendReport(
   }
 }
 
-function generateShortEmailBody(
-  domain: string,
-  score: GeoScore,
-): string {
+function generateShortEmailBody(domain: string, score: GeoScore): string {
   const totalPages = score.page_remediations?.length || 0;
 
   return `

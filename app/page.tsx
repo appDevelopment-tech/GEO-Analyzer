@@ -22,7 +22,10 @@ export default function Home() {
     setIsAnalyzing(true);
 
     const t0 = Date.now();
-    console.log("[Analyze] Starting analysis", { url, email: email.replace(/(.{3}).*(@.*)/, "$1***$2") });
+    console.log("[Analyze] Starting analysis", {
+      url,
+      email: email.replace(/(.{3}).*(@.*)/, "$1***$2"),
+    });
 
     try {
       const response = await fetch("/api/analyze", {
@@ -32,19 +35,25 @@ export default function Home() {
       });
 
       const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-      console.log(`[Analyze] Response received in ${elapsed}s — status ${response.status}`);
+      console.log(
+        `[Analyze] Response received in ${elapsed}s — status ${response.status}`,
+      );
 
       // Netlify 502/504 returns HTML, not JSON — handle gracefully
       const contentType = response.headers.get("content-type") || "";
       if (!contentType.includes("application/json")) {
         const raw = await response.text();
-        console.error("[Analyze] Non-JSON response:", { status: response.status, contentType, bodyPreview: raw.slice(0, 500) });
+        console.error("[Analyze] Non-JSON response:", {
+          status: response.status,
+          contentType,
+          bodyPreview: raw.slice(0, 500),
+        });
         throw new Error(
           response.status === 502
             ? `Server timeout after ${elapsed}s — the site may be slow to crawl. Please try again.`
             : response.status === 504
               ? `Gateway timeout after ${elapsed}s. Please try again in a moment.`
-              : `Unexpected response (HTTP ${response.status}). Please try again.`
+              : `Unexpected response (HTTP ${response.status}). Please try again.`,
         );
       }
 
@@ -57,7 +66,9 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error(data.error || `Analysis failed (HTTP ${response.status})`);
+        throw new Error(
+          data.error || `Analysis failed (HTTP ${response.status})`,
+        );
       }
 
       // Pass the URL so the report page can trigger the worker

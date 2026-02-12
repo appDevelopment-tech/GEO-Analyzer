@@ -83,7 +83,10 @@ export default function JsonLdBlock({
     }
 
     // Always include Organization if missing
-    if (!existingTypes.has("Organization") && !existingTypes.has("LocalBusiness")) {
+    if (
+      !existingTypes.has("Organization") &&
+      !existingTypes.has("LocalBusiness")
+    ) {
       graph.push({
         "@type": "Organization",
         name: businessName,
@@ -168,18 +171,31 @@ export default function JsonLdBlock({
       >
         <div className="flex items-center gap-3 mb-4">
           <span className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-            <svg className="w-5 h-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-5 h-5 text-green-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </span>
-          <h3 className="text-2xl font-bold text-apple-gray">Structured Data</h3>
+          <h3 className="text-2xl font-bold text-apple-gray">
+            Structured Data
+          </h3>
           <span className="ml-auto inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
             Good
           </span>
         </div>
         <p className="text-gray-600 text-sm">
-          Your site already has Organization, WebSite, and FAQPage schemas. The full report includes
-          specific improvements to optimize your existing structured data for better AI citation.
+          Your site already has Organization, WebSite, and FAQPage schemas. The
+          full report includes specific improvements to optimize your existing
+          structured data for better AI citation.
         </p>
       </motion.div>
     );
@@ -219,8 +235,18 @@ export default function JsonLdBlock({
       <div className="px-8 pt-8 pb-2">
         <div className="flex items-center gap-3 mb-3">
           <span className="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center">
-            <svg className="w-5 h-5 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            <svg
+              className="w-5 h-5 text-violet-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+              />
             </svg>
           </span>
           <div>
@@ -228,7 +254,8 @@ export default function JsonLdBlock({
               Your JSON-LD — Copy &amp; Paste
             </h3>
             <p className="text-sm text-gray-500 mt-0.5">
-              {missingCount} missing schema{missingCount !== 1 ? "s" : ""} generated for your site
+              {missingCount} missing schema{missingCount !== 1 ? "s" : ""}{" "}
+              generated for your site
             </p>
           </div>
           <span className="ml-auto inline-flex items-center px-3 py-1 rounded-full bg-violet-100 text-violet-700 text-xs font-semibold">
@@ -241,10 +268,16 @@ export default function JsonLdBlock({
       <div className="px-8 pb-4">
         <div className="bg-violet-50 border border-violet-100 rounded-xl p-4">
           <p className="text-sm text-violet-900 leading-relaxed">
-            AI systems like ChatGPT, Perplexity, and Gemini rely on structured data to understand
-            and cite your website. We detected {missingCount > 0 ? `${missingCount} missing schema type${missingCount !== 1 ? "s" : ""}` : "gaps"} on
-            your site. Paste this into your <code className="bg-violet-100 px-1.5 py-0.5 rounded text-xs font-mono">&lt;head&gt;</code> tag
-            and replace the placeholder values.
+            AI systems like ChatGPT, Perplexity, and Gemini rely on structured
+            data to understand and cite your website. We detected{" "}
+            {missingCount > 0
+              ? `${missingCount} missing schema type${missingCount !== 1 ? "s" : ""}`
+              : "gaps"}{" "}
+            on your site. Paste this into your{" "}
+            <code className="bg-violet-100 px-1.5 py-0.5 rounded text-xs font-mono">
+              &lt;head&gt;
+            </code>{" "}
+            tag and replace the placeholder values.
           </p>
         </div>
       </div>
@@ -259,15 +292,35 @@ export default function JsonLdBlock({
           >
             {copied ? (
               <>
-                <svg className="w-3.5 h-3.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-3.5 h-3.5 text-green-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2.5}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
                 Copied!
               </>
             ) : (
               <>
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  />
                 </svg>
                 Copy
               </>
@@ -287,7 +340,9 @@ export default function JsonLdBlock({
                 {i + 1}
               </span>
               <div>
-                <span className="font-semibold text-apple-gray">{item["@type"]}</span>
+                <span className="font-semibold text-apple-gray">
+                  {item["@type"]}
+                </span>
                 <span className="text-gray-500 ml-1.5">
                   {item["@type"] === "Organization"
                     ? "— tells AI who you are, your logo, and social profiles"

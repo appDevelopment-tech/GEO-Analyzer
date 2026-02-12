@@ -3,6 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PDFDocument = require("pdfkit/js/pdfkit.standalone.js");
 
+import type { ReportDetails } from "@/types/geo";
+
 // ── Black & white palette ───────────────────────────────────
 const BLACK = "#000000";
 const DARK = "#1a1a1a";
@@ -36,10 +38,12 @@ const fmtDate = (): string =>
 /**
  * Generate a professional B&W consultant-style PDF report.
  * Pure Node.js (standalone PDFKit) — no filesystem or Python deps.
+ * When reportDetails is provided (paid), adds deep multi-page analysis sections.
  */
 export async function generatePdfReport(
   data: Record<string, any>,
   domain: string,
+  reportDetails?: ReportDetails | null,
 ): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     try {
@@ -128,7 +132,11 @@ export async function generatePdfReport(
       const hr = (weight = 0.5, color = RULE) => {
         space(6);
         doc.save();
-        doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(weight).stroke(color);
+        doc
+          .moveTo(ML, doc.y)
+          .lineTo(ML + CONTENT_W, doc.y)
+          .lineWidth(weight)
+          .stroke(color);
         doc.restore();
         doc.y += 8;
       };
@@ -136,10 +144,17 @@ export async function generatePdfReport(
       const h1 = (text: string) => {
         if (doc.y + 36 > PAGE_H - 80) addPage();
         doc.font("Helvetica-Bold").fontSize(18).fillColor(BLACK);
-        doc.text(text.toUpperCase(), ML, doc.y, { width: CONTENT_W, characterSpacing: 1 });
+        doc.text(text.toUpperCase(), ML, doc.y, {
+          width: CONTENT_W,
+          characterSpacing: 1,
+        });
         doc.y += 4;
         doc.save();
-        doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(1.5).stroke(BLACK);
+        doc
+          .moveTo(ML, doc.y)
+          .lineTo(ML + CONTENT_W, doc.y)
+          .lineWidth(1.5)
+          .stroke(BLACK);
         doc.restore();
         doc.y += 12;
       };
@@ -211,7 +226,10 @@ export async function generatePdfReport(
       // Gray box for callouts
       const grayBox = (text: string) => {
         doc.font("Helvetica").fontSize(9);
-        const th = doc.heightOfString(text, { width: CONTENT_W - 24, lineGap: 2 });
+        const th = doc.heightOfString(text, {
+          width: CONTENT_W - 24,
+          lineGap: 2,
+        });
         const bh = th + 16;
         if (doc.y + bh > PAGE_H - 80) addPage();
         const by = doc.y;
@@ -230,14 +248,21 @@ export async function generatePdfReport(
 
       // Top rule
       doc.save();
-      doc.moveTo(ML, 72).lineTo(ML + CONTENT_W, 72).lineWidth(2).stroke(BLACK);
+      doc
+        .moveTo(ML, 72)
+        .lineTo(ML + CONTENT_W, 72)
+        .lineWidth(2)
+        .stroke(BLACK);
       doc.restore();
 
       doc.y = 96;
 
       // Brand name
       doc.font("Helvetica-Bold").fontSize(11).fillColor(LIGHT);
-      doc.text("GEO ANALYZER", ML, doc.y, { characterSpacing: 3, width: CONTENT_W });
+      doc.text("GEO ANALYZER", ML, doc.y, {
+        characterSpacing: 3,
+        width: CONTENT_W,
+      });
 
       doc.y += 28;
 
@@ -250,7 +275,11 @@ export async function generatePdfReport(
 
       // Thin rule
       doc.save();
-      doc.moveTo(ML, doc.y).lineTo(ML + 80, doc.y).lineWidth(1).stroke(BLACK);
+      doc
+        .moveTo(ML, doc.y)
+        .lineTo(ML + 80, doc.y)
+        .lineWidth(1)
+        .stroke(BLACK);
       doc.restore();
       doc.y += 20;
 
@@ -274,13 +303,19 @@ export async function generatePdfReport(
       // Bottom of cover
       doc.y = PAGE_H - 130;
       doc.save();
-      doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.5).stroke(RULE);
+      doc
+        .moveTo(ML, doc.y)
+        .lineTo(ML + CONTENT_W, doc.y)
+        .lineWidth(0.5)
+        .stroke(RULE);
       doc.restore();
       doc.y += 12;
       doc.font("Helvetica").fontSize(8).fillColor(LIGHT);
       doc.text(
         "This report evaluates how well a website is positioned for citation and recommendation by AI systems such as ChatGPT, Perplexity, Claude, and Gemini. It is a diagnostic snapshot, not an exhaustive SEO audit.",
-        ML, doc.y, { width: CONTENT_W, lineGap: 2 }
+        ML,
+        doc.y,
+        { width: CONTENT_W, lineGap: 2 },
       );
 
       // ═══════════════════════════════════════════════════
@@ -292,14 +327,14 @@ export async function generatePdfReport(
 
       body(
         `${domain} received an overall AI-readiness score of ${overall}/100, placing it in the "${tier}" tier. ` +
-        `This means the site has sufficient entity signals and structured data for AI systems to identify and occasionally cite it, ` +
-        `but there are concrete improvements that would increase citation frequency and accuracy.`
+          `This means the site has sufficient entity signals and structured data for AI systems to identify and occasionally cite it, ` +
+          `but there are concrete improvements that would increase citation frequency and accuracy.`,
       );
       space(4);
       body(
         `The analysis identified ${hesitations.length} key issue${hesitations.length !== 1 ? "s" : ""} that cause AI systems to hesitate before recommending this site, ` +
-        `along with ${fixPlan.length} prioritised actions for the first week. ` +
-        `${queries.length} simulated AI queries were run to estimate current citation likelihood.`
+          `along with ${fixPlan.length} prioritised actions for the first week. ` +
+          `${queries.length} simulated AI queries were run to estimate current citation likelihood.`,
       );
 
       space(16);
@@ -307,23 +342,38 @@ export async function generatePdfReport(
 
       body(
         "Each dimension reflects how AI systems weigh source quality when deciding which sites to cite. " +
-        "Entity Clarity and Direct Answers carry the most weight (30% each), followed by Trust Signals (20%), " +
-        "Competitive Positioning (10%), and Technical Accessibility (10%)."
+          "Entity Clarity and Direct Answers carry the most weight (30% each), followed by Trust Signals (20%), " +
+          "Competitive Positioning (10%), and Technical Accessibility (10%).",
       );
       space(10);
 
       // Score table
       const dims = [
-        { label: "Entity Clarity", key: "entity_clarity",
-          desc: "How clearly the site communicates who, what, and where." },
-        { label: "Direct Answers", key: "direct_answers",
-          desc: "Whether content provides concise, extractable answers AI can cite." },
-        { label: "Trust Signals", key: "trust_signals",
-          desc: "Verifiable trust markers: credentials, policies, reviews, contact info." },
-        { label: "Competitive Positioning", key: "competitive_positioning",
-          desc: "How well the site differentiates with concrete evidence." },
-        { label: "Technical Accessibility", key: "technical_accessibility",
-          desc: "Structured data, clean HTML, machine-readability." },
+        {
+          label: "Entity Clarity",
+          key: "entity_clarity",
+          desc: "How clearly the site communicates who, what, and where.",
+        },
+        {
+          label: "Direct Answers",
+          key: "direct_answers",
+          desc: "Whether content provides concise, extractable answers AI can cite.",
+        },
+        {
+          label: "Trust Signals",
+          key: "trust_signals",
+          desc: "Verifiable trust markers: credentials, policies, reviews, contact info.",
+        },
+        {
+          label: "Competitive Positioning",
+          key: "competitive_positioning",
+          desc: "How well the site differentiates with concrete evidence.",
+        },
+        {
+          label: "Technical Accessibility",
+          key: "technical_accessibility",
+          desc: "Structured data, clean HTML, machine-readability.",
+        },
       ];
 
       for (const dim of dims) {
@@ -345,7 +395,10 @@ export async function generatePdfReport(
         const barY = rowY + 16;
         doc.save();
         doc.rect(ML, barY, CONTENT_W, 6).fill(BG);
-        const filled = Math.max(0, Math.min(CONTENT_W * (val / 100), CONTENT_W));
+        const filled = Math.max(
+          0,
+          Math.min(CONTENT_W * (val / 100), CONTENT_W),
+        );
         if (filled > 0) doc.rect(ML, barY, filled, 6).fill(BLACK);
         doc.restore();
 
@@ -353,7 +406,8 @@ export async function generatePdfReport(
         doc.font("Helvetica").fontSize(8).fillColor(GRAY);
         doc.text(dim.desc, ML, barY + 10, { width: CONTENT_W });
 
-        doc.y = barY + 10 + doc.heightOfString(dim.desc, { width: CONTENT_W }) + 10;
+        doc.y =
+          barY + 10 + doc.heightOfString(dim.desc, { width: CONTENT_W }) + 10;
       }
 
       // ═══════════════════════════════════════════════════
@@ -365,7 +419,7 @@ export async function generatePdfReport(
 
       body(
         "The following issues were identified as the primary reasons an AI system would hesitate " +
-        "before citing this site in a user-facing answer. Each includes supporting evidence."
+          "before citing this site in a user-facing answer. Each includes supporting evidence.",
       );
       space(8);
 
@@ -414,7 +468,7 @@ export async function generatePdfReport(
       h1("Week-1 Action Plan");
 
       body(
-        "Prioritised action items to implement this week for the greatest improvement in AI citation readiness."
+        "Prioritised action items to implement this week for the greatest improvement in AI citation readiness.",
       );
       space(6);
 
@@ -434,8 +488,8 @@ export async function generatePdfReport(
 
         body(
           "Simulated queries were run to estimate whether this site would be cited by an AI assistant. " +
-          "Results show citation likelihood, estimated ranking position, the AI response snippet, " +
-          "and which competitors AI would mention alongside (or instead of) your site."
+            "Results show citation likelihood, estimated ranking position, the AI response snippet, " +
+            "and which competitors AI would mention alongside (or instead of) your site.",
         );
         space(8);
 
@@ -448,7 +502,9 @@ export async function generatePdfReport(
           doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
           doc.text(`${qi + 1}.`, ML, queryY, { lineBreak: false });
           doc.font("Helvetica-Bold").fontSize(10).fillColor(BLACK);
-          doc.text(`"${q.query || ""}"`, ML + 18, queryY, { width: CONTENT_W - 18 - 90 });
+          doc.text(`"${q.query || ""}"`, ML + 18, queryY, {
+            width: CONTENT_W - 18 - 90,
+          });
           const afterQuery = doc.y;
 
           // Cited badge — right-aligned
@@ -458,14 +514,19 @@ export async function generatePdfReport(
           const badgeW = doc.widthOfString(cited) + 12;
           const badgeX = ML + CONTENT_W - badgeW;
           doc.save();
-          doc.rect(badgeX, queryY, badgeW, 14).lineWidth(0.5).stroke(badgeColor);
+          doc
+            .rect(badgeX, queryY, badgeW, 14)
+            .lineWidth(0.5)
+            .stroke(badgeColor);
           doc.restore();
           doc.text(cited, badgeX + 6, queryY + 3, { lineBreak: false });
 
           // Position if present
           if (q.position) {
             doc.font("Helvetica").fontSize(8).fillColor(GRAY);
-            doc.text(`Position #${q.position}`, badgeX - 70, queryY + 3, { lineBreak: false });
+            doc.text(`Position #${q.position}`, badgeX - 70, queryY + 3, {
+              lineBreak: false,
+            });
           }
 
           doc.y = Math.max(afterQuery, queryY + 18) + 2;
@@ -479,10 +540,14 @@ export async function generatePdfReport(
           const comps: string[] = q.competitors_mentioned || [];
           if (comps.length > 0) {
             doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
-            doc.text("COMPETITORS ALSO MENTIONED", ML + 10, doc.y, { width: CONTENT_W });
+            doc.text("COMPETITORS ALSO MENTIONED", ML + 10, doc.y, {
+              width: CONTENT_W,
+            });
             doc.y += 2;
             doc.font("Helvetica").fontSize(8).fillColor(GRAY);
-            doc.text(comps.join("  \u00B7  "), ML + 10, doc.y, { width: CONTENT_W - 10 });
+            doc.text(comps.join("  \u00B7  "), ML + 10, doc.y, {
+              width: CONTENT_W - 10,
+            });
             doc.y += 6;
           }
 
@@ -506,15 +571,15 @@ export async function generatePdfReport(
 
         body(
           "The following competitors were identified in your niche. " +
-          "Their estimated AI readiness scores reflect how well-positioned they are for citation by AI systems " +
-          `compared to your site\u2019s score of ${overall}/100.`
+            "Their estimated AI readiness scores reflect how well-positioned they are for citation by AI systems " +
+            `compared to your site\u2019s score of ${overall}/100.`,
         );
         space(4);
 
         // Collect which competitors are mentioned across all queries
         const compMentionCounts: Record<string, number> = {};
         for (const q of queries) {
-          for (const cm of (q.competitors_mentioned || [])) {
+          for (const cm of q.competitors_mentioned || []) {
             compMentionCounts[cm] = (compMentionCounts[cm] || 0) + 1;
           }
         }
@@ -536,12 +601,17 @@ export async function generatePdfReport(
           const barW2 = CONTENT_W - 70 - 50;
           doc.save();
           doc.rect(barX2, barY2, barW2, 6).fill(BG);
-          const yourFilled = Math.max(0, Math.min(barW2 * (overall / 100), barW2));
+          const yourFilled = Math.max(
+            0,
+            Math.min(barW2 * (overall / 100), barW2),
+          );
           if (yourFilled > 0) doc.rect(barX2, barY2, yourFilled, 6).fill(BLACK);
           doc.restore();
 
           doc.font("Helvetica-Bold").fontSize(8).fillColor(BLACK);
-          doc.text(`${overall}/100`, barX2 + barW2 + 8, barY2 - 1, { lineBreak: false });
+          doc.text(`${overall}/100`, barX2 + barW2 + 8, barY2 - 1, {
+            lineBreak: false,
+          });
           doc.y = barY2 + 14;
           space(4);
           hr(0.5, BLACK);
@@ -577,14 +647,22 @@ export async function generatePdfReport(
           const barW = CONTENT_W - 70 - 80;
           doc.save();
           doc.rect(barX, barY, barW, 6).fill(BG);
-          const compFilled = Math.max(0, Math.min(barW * (readiness / 100), barW));
+          const compFilled = Math.max(
+            0,
+            Math.min(barW * (readiness / 100), barW),
+          );
           if (compFilled > 0) doc.rect(barX, barY, compFilled, 6).fill(BLACK);
           doc.restore();
 
           doc.font("Helvetica-Bold").fontSize(8).fillColor(DARK);
           doc.text(scoreText, barX + barW + 8, barY - 1, { lineBreak: false });
-          doc.font("Helvetica").fontSize(7.5).fillColor(delta > 0 ? DARK : GRAY);
-          doc.text(`(${deltaStr})`, barX + barW + 44, barY - 1, { lineBreak: false });
+          doc
+            .font("Helvetica")
+            .fontSize(7.5)
+            .fillColor(delta > 0 ? DARK : GRAY);
+          doc.text(`(${deltaStr})`, barX + barW + 44, barY - 1, {
+            lineBreak: false,
+          });
 
           // Strengths
           if (comp.strengths && comp.strengths.length > 0) {
@@ -595,7 +673,9 @@ export async function generatePdfReport(
             for (const s of comp.strengths) {
               if (doc.y + 14 > PAGE_H - 80) addPage();
               doc.font("Helvetica").fontSize(8).fillColor(GRAY);
-              doc.text(`\u2022  ${s}`, ML + 14, doc.y, { width: CONTENT_W - 14 });
+              doc.text(`\u2022  ${s}`, ML + 14, doc.y, {
+                width: CONTENT_W - 14,
+              });
               doc.y += 2;
             }
             doc.y += 4;
@@ -609,14 +689,20 @@ export async function generatePdfReport(
             doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
             doc.text(
               `Mentioned in ${mentions} of ${queries.length} simulated AI queries`,
-              ML + 10, doc.y, { width: CONTENT_W - 10 }
+              ML + 10,
+              doc.y,
+              { width: CONTENT_W - 10 },
             );
             doc.y += 6;
           }
 
           if (ci < realCompetitors.length - 1) {
             doc.save();
-            doc.moveTo(ML, doc.y).lineTo(ML + CONTENT_W, doc.y).lineWidth(0.25).stroke(RULE);
+            doc
+              .moveTo(ML, doc.y)
+              .lineTo(ML + CONTENT_W, doc.y)
+              .lineWidth(0.25)
+              .stroke(RULE);
             doc.restore();
             doc.y += 6;
           }
@@ -635,7 +721,7 @@ export async function generatePdfReport(
 
         body(
           "AI-optimized content blocks you can paste directly into your site to improve citation readiness. " +
-          "Each includes the current text (if found) and a suggested replacement."
+            "Each includes the current text (if found) and a suggested replacement.",
         );
         space(8);
 
@@ -665,13 +751,18 @@ export async function generatePdfReport(
             doc.text("CURRENT", ML, doc.y, { width: CONTENT_W });
             doc.y += 2;
             doc.font("Helvetica").fontSize(8.5).fillColor(GRAY);
-            doc.text(blk.current, ML + 10, doc.y, { width: CONTENT_W - 10, lineGap: 2 });
+            doc.text(blk.current, ML + 10, doc.y, {
+              width: CONTENT_W - 10,
+              lineGap: 2,
+            });
             doc.y += 6;
           }
 
           // Suggested value
           doc.font("Helvetica-Bold").fontSize(7.5).fillColor(BLACK);
-          doc.text(blk.current ? "REPLACE WITH" : "ADD THIS", ML, doc.y, { width: CONTENT_W });
+          doc.text(blk.current ? "REPLACE WITH" : "ADD THIS", ML, doc.y, {
+            width: CONTENT_W,
+          });
           doc.y += 2;
 
           // Gray box for suggested text
@@ -688,7 +779,10 @@ export async function generatePdfReport(
               doc.text(`Q: ${qa.q}`, ML + 10, doc.y, { width: CONTENT_W - 10 });
               doc.y += 2;
               doc.font("Helvetica").fontSize(8).fillColor(GRAY);
-              doc.text(`A: ${qa.a}`, ML + 18, doc.y, { width: CONTENT_W - 18, lineGap: 2 });
+              doc.text(`A: ${qa.a}`, ML + 18, doc.y, {
+                width: CONTENT_W - 18,
+                lineGap: 2,
+              });
               doc.y += 4;
             }
             space(2);
@@ -697,7 +791,10 @@ export async function generatePdfReport(
           // Why this matters
           if (blk.why) {
             doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
-            doc.text(`Why: ${blk.why}`, ML + 10, doc.y, { width: CONTENT_W - 10, lineGap: 1.5 });
+            doc.text(`Why: ${blk.why}`, ML + 10, doc.y, {
+              width: CONTENT_W - 10,
+              lineGap: 1.5,
+            });
             doc.y += 4;
           }
 
@@ -720,7 +817,14 @@ export async function generatePdfReport(
       if (jsonLd.length > 0) {
         // Collect all @types and extract key entity info
         const allTypes = new Set<string>();
-        const entityDetails: { type: string; name?: string; url?: string; phone?: string; address?: string; services?: string[] }[] = [];
+        const entityDetails: {
+          type: string;
+          name?: string;
+          url?: string;
+          phone?: string;
+          address?: string;
+          services?: string[];
+        }[] = [];
 
         for (const item of jsonLd) {
           if (typeof item === "object" && item) {
@@ -733,14 +837,21 @@ export async function generatePdfReport(
                 else allTypes.add(t);
 
                 // Extract key entity info for display
-                const detail: typeof entityDetails[0] = { type: typeName };
+                const detail: (typeof entityDetails)[0] = { type: typeName };
                 if (g.name) detail.name = String(g.name);
                 if (g.url) detail.url = String(g.url);
                 if (g.telephone) detail.phone = String(g.telephone);
                 if (g.address && typeof g.address === "object") {
                   const a = g.address;
-                  detail.address = [a.streetAddress, a.addressLocality, a.addressRegion, a.postalCode, a.addressCountry]
-                    .filter(Boolean).join(", ");
+                  detail.address = [
+                    a.streetAddress,
+                    a.addressLocality,
+                    a.addressRegion,
+                    a.postalCode,
+                    a.addressCountry,
+                  ]
+                    .filter(Boolean)
+                    .join(", ");
                 }
                 if (g.serviceType && Array.isArray(g.serviceType)) {
                   detail.services = g.serviceType.slice(0, 6);
@@ -762,7 +873,7 @@ export async function generatePdfReport(
 
         body(
           `${jsonLd.length} JSON-LD block${jsonLd.length !== 1 ? "s" : ""} detected on the site. ` +
-          `Schema types found: ${allTypes.size > 0 ? Array.from(allTypes).sort().join(", ") : "none identified"}.`
+            `Schema types found: ${allTypes.size > 0 ? Array.from(allTypes).sort().join(", ") : "none identified"}.`,
         );
         space(4);
 
@@ -783,15 +894,26 @@ export async function generatePdfReport(
             doc.text(`${ent.type}`, ML + 10, doc.y, { lineBreak: false });
             if (ent.name) {
               doc.font("Helvetica").fontSize(9).fillColor(BODY);
-              doc.text(` — ${ent.name}`, ML + 10 + doc.widthOfString(ent.type) + 2, doc.y, {
-                width: CONTENT_W - doc.widthOfString(ent.type) - 14,
-              });
+              doc.text(
+                ` — ${ent.name}`,
+                ML + 10 + doc.widthOfString(ent.type) + 2,
+                doc.y,
+                {
+                  width: CONTENT_W - doc.widthOfString(ent.type) - 14,
+                },
+              );
             }
             doc.y += 2;
 
-            if (ent.url) { small(`URL: ${ent.url}`, 14); }
-            if (ent.phone) { small(`Phone: ${ent.phone}`, 14); }
-            if (ent.address) { small(`Address: ${ent.address}`, 14); }
+            if (ent.url) {
+              small(`URL: ${ent.url}`, 14);
+            }
+            if (ent.phone) {
+              small(`Phone: ${ent.phone}`, 14);
+            }
+            if (ent.address) {
+              small(`Address: ${ent.address}`, 14);
+            }
             if (ent.services && ent.services.length > 0) {
               small(`Services: ${ent.services.join(", ")}`, 14);
             }
@@ -804,13 +926,14 @@ export async function generatePdfReport(
         // Show compact JSON-LD preview
         h3("JSON-LD Raw Preview");
         const ldStr = JSON.stringify(jsonLd[0], null, 2);
-        const preview = ldStr.length > 500 ? ldStr.substring(0, 500) + "\n  ..." : ldStr;
+        const preview =
+          ldStr.length > 500 ? ldStr.substring(0, 500) + "\n  ..." : ldStr;
         if (doc.y + 60 > PAGE_H - 80) addPage();
         mono(preview, 4);
       } else {
         grayBox(
           "No JSON-LD structured data detected. Adding Organization, WebSite, and FAQPage schemas " +
-          "is one of the highest-impact changes for AI citation."
+            "is one of the highest-impact changes for AI citation.",
         );
       }
 
@@ -820,7 +943,7 @@ export async function generatePdfReport(
       if (faqs.length > 0) {
         body(
           `${faqs.length} FAQ or direct-answer block${faqs.length !== 1 ? "s" : ""} detected. ` +
-          "These are valuable for AI citation as they provide concise, extractable answers."
+            "These are valuable for AI citation as they provide concise, extractable answers.",
         );
         for (const faq of faqs) {
           const fs = String(faq);
@@ -834,7 +957,8 @@ export async function generatePdfReport(
             if (item["@type"] === "FAQPage") hasFaqSchema = true;
             const graph = item["@graph"] || [];
             for (const g of graph) {
-              if (typeof g === "object" && g && g["@type"] === "FAQPage") hasFaqSchema = true;
+              if (typeof g === "object" && g && g["@type"] === "FAQPage")
+                hasFaqSchema = true;
             }
           }
         }
@@ -842,13 +966,593 @@ export async function generatePdfReport(
         if (hasFaqSchema) {
           body(
             "No FAQ blocks were extracted from the page content, but FAQPage schema markup was detected in the JSON-LD. " +
-            "This is a positive signal — ensure the on-page FAQ content matches the schema for consistency."
+              "This is a positive signal — ensure the on-page FAQ content matches the schema for consistency.",
           );
         } else {
           grayBox(
             "No FAQ or direct-answer blocks detected. Adding an FAQ section with FAQPage schema markup " +
-            "dramatically increases the probability of AI citation."
+              "dramatically increases the probability of AI citation.",
           );
+        }
+      }
+
+      // ═══════════════════════════════════════════════════
+      // DEEP MULTI-PAGE ANALYSIS (PAID ONLY)
+      // ═══════════════════════════════════════════════════
+      if (
+        reportDetails &&
+        reportDetails.pages_analyzed &&
+        reportDetails.pages_analyzed.length > 0
+      ) {
+        // ── PAGE-BY-PAGE ANALYSIS ──
+        addPage();
+        hr(1.5, BLACK);
+        h1("Page-by-Page Deep Analysis");
+
+        body(
+          `${reportDetails.total_pages_crawled} pages were crawled and analyzed individually. ` +
+            "Each page below includes its own AI readiness score, specific issues, and exact fixes you can implement immediately.",
+        );
+        space(10);
+
+        for (let pi = 0; pi < reportDetails.pages_analyzed.length; pi++) {
+          const pg = reportDetails.pages_analyzed[pi];
+          if (pi > 0) {
+            addPage();
+          }
+
+          // Page header with score
+          if (doc.y + 50 > PAGE_H - 80) addPage();
+          const pageHeaderY = doc.y;
+          doc.font("Helvetica-Bold").fontSize(13).fillColor(BLACK);
+
+          const pageTypeLabel =
+            pg.page_type.charAt(0).toUpperCase() + pg.page_type.slice(1);
+          doc.text(`${pageTypeLabel}: ${pg.title || pg.url}`, ML, pageHeaderY, {
+            width: CONTENT_W - 80,
+          });
+
+          // Score badge right-aligned
+          const pgScoreStr = `${pg.page_score}/100`;
+          doc.font("Helvetica-Bold").fontSize(12).fillColor(BLACK);
+          doc.text(pgScoreStr, ML + CONTENT_W - 60, pageHeaderY, {
+            lineBreak: false,
+          });
+          doc.y = Math.max(doc.y, pageHeaderY + 20);
+
+          // URL
+          doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+          doc.text(pg.url, ML, doc.y, { width: CONTENT_W });
+          doc.y += 4;
+
+          // Score bars for this page
+          const pageDims = [
+            { label: "Entity Clarity", val: pg.scores.entity_clarity },
+            { label: "Direct Answers", val: pg.scores.direct_answers },
+            { label: "Trust Signals", val: pg.scores.trust_signals },
+            { label: "Structured Data", val: pg.scores.structured_data },
+          ];
+
+          space(4);
+          for (const dim of pageDims) {
+            if (doc.y + 20 > PAGE_H - 80) addPage();
+            const dimY = doc.y;
+            doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+            doc.text(dim.label, ML, dimY, { lineBreak: false });
+
+            const barX = ML + 90;
+            const barW = CONTENT_W - 90 - 40;
+            doc.save();
+            doc.rect(barX, dimY + 1, barW, 5).fill(BG);
+            const filled = Math.max(0, Math.min(barW * (dim.val / 100), barW));
+            if (filled > 0) doc.rect(barX, dimY + 1, filled, 5).fill(BLACK);
+            doc.restore();
+
+            doc.font("Helvetica-Bold").fontSize(8).fillColor(DARK);
+            doc.text(`${dim.val}`, barX + barW + 6, dimY, { lineBreak: false });
+            doc.y = dimY + 12;
+          }
+
+          // AI snapshot
+          space(4);
+          h3("How AI Currently Sees This Page");
+          grayBox(pg.ai_snapshot || "No snapshot available.");
+
+          // Dominant gap
+          const gapLabels: Record<string, string> = {
+            entity_clarity: "Entity Clarity",
+            direct_answers: "Direct Answers",
+            trust_signals: "Trust Signals",
+            structured_data: "Structured Data",
+            content_depth: "Content Depth",
+          };
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(LIGHT);
+          doc.text("BIGGEST GAP", ML, doc.y, { lineBreak: false });
+          doc.font("Helvetica-Bold").fontSize(8).fillColor(BLACK);
+          doc.text(
+            `  ${gapLabels[pg.dominant_gap] || pg.dominant_gap}`,
+            ML + 72,
+            doc.y,
+            { lineBreak: false },
+          );
+          doc.y += 12;
+
+          // Fixes
+          if (pg.fixes && pg.fixes.length > 0) {
+            space(6);
+            h3("Actionable Fixes for This Page");
+            space(4);
+
+            for (let fi = 0; fi < pg.fixes.length; fi++) {
+              const fix = pg.fixes[fi];
+              if (doc.y + 60 > PAGE_H - 80) addPage();
+
+              // Priority badge + action
+              const priorityColors: Record<string, string> = {
+                critical: BLACK,
+                high: DARK,
+                medium: GRAY,
+              };
+              const prColor = priorityColors[fix.priority] || GRAY;
+
+              doc.font("Helvetica-Bold").fontSize(9).fillColor(prColor);
+              doc.text(
+                `${(fix.priority || "medium").toUpperCase()}`,
+                ML,
+                doc.y,
+                { lineBreak: false },
+              );
+              doc.font("Helvetica-Bold").fontSize(9).fillColor(DARK);
+              doc.text(`  ${fix.action}`, ML + 55, doc.y, {
+                width: CONTENT_W - 55,
+              });
+              doc.y += 4;
+
+              // Current state
+              if (fix.current_state) {
+                doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+                doc.text("CURRENT", ML + 10, doc.y, { width: CONTENT_W });
+                doc.y += 2;
+                doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+                doc.text(fix.current_state, ML + 10, doc.y, {
+                  width: CONTENT_W - 10,
+                  lineGap: 1.5,
+                });
+                doc.y += 4;
+              }
+
+              // Suggested content
+              doc.font("Helvetica-Bold").fontSize(7.5).fillColor(BLACK);
+              doc.text(
+                fix.current_state ? "REPLACE WITH" : "ADD THIS",
+                ML + 10,
+                doc.y,
+                { width: CONTENT_W },
+              );
+              doc.y += 2;
+              grayBox(fix.suggested_content || "");
+
+              // Impact
+              if (fix.impact) {
+                doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+                doc.text(`Impact: ${fix.impact}`, ML + 10, doc.y, {
+                  width: CONTENT_W - 10,
+                  lineGap: 1.5,
+                });
+                doc.y += 4;
+              }
+
+              if (fi < pg.fixes.length - 1) {
+                space(4);
+                hr(0.25, RULE);
+                space(4);
+              }
+            }
+          }
+
+          // Schema recommendations
+          if (
+            pg.schema_recommendations &&
+            pg.schema_recommendations.length > 0
+          ) {
+            space(8);
+            h3("Schema Markup Recommendations");
+            space(2);
+
+            for (const sr of pg.schema_recommendations) {
+              if (doc.y + 40 > PAGE_H - 80) addPage();
+
+              const statusIcon = sr.exists ? "\u2713" : "\u2717";
+              const statusLabel = sr.exists ? "EXISTS" : "MISSING";
+              doc
+                .font("Helvetica-Bold")
+                .fontSize(9)
+                .fillColor(sr.exists ? GRAY : BLACK);
+              doc.text(`${statusIcon} ${sr.schema_type}`, ML + 10, doc.y, {
+                lineBreak: false,
+              });
+              doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+              doc.text(
+                `  (${statusLabel})`,
+                ML +
+                  10 +
+                  doc.widthOfString(`${statusIcon} ${sr.schema_type}`) +
+                  4,
+                doc.y,
+                {
+                  lineBreak: false,
+                },
+              );
+              doc.y += 14;
+
+              if (!sr.exists && sr.json_ld_snippet) {
+                doc.font("Helvetica-Bold").fontSize(7.5).fillColor(BLACK);
+                doc.text("ADD THIS JSON-LD:", ML + 14, doc.y, {
+                  width: CONTENT_W,
+                });
+                doc.y += 4;
+                // Truncate very long snippets
+                const snippet =
+                  sr.json_ld_snippet.length > 600
+                    ? sr.json_ld_snippet.substring(0, 600) + "\n..."
+                    : sr.json_ld_snippet;
+                mono(snippet, 14);
+                space(4);
+              }
+            }
+          }
+
+          // Separator between pages
+          if (pi < reportDetails.pages_analyzed.length - 1) {
+            space(8);
+            hr(1, BLACK);
+          }
+        }
+
+        // ── SITE-WIDE ISSUES ──
+        if (
+          reportDetails.site_wide_issues &&
+          reportDetails.site_wide_issues.length > 0
+        ) {
+          addPage();
+          hr(1.5, BLACK);
+          h1("Site-Wide Issues");
+
+          body(
+            "These issues affect multiple pages across your site and should be addressed holistically " +
+              "for the greatest impact on AI visibility.",
+          );
+          space(6);
+
+          for (let si = 0; si < reportDetails.site_wide_issues.length; si++) {
+            const issue = reportDetails.site_wide_issues[si];
+            if (doc.y + 50 > PAGE_H - 80) addPage();
+
+            // Severity + issue
+            const sevColor =
+              issue.severity === "critical"
+                ? BLACK
+                : issue.severity === "high"
+                  ? DARK
+                  : GRAY;
+            doc.font("Helvetica-Bold").fontSize(10).fillColor(sevColor);
+            doc.text(`${issue.severity.toUpperCase()}`, ML, doc.y, {
+              lineBreak: false,
+            });
+            doc.font("Helvetica-Bold").fontSize(10).fillColor(DARK);
+            doc.text(`  ${issue.issue}`, ML + 60, doc.y, {
+              width: CONTENT_W - 60,
+            });
+            doc.y += 6;
+
+            // Affected pages
+            if (issue.affected_pages && issue.affected_pages.length > 0) {
+              doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+              doc.text(
+                `Affected: ${issue.affected_pages.join(", ")}`,
+                ML + 10,
+                doc.y,
+                { width: CONTENT_W - 10 },
+              );
+              doc.y += 6;
+            }
+
+            // Fix
+            grayBox(issue.fix);
+
+            if (si < reportDetails.site_wide_issues.length - 1) {
+              space(4);
+              hr(0.25, RULE);
+              space(4);
+            }
+          }
+        }
+
+        // ── CONTENT GAP ANALYSIS ──
+        if (
+          reportDetails.content_gaps &&
+          reportDetails.content_gaps.length > 0
+        ) {
+          space(12);
+          if (doc.y + 80 > PAGE_H - 80) addPage();
+          hr(1.5, BLACK);
+          h1("Content Gap Analysis");
+
+          body(
+            "These are topics and queries where your site currently provides no content but where " +
+              "AI systems are actively looking for answers. Filling these gaps can dramatically increase your citation rate.",
+          );
+          space(6);
+
+          for (let gi = 0; gi < reportDetails.content_gaps.length; gi++) {
+            const gap = reportDetails.content_gaps[gi];
+            if (doc.y + 50 > PAGE_H - 80) addPage();
+
+            h3(gap.gap);
+            space(2);
+            body(gap.opportunity, 10);
+
+            if (gap.suggested_queries && gap.suggested_queries.length > 0) {
+              doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+              doc.text("AI QUERIES THIS WOULD CAPTURE", ML + 10, doc.y, {
+                width: CONTENT_W,
+              });
+              doc.y += 3;
+              for (const sq of gap.suggested_queries) {
+                bullet(`"${sq}"`, 14);
+              }
+            }
+
+            if (gi < reportDetails.content_gaps.length - 1) {
+              space(4);
+              hr(0.25, RULE);
+              space(4);
+            }
+          }
+        }
+
+        // ── CONTENT STRATEGY ──
+        if (
+          reportDetails.content_strategy &&
+          reportDetails.content_strategy.length > 0
+        ) {
+          addPage();
+          hr(1.5, BLACK);
+          h1("AI Visibility Content Strategy");
+
+          body(
+            "A prioritized content strategy to maximize your visibility in AI-generated answers. " +
+              "Each strategy targets specific queries and includes an implementation outline.",
+          );
+          space(8);
+
+          for (let ci = 0; ci < reportDetails.content_strategy.length; ci++) {
+            const strat = reportDetails.content_strategy[ci];
+            if (doc.y + 80 > PAGE_H - 80) addPage();
+
+            // Priority number + title
+            numberedItem(strat.priority || ci + 1, strat.title);
+            space(2);
+            body(strat.description, 18);
+
+            // Target queries
+            if (strat.target_queries && strat.target_queries.length > 0) {
+              doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+              doc.text("TARGET AI QUERIES", ML + 18, doc.y, {
+                width: CONTENT_W,
+              });
+              doc.y += 3;
+              doc.font("Helvetica").fontSize(8).fillColor(GRAY);
+              doc.text(
+                strat.target_queries
+                  .map((q: string) => `"${q}"`)
+                  .join("  \u00B7  "),
+                ML + 18,
+                doc.y,
+                {
+                  width: CONTENT_W - 18,
+                },
+              );
+              doc.y += 6;
+            }
+
+            // Content outline
+            if (strat.content_outline) {
+              doc.font("Helvetica-Bold").fontSize(7.5).fillColor(LIGHT);
+              doc.text("CONTENT OUTLINE", ML + 18, doc.y, { width: CONTENT_W });
+              doc.y += 3;
+              grayBox(strat.content_outline);
+            }
+
+            // Placement + expected impact
+            if (strat.placement) {
+              small(`Placement: ${strat.placement}`, 18);
+            }
+            if (strat.expected_impact) {
+              small(`Expected Impact: ${strat.expected_impact}`, 18);
+            }
+
+            if (ci < reportDetails.content_strategy.length - 1) {
+              space(6);
+              hr(0.25, RULE);
+              space(6);
+            }
+          }
+        }
+
+        // ── INTERNAL LINKING ──
+        if (
+          reportDetails.internal_linking_recommendations &&
+          reportDetails.internal_linking_recommendations.length > 0
+        ) {
+          space(12);
+          if (doc.y + 80 > PAGE_H - 80) addPage();
+          hr(1.5, BLACK);
+          h1("Internal Linking for AI Context");
+
+          body(
+            "AI systems use internal links to understand relationships between your pages. " +
+              "These recommendations help AI build a complete picture of your business and offerings.",
+          );
+          space(6);
+
+          for (const link of reportDetails.internal_linking_recommendations) {
+            if (doc.y + 40 > PAGE_H - 80) addPage();
+
+            doc.font("Helvetica-Bold").fontSize(9).fillColor(DARK);
+            doc.text(`"${link.anchor_text}"`, ML + 10, doc.y, {
+              width: CONTENT_W - 10,
+            });
+            doc.y += 3;
+            doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+            doc.text(`From: ${link.from_page}`, ML + 14, doc.y, {
+              width: CONTENT_W - 14,
+            });
+            doc.y += 2;
+            doc.text(`To: ${link.to_page}`, ML + 14, doc.y, {
+              width: CONTENT_W - 14,
+            });
+            doc.y += 4;
+            small(`Why: ${link.reason}`, 14);
+            space(6);
+          }
+        }
+
+        // ── SCHEMA COVERAGE ──
+        if (reportDetails.schema_coverage) {
+          space(8);
+          if (doc.y + 80 > PAGE_H - 80) addPage();
+          hr(1.5, BLACK);
+          h1("Schema.org Coverage Map");
+
+          const sc = reportDetails.schema_coverage;
+          body(
+            `Your site currently implements ${sc.existing_types.length} schema types. ` +
+              `${sc.missing_recommended.length} additional types are recommended for improved AI visibility. ` +
+              `Overall schema coverage score: ${sc.overall_schema_score}/100.`,
+          );
+          space(6);
+
+          // Schema score bar
+          if (doc.y + 20 > PAGE_H - 80) addPage();
+          const scBarY = doc.y;
+          doc.font("Helvetica-Bold").fontSize(9).fillColor(DARK);
+          doc.text("Schema Coverage", ML, scBarY, { lineBreak: false });
+          const scBarX = ML + 100;
+          const scBarW = CONTENT_W - 100 - 50;
+          doc.save();
+          doc.rect(scBarX, scBarY + 2, scBarW, 6).fill(BG);
+          const scFilled = Math.max(
+            0,
+            Math.min(scBarW * (sc.overall_schema_score / 100), scBarW),
+          );
+          if (scFilled > 0)
+            doc.rect(scBarX, scBarY + 2, scFilled, 6).fill(BLACK);
+          doc.restore();
+          doc.font("Helvetica-Bold").fontSize(9).fillColor(BLACK);
+          doc.text(
+            `${sc.overall_schema_score}/100`,
+            scBarX + scBarW + 8,
+            scBarY,
+            { lineBreak: false },
+          );
+          doc.y = scBarY + 18;
+
+          // Existing types
+          if (sc.existing_types.length > 0) {
+            space(4);
+            doc.font("Helvetica-Bold").fontSize(8).fillColor(LIGHT);
+            doc.text("EXISTING SCHEMA TYPES", ML, doc.y, { width: CONTENT_W });
+            doc.y += 4;
+            doc.font("Helvetica").fontSize(8.5).fillColor(BODY);
+            doc.text(sc.existing_types.join("  \u00B7  "), ML + 10, doc.y, {
+              width: CONTENT_W - 10,
+            });
+            doc.y += 8;
+          }
+
+          // Missing recommended
+          if (sc.missing_recommended.length > 0) {
+            doc.font("Helvetica-Bold").fontSize(8).fillColor(BLACK);
+            doc.text("RECOMMENDED TO ADD", ML, doc.y, { width: CONTENT_W });
+            doc.y += 4;
+            for (const miss of sc.missing_recommended) {
+              bullet(miss, 10);
+            }
+          }
+        }
+
+        // ── 30-DAY IMPLEMENTATION ROADMAP ──
+        if (
+          reportDetails.implementation_roadmap &&
+          reportDetails.implementation_roadmap.length > 0
+        ) {
+          addPage();
+          hr(1.5, BLACK);
+          h1("30-Day Implementation Roadmap");
+
+          body(
+            "A week-by-week action plan to systematically improve your AI visibility. " +
+              "Tasks are ordered by impact so you get the biggest gains first.",
+          );
+          space(8);
+
+          for (const week of reportDetails.implementation_roadmap) {
+            if (doc.y + 50 > PAGE_H - 80) addPage();
+
+            h2(`Week ${week.week}`);
+            space(4);
+
+            // Table-style layout
+            for (const task of week.tasks) {
+              if (doc.y + 30 > PAGE_H - 80) addPage();
+
+              // Impact/Effort badges
+              const impactColor =
+                task.impact === "high"
+                  ? BLACK
+                  : task.impact === "medium"
+                    ? DARK
+                    : GRAY;
+              const effortLabel =
+                task.effort === "low"
+                  ? "Quick Win"
+                  : task.effort === "medium"
+                    ? "Moderate"
+                    : "Major";
+
+              doc.font("Helvetica-Bold").fontSize(8).fillColor(impactColor);
+              doc.text(`${task.impact.toUpperCase()} IMPACT`, ML, doc.y, {
+                lineBreak: false,
+              });
+              doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+              doc.text(`  \u00B7  ${effortLabel} effort`, ML + 75, doc.y, {
+                lineBreak: false,
+              });
+              doc.y += 12;
+
+              doc.font("Helvetica").fontSize(9).fillColor(BODY);
+              doc.text(task.task, ML + 10, doc.y, {
+                width: CONTENT_W - 10,
+                lineGap: 2,
+              });
+              doc.y += 4;
+
+              if (task.page) {
+                doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
+                doc.text(`Page: ${task.page}`, ML + 10, doc.y, {
+                  width: CONTENT_W,
+                });
+                doc.y += 4;
+              }
+              space(4);
+            }
+
+            if (week.week < 4) {
+              hr(0.5, RULE);
+              space(4);
+            }
+          }
         }
       }
 
@@ -870,14 +1574,18 @@ export async function generatePdfReport(
       doc.font("Helvetica").fontSize(8.5).fillColor(GRAY);
       doc.text(
         "This report was generated by GEO Analyzer (geo-analyzer.com). " +
-        "For questions or support, contact hello@maxpetrusenko.com.",
-        ML, doc.y, { width: CONTENT_W, align: "center" }
+          "For questions or support, contact hello@maxpetrusenko.com.",
+        ML,
+        doc.y,
+        { width: CONTENT_W, align: "center" },
       );
       space(4);
       doc.font("Helvetica").fontSize(7.5).fillColor(LIGHT);
       doc.text(
         `\u00A9 ${new Date().getFullYear()} GEO Analyzer. All rights reserved.`,
-        ML, doc.y, { width: CONTENT_W, align: "center" }
+        ML,
+        doc.y,
+        { width: CONTENT_W, align: "center" },
       );
 
       doc.end();

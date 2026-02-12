@@ -41,14 +41,18 @@ const crawlCache = new Map<string, { data: CrawlData; timestamp: number }>();
 
 async function fetchPage(url: string): Promise<CrawlData> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), CRAWLER_CONFIG.fetchTimeout);
+  const timer = setTimeout(
+    () => controller.abort(),
+    CRAWLER_CONFIG.fetchTimeout,
+  );
 
   try {
     const res = await fetch(url, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (compatible; GEOAnalyzer/1.0; +https://geo-analyzer.com)",
-        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        Accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.9",
       },
       signal: controller.signal,
@@ -88,9 +92,15 @@ function parseHtml(html: string, url: string): CrawlData {
 
   $("script, style, nav, footer").remove();
 
-  const h1 = $("h1").map((_, el) => $(el).text().trim()).get();
-  const h2 = $("h2").map((_, el) => $(el).text().trim()).get();
-  const h3 = $("h3").map((_, el) => $(el).text().trim()).get();
+  const h1 = $("h1")
+    .map((_, el) => $(el).text().trim())
+    .get();
+  const h2 = $("h2")
+    .map((_, el) => $(el).text().trim())
+    .get();
+  const h3 = $("h3")
+    .map((_, el) => $(el).text().trim())
+    .get();
 
   // Extract text content (first 500 words — enough for AI analysis)
   const textContent = $("body")
@@ -167,7 +177,14 @@ function extractLocations(text: string): string[] {
 
 function extractDirectAnswers($: cheerio.CheerioAPI): string[] {
   const blocks: string[] = [];
-  const qPat = [/\?/, /\bwhat\b/i, /\bhow\b/i, /\bwhy\b/i, /\bwho\b/i, /\bwhere\b/i];
+  const qPat = [
+    /\?/,
+    /\bwhat\b/i,
+    /\bhow\b/i,
+    /\bwhy\b/i,
+    /\bwho\b/i,
+    /\bwhere\b/i,
+  ];
 
   $("h1, h2, h3, h4").each((_, el) => {
     const heading = $(el).text().trim();

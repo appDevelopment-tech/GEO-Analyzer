@@ -52,13 +52,17 @@ export default function ReportPage() {
       `[Report] Triggering worker for report_id=${reportId}, url=${url}`,
     );
 
-    fetch("/api/analyze-worker", {
+    const workerUrl =
+      window.location.hostname === "localhost"
+        ? "/api/analyze-worker"
+        : "/.netlify/functions/analyze-background";
+
+    fetch(workerUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ report_id: reportId, url }),
     })
-      .then((res) => res.json())
-      .then((data) => console.log("[Report] Worker response:", data))
+      .then(() => console.log("[Report] Background worker triggered"))
       .catch((err) => console.error("[Report] Worker trigger failed:", err));
   }, []);
 
