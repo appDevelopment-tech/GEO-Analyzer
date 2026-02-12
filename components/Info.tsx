@@ -113,9 +113,10 @@ const sections = [
         <span className="block mb-2 text-gray-700">
           If you want a full, detailed report with prioritized action items and
           a week-one fix plan, you can purchase it for a one-time fee ($19.50).
-          That’s less than the price of two cups of coffee—an easy investment
-          for a big boost in AI visibility. The full report shows exactly what
-          to fix and why, so you can win more AI recommendations right away.
+          Most AI consultants charge $200+ per hour for this kind of
+          insight—you get it instantly for a fraction of the cost. The full
+          report shows exactly what to fix and why, so you can win more AI
+          recommendations right away.
         </span>
       </>
     ),
