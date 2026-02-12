@@ -5,7 +5,7 @@ import {
   AIQuerySimulation,
   RealCompetitor,
   CopyBlock,
-} from "@/types/geo";
+} from "../types/geo";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

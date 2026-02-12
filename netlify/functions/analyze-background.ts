@@ -1,14 +1,13 @@
-import type { Context } from "@netlify/functions";
 import { createClient } from "@supabase/supabase-js";
-import { crawlWebsite } from "../../lib/crawler.js";
-import { analyzeWithOpenAI } from "../../lib/analyzer-v1.js";
+import { crawlWebsite } from "../../lib/crawler";
+import { analyzeWithOpenAI } from "../../lib/analyzer-v1";
 
 /**
  * Netlify Background Function — runs for up to 15 minutes.
  * Netlify returns 202 Accepted immediately; the function keeps running.
  * The FE polls Supabase for results.
  */
-export default async function handler(req: Request, _context: Context) {
+export default async function handler(req: Request) {
   const t0 = Date.now();
   const lap = () => `${((Date.now() - t0) / 1000).toFixed(1)}s`;
   let step = "init";
@@ -24,9 +23,7 @@ export default async function handler(req: Request, _context: Context) {
       return;
     }
 
-    console.log(
-      `[BG Worker ${lap()}] Start — report_id=${report_id}, url=${url}`,
-    );
+    console.log(`[BG Worker ${lap()}] Start — report_id=${report_id}, url=${url}`);
 
     const supabase = createClient(
       process.env.SUPABASE_URL!,
@@ -47,9 +44,7 @@ export default async function handler(req: Request, _context: Context) {
     }
 
     if (existing.result !== "processing") {
-      console.log(
-        `[BG Worker ${lap()}] Report ${report_id} already ${existing.result} — skipping`,
-      );
+      console.log(`[BG Worker ${lap()}] Report ${report_id} already ${existing.result} — skipping`);
       return;
     }
 
@@ -57,21 +52,12 @@ export default async function handler(req: Request, _context: Context) {
     step = "crawl";
     console.log(`[BG Worker ${lap()}] Crawling ${url}...`);
     const crawlData = await crawlWebsite(url);
-    console.log(
-      `[BG Worker ${lap()}] Crawl done — ${crawlData.length} page(s), textLen=${crawlData[0]?.textContent?.length ?? 0}`,
-    );
+    console.log(`[BG Worker ${lap()}] Crawl done — ${crawlData.length} page(s), textLen=${crawlData[0]?.textContent?.length ?? 0}`);
 
     if (crawlData.length === 0 || !crawlData[0]?.textContent) {
       console.error(`[BG Worker ${lap()}] Crawl returned no usable data`);
-      await writeResult(
-        supabase,
-        report_id,
-        existing,
-        "error",
-        JSON.stringify({
-          error: "Unable to crawl website. The site may be blocking requests.",
-        }),
-      );
+      await writeResult(supabase, report_id, existing, "error",
+        JSON.stringify({ error: "Unable to crawl website. The site may be blocking requests." }));
       return;
     }
 
@@ -79,35 +65,23 @@ export default async function handler(req: Request, _context: Context) {
     step = "openai";
     console.log(`[BG Worker ${lap()}] Sending to OpenAI...`);
     const geoScore = await analyzeWithOpenAI(crawlData);
-    console.log(
-      `[BG Worker ${lap()}] OpenAI done — score=${geoScore.overall_score}, tier=${geoScore.tier}`,
-    );
+    console.log(`[BG Worker ${lap()}] OpenAI done — score=${geoScore.overall_score}, tier=${geoScore.tier}`);
 
     // Step 3: Write results to Supabase
     step = "supabase-write";
     console.log(`[BG Worker ${lap()}] Writing results to Supabase...`);
-    const writeOk = await writeResult(
-      supabase,
-      report_id,
-      existing,
-      "success",
-      JSON.stringify(geoScore),
-    );
+    const writeOk = await writeResult(supabase, report_id, existing, "success",
+      JSON.stringify(geoScore));
 
     if (!writeOk) {
       console.error(`[BG Worker ${lap()}] Failed to write results to Supabase`);
       return;
     }
 
-    console.log(
-      `[BG Worker ${lap()}] Done — report_id=${report_id} written successfully`,
-    );
+    console.log(`[BG Worker ${lap()}] Done — report_id=${report_id} written successfully`);
   } catch (error: any) {
     const elapsed = lap();
-    console.error(
-      `[BG Worker ${elapsed}] FAILED at step="${step}":`,
-      error?.message || error,
-    );
+    console.error(`[BG Worker ${elapsed}] FAILED at step="${step}":`, error?.message || error);
 
     if (reportId) {
       try {
@@ -121,23 +95,11 @@ export default async function handler(req: Request, _context: Context) {
           .eq("report_id", reportId)
           .single();
         if (row) {
-          await writeResult(
-            supabase,
-            reportId,
-            row,
-            "error",
-            JSON.stringify({
-              error: error.message || "Analysis failed",
-              _debug_step: step,
-              _debug_elapsed: elapsed,
-            }),
-          );
+          await writeResult(supabase, reportId, row, "error",
+            JSON.stringify({ error: error.message || "Analysis failed", _debug_step: step, _debug_elapsed: elapsed }));
         }
       } catch (dbErr: any) {
-        console.error(
-          `[BG Worker] Failed to mark report as errored:`,
-          dbErr.message,
-        );
+        console.error(`[BG Worker] Failed to mark report as errored:`, dbErr.message);
       }
     }
   }
@@ -161,9 +123,7 @@ async function writeResult(
     return true;
   }
 
-  console.warn(
-    `[BG Worker] UPDATE returned 0 rows — falling back to DELETE + INSERT`,
-  );
+  console.warn(`[BG Worker] UPDATE returned 0 rows — falling back to DELETE + INSERT`);
 
   const { error: deleteErr } = await supabase
     .from("Reports")
@@ -176,15 +136,13 @@ async function writeResult(
 
   const { data: inserted, error: insertErr } = await supabase
     .from("Reports")
-    .insert([
-      {
-        report_id: reportId,
-        full_report: fullReport,
-        result,
-        domain: existing.domain || "",
-        email: existing.email || "",
-      },
-    ])
+    .insert([{
+      report_id: reportId,
+      full_report: fullReport,
+      result,
+      domain: existing.domain || "",
+      email: existing.email || "",
+    }])
     .select("report_id");
 
   if (insertErr) {
@@ -210,5 +168,5 @@ async function writeResult(
 }
 
 export const config = {
-  path: "/.netlify/functions/analyze-background",
+  type: "background" as const,
 };

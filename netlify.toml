@@ -6,7 +6,6 @@
   # Maximum timeout for serverless functions (26s on Pro, 10s on free).
   external_node_modules = ["pdfkit"]
   node_bundler = "esbuild"
-  directory = "netlify/functions"
 
 [[headers]]
   for = "/api/*"

@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { CrawlData } from "@/types/geo";
+import { CrawlData } from "../types/geo";
 
 const HEDGING_WORDS = [
   "may",
