@@ -189,6 +189,93 @@ function extractDirectAnswers($: cheerio.CheerioAPI): string[] {
   return blocks.slice(0, 5);
 }
 
+// ── Internal link discovery ──────────────────────────────────────
+
+/**
+ * Discover internal links from the crawled homepage HTML.
+ * Returns unique same-origin URLs sorted by likely importance:
+ * 1. /about, /services, /pricing, /faq, /contact — high value for AI signals
+ * 2. Other top-level paths (short URLs, not blog posts or assets)
+ */
+function discoverInternalLinks(
+  homepageHtml: string,
+  baseUrl: string,
+  maxLinks: number = 10,
+): string[] {
+  const $ = cheerio.load(homepageHtml);
+  let origin: string;
+  try {
+    origin = new URL(baseUrl).origin;
+  } catch {
+    return [];
+  }
+
+  const seen = new Set<string>();
+  seen.add(baseUrl.replace(/\/$/, ""));
+
+  const HIGH_VALUE_PATTERNS = [
+    /\/(about|company|who-we-are)/i,
+    /\/(services|solutions|what-we-do|offerings)/i,
+    /\/(pricing|plans|packages|rates)/i,
+    /\/(faq|frequently-asked|help|support)/i,
+    /\/(contact|get-in-touch|reach-us)/i,
+    /\/(team|people|staff|leadership)/i,
+    /\/(reviews|testimonials|case-studies)/i,
+    /\/(products|features|capabilities)/i,
+  ];
+
+  const SKIP_PATTERNS = [
+    /\.(pdf|jpg|jpeg|png|gif|svg|webp|css|js|zip|mp4|mp3)$/i,
+    /\/(blog|news|press|media|events|archive)\//i,
+    /#/,
+    /\?/,
+    /\/(wp-admin|wp-content|wp-includes|cdn-cgi)\//i,
+    /\/(login|signup|register|cart|checkout)\//i,
+    /mailto:/i,
+    /tel:/i,
+    /javascript:/i,
+  ];
+
+  const highValue: string[] = [];
+  const others: string[] = [];
+
+  $("a[href]").each((_, el) => {
+    const href = $(el).attr("href");
+    if (!href) return;
+
+    let fullUrl: string;
+    try {
+      fullUrl = new URL(href, baseUrl).href.replace(/\/$/, "");
+    } catch {
+      return;
+    }
+
+    // Same origin only
+    if (!fullUrl.startsWith(origin)) return;
+    if (seen.has(fullUrl)) return;
+    if (SKIP_PATTERNS.some((p) => p.test(fullUrl))) return;
+
+    seen.add(fullUrl);
+
+    // Classify
+    const path = new URL(fullUrl).pathname;
+    if (path === "/" || path === "") return; // skip homepage duplicate
+
+    // Prefer short, top-level paths (e.g., /about vs /blog/2024/post-title)
+    const depth = path.split("/").filter(Boolean).length;
+    if (depth > 2) return; // skip deep pages
+
+    if (HIGH_VALUE_PATTERNS.some((p) => p.test(path))) {
+      highValue.push(fullUrl);
+    } else {
+      others.push(fullUrl);
+    }
+  });
+
+  // Return high-value first, then others, up to maxLinks
+  return [...highValue, ...others].slice(0, maxLinks);
+}
+
 // ── Public API ──────────────────────────────────────────────────
 
 /** Keep the old signature so nothing else breaks */
@@ -217,6 +304,42 @@ export async function crawlWebsite(
   const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
   const page = await fetchPage(normalizedUrl);
   return [page];
+}
+
+/**
+ * Crawl the homepage + up to (maxPages - 1) additional internal pages.
+ * Used by the paid deep-analysis flow for richer multi-page reports.
+ */
+export async function crawlMultiplePages(
+  url: string,
+  maxPages: number = 3,
+): Promise<CrawlData[]> {
+  const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
+
+  // Step 1: Crawl homepage
+  const homepage = await fetchPage(normalizedUrl);
+  const pages: CrawlData[] = [homepage];
+
+  if (maxPages <= 1 || !homepage.html) return pages;
+
+  // Step 2: Discover internal links from homepage
+  const internalLinks = discoverInternalLinks(homepage.html, normalizedUrl, maxPages * 2);
+  console.log(`[MultiCrawl] Found ${internalLinks.length} internal links, will crawl up to ${maxPages - 1} more`);
+
+  // Step 3: Crawl additional pages concurrently (respect concurrency limit)
+  const toFetch = internalLinks.slice(0, maxPages - 1);
+  const results = await Promise.allSettled(
+    toFetch.map((link) => fetchPage(link)),
+  );
+
+  for (const result of results) {
+    if (result.status === "fulfilled" && result.value.textContent.length > 50) {
+      pages.push(result.value);
+    }
+  }
+
+  console.log(`[MultiCrawl] Successfully crawled ${pages.length} pages total`);
+  return pages;
 }
 
 export async function crawlWebsiteDetailed(
