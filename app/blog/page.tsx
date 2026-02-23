@@ -4,7 +4,6 @@ import Script from "next/script";
 import { blogPosts } from "@/lib/blog-data";
 import {
   BLOG_CATEGORIES,
-  CATEGORY_COLOR_CLASSES,
   getBlogCategoryHref,
   type BlogCategory,
 } from "@/lib/blog-categories";
@@ -135,7 +134,6 @@ export default function BlogPage() {
         {Object.entries(groupedPosts).map(([rawCategory, posts]) => {
           const category = rawCategory as BlogCategory;
           const catInfo = BLOG_CATEGORIES[category];
-          const colorClass = CATEGORY_COLOR_CLASSES[catInfo.color];
           const sortedPosts = [...posts].sort(
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
           );
@@ -160,18 +158,11 @@ export default function BlogPage() {
                     className="bg-gray-800 rounded-xl overflow-hidden hover:bg-gray-750 transition-colors group"
                   >
                     <div className="p-6">
-                      <div className="flex items-center gap-2 mb-4 flex-wrap">
-                        <span
-                          className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${colorClass}`}
-                        >
-                          {catInfo.name}
-                        </span>
-                        {typeof post.score === "number" && (
-                          <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full border border-yellow-500/50 text-yellow-300 bg-yellow-500/10">
-                            Framework: {post.score}/10
-                          </span>
-                        )}
-                      </div>
+                      <p className="text-xs text-gray-400 mb-4">
+                        {catInfo.name}
+                        {typeof post.score === "number" &&
+                          ` · Framework: ${post.score}/10`}
+                      </p>
                       <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
                         {post.title}
                       </h3>

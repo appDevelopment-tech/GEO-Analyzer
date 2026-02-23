@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/blog-data";
 import {
   BLOG_CATEGORIES,
-  CATEGORY_COLOR_CLASSES,
   getBlogCategoryHref,
   isBlogCategory,
   type BlogCategory,
@@ -67,7 +66,6 @@ export default async function BlogCategoryPage({
 
   const info = BLOG_CATEGORIES[category];
   const posts = getCategoryPosts(category);
-  const colorClass = CATEGORY_COLOR_CLASSES[info.color];
   const categoryUrl = `${baseUrl}${getBlogCategoryHref(category)}`;
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -135,12 +133,7 @@ export default async function BlogCategoryPage({
         </nav>
 
         <section className="mb-12 bg-white rounded-2xl p-8 md:p-10 shadow-xl">
-          <div className="flex items-center gap-3 mb-4">
-            <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${colorClass}`}>
-              {info.name}
-            </span>
-            <span className="text-sm text-gray-500">{posts.length} articles</span>
-          </div>
+          <p className="text-sm text-gray-500 mb-4">{posts.length} articles</p>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {info.name}
           </h1>
@@ -157,18 +150,11 @@ export default async function BlogCategoryPage({
               className="bg-gray-800 rounded-xl overflow-hidden hover:bg-gray-750 transition-colors group"
             >
               <div className="p-6">
-                <div className="flex items-center gap-2 mb-4 flex-wrap">
-                  <span
-                    className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${colorClass}`}
-                  >
-                    {info.name}
-                  </span>
-                  {typeof post.score === "number" && (
-                    <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full border border-yellow-500/50 text-yellow-300 bg-yellow-500/10">
-                      Framework: {post.score}/10
-                    </span>
-                  )}
-                </div>
+                <p className="text-xs text-gray-400 mb-4">
+                  {info.name}
+                  {typeof post.score === "number" &&
+                    ` · Framework: ${post.score}/10`}
+                </p>
                 <h2 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
                   {post.title}
                 </h2>
