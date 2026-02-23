@@ -1,4 +1,5 @@
 import { blogPosts } from "@/lib/blog-data";
+import { comparisonPages } from "@/lib/comparison-data";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
@@ -10,6 +11,9 @@ function buildLlmsTxt(): string {
   });
 
   const topPosts = sortedPosts.slice(0, 60);
+  const topComparisons = [...comparisonPages]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 15);
 
   const lines = [
     "# GeoAnalyzer",
@@ -19,6 +23,7 @@ function buildLlmsTxt(): string {
     "## Canonical",
     `- ${baseUrl}`,
     `- ${baseUrl}/blog`,
+    `- ${baseUrl}/compare`,
     `- ${baseUrl}/docs`,
     `- ${baseUrl}/faq`,
     "",
@@ -31,6 +36,13 @@ function buildLlmsTxt(): string {
       (post) =>
         `- [${post.title}](${baseUrl}/blog/${post.slug})` +
         ` — ${post.description}`,
+    ),
+    "",
+    "## Priority Comparisons",
+    ...topComparisons.map(
+      (page) =>
+        `- [${page.title}](${baseUrl}/compare/${page.slug})` +
+        ` — ${page.description}`,
     ),
     "",
     "## Contact",

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { AUTHORS, getAuthorHref } from "@/lib/authors";
 import { blogPosts } from "@/lib/blog-data";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
+import { comparisonPages, getComparisonHref } from "@/lib/comparison-data";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
@@ -42,6 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.55,
+    },
+    {
+      url: `${baseUrl}/compare`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/about`,
@@ -92,5 +99,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticPages, ...categoryPages, ...authorPages, ...blogPages];
+  const comparisonSubPages: MetadataRoute.Sitemap = comparisonPages.map(
+    (page) => ({
+      url: `${baseUrl}${getComparisonHref(page.slug)}`,
+      lastModified: new Date(page.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.58,
+    }),
+  );
+
+  return [
+    ...staticPages,
+    ...categoryPages,
+    ...authorPages,
+    ...comparisonSubPages,
+    ...blogPages,
+  ];
 }

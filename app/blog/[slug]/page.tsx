@@ -9,6 +9,10 @@ import {
   CATEGORY_COLOR_CLASSES,
   getBlogCategoryHref,
 } from "@/lib/blog-categories";
+import {
+  getComparisonHref,
+  getRelatedComparisonsForPost,
+} from "@/lib/comparison-data";
 import { getInternalLinkTargets } from "@/lib/blog-link-matrix";
 import {
   generateBlogPostingSchema,
@@ -4008,6 +4012,7 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
   };
   const internalLinks = getInternalLinkTargets(post, blogPosts, 4);
+  const relatedComparisons = getRelatedComparisonsForPost(post, 3);
   const faqPairs = extractFaqPairs(content.sections);
   const categoryInfo = BLOG_CATEGORIES[post.category];
   const categoryClass = CATEGORY_COLOR_CLASSES[categoryInfo.color];
@@ -4167,6 +4172,32 @@ export default async function BlogPostPage({
                   </h3>
                   <p className="text-gray-400 text-sm line-clamp-2">
                     {relatedPost.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-16 pt-16 border-t border-gray-700">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              Compare Related Strategies
+            </h2>
+            <p className="text-gray-400 mb-6">
+              Programmatic comparison pages that map trade-offs for adjacent
+              GEO/AEO decisions.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              {relatedComparisons.map((comparison) => (
+                <Link
+                  key={comparison.slug}
+                  href={getComparisonHref(comparison.slug)}
+                  className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors"
+                >
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {comparison.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    {comparison.description}
                   </p>
                 </Link>
               ))}

@@ -93,6 +93,12 @@ export default function BlogPage() {
               FAQ
             </Link>
             <Link
+              href="/compare"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Compare
+            </Link>
+            <Link
               href="/contact"
               className="text-gray-300 hover:text-white transition-colors"
             >
