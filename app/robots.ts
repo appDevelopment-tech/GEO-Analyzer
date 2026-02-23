@@ -36,6 +36,14 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Google-Extended",
         allow: "/",
       },
+      {
+        userAgent: "OAI-SearchBot",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

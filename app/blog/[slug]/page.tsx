@@ -4,7 +4,11 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/blog-data";
 import { getInternalLinkTargets } from "@/lib/blog-link-matrix";
-import { generateBlogPostingSchema } from "@/lib/schema-data";
+import {
+  generateBlogPostingSchema,
+  generateBreadcrumbSchema,
+  generateFAQPageSchema,
+} from "@/lib/schema-data";
 import { Footer } from "@/components/Footer";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
@@ -3256,6 +3260,46 @@ const blogContent: Record<
   },
 };
 
+function extractFaqPairs(
+  sections: Array<{ heading: string; content: string }>,
+): Array<{ question: string; answer: string }> {
+  const pairs: Array<{ question: string; answer: string }> = [];
+
+  sections.forEach((section) => {
+    const looksLikeFaqSection =
+      section.heading.toLowerCase().includes("faq") ||
+      section.content.includes("> FAQ:");
+
+    if (!looksLikeFaqSection) return;
+
+    const lines = section.content
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    let currentQuestion = "";
+
+    lines.forEach((line) => {
+      const questionMatch = line.match(/^>\s*FAQ:\s*(.+)$/i);
+      if (questionMatch) {
+        currentQuestion = questionMatch[1].trim();
+        return;
+      }
+
+      const answerMatch = line.match(/^>\s*Answer:\s*(.+)$/i);
+      if (answerMatch && currentQuestion) {
+        pairs.push({
+          question: currentQuestion,
+          answer: answerMatch[1].trim(),
+        });
+        currentQuestion = "";
+      }
+    });
+  });
+
+  return pairs.slice(0, 8);
+}
+
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
@@ -3315,6 +3359,14 @@ export default async function BlogPostPage({
     "@context": "https://schema.org",
   };
   const internalLinks = getInternalLinkTargets(post, blogPosts, 4);
+  const faqPairs = extractFaqPairs(content.sections);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: baseUrl },
+    { name: "Blog", url: `${baseUrl}/blog` },
+    { name: post.title, url: `${baseUrl}/blog/${slug}` },
+  ]);
+  const faqSchema =
+    faqPairs.length >= 2 ? generateFAQPageSchema(faqPairs) : null;
 
   return (
     <>
@@ -3323,6 +3375,18 @@ export default async function BlogPostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
+      <Script
+        id={`schema-breadcrumb-${slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {faqSchema && (
+        <Script
+          id={`schema-faq-${slug}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <article className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
         {/* Header */}

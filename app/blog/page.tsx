@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { blogPosts } from "@/lib/blog-data";
+import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema-data";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
@@ -42,9 +44,32 @@ export default function BlogPage() {
     },
     {} as Record<string, typeof blogPosts>,
   );
+  const latestPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 50);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: baseUrl },
+    { name: "Blog", url: `${baseUrl}/blog` },
+  ]);
+  const itemListSchema = generateItemListSchema(
+    latestPosts.map((post) => ({
+      name: post.title,
+      url: `${baseUrl}/blog/${post.slug}`,
+    })),
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+      <Script
+        id="schema-blog-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Script
+        id="schema-blog-itemlist"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
       {/* Header */}
       <header className="border-b border-gray-700">
         <div className="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
