@@ -581,6 +581,378 @@ const blogContent: Record<
       },
     ],
   },
+  "why-top-pages-win-ai-search": {
+    directAnswer:
+      "Top pages win AI search because they align tightly with user intent, provide short extractable answers, prove claims with credible sources, and maintain clean technical signals (canonical URLs, crawl access, fast pages). In practice, the winners are the pages that are easiest for both users and machines to trust and quote.",
+    sections: [
+      {
+        heading: "Intent Match Beats Word Count",
+        content:
+          "Most high-performing AEO pages answer one clear question and resolve related follow-up questions in the same document. They don't try to rank for everything. Their structure mirrors user intent: definition first, then process, then edge cases, then examples. This reduces ambiguity and increases extractability for AI engines.",
+      },
+      {
+        heading: "Extractable Answer Format",
+        content:
+          "Winning pages use direct answers near the top, question-based subheadings, short paragraphs, and clear lists. AI systems can quote these sections without heavy rewriting. If a paragraph is vague, promotional, or overloaded with fluff, it is less likely to be reused in generated answers.",
+      },
+      {
+        heading: "Evidence and Source Quality",
+        content:
+          "Top pages support key claims with verifiable references and clear attribution. They use specific definitions, transparent methodology, and consistent terminology. AI products are conservative about trust. A page that shows where facts come from is easier to cite than one that only asserts opinions.",
+      },
+      {
+        heading: "Technical Reliability",
+        content:
+          "Top search pages usually have one preferred canonical URL, permanent redirects from alternate versions, no accidental noindex directives, and consistent internal linking. Technical consistency helps search systems consolidate ranking signals instead of splitting them across URL variants.",
+      },
+      {
+        heading: "How to Apply This to Your Site",
+        content:
+          "Pick one high-intent question per page. Add a 40-60 word direct answer under the H1. Add FAQPage or HowTo schema where appropriate. Verify canonical and redirect behavior. Then publish supporting pages that answer adjacent questions and link back to your main page. This cluster model is what most top AI-search pages have in common.",
+      },
+    ],
+  },
+  "top-questions-about-geo-aeo": {
+    directAnswer:
+      "The top GEO/AEO questions are practical: what GEO is, how it differs from SEO, how to appear in AI answers, which schema to implement, and how to measure citation performance. Content that answers these questions directly tends to earn more visibility across both classic search and AI search.",
+    sections: [
+      {
+        heading: "Foundational Questions Users Ask First",
+        content:
+          "Common early-stage questions include: What is GEO? What is AEO? Is AEO different from SEO? Does ranking in Google guarantee visibility in ChatGPT or Perplexity? These are high-volume educational queries and ideal for pillar pages.",
+      },
+      {
+        heading: "Execution Questions With Purchase Intent",
+        content:
+          "Mid-funnel questions include: How do I get cited in AI answers? What schema should I use first? How should I structure direct answer blocks? How do I compare competitors in AI citations? These queries map to checklists, templates, and service pages.",
+      },
+      {
+        heading: "Technical Questions Decision-Makers Ask",
+        content:
+          "Technical questions often include: Is my robots.txt blocking key bots? Why does Search Console show 'Page with redirect'? Should I use canonical tags and redirects together? How often should I refresh content? These topics attract teams ready to implement changes.",
+      },
+      {
+        heading: "Measurement Questions That Drive Retainers",
+        content:
+          "Measurement questions include: How do I track AI citations? What KPI replaces click-through rate in zero-click contexts? Which platforms should I prioritize first? These queries are useful for ongoing reporting and consulting packages.",
+      },
+      {
+        heading: "Editorial Plan You Can Ship in 30 Days",
+        content:
+          "Publish one pillar page ('What is GEO/AEO?'), three implementation pages (schema, direct answers, crawler access), two diagnostics pages (redirects, canonicalization), and two measurement pages (citation tracking, reporting). Interlink all pages and update them monthly with examples and dateModified changes.",
+      },
+    ],
+  },
+  "page-with-redirect-google-search-console": {
+    directAnswer:
+      "In Google Search Console, 'Page with redirect' usually means Google found a URL that intentionally redirects to another URL. That source URL is excluded from indexing by design. You should only fix it if the redirect is accidental, loops, or points to the wrong destination.",
+    sections: [
+      {
+        heading: "What the Status Means",
+        content:
+          "Google classifies redirecting URLs as non-indexed because they are not final destination pages. This is normal for URL variants such as HTTP to HTTPS, www to non-www, old slugs to new slugs, or trailing-slash normalization.",
+      },
+      {
+        heading: "When You Should Ignore It",
+        content:
+          "Ignore the status when all variants redirect with a permanent redirect to your preferred canonical URL, and the destination URL is indexable. Example: http://www.example.com/ redirecting to https://example.com/ is expected behavior, not a defect.",
+      },
+      {
+        heading: "When You Should Fix It",
+        content:
+          "Fix issues when redirects chain multiple hops, produce loops, point to unrelated destinations, or when your sitemap lists redirecting URLs instead of final URLs. Also fix if internal links keep pointing to non-canonical URLs, because that wastes crawl budget and dilutes signals.",
+      },
+      {
+        heading: "Practical Fix Workflow",
+        content:
+          "1) Pick one canonical host/protocol format.\n2) Redirect all variants in one hop.\n3) Use self-referencing canonical tags on destination pages.\n4) Ensure sitemaps include only final indexable URLs.\n5) Update internal links to canonical URLs.\n6) Request re-crawl only for URLs that were truly fixed.",
+      },
+      {
+        heading: "Why Validation Often Fails Here",
+        content:
+          "Validation fails if the redirect still exists, and in many cases that is expected. A redirecting URL is supposed to remain redirecting. In this scenario, there is nothing to 'repair'; the status is informational for excluded source URLs, while the destination URL is the one that should be indexed.",
+      },
+    ],
+  },
+  "canonical-redirects-technical-seo-ai-search": {
+    directAnswer:
+      "Canonical tags and redirects solve different problems. Redirects send users and crawlers to the preferred URL, while canonical tags consolidate duplicate signals when multiple URLs are still accessible. The strongest setup is one canonical URL plus permanent redirects from all alternate variants.",
+    sections: [
+      {
+        heading: "Redirect vs Canonical: The Difference",
+        content:
+          "Use redirects when you do not want alternate URLs to remain accessible. Use canonical tags when duplicates must stay live (for example filtered URLs, print pages, or campaign parameters) but you want signals credited to one preferred version.",
+      },
+      {
+        heading: "Preferred URL Architecture",
+        content:
+          "Choose one protocol (HTTPS), one host (www or non-www), one trailing-slash policy, and one content version per language/region. Enforce this with permanent redirects. Then place a self-referencing canonical tag on each destination page.",
+      },
+      {
+        heading: "Common Implementation Mistakes",
+        content:
+          "Avoid canonical tags pointing to URLs that redirect. Avoid sitemap entries that are redirected, noindexed, or blocked. Avoid mixed internal linking where some links use HTTP and others use HTTPS. These inconsistencies weaken signal consolidation.",
+      },
+      {
+        heading: "Testing Checklist",
+        content:
+          "Use header checks to confirm one-hop 301 behavior for all variants. Inspect rendered HTML for canonical tags. Fetch robots.txt and sitemap.xml to ensure consistency. Spot-check critical pages in Search Console URL Inspection and verify Google-selected canonical matches your preferred URL.",
+      },
+      {
+        heading: "Why This Matters for AI Search",
+        content:
+          "AI systems rely on search and web signals to determine reliable source documents. Canonical and redirect consistency reduces ambiguity about which page should represent your information. Fewer duplicates and cleaner signals improve the odds your intended page is cited.",
+      },
+    ],
+  },
+  "chatgpt-search-crawling-guide": {
+    directAnswer:
+      "For ChatGPT visibility, you need crawlable public pages, clear factual content, and bot access that matches your policy. OpenAI identifies multiple bots for different purposes, so your robots.txt should explicitly allow or disallow the right bot depending on whether you want training access, search visibility, or both.",
+    sections: [
+      {
+        heading: "Which OpenAI Bots Matter",
+        content:
+          "OpenAI documents separate bots for different functions. GPTBot is associated with improving foundation models. OAI-SearchBot is associated with search and linking in responses. ChatGPT-User represents user-triggered retrieval actions. Treat these separately in robots policy decisions.",
+      },
+      {
+        heading: "Access Policy by Goal",
+        content:
+          "If you want your content discoverable in ChatGPT search experiences, do not block search-related crawling. If you do not want model-training crawling, you can disallow the training bot while still allowing search-related access. Document your policy so legal, editorial, and growth teams are aligned.",
+      },
+      {
+        heading: "Content Patterns That Increase Citation Potential",
+        content:
+          "Pages with concise definitions, explicit question-answer structure, and verifiable claims tend to be easier for AI systems to quote. Add clear section headings, direct answers near the top, and specific examples. Avoid vague claims without context or evidence.",
+      },
+      {
+        heading: "Debugging Crawl and Citation Gaps",
+        content:
+          "Check server logs for bot user agents, verify robots directives on production, and test whether key pages are accessible without heavy client-side rendering. If pages are technically crawlable but not cited, improve answer clarity, entity signals, and source transparency.",
+      },
+      {
+        heading: "Operational Playbook",
+        content:
+          "Run a monthly check of robots rules, crawl accessibility, structured data validity, and question coverage for your highest-intent topics. Keep a single tracker for URL status, update dates, and citation checks so teams can iterate quickly instead of guessing.",
+      },
+    ],
+  },
+  "gptbot-vs-oai-searchbot": {
+    directAnswer:
+      "GPTBot and OAI-SearchBot serve different purposes. GPTBot relates to model improvement workflows, while OAI-SearchBot relates to search and link retrieval behavior. Publishers should decide bot access per business goal and set robots.txt directives explicitly rather than using one blanket rule.",
+    sections: [
+      {
+        heading: "Quick Comparison",
+        content:
+          "GPTBot: typically discussed in the context of model training and data collection policy. OAI-SearchBot: associated with search indexing and citation/linking behavior. ChatGPT-User: user-initiated fetch behavior. These distinctions matter when deciding what to allow.",
+      },
+      {
+        heading: "Robots.txt Examples",
+        content:
+          "Allow search, disallow training example:\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nAllow both example:\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: GPTBot\nAllow: /",
+      },
+      {
+        heading: "Policy Framework for Teams",
+        content:
+          "Define goals first: citation visibility, model-training participation, or strict content control. Then map those goals to bot directives. Revisit policy quarterly as platform behavior and legal requirements evolve. Keep one owner accountable for policy changes to avoid accidental blocks.",
+      },
+      {
+        heading: "Common Errors to Avoid",
+        content:
+          "Avoid assuming one directive controls all OpenAI behavior. Avoid production/dev mismatches where robots rules differ by environment. Avoid blocking bots globally while expecting AI visibility gains. Inconsistent policy is a frequent reason teams see no citation progress.",
+      },
+      {
+        heading: "Measurement",
+        content:
+          "Track bot hits in logs, citation presence for target queries, and branded search lift after policy/content updates. Bot access alone does not create visibility; it simply removes a gate. Content quality and entity trust still determine whether your pages are selected.",
+      },
+    ],
+  },
+  "google-ai-overviews-ranking-signals": {
+    directAnswer:
+      "Google AI Overviews tend to favor pages that satisfy intent quickly, demonstrate source credibility, and are technically reliable. The most practical levers are concise first-paragraph answers, strong E-E-A-T signals, clean structured data, and consistent page maintenance on volatile topics.",
+    sections: [
+      {
+        heading: "Intent Resolution and Query Fit",
+        content:
+          "Google's systems reward pages that answer the exact user question without forcing extra navigation. Put the direct answer at the top, then expand with context, caveats, and examples. Match page type to query type: definitions, comparisons, how-to, or troubleshooting.",
+      },
+      {
+        heading: "Credibility and Corroboration",
+        content:
+          "Citable pages show who wrote the content, why they are qualified, when it was updated, and where key claims come from. Add author context, references, and clear methodology. Trust increases when your claims can be cross-checked against other reliable sources.",
+      },
+      {
+        heading: "Structured Data and Technical Quality",
+        content:
+          "Use schema where it improves clarity (Organization, Article, FAQPage, HowTo where eligible). Keep Core Web Vitals acceptable, avoid broken internal links, and ensure canonical consistency. Technical quality does not replace content quality, but weak technical hygiene can suppress strong content.",
+      },
+      {
+        heading: "Freshness by Query Volatility",
+        content:
+          "Not all pages require the same update cadence. Fast-moving topics (platform changes, policy updates, tooling) need frequent updates. Stable concepts can be refreshed less often. Add dateModified when meaningful changes are made and keep examples current.",
+      },
+      {
+        heading: "How to Prioritize Work",
+        content:
+          "Start with pages already earning impressions for informational queries. Improve direct answers, add missing trust signals, and tighten structure. Then build supporting pages that answer adjacent questions. This usually produces faster gains than publishing random net-new posts.",
+      },
+    ],
+  },
+  "answer-engine-optimization-checklist-2026": {
+    directAnswer:
+      "A complete AEO setup needs four layers: technical access, clear answer structure, trust and entity signals, and recurring measurement. Teams that treat AEO as an ongoing operating system, not a one-time blog sprint, tend to earn more stable AI visibility.",
+    sections: [
+      {
+        heading: "Layer 1: Technical Access",
+        content:
+          "Ensure key pages return 200 status, are not blocked by robots unintentionally, and are included in sitemap only if indexable. Normalize URL variants with permanent redirects and self-referencing canonicals. Validate structured data and resolve critical parse errors.",
+      },
+      {
+        heading: "Layer 2: Answer Structure",
+        content:
+          "For each priority page, place a direct answer under the H1 in 40-60 words. Use question-led H2s. Add concise bullet lists for steps or comparisons. Include short FAQ sections for follow-up questions users commonly ask after the first answer.",
+      },
+      {
+        heading: "Layer 3: Entity and Trust",
+        content:
+          "Publish clear About and Contact pages, maintain consistent brand identity across web properties, and include author context for expert content. Support claims with references and update outdated examples. These trust cues improve the chance your content is selected as a safe source.",
+      },
+      {
+        heading: "Layer 4: Measurement Cadence",
+        content:
+          "Track monthly: citation presence for priority queries, branded search trend, key page indexation health, and content freshness backlog. Keep one dashboard that combines search visibility and AI citation checks so stakeholders can see trend lines, not snapshots.",
+      },
+      {
+        heading: "30-Day Rollout",
+        content:
+          "Week 1: Technical cleanup and URL normalization. Week 2: Direct answers on top pages. Week 3: Schema and entity upgrades. Week 4: Citation monitoring setup plus editorial calendar for next cluster. Repeat monthly with one primary topic cluster at a time.",
+      },
+    ],
+  },
+  "topical-authority-for-ai-citations": {
+    directAnswer:
+      "Topical authority for AI citations comes from consistent, interconnected coverage of a topic cluster. One strong page is not enough. You need a pillar page, supporting pages for sub-questions, and internal links that make expertise relationships explicit.",
+    sections: [
+      {
+        heading: "Build Topic Clusters, Not Isolated Posts",
+        content:
+          "Choose one business-critical topic, then map the parent question and 8-15 sub-questions users ask before buying. Publish a pillar page for the parent query and focused pages for each sub-question. Link child pages back to the pillar and to adjacent children where relevant.",
+      },
+      {
+        heading: "Coverage Depth That Actually Matters",
+        content:
+          "Depth is not word count. Depth is answering practical follow-ups, tradeoffs, implementation details, and failure cases. Pages that only define terms are easy to replace. Pages that include process detail, examples, and constraints are harder to replace and more likely to be cited.",
+      },
+      {
+        heading: "Internal Linking as a Relevance Graph",
+        content:
+          "Use descriptive anchor text that reflects question intent, not generic 'click here'. Every supporting page should link to the canonical pillar resource and at least two related support pages. This helps crawlers understand topical relationships and reduces orphaned content.",
+      },
+      {
+        heading: "Refresh and Prune Strategy",
+        content:
+          "Audit clusters quarterly. Merge overlapping thin pages, redirect obsolete pages, and expand pages that rank but underperform on engagement or citation checks. A smaller high-quality cluster often outperforms a large fragmented cluster.",
+      },
+      {
+        heading: "Example GEO Cluster",
+        content:
+          "Pillar: 'What is AEO?'\nSupport 1: 'AEO vs SEO'\nSupport 2: 'Schema for AEO'\nSupport 3: 'Direct answer blocks'\nSupport 4: 'Robots policy for AI bots'\nSupport 5: 'How to measure citations'\nThis structure aligns education, implementation, and measurement in one coherent graph.",
+      },
+    ],
+  },
+  "llms-txt-vs-robots-txt-guide": {
+    directAnswer:
+      "robots.txt is an established crawler-control mechanism used by major search bots. llms.txt is an emerging, non-standard convention that may help content discovery for some tools but is not a guaranteed ranking or indexing signal. Use robots.txt for enforceable bot policy and treat llms.txt as optional documentation.",
+    sections: [
+      {
+        heading: "What robots.txt Does Today",
+        content:
+          "robots.txt gives crawl directives by user-agent and remains the practical control surface for mainstream crawlers. It is the right place to allow or disallow specific bots, restrict sensitive paths, and publish sitemap locations. It is widely implemented and operationally reliable.",
+      },
+      {
+        heading: "What llms.txt Tries to Do",
+        content:
+          "llms.txt is typically used as a curated index of important pages and context for language-model tools. It may improve readability for agents that choose to consume it, but adoption and behavior are not standardized across platforms. It should not replace core technical SEO controls.",
+      },
+      {
+        heading: "Recommended Setup",
+        content:
+          "Keep robots.txt accurate and explicit. Maintain clean sitemap and canonical signals. If you publish llms.txt, keep it concise: top docs, key policies, and stable URLs. Treat it as supplemental guidance, not a substitute for crawl/index foundations.",
+      },
+      {
+        heading: "Avoid Common Misconceptions",
+        content:
+          "Publishing llms.txt does not force indexing or citation. Blocking a bot in robots.txt can still override your visibility goals regardless of llms.txt content. Most visibility gains still come from content quality, clear structure, and trust signals.",
+      },
+      {
+        heading: "Minimal llms.txt Template",
+        content:
+          "Use a short list of canonical URLs to your primary docs, FAQ, and policy pages, plus a one-line site description. Update it when core URLs change. Keep the file stable so agents can rely on it without chasing outdated links.",
+      },
+    ],
+  },
+  "best-content-formats-for-ai-citations": {
+    directAnswer:
+      "The most citable formats are direct Q&A pages, comparison pages, how-to guides, concise definitions, and data-backed explainers. These formats work because they map to common user intents and are easy for AI systems to extract, summarize, and attribute.",
+    sections: [
+      {
+        heading: "FAQ and Q&A Pages",
+        content:
+          "Q&A structures are highly extractable. Each question should have one concise answer paragraph followed by detail. Add FAQPage schema when eligible. Keep wording factual and specific so an AI answer can quote or paraphrase without losing meaning.",
+      },
+      {
+        heading: "Comparison Pages",
+        content:
+          "Comparison intent is strong in both search and AI tools. Use neutral side-by-side criteria, explicit tradeoffs, and audience-based recommendations. Avoid blanket 'best for everyone' claims. Comparisons with transparent criteria are easier to trust and cite.",
+      },
+      {
+        heading: "How-To and Troubleshooting Guides",
+        content:
+          "Procedural queries are ideal for step-based layouts. Use numbered steps, prerequisites, expected outcomes, and common failure points. Clear process documentation helps assistants answer 'how do I' queries accurately.",
+      },
+      {
+        heading: "Definitions and Concept Pages",
+        content:
+          "For top-of-funnel queries, lead with a 1-2 sentence definition, then explain why it matters, how it differs from adjacent concepts, and when to use it. This format improves both classic snippet performance and AI extraction.",
+      },
+      {
+        heading: "Data-Backed Explainers",
+        content:
+          "Pages that include transparent methods, sample sizes, and clear source notes are strong candidates for citation. If you use internal data, explain collection and limitations. Credibility increases when readers can evaluate the claim quality quickly.",
+      },
+    ],
+  },
+  "refresh-content-for-ai-overviews": {
+    directAnswer:
+      "Refresh frequency should match query volatility. Update fast-changing topics monthly, operational guides quarterly, and foundational definitions every 6-12 months. The goal is not constant rewrites; it is keeping high-value pages accurate enough to remain trusted citation candidates.",
+    sections: [
+      {
+        heading: "Set Refresh Cadence by Query Type",
+        content:
+          "Fast-changing queries (platform updates, policy shifts, new features) need monthly review. Mid-volatility queries (implementation guides, tooling comparisons) usually need quarterly updates. Stable conceptual pages can run on semiannual or annual refreshes unless new evidence appears.",
+      },
+      {
+        heading: "What to Update First",
+        content:
+          "Prioritize pages with high impressions, citation potential, or revenue impact. Refresh opening definitions, examples, screenshots, references, and FAQ entries first. If core guidance changed, update the direct answer block before expanding the rest of the article.",
+      },
+      {
+        heading: "Efficient Refresh Workflow",
+        content:
+          "Use a recurring audit sheet with fields for last updated date, confidence level, stale sections, and required owner. Batch similar updates (for example all bot-policy mentions) in one sprint. This makes updates predictable and reduces editorial debt.",
+      },
+      {
+        heading: "Show Freshness Transparently",
+        content:
+          "Use visible last-updated dates only when meaningful edits are made. Keep schema dateModified aligned with the real update. Avoid fake freshness updates that change a date without improving content; this erodes trust over time.",
+      },
+      {
+        heading: "Measure Refresh Impact",
+        content:
+          "After updates, monitor impressions for target queries, citation checks on key platforms, and branded search trend over 2-6 weeks. If metrics do not improve, the issue may be intent mismatch or weak trust signals rather than content age alone.",
+      },
+    ],
+  },
 };
 
 export async function generateStaticParams() {

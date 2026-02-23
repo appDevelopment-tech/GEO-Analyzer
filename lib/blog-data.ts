@@ -152,4 +152,112 @@ export const blogPosts: BlogPost[] = [
     category: "audits",
     content: "",
   },
+  {
+    slug: "why-top-pages-win-ai-search",
+    title: "Why Top Pages Win AI Search: 9 Shared Patterns",
+    description:
+      "Break down the common signals top-ranking GEO/AEO pages use: direct answers, entity clarity, structured data, and stronger trust proof.",
+    date: "2026-02-05",
+    category: "case-studies",
+    content: "",
+  },
+  {
+    slug: "top-questions-about-geo-aeo",
+    title: "Top GEO/AEO Questions People Ask (And How to Answer Them)",
+    description:
+      "A practical list of high-intent GEO/AEO questions from current search demand with content angles you can publish this quarter.",
+    date: "2026-02-06",
+    category: "audits",
+    content: "",
+  },
+  {
+    slug: "page-with-redirect-google-search-console",
+    title: "Page With Redirect in Google Search Console: Fix or Ignore?",
+    description:
+      "Understand when Search Console's 'Page with redirect' status is normal, when it signals a problem, and how to resolve true issues.",
+    date: "2026-02-07",
+    category: "fundamentals",
+    content: "",
+  },
+  {
+    slug: "canonical-redirects-technical-seo-ai-search",
+    title: "Canonical URLs + Redirects: Technical SEO Setup for AI Search",
+    description:
+      "Learn how canonical tags and permanent redirects work together to consolidate signals for Google, AI overviews, and answer engines.",
+    date: "2026-02-08",
+    category: "audits",
+    content: "",
+  },
+  {
+    slug: "chatgpt-search-crawling-guide",
+    title: "How ChatGPT Search Crawls Websites and Chooses Sources",
+    description:
+      "A practical guide to crawler access, indexing behavior, and the content patterns that improve your odds of being cited in ChatGPT.",
+    date: "2026-02-09",
+    category: "fundamentals",
+    content: "",
+  },
+  {
+    slug: "gptbot-vs-oai-searchbot",
+    title: "GPTBot vs OAI-SearchBot: What Each Bot Means for Publishers",
+    description:
+      "Know the difference between OpenAI bots and what each one controls in robots.txt, from model training access to search visibility.",
+    date: "2026-02-10",
+    category: "fundamentals",
+    content: "",
+  },
+  {
+    slug: "google-ai-overviews-ranking-signals",
+    title: "Google AI Overviews Ranking Signals: What Matters Most",
+    description:
+      "Focus on the inputs most correlated with AI Overview inclusion: intent match, concise answers, source credibility, and page experience.",
+    date: "2026-02-11",
+    category: "audits",
+    content: "",
+  },
+  {
+    slug: "answer-engine-optimization-checklist-2026",
+    title: "Answer Engine Optimization Checklist for 2026",
+    description:
+      "A deployment-ready AEO checklist covering technical setup, content structure, schema implementation, and measurement cadence.",
+    date: "2026-02-12",
+    category: "audits",
+    content: "",
+  },
+  {
+    slug: "topical-authority-for-ai-citations",
+    title: "Topical Authority for AI Citations: Build a Cluster That Gets Cited",
+    description:
+      "Use query clusters and internal linking to help AI engines understand your expertise and cite your pages more consistently.",
+    date: "2026-02-13",
+    category: "case-studies",
+    content: "",
+  },
+  {
+    slug: "llms-txt-vs-robots-txt-guide",
+    title: "llms.txt vs robots.txt: What Actually Helps AI Discovery?",
+    description:
+      "Separate signal from hype: where robots.txt matters today, where llms.txt can help readability, and where neither changes rankings.",
+    date: "2026-02-14",
+    category: "fundamentals",
+    content: "",
+  },
+  {
+    slug: "best-content-formats-for-ai-citations",
+    title: "Best Content Formats for AI Citations (With Examples)",
+    description:
+      "See which page formats are cited most often in AI answers and how to structure each format for extraction and attribution.",
+    date: "2026-02-15",
+    category: "audits",
+    content: "",
+  },
+  {
+    slug: "refresh-content-for-ai-overviews",
+    title: "How Often to Refresh Content for AI Overviews and AEO",
+    description:
+      "Set a practical refresh cycle by query type so your pages stay current enough for AI answers without constant rewrites.",
+    date: "2026-02-16",
+    category: "case-studies",
+    content: "",
+  },
 ];
