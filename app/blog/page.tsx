@@ -105,14 +105,24 @@ export default function BlogPage() {
       <main className="max-w-6xl mx-auto px-4 py-16">
         {/* Page Header */}
         <section className="mb-16 bg-white rounded-2xl p-8 md:p-12 shadow-xl">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            GEO Blog
-          </h1>
-          <p className="text-lg text-gray-700 leading-relaxed">
-            Learn how to optimize your website for AI recommendation engines.
-            Practical guides, templates, and case studies on Generative Engine
-            Optimization.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                GEO Blog
+              </h1>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Learn how to optimize your website for AI recommendation
+                engines. Practical guides, templates, and case studies on
+                Generative Engine Optimization.
+              </p>
+            </div>
+            <a
+              href="/rss.xml"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-gray-300 text-gray-800 hover:bg-gray-100 transition-colors text-sm font-medium shrink-0"
+            >
+              Subscribe via RSS
+            </a>
+          </div>
         </section>
 
         {/* Blog Posts by Category */}

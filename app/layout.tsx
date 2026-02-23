@@ -72,6 +72,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: baseUrl,
+    types: {
+      "application/rss+xml": `${baseUrl}/rss.xml`,
+    },
   },
 };
 
@@ -100,6 +103,12 @@ export default function RootLayout({
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="GeoAnalyzer Blog RSS Feed"
+          href={`${baseUrl}/rss.xml`}
         />
       </head>
       <body>
