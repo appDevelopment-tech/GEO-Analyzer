@@ -3,6 +3,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/blog-data";
+import { getInternalLinkTargets } from "@/lib/blog-link-matrix";
 import { generateBlogPostingSchema } from "@/lib/schema-data";
 import { Footer } from "@/components/Footer";
 
@@ -3313,6 +3314,7 @@ export default async function BlogPostPage({
     }),
     "@context": "https://schema.org",
   };
+  const internalLinks = getInternalLinkTargets(post, blogPosts, 4);
 
   return (
     <>
@@ -3411,29 +3413,30 @@ export default async function BlogPostPage({
             ))}
           </section>
 
-          {/* Related Posts */}
+          {/* Internal Linking Matrix */}
           <section className="mt-16 pt-16 border-t border-gray-700">
             <h2 className="text-2xl font-bold text-white mb-6">
-              Related Articles
+              Implementation Map: Next Articles
             </h2>
+            <p className="text-gray-400 mb-6">
+              Selected by topic-cluster linking matrix to strengthen this page's
+              citation context.
+            </p>
             <div className="grid md:grid-cols-2 gap-6">
-              {blogPosts
-                .filter((p) => p.slug !== slug && p.category === post.category)
-                .slice(0, 2)
-                .map((relatedPost) => (
-                  <Link
-                    key={relatedPost.slug}
-                    href={`/blog/${relatedPost.slug}`}
-                    className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors"
-                  >
-                    <h3 className="text-lg font-semibold text-white mb-2">
-                      {relatedPost.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm line-clamp-2">
-                      {relatedPost.description}
-                    </p>
-                  </Link>
-                ))}
+              {internalLinks.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/blog/${relatedPost.slug}`}
+                  className="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors"
+                >
+                  <h3 className="text-lg font-semibold text-white mb-2">
+                    {relatedPost.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm line-clamp-2">
+                    {relatedPost.description}
+                  </p>
+                </Link>
+              ))}
             </div>
           </section>
 
