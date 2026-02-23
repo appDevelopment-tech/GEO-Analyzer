@@ -5,6 +5,7 @@ export interface BlogPost {
   date: string;
   category: "fundamentals" | "audits" | "case-studies";
   content: string;
+  score?: number;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -258,6 +259,506 @@ export const blogPosts: BlogPost[] = [
       "Set a practical refresh cycle by query type so your pages stay current enough for AI answers without constant rewrites.",
     date: "2026-02-16",
     category: "case-studies",
+    content: "",
+  },
+  {
+    slug: "geo-vs-aeo-vs-seo-framework",
+    title: "GEO vs AEO vs SEO: One Framework for Strategic Decisions",
+    description:
+      "Source-of-truth guide to how GEO, AEO, and SEO differ and work together with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-17",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "does-seo-still-matter-in-ai-search",
+    title: "Does SEO Still Matter in AI Search?",
+    description:
+      "Source-of-truth guide to whether SEO still matters when AI answers reduce clicks with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-18",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "how-to-write-citable-definitions",
+    title: "How to Write Citable Definitions for GEO/AEO",
+    description:
+      "Source-of-truth guide to how to write definitions that AI systems can cite safely with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-19",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "faq-strategy-for-aeo",
+    title: "FAQ Strategy for AEO: Build an Answer Graph That Compounds",
+    description:
+      "Source-of-truth guide to how to design FAQ pages for answer engine optimization with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-20",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "howto-schema-for-answer-engines",
+    title: "HowTo Schema for Answer Engines: When It Helps and When It Fails",
+    description:
+      "Source-of-truth guide to when HowTo schema improves AI answer visibility with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-21",
+    category: "audits",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "organization-schema-for-entity-clarity",
+    title: "Organization Schema for Entity Clarity: Complete Implementation Guide",
+    description:
+      "Source-of-truth guide to how organization schema improves entity clarity with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-22",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "person-schema-for-authority",
+    title: "Person Schema for Authority: Author Credibility in AI Search",
+    description:
+      "Source-of-truth guide to how person schema supports authority and trust signals with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-23",
+    category: "fundamentals",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "citation-tracking-dashboard-setup",
+    title: "Citation Tracking Dashboard Setup: Metrics That Actually Matter",
+    description:
+      "Source-of-truth guide to how to build a practical citation tracking dashboard with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-24",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "ai-overviews-query-intent-map",
+    title: "AI Overviews Query-Intent Map: Where You Should Compete First",
+    description:
+      "Source-of-truth guide to which query intents trigger AI overviews and where to prioritize with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-25",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "chatgpt-citation-optimization",
+    title: "ChatGPT Citation Optimization: A Practical Editorial Model",
+    description:
+      "Source-of-truth guide to how to improve citation probability in ChatGPT experiences with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-26",
+    category: "fundamentals",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "perplexity-citation-optimization",
+    title: "Perplexity Citation Optimization: Freshness + Community Signals",
+    description:
+      "Source-of-truth guide to how to optimize specifically for Perplexity citations with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-27",
+    category: "fundamentals",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "claude-citation-optimization",
+    title: "Claude Citation Optimization: Nuance, Safety, and Source Quality",
+    description:
+      "Source-of-truth guide to how Claude-style responses select careful source material with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-02-28",
+    category: "fundamentals",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "copilot-citation-strategy",
+    title: "Copilot Citation Strategy: Enterprise-Aware Content Positioning",
+    description:
+      "Source-of-truth guide to how to structure content for Microsoft Copilot-style retrieval with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-01",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "local-business-aeo-playbook",
+    title: "Local Business AEO Playbook: GEO for Service-Area Companies",
+    description:
+      "Source-of-truth guide to how local businesses can appear in AI answers with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-02",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "ecommerce-product-pages-for-aeo",
+    title: "Ecommerce Product Pages for AEO: Conversion-Ready Answer Blocks",
+    description:
+      "Source-of-truth guide to how ecommerce pages should change for answer engines with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-03",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "b2b-saas-aeo-content-engine",
+    title: "B2B SaaS AEO Content Engine: From Problem Query to Demo Pipeline",
+    description:
+      "Source-of-truth guide to how B2B SaaS teams build repeatable AEO growth with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-04",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "healthcare-geo-compliance-guide",
+    title: "Healthcare GEO Compliance Guide: Accuracy, Safety, and Trust",
+    description:
+      "Source-of-truth guide to how healthcare publishers balance GEO with compliance with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-05",
+    category: "fundamentals",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "legal-geo-accuracy-framework",
+    title: "Legal GEO Accuracy Framework: Reducing Advice Risk in AI Search",
+    description:
+      "Source-of-truth guide to how legal sites stay accurate while optimizing for AI answers with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-06",
+    category: "fundamentals",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "finance-geo-risk-controls",
+    title: "Finance GEO Risk Controls: Evidence Standards for YMYL Content",
+    description:
+      "Source-of-truth guide to how finance content teams reduce risk in AI-visible content with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-07",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "old-way-vs-new-way-seo-to-aeo",
+    title: "Old Way vs New Way: Transitioning from SEO Tactics to AEO Systems",
+    description:
+      "Source-of-truth guide to how to shift from classic SEO output to AEO operating systems with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-08",
+    category: "case-studies",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "topic-cluster-blueprint-for-geo",
+    title: "Topic Cluster Blueprint for GEO: The Citation-Centric Architecture",
+    description:
+      "Source-of-truth guide to how to build topic clusters that maximize citation opportunities with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-09",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "internal-linking-patterns-for-citations",
+    title: "Internal Linking Patterns for Citations: What Actually Helps",
+    description:
+      "Source-of-truth guide to which internal linking patterns improve AI understanding with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-10",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "content-pruning-for-aeo",
+    title: "Content Pruning for AEO: Remove Noise, Increase Authority Density",
+    description:
+      "Source-of-truth guide to how pruning thin pages affects GEO and citation outcomes with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-11",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "update-frequency-by-topic-volatility",
+    title: "Update Frequency by Topic Volatility: AEO Refresh Policy",
+    description:
+      "Source-of-truth guide to how often different page types should be refreshed with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-12",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "no-click-search-conversion-model",
+    title: "No-Click Search Conversion Model: Monetizing Visibility Without Visits",
+    description:
+      "Source-of-truth guide to how to monetize AI visibility when clicks decline with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-13",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "brand-mentions-vs-clicks-kpis",
+    title: "Brand Mentions vs Clicks: KPI Stack for Zero-Click AI Search",
+    description:
+      "Source-of-truth guide to which KPIs replace click-first thinking in AEO with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-14",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "crawl-budget-for-large-content-sites",
+    title: "Crawl Budget for Large Content Sites in the AI Era",
+    description:
+      "Source-of-truth guide to how crawl budget decisions impact large GEO content estates with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-15",
+    category: "audits",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "javascript-rendering-and-ai-discovery",
+    title: "JavaScript Rendering and AI Discovery: Practical Mitigation Guide",
+    description:
+      "Source-of-truth guide to how JS rendering affects crawler and AI discoverability with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-16",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "canonicalization-at-scale-playbook",
+    title: "Canonicalization at Scale Playbook: Prevent Signal Fragmentation",
+    description:
+      "Source-of-truth guide to how to run canonicalization reliably at scale with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-17",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "redirect-migration-without-traffic-loss",
+    title: "Redirect Migration Without Traffic Loss: GEO-Safe Protocol",
+    description:
+      "Source-of-truth guide to how to execute URL migrations without citation signal loss with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-18",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "multilingual-geo-strategy",
+    title: "Multilingual GEO Strategy: Language Coverage Without Cannibalization",
+    description:
+      "Source-of-truth guide to how to expand multilingual content for AI search with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-19",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "international-hreflang-for-ai-search",
+    title: "International hreflang for AI Search: What Still Applies",
+    description:
+      "Source-of-truth guide to how hreflang interacts with AI-driven retrieval pathways with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-20",
+    category: "audits",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "llms-txt-implementation-guide",
+    title: "llms.txt Implementation Guide: Supplemental, Not Substitute",
+    description:
+      "Source-of-truth guide to how to use llms.txt without weakening core SEO foundations with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-21",
+    category: "fundamentals",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "robots-txt-policy-for-ai-bots",
+    title: "robots.txt Policy for AI Bots: Governance Model for Publishers",
+    description:
+      "Source-of-truth guide to how to govern robots policy decisions across teams with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-22",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "gsc-indexing-debug-framework",
+    title: "Google Search Console Indexing Debug Framework for GEO Teams",
+    description:
+      "Source-of-truth guide to how to debug indexing and exclusion states systematically with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-23",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "entity-reconciliation-across-the-web",
+    title: "Entity Reconciliation Across the Web: Fixing Identity Drift",
+    description:
+      "Source-of-truth guide to how to reconcile inconsistent entity signals across platforms with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-24",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "knowledge-panel-building-playbook",
+    title: "Knowledge Panel Building Playbook: Signals You Can Control",
+    description:
+      "Source-of-truth guide to which actions increase likelihood of stronger knowledge graph representation with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-25",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "comparison-page-template-for-aeo",
+    title: "Comparison Page Template for AEO: Neutral, Useful, and Citable",
+    description:
+      "Source-of-truth guide to how to build comparison pages that get cited with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-26",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "troubleshooting-content-template",
+    title: "Troubleshooting Content Template for Answer Engines",
+    description:
+      "Source-of-truth guide to how to structure troubleshooting guides for AI retrieval with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-27",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "data-driven-content-for-ai-citations",
+    title: "Data-Driven Content for AI Citations: Method > Opinion",
+    description:
+      "Source-of-truth guide to how original data content improves citation potential with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-28",
+    category: "case-studies",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "editorial-workflow-human-ai-teams",
+    title: "Editorial Workflow for Human + AI Teams: Quality Control by Design",
+    description:
+      "Source-of-truth guide to how teams combine AI drafting with human editorial authority with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-29",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "fact-checking-workflow-for-aeo",
+    title: "Fact-Checking Workflow for AEO: Source Discipline at Scale",
+    description:
+      "Source-of-truth guide to how to operationalize fact checking for high-volume AEO publishing with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-30",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "ai-content-quality-rubric",
+    title: "AI Content Quality Rubric: A Practical 10-Point Review System",
+    description:
+      "Source-of-truth guide to how to score content quality before publishing in AI-search markets with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-03-31",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "aeo-pillar-page-template",
+    title: "AEO Pillar Page Template: Build One Page Worth Citing",
+    description:
+      "Source-of-truth guide to how to design a pillar page as a source-of-truth asset with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-01",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "service-page-direct-answer-template",
+    title: "Service Page Direct-Answer Template for GEO",
+    description:
+      "Source-of-truth guide to how to turn service pages into quote-ready answer assets with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-02",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "founder-led-thought-leadership-for-geo",
+    title: "Founder-Led Thought Leadership for GEO: Experience as a Ranking Signal",
+    description:
+      "Source-of-truth guide to how founder expertise can strengthen GEO trust signals with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-03",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "community-content-for-perplexity",
+    title: "Community Content for Perplexity: Where Discussion Becomes Discovery",
+    description:
+      "Source-of-truth guide to how community platforms influence Perplexity citation patterns with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-04",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "reddit-strategy-for-ai-visibility",
+    title: "Reddit Strategy for AI Visibility: Participation Without Spam",
+    description:
+      "Source-of-truth guide to how Reddit activity can support AI visibility ethically with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-05",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "30-day-aeo-sprint-plan",
+    title: "30-Day AEO Sprint Plan: From Audit to Publication",
+    description:
+      "Source-of-truth guide to how to execute an AEO sprint in 30 days with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-06",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "90-day-geo-roadmap",
+    title: "90-Day GEO Roadmap: Build Durable Citation Equity",
+    description:
+      "Source-of-truth guide to how to sequence GEO work over a full quarter with definitions, evidence links, risks, and a practical implementation map.",
+    date: "2026-04-07",
+    category: "audits",
+    score: 10,
     content: "",
   },
 ];

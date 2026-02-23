@@ -953,6 +953,2306 @@ const blogContent: Record<
       },
     ],
   },
+  "geo-vs-aeo-vs-seo-framework": {
+    directAnswer:
+      "For how GEO, AEO, and SEO differ and work together, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how GEO, AEO, and SEO differ and work together as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how GEO, AEO, and SEO differ and work together means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how GEO, AEO, and SEO differ and work together end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how GEO, AEO, and SEO differ and work together.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "does-seo-still-matter-in-ai-search": {
+    directAnswer:
+      "For whether SEO still matters when AI answers reduce clicks, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat whether SEO still matters when AI answers reduce clicks as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: whether SEO still matters when AI answers reduce clicks means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves whether SEO still matters when AI answers reduce clicks end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on whether SEO still matters when AI answers reduce clicks.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "how-to-write-citable-definitions": {
+    directAnswer:
+      "For how to write definitions that AI systems can cite safely, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to write definitions that AI systems can cite safely as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to write definitions that AI systems can cite safely means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to write definitions that AI systems can cite safely end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to write definitions that AI systems can cite safely.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "faq-strategy-for-aeo": {
+    directAnswer:
+      "For how to design FAQ pages for answer engine optimization, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to design FAQ pages for answer engine optimization as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to design FAQ pages for answer engine optimization means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to design FAQ pages for answer engine optimization end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to design FAQ pages for answer engine optimization.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "howto-schema-for-answer-engines": {
+    directAnswer:
+      "For when HowTo schema improves AI answer visibility, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat when HowTo schema improves AI answer visibility as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: when HowTo schema improves AI answer visibility means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves when HowTo schema improves AI answer visibility end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on when HowTo schema improves AI answer visibility.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "organization-schema-for-entity-clarity": {
+    directAnswer:
+      "For how organization schema improves entity clarity, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how organization schema improves entity clarity as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how organization schema improves entity clarity means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how organization schema improves entity clarity end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how organization schema improves entity clarity.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "person-schema-for-authority": {
+    directAnswer:
+      "For how person schema supports authority and trust signals, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how person schema supports authority and trust signals as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how person schema supports authority and trust signals means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how person schema supports authority and trust signals end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how person schema supports authority and trust signals.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "citation-tracking-dashboard-setup": {
+    directAnswer:
+      "For how to build a practical citation tracking dashboard, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to build a practical citation tracking dashboard as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to build a practical citation tracking dashboard means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to build a practical citation tracking dashboard end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to build a practical citation tracking dashboard.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "ai-overviews-query-intent-map": {
+    directAnswer:
+      "For which query intents trigger AI overviews and where to prioritize, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat which query intents trigger AI overviews and where to prioritize as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: which query intents trigger AI overviews and where to prioritize means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves which query intents trigger AI overviews and where to prioritize end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on which query intents trigger AI overviews and where to prioritize.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "chatgpt-citation-optimization": {
+    directAnswer:
+      "For how to improve citation probability in ChatGPT experiences, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to improve citation probability in ChatGPT experiences as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to improve citation probability in ChatGPT experiences means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to improve citation probability in ChatGPT experiences end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to improve citation probability in ChatGPT experiences.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "perplexity-citation-optimization": {
+    directAnswer:
+      "For how to optimize specifically for Perplexity citations, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to optimize specifically for Perplexity citations as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to optimize specifically for Perplexity citations means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to optimize specifically for Perplexity citations end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to optimize specifically for Perplexity citations.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "claude-citation-optimization": {
+    directAnswer:
+      "For how Claude-style responses select careful source material, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how Claude-style responses select careful source material as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how Claude-style responses select careful source material means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how Claude-style responses select careful source material end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how Claude-style responses select careful source material.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "copilot-citation-strategy": {
+    directAnswer:
+      "For how to structure content for Microsoft Copilot-style retrieval, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to structure content for Microsoft Copilot-style retrieval as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to structure content for Microsoft Copilot-style retrieval means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to structure content for Microsoft Copilot-style retrieval end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to structure content for Microsoft Copilot-style retrieval.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "local-business-aeo-playbook": {
+    directAnswer:
+      "For how local businesses can appear in AI answers, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how local businesses can appear in AI answers as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how local businesses can appear in AI answers means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how local businesses can appear in AI answers end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how local businesses can appear in AI answers.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "ecommerce-product-pages-for-aeo": {
+    directAnswer:
+      "For how ecommerce pages should change for answer engines, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how ecommerce pages should change for answer engines as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how ecommerce pages should change for answer engines means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how ecommerce pages should change for answer engines end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how ecommerce pages should change for answer engines.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "b2b-saas-aeo-content-engine": {
+    directAnswer:
+      "For how B2B SaaS teams build repeatable AEO growth, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how B2B SaaS teams build repeatable AEO growth as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how B2B SaaS teams build repeatable AEO growth means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how B2B SaaS teams build repeatable AEO growth end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how B2B SaaS teams build repeatable AEO growth.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "healthcare-geo-compliance-guide": {
+    directAnswer:
+      "For how healthcare publishers balance GEO with compliance, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how healthcare publishers balance GEO with compliance as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how healthcare publishers balance GEO with compliance means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how healthcare publishers balance GEO with compliance end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how healthcare publishers balance GEO with compliance.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "legal-geo-accuracy-framework": {
+    directAnswer:
+      "For how legal sites stay accurate while optimizing for AI answers, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how legal sites stay accurate while optimizing for AI answers as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how legal sites stay accurate while optimizing for AI answers means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how legal sites stay accurate while optimizing for AI answers end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how legal sites stay accurate while optimizing for AI answers.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "finance-geo-risk-controls": {
+    directAnswer:
+      "For how finance content teams reduce risk in AI-visible content, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how finance content teams reduce risk in AI-visible content as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how finance content teams reduce risk in AI-visible content means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how finance content teams reduce risk in AI-visible content end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how finance content teams reduce risk in AI-visible content.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "old-way-vs-new-way-seo-to-aeo": {
+    directAnswer:
+      "For how to shift from classic SEO output to AEO operating systems, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to shift from classic SEO output to AEO operating systems as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to shift from classic SEO output to AEO operating systems means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to shift from classic SEO output to AEO operating systems end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to shift from classic SEO output to AEO operating systems.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "topic-cluster-blueprint-for-geo": {
+    directAnswer:
+      "For how to build topic clusters that maximize citation opportunities, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to build topic clusters that maximize citation opportunities as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to build topic clusters that maximize citation opportunities means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to build topic clusters that maximize citation opportunities end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to build topic clusters that maximize citation opportunities.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "internal-linking-patterns-for-citations": {
+    directAnswer:
+      "For which internal linking patterns improve AI understanding, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat which internal linking patterns improve AI understanding as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: which internal linking patterns improve AI understanding means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves which internal linking patterns improve AI understanding end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on which internal linking patterns improve AI understanding.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "content-pruning-for-aeo": {
+    directAnswer:
+      "For how pruning thin pages affects GEO and citation outcomes, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how pruning thin pages affects GEO and citation outcomes as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how pruning thin pages affects GEO and citation outcomes means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how pruning thin pages affects GEO and citation outcomes end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how pruning thin pages affects GEO and citation outcomes.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "update-frequency-by-topic-volatility": {
+    directAnswer:
+      "For how often different page types should be refreshed, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how often different page types should be refreshed as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how often different page types should be refreshed means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how often different page types should be refreshed end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how often different page types should be refreshed.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "no-click-search-conversion-model": {
+    directAnswer:
+      "For how to monetize AI visibility when clicks decline, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to monetize AI visibility when clicks decline as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to monetize AI visibility when clicks decline means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to monetize AI visibility when clicks decline end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to monetize AI visibility when clicks decline.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "brand-mentions-vs-clicks-kpis": {
+    directAnswer:
+      "For which KPIs replace click-first thinking in AEO, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat which KPIs replace click-first thinking in AEO as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: which KPIs replace click-first thinking in AEO means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves which KPIs replace click-first thinking in AEO end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on which KPIs replace click-first thinking in AEO.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "crawl-budget-for-large-content-sites": {
+    directAnswer:
+      "For how crawl budget decisions impact large GEO content estates, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how crawl budget decisions impact large GEO content estates as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how crawl budget decisions impact large GEO content estates means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how crawl budget decisions impact large GEO content estates end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how crawl budget decisions impact large GEO content estates.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "javascript-rendering-and-ai-discovery": {
+    directAnswer:
+      "For how JS rendering affects crawler and AI discoverability, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how JS rendering affects crawler and AI discoverability as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how JS rendering affects crawler and AI discoverability means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how JS rendering affects crawler and AI discoverability end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how JS rendering affects crawler and AI discoverability.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "canonicalization-at-scale-playbook": {
+    directAnswer:
+      "For how to run canonicalization reliably at scale, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to run canonicalization reliably at scale as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to run canonicalization reliably at scale means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to run canonicalization reliably at scale end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to run canonicalization reliably at scale.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "redirect-migration-without-traffic-loss": {
+    directAnswer:
+      "For how to execute URL migrations without citation signal loss, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to execute URL migrations without citation signal loss as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to execute URL migrations without citation signal loss means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to execute URL migrations without citation signal loss end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to execute URL migrations without citation signal loss.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "multilingual-geo-strategy": {
+    directAnswer:
+      "For how to expand multilingual content for AI search, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to expand multilingual content for AI search as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to expand multilingual content for AI search means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to expand multilingual content for AI search end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to expand multilingual content for AI search.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "international-hreflang-for-ai-search": {
+    directAnswer:
+      "For how hreflang interacts with AI-driven retrieval pathways, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how hreflang interacts with AI-driven retrieval pathways as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how hreflang interacts with AI-driven retrieval pathways means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how hreflang interacts with AI-driven retrieval pathways end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how hreflang interacts with AI-driven retrieval pathways.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "llms-txt-implementation-guide": {
+    directAnswer:
+      "For how to use llms.txt without weakening core SEO foundations, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to use llms.txt without weakening core SEO foundations as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to use llms.txt without weakening core SEO foundations means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to use llms.txt without weakening core SEO foundations end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to use llms.txt without weakening core SEO foundations.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "robots-txt-policy-for-ai-bots": {
+    directAnswer:
+      "For how to govern robots policy decisions across teams, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to govern robots policy decisions across teams as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to govern robots policy decisions across teams means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to govern robots policy decisions across teams end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to govern robots policy decisions across teams.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "gsc-indexing-debug-framework": {
+    directAnswer:
+      "For how to debug indexing and exclusion states systematically, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to debug indexing and exclusion states systematically as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to debug indexing and exclusion states systematically means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to debug indexing and exclusion states systematically end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to debug indexing and exclusion states systematically.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "entity-reconciliation-across-the-web": {
+    directAnswer:
+      "For how to reconcile inconsistent entity signals across platforms, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to reconcile inconsistent entity signals across platforms as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to reconcile inconsistent entity signals across platforms means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to reconcile inconsistent entity signals across platforms end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to reconcile inconsistent entity signals across platforms.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "knowledge-panel-building-playbook": {
+    directAnswer:
+      "For which actions increase likelihood of stronger knowledge graph representation, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat which actions increase likelihood of stronger knowledge graph representation as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: which actions increase likelihood of stronger knowledge graph representation means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves which actions increase likelihood of stronger knowledge graph representation end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on which actions increase likelihood of stronger knowledge graph representation.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "comparison-page-template-for-aeo": {
+    directAnswer:
+      "For how to build comparison pages that get cited, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to build comparison pages that get cited as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to build comparison pages that get cited means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to build comparison pages that get cited end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to build comparison pages that get cited.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "troubleshooting-content-template": {
+    directAnswer:
+      "For how to structure troubleshooting guides for AI retrieval, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to structure troubleshooting guides for AI retrieval as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to structure troubleshooting guides for AI retrieval means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to structure troubleshooting guides for AI retrieval end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to structure troubleshooting guides for AI retrieval.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "data-driven-content-for-ai-citations": {
+    directAnswer:
+      "For how original data content improves citation potential, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how original data content improves citation potential as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how original data content improves citation potential means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how original data content improves citation potential end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how original data content improves citation potential.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "editorial-workflow-human-ai-teams": {
+    directAnswer:
+      "For how teams combine AI drafting with human editorial authority, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how teams combine AI drafting with human editorial authority as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how teams combine AI drafting with human editorial authority means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how teams combine AI drafting with human editorial authority end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how teams combine AI drafting with human editorial authority.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "fact-checking-workflow-for-aeo": {
+    directAnswer:
+      "For how to operationalize fact checking for high-volume AEO publishing, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to operationalize fact checking for high-volume AEO publishing as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to operationalize fact checking for high-volume AEO publishing means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to operationalize fact checking for high-volume AEO publishing end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to operationalize fact checking for high-volume AEO publishing.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "ai-content-quality-rubric": {
+    directAnswer:
+      "For how to score content quality before publishing in AI-search markets, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to score content quality before publishing in AI-search markets as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to score content quality before publishing in AI-search markets means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to score content quality before publishing in AI-search markets end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to score content quality before publishing in AI-search markets.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "aeo-pillar-page-template": {
+    directAnswer:
+      "For how to design a pillar page as a source-of-truth asset, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to design a pillar page as a source-of-truth asset as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to design a pillar page as a source-of-truth asset means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to design a pillar page as a source-of-truth asset end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to design a pillar page as a source-of-truth asset.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "service-page-direct-answer-template": {
+    directAnswer:
+      "For how to turn service pages into quote-ready answer assets, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to turn service pages into quote-ready answer assets as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to turn service pages into quote-ready answer assets means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to turn service pages into quote-ready answer assets end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to turn service pages into quote-ready answer assets.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "founder-led-thought-leadership-for-geo": {
+    directAnswer:
+      "For how founder expertise can strengthen GEO trust signals, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how founder expertise can strengthen GEO trust signals as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how founder expertise can strengthen GEO trust signals means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how founder expertise can strengthen GEO trust signals end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how founder expertise can strengthen GEO trust signals.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "community-content-for-perplexity": {
+    directAnswer:
+      "For how community platforms influence Perplexity citation patterns, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how community platforms influence Perplexity citation patterns as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how community platforms influence Perplexity citation patterns means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how community platforms influence Perplexity citation patterns end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how community platforms influence Perplexity citation patterns.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "reddit-strategy-for-ai-visibility": {
+    directAnswer:
+      "For how Reddit activity can support AI visibility ethically, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how Reddit activity can support AI visibility ethically as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how Reddit activity can support AI visibility ethically means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how Reddit activity can support AI visibility ethically end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how Reddit activity can support AI visibility ethically.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "30-day-aeo-sprint-plan": {
+    directAnswer:
+      "For how to execute an AEO sprint in 30 days, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to execute an AEO sprint in 30 days as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to execute an AEO sprint in 30 days means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to execute an AEO sprint in 30 days end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to execute an AEO sprint in 30 days.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
+  "90-day-geo-roadmap": {
+    directAnswer:
+      "For how to sequence GEO work over a full quarter, the highest-leverage approach is one source-of-truth page with a concise definition, primary-source citations, explicit limitations, and a 30-day implementation plan. That structure helps humans act quickly and gives AI systems a stable, quote-ready document to treat as the canonical reference.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "Most teams treat how to sequence GEO work over a full quarter as a publishing volume problem. The tension is that answer engines reward coherence, not volume. This article is written for operators who need both human trust and machine citation. The goal is to replace scattered advice with one dependable source of truth.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to sequence GEO work over a full quarter means creating a single page that resolves the core question with evidence, limitations, and next actions.\n> Standard: If an assistant had to answer using one URL, this page should be sufficient.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Named entities and primary sources:\n- Google Search Central (crawling/indexing): https://developers.google.com/search/docs/crawling-indexing/overview\n- Canonicalization guidance: https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- OpenAI publisher guidance and bot policy: https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- GPTBot reference: https://openai.com/gptbot\n- Structured data vocabulary: https://schema.org\nRule applied: no claim stands without a source link or documented first-hand implementation note.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: generic posts, weak definitions, no explicit evidence trail, and no implementation map.\nNew Way: one canonical page with direct answer, cited references, objection handling, and an execution timeline.\nComparison result: teams reduce duplication risk and improve citation consistency because signals point to one best document.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure case: we have seen teams add schema while leaving conflicting canonicals and internal links; nothing improved until URL signals were cleaned. Limitation: formatting cannot compensate for weak proof or unclear positioning. Rollback trigger: if added sections increase noise, trim to fewer, denser sections and keep one canonical answer path.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A source-of-truth page that resolves how to sequence GEO work over a full quarter end-to-end.\n> FAQ: Why does it matter?\n> Answer: AI systems prefer pages with explicit definitions, proof, and clear scope.\n> FAQ: How does it work?\n> Answer: Direct answer + evidence + implementation map + limits.\n> FAQ: What are the risks?\n> Answer: Over-automation, unsourced claims, and conflicting technical signals.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and expand only after evidence and structure are stable.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Publish or refresh one canonical page focused only on how to sequence GEO work over a full quarter.\nSecondary actions:\n- Add evidence links to primary documentation for every factual claim.\n- Add block-quote definitions and FAQs that directly answer implementation objections.\n- Link 3-5 supporting pages back to the canonical page with intent-matched anchors.\nExecution plan:\n- Days 1-7: finalize thesis, direct answer, and source links.\n- Days 8-14: ship FAQ graph, comparison section, and internal links.\n- Days 15-30: validate crawl/index signals, measure citations, and iterate weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The initial tension was quantity versus trust. The transformation is precision plus proof. When one page answers the full question responsibly, humans finish smarter and AI systems have a safe citation target. Uncomfortable truth: if your page cannot survive source-level scrutiny, it does not deserve source-level visibility.",
+      },
+    ],
+  },
 };
 
 export async function generateStaticParams() {
@@ -1065,13 +3365,20 @@ export default async function BlogPostPage({
 
           {/* Article Header */}
           <header className="mb-12">
-            <time className="text-gray-400 text-sm">
-              {new Date(post.date).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </time>
+            <div className="flex items-center gap-3 flex-wrap">
+              <time className="text-gray-400 text-sm">
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+              {typeof post.score === "number" && (
+                <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full border border-yellow-500/50 text-yellow-300 bg-yellow-500/10">
+                  Framework Score: {post.score}/10
+                </span>
+              )}
+            </div>
             <h1 className="text-3xl md:text-5xl font-bold text-white mt-4 mb-6">
               {post.title}
             </h1>

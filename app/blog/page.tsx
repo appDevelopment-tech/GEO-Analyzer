@@ -98,6 +98,9 @@ export default function BlogPage() {
           const catInfo = categories[category as keyof typeof categories];
           const colorClass =
             categoryColors[catInfo.color as keyof typeof categoryColors];
+          const sortedPosts = [...posts].sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+          );
           return (
             <section key={category} className="mb-16">
               <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
@@ -107,18 +110,25 @@ export default function BlogPage() {
                 {catInfo.name}
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {posts.map((post) => (
+                {sortedPosts.map((post) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
                     className="bg-gray-800 rounded-xl overflow-hidden hover:bg-gray-750 transition-colors group"
                   >
                     <div className="p-6">
-                      <span
-                        className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${colorClass} mb-4`}
-                      >
-                        {catInfo.name}
-                      </span>
+                      <div className="flex items-center gap-2 mb-4 flex-wrap">
+                        <span
+                          className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${colorClass}`}
+                        >
+                          {catInfo.name}
+                        </span>
+                        {typeof post.score === "number" && (
+                          <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full border border-yellow-500/50 text-yellow-300 bg-yellow-500/10">
+                            Framework: {post.score}/10
+                          </span>
+                        )}
+                      </div>
                       <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
                         {post.title}
                       </h3>
