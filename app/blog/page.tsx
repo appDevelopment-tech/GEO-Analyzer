@@ -2,7 +2,16 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { blogPosts } from "@/lib/blog-data";
-import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema-data";
+import {
+  BLOG_CATEGORIES,
+  CATEGORY_COLOR_CLASSES,
+  getBlogCategoryHref,
+  type BlogCategory,
+} from "@/lib/blog-categories";
+import {
+  generateBreadcrumbSchema,
+  generateItemListSchema,
+} from "@/lib/schema-data";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
@@ -19,18 +28,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/blog`,
   },
-};
-
-const categories = {
-  fundamentals: { name: "GEO Fundamentals", color: "purple" },
-  audits: { name: "Audits & Templates", color: "green" },
-  "case-studies": { name: "Case Studies", color: "blue" },
-};
-
-const categoryColors = {
-  purple: "bg-purple-500/20 text-purple-400 border-purple-500/50",
-  green: "bg-green-500/20 text-green-400 border-green-500/50",
-  blue: "bg-blue-500/20 text-blue-400 border-blue-500/50",
 };
 
 export default function BlogPage() {
@@ -119,10 +116,10 @@ export default function BlogPage() {
         </section>
 
         {/* Blog Posts by Category */}
-        {Object.entries(groupedPosts).map(([category, posts]) => {
-          const catInfo = categories[category as keyof typeof categories];
-          const colorClass =
-            categoryColors[catInfo.color as keyof typeof categoryColors];
+        {Object.entries(groupedPosts).map(([rawCategory, posts]) => {
+          const category = rawCategory as BlogCategory;
+          const catInfo = BLOG_CATEGORIES[category];
+          const colorClass = CATEGORY_COLOR_CLASSES[catInfo.color];
           const sortedPosts = [...posts].sort(
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
           );
@@ -132,7 +129,12 @@ export default function BlogPage() {
                 <span
                   className={`w-3 h-3 rounded-full bg-${catInfo.color}-500`}
                 />
-                {catInfo.name}
+                <Link
+                  href={getBlogCategoryHref(category)}
+                  className="hover:text-blue-300 transition-colors"
+                >
+                  {catInfo.name}
+                </Link>
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sortedPosts.map((post) => (

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
+import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://geo-analyzer.com";
 
@@ -68,5 +69,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPages];
+  const categoryPages: MetadataRoute.Sitemap = Object.keys(BLOG_CATEGORIES).map(
+    (category) => ({
+      url: `${baseUrl}/blog/category/${category}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.65,
+    }),
+  );
+
+  return [...staticPages, ...categoryPages, ...blogPages];
 }

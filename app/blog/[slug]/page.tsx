@@ -3,6 +3,11 @@ import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/blog-data";
+import {
+  BLOG_CATEGORIES,
+  CATEGORY_COLOR_CLASSES,
+  getBlogCategoryHref,
+} from "@/lib/blog-categories";
 import { getInternalLinkTargets } from "@/lib/blog-link-matrix";
 import {
   generateBlogPostingSchema,
@@ -3992,6 +3997,8 @@ export default async function BlogPostPage({
   };
   const internalLinks = getInternalLinkTargets(post, blogPosts, 4);
   const faqPairs = extractFaqPairs(content.sections);
+  const categoryInfo = BLOG_CATEGORIES[post.category];
+  const categoryClass = CATEGORY_COLOR_CLASSES[categoryInfo.color];
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: baseUrl },
     { name: "Blog", url: `${baseUrl}/blog` },
@@ -4071,6 +4078,12 @@ export default async function BlogPostPage({
                   year: "numeric",
                 })}
               </time>
+              <Link
+                href={getBlogCategoryHref(post.category)}
+                className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${categoryClass} hover:opacity-90 transition-opacity`}
+              >
+                {categoryInfo.name}
+              </Link>
               {typeof post.score === "number" && (
                 <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full border border-yellow-500/50 text-yellow-300 bg-yellow-500/10">
                   Framework Score: {post.score}/10
