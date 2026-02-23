@@ -93,6 +93,20 @@ const INTERNAL_LINK_CLUSTERS: string[][] = [
     "founder-led-thought-leadership-for-geo",
     "how-to-win-ai-citations",
   ],
+  [
+    "why-chatgpt-vs-claude-perplexity-numbers-differ",
+    "what-is-ssr-for-geo-citations",
+    "content-to-citation-strategy-without-backlinks",
+    "distribution-vs-backlinks-2026-playbook",
+    "medium-crossposting-why-citations-stay-low",
+    "zero-backlinks-4k-citations-methodology",
+    "brand-bias-free-geo-test-protocol",
+    "reddit-digg-distribution-for-ai-citations",
+    "snappy-ssr-website-checklist-for-geo",
+    "agents-vs-manual-link-building-2026",
+    "accidental-ranking-vs-structured-content",
+    "geo-thread-faq-from-real-operators",
+  ],
 ];
 
 export function getInternalLinkTargets(

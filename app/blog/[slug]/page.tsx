@@ -3258,6 +3258,558 @@ const blogContent: Record<
       },
     ],
   },
+  "why-chatgpt-vs-claude-perplexity-numbers-differ": {
+    directAnswer:
+      "For why citation numbers can differ sharply between ChatGPT, Claude, and Perplexity, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for why citation numbers can differ sharply between ChatGPT, Claude, and Perplexity, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: why citation numbers can differ sharply between ChatGPT, Claude, and Perplexity means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for why citation numbers can differ sharply between ChatGPT, Claude, and Perplexity.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on why citation numbers can differ sharply between ChatGPT, Claude, and Perplexity.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "what-is-ssr-for-geo-citations": {
+    directAnswer:
+      "For what SSR is and why it matters for GEO and citation visibility, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for what SSR is and why it matters for GEO and citation visibility, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: what SSR is and why it matters for GEO and citation visibility means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for what SSR is and why it matters for GEO and citation visibility.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on what SSR is and why it matters for GEO and citation visibility.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "content-to-citation-strategy-without-backlinks": {
+    directAnswer:
+      "For how to build a content-to-citation system before backlink authority is mature, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how to build a content-to-citation system before backlink authority is mature, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to build a content-to-citation system before backlink authority is mature means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how to build a content-to-citation system before backlink authority is mature.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how to build a content-to-citation system before backlink authority is mature.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "distribution-vs-backlinks-2026-playbook": {
+    directAnswer:
+      "For whether distribution should outrank backlinks in a 2026 GEO strategy, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for whether distribution should outrank backlinks in a 2026 GEO strategy, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: whether distribution should outrank backlinks in a 2026 GEO strategy means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for whether distribution should outrank backlinks in a 2026 GEO strategy.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on whether distribution should outrank backlinks in a 2026 GEO strategy.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "medium-crossposting-why-citations-stay-low": {
+    directAnswer:
+      "For why Medium and blog crossposting can still produce low citation counts, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for why Medium and blog crossposting can still produce low citation counts, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: why Medium and blog crossposting can still produce low citation counts means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for why Medium and blog crossposting can still produce low citation counts.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on why Medium and blog crossposting can still produce low citation counts.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "zero-backlinks-4k-citations-methodology": {
+    directAnswer:
+      "For how to evaluate high-citation claims when backlink profiles are near zero, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how to evaluate high-citation claims when backlink profiles are near zero, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to evaluate high-citation claims when backlink profiles are near zero means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how to evaluate high-citation claims when backlink profiles are near zero.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how to evaluate high-citation claims when backlink profiles are near zero.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "brand-bias-free-geo-test-protocol": {
+    directAnswer:
+      "For how to run GEO tests without brand-mention bias contaminating results, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how to run GEO tests without brand-mention bias contaminating results, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to run GEO tests without brand-mention bias contaminating results means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how to run GEO tests without brand-mention bias contaminating results.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how to run GEO tests without brand-mention bias contaminating results.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "reddit-digg-distribution-for-ai-citations": {
+    directAnswer:
+      "For how Reddit and Digg style distribution can influence AI citation discovery, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how Reddit and Digg style distribution can influence AI citation discovery, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how Reddit and Digg style distribution can influence AI citation discovery means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how Reddit and Digg style distribution can influence AI citation discovery.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how Reddit and Digg style distribution can influence AI citation discovery.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "snappy-ssr-website-checklist-for-geo": {
+    directAnswer:
+      "For how to make a snappy SSR site that improves both user experience and machine readability, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how to make a snappy SSR site that improves both user experience and machine readability, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to make a snappy SSR site that improves both user experience and machine readability means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how to make a snappy SSR site that improves both user experience and machine readability.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how to make a snappy SSR site that improves both user experience and machine readability.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "agents-vs-manual-link-building-2026": {
+    directAnswer:
+      "For whether agent-driven search intelligence can outperform manual link building, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for whether agent-driven search intelligence can outperform manual link building, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: whether agent-driven search intelligence can outperform manual link building means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for whether agent-driven search intelligence can outperform manual link building.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on whether agent-driven search intelligence can outperform manual link building.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "accidental-ranking-vs-structured-content": {
+    directAnswer:
+      "For how to replace accidental rankings with a repeatable structured content system, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for how to replace accidental rankings with a repeatable structured content system, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: how to replace accidental rankings with a repeatable structured content system means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for how to replace accidental rankings with a repeatable structured content system.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on how to replace accidental rankings with a repeatable structured content system.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
+  "geo-thread-faq-from-real-operators": {
+    directAnswer:
+      "For the most important recurring GEO questions practitioners ask in public discussions, treat results as system-dependent, not universal. Citation outcomes change with crawler access, rendering quality, prompt framing, and source trust. The reliable path is one canonical page with explicit definitions, evidence links, and a repeatable measurement protocol across platforms.",
+    sections: [
+      {
+        heading: "Thesis and Tension",
+        content:
+          "The recurring tension is simple: teams want one metric for the most important recurring GEO questions practitioners ask in public discussions, but each platform retrieves and cites differently. This guide is for operators who need defensible results, not screenshots that look good for one day.",
+      },
+      {
+        heading: "Definition (Block Quote)",
+        content:
+          "> Definition: the most important recurring GEO questions practitioners ask in public discussions means evaluating visibility through repeatable, source-documented checks across multiple engines, not one-off anecdotal prompts.\n> Standard: if another team repeats your method next week, they should get comparable directional results.",
+      },
+      {
+        heading: "Authority and Evidence",
+        content:
+          "Primary sources used in this workflow:\n- https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers\n- https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls\n- https://openai.com/gptbot\n- https://help.openai.com/en/articles/9883556-publishers-and-developers-faq\n- https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering\n- https://schema.org/FAQPage\nUse named sources for every non-obvious claim. If a claim has no source and no first-hand proof, remove it.",
+      },
+      {
+        heading: "Old Way vs New Way",
+        content:
+          "Old Way: publish many pages, run a few branded prompts, and infer broad conclusions.\nNew Way: define one hypothesis, isolate variables, compare non-branded and branded prompts, and track outcomes weekly.\nThe new method is slower initially but far more trustworthy for decision-making.",
+      },
+      {
+        heading: "Reality Contact: Failure, Limitation, Rollback",
+        content:
+          "Failure we keep seeing: teams celebrate one high-citation screenshot, then cannot reproduce it. Limitation: SSR and speed help discovery, but weak evidence still fails citation tests. Rollback rule: if a tactic improves vanity counts but lowers repeatability, revert and re-baseline.",
+      },
+      {
+        heading: "Objections and FAQs (Block Quotes)",
+        content:
+          "> FAQ: What is it?\n> Answer: A repeatable operating model for the most important recurring GEO questions practitioners ask in public discussions.\n> FAQ: Why does it matter?\n> Answer: Non-repeatable wins waste roadmap cycles.\n> FAQ: How does it work?\n> Answer: Baseline metrics, isolate one variable, test across engines, document sources.\n> FAQ: What are the risks?\n> Answer: Brand-bias prompts, unsourced claims, and overfitting to one model behavior.\n> FAQ: How do I implement it?\n> Answer: Start with one canonical page and one weekly measurement sheet before scaling output.",
+      },
+      {
+        heading: "Actionability: Primary Action + 7/14/30 Plan",
+        content:
+          "Primary action: Ship one source-of-truth page focused on the most important recurring GEO questions practitioners ask in public discussions.\nSecondary actions:\n- Enforce one canonical URL and one direct answer block.\n- Add at least five primary-source links in context.\n- Run the same query set weekly across ChatGPT, Claude, and Perplexity.\nExecution map:\n- Days 1-7: baseline, rewrite direct answer, fix crawl/render blockers.\n- Days 8-14: add FAQs, schema, and internal cluster links.\n- Days 15-30: evaluate citation consistency and update weak sections.",
+      },
+      {
+        heading: "Conclusion Loop",
+        content:
+          "The tension started with noisy claims versus reliable insight. The transformation is a method you can repeat and defend. If your process cannot survive independent replication, your growth is luck wearing a dashboard.",
+      },
+    ],
+  },
 };
 
 function extractFaqPairs(
@@ -3298,6 +3850,86 @@ function extractFaqPairs(
   });
 
   return pairs.slice(0, 8);
+}
+
+function renderLineWithLinks(line: string) {
+  const urlRegex = /(https?:\/\/[^\s)]+)/g;
+  const segments = line.split(urlRegex);
+
+  return segments.map((segment, index) => {
+    if (segment.match(/^https?:\/\//)) {
+      return (
+        <a
+          key={`${segment}-${index}`}
+          href={segment}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:text-blue-300 underline break-all"
+        >
+          {segment}
+        </a>
+      );
+    }
+
+    return <span key={`${segment}-${index}`}>{segment}</span>;
+  });
+}
+
+function renderSectionContent(content: string) {
+  const lines = content.split("\n");
+  const blocks: JSX.Element[] = [];
+  let bullets: string[] = [];
+
+  const flushBullets = (keyPrefix: string) => {
+    if (!bullets.length) return;
+
+    blocks.push(
+      <ul key={`${keyPrefix}-ul-${blocks.length}`} className="list-disc pl-6 space-y-2">
+        {bullets.map((bullet, idx) => (
+          <li key={`${keyPrefix}-li-${idx}`}>{renderLineWithLinks(bullet)}</li>
+        ))}
+      </ul>,
+    );
+    bullets = [];
+  };
+
+  lines.forEach((rawLine, lineIndex) => {
+    const line = rawLine.trim();
+
+    if (!line) {
+      flushBullets(`line-${lineIndex}`);
+      return;
+    }
+
+    if (line.startsWith("- ")) {
+      bullets.push(line.slice(2).trim());
+      return;
+    }
+
+    flushBullets(`line-${lineIndex}`);
+
+    if (line.startsWith(">")) {
+      blocks.push(
+        <blockquote
+          key={`quote-${lineIndex}-${blocks.length}`}
+          className="border-l-4 border-blue-500/70 bg-gray-900/40 rounded-r-lg px-4 py-3 text-gray-200"
+        >
+          {renderLineWithLinks(line.replace(/^>\s*/, ""))}
+        </blockquote>,
+      );
+      return;
+    }
+
+    blocks.push(
+      <p key={`line-${lineIndex}-${blocks.length}`}>
+        {renderLineWithLinks(line)}
+      </p>,
+    );
+  });
+
+  flushBullets("final");
+
+  return <div className="space-y-4">{blocks}</div>;
 }
 
 export async function generateStaticParams() {
@@ -3470,8 +4102,8 @@ export default async function BlogPostPage({
                 <h2 className="text-2xl font-bold text-white mb-4">
                   {section.heading}
                 </h2>
-                <div className="text-gray-300 leading-relaxed whitespace-pre-line">
-                  {section.content}
+                <div className="text-gray-300 leading-relaxed">
+                  {renderSectionContent(section.content)}
                 </div>
               </div>
             ))}

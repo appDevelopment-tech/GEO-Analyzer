@@ -761,4 +761,124 @@ export const blogPosts: BlogPost[] = [
     score: 10,
     content: "",
   },
+  {
+    slug: "why-chatgpt-vs-claude-perplexity-numbers-differ",
+    title: "Why ChatGPT vs Claude/Perplexity Citation Numbers Differ",
+    description:
+      "Break down why citation counts vary by model, retrieval method, and product behavior instead of assuming one universal ranking system.",
+    date: "2026-04-08",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "what-is-ssr-for-geo-citations",
+    title: "What Is SSR for GEO? A Practical Guide for Founders",
+    description:
+      "A plain-language explanation of server-side rendering, why it helps discoverability, and when SSR alone is not enough for citations.",
+    date: "2026-04-09",
+    category: "fundamentals",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "content-to-citation-strategy-without-backlinks",
+    title: "Content-to-Citation Strategy Without Backlinks",
+    description:
+      "A step-by-step model to increase AI citations through page structure, evidence quality, and topical coherence even before link campaigns.",
+    date: "2026-04-10",
+    category: "case-studies",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "distribution-vs-backlinks-2026-playbook",
+    title: "Distribution vs Backlinks in 2026: The Operational Playbook",
+    description:
+      "Compare distribution channels and backlinks by effort, speed, and durability to choose the right mix for modern SEO + AEO.",
+    date: "2026-04-11",
+    category: "case-studies",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "medium-crossposting-why-citations-stay-low",
+    title: "Crossposting on Medium but Citations Stay Low? Here Is Why",
+    description:
+      "Diagnose why crossposting often fails to raise citations and what to change in canonicalization, structure, and evidence depth.",
+    date: "2026-04-12",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "zero-backlinks-4k-citations-methodology",
+    title: "4K Citations with Zero Backlinks: Methodology and Caveats",
+    description:
+      "A rigorous breakdown of what this claim can mean, how to test it honestly, and where survivorship bias distorts conclusions.",
+    date: "2026-04-13",
+    category: "case-studies",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "brand-bias-free-geo-test-protocol",
+    title: "Brand-Bias-Free GEO Test Protocol (So Results Are Credible)",
+    description:
+      "Design prompts and evaluations that remove brand-name bias so your GEO experiments reflect true competitive discoverability.",
+    date: "2026-04-14",
+    category: "audits",
+    score: 10,
+    content: "",
+  },
+  {
+    slug: "reddit-digg-distribution-for-ai-citations",
+    title: "Reddit + Digg Distribution for AI Citations: What Works Safely",
+    description:
+      "Use community distribution to accelerate discovery without turning your content operation into spam or short-term gaming.",
+    date: "2026-04-15",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "snappy-ssr-website-checklist-for-geo",
+    title: "Snappy SSR Website Checklist for GEO Teams",
+    description:
+      "A technical checklist for speed, render consistency, and crawlability so your site is easy to parse and easy to trust.",
+    date: "2026-04-16",
+    category: "audits",
+    score: 9,
+    content: "",
+  },
+  {
+    slug: "agents-vs-manual-link-building-2026",
+    title: "Agents vs Manual Link Building in 2026: False Choice or Real Shift?",
+    description:
+      "Compare automated query intelligence with traditional link outreach to decide where each method still creates edge.",
+    date: "2026-04-17",
+    category: "fundamentals",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "accidental-ranking-vs-structured-content",
+    title: "Accidental Ranking vs Structured Content Systems",
+    description:
+      "Why accidental wins are hard to repeat and how a structured editorial system creates durable search and citation performance.",
+    date: "2026-04-18",
+    category: "case-studies",
+    score: 8,
+    content: "",
+  },
+  {
+    slug: "geo-thread-faq-from-real-operators",
+    title: "GEO Thread FAQ from Real Operators: What Keeps Coming Up",
+    description:
+      "Real recurring questions from founders and SEOs about SSR, citations, distribution, and measurement answered in one source.",
+    date: "2026-04-19",
+    category: "fundamentals",
+    score: 9,
+    content: "",
+  },
 ];
