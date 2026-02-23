@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
+import { getAuthorForPost, getAuthorHref } from "@/lib/authors";
 import { blogPosts } from "@/lib/blog-data";
 import {
   BLOG_CATEGORIES,
@@ -13,6 +14,7 @@ import {
   generateBlogPostingSchema,
   generateBreadcrumbSchema,
   generateFAQPageSchema,
+  generatePersonSchema,
 } from "@/lib/schema-data";
 import { Footer } from "@/components/Footer";
 
@@ -3956,6 +3958,7 @@ export async function generateMetadata({
       title: "Post Not Found – GeoAnalyzer",
     };
   }
+  const author = getAuthorForPost(post);
 
   return {
     title: `${post.title} – GeoAnalyzer`,
@@ -3966,6 +3969,7 @@ export async function generateMetadata({
       url: `${baseUrl}/blog/${slug}`,
       type: "article",
       publishedTime: post.date,
+      authors: [author.name],
     },
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,
@@ -3985,6 +3989,7 @@ export default async function BlogPostPage({
   if (!post || !content) {
     notFound();
   }
+  const author = getAuthorForPost(post);
 
   const schema = {
     ...generateBlogPostingSchema({
@@ -3992,6 +3997,13 @@ export default async function BlogPostPage({
       description: post.description,
       datePublished: post.date,
       slug,
+      author: {
+        slug: author.slug,
+        name: author.name,
+        role: author.role,
+        sameAs: author.sameAs,
+        knowsAbout: author.knowsAbout,
+      },
     }),
     "@context": "https://schema.org",
   };
@@ -4004,6 +4016,7 @@ export default async function BlogPostPage({
     { name: "Blog", url: `${baseUrl}/blog` },
     { name: post.title, url: `${baseUrl}/blog/${slug}` },
   ]);
+  const personSchema = generatePersonSchema(author);
   const faqSchema =
     faqPairs.length >= 2 ? generateFAQPageSchema(faqPairs) : null;
 
@@ -4018,6 +4031,11 @@ export default async function BlogPostPage({
         id={`schema-breadcrumb-${slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <Script
+        id={`schema-person-${slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
       {faqSchema && (
         <Script
@@ -4078,6 +4096,12 @@ export default async function BlogPostPage({
                   year: "numeric",
                 })}
               </time>
+              <Link
+                href={getAuthorHref(author.slug)}
+                className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors"
+              >
+                By {author.name}
+              </Link>
               <Link
                 href={getBlogCategoryHref(post.category)}
                 className={`inline-block px-3 py-1 text-xs font-medium rounded-full border ${categoryClass} hover:opacity-90 transition-opacity`}

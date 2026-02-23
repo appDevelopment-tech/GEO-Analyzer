@@ -88,6 +88,33 @@ export function generateItemListSchema(
   };
 }
 
+export function generatePersonSchema(person: {
+  name: string;
+  slug: string;
+  role: string;
+  bio: string;
+  knowsAbout: string[];
+  sameAs?: string[];
+}) {
+  const url = `${baseUrl}/authors/${person.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": url,
+    name: person.name,
+    url,
+    description: person.bio,
+    jobTitle: person.role,
+    knowsAbout: person.knowsAbout,
+    sameAs: person.sameAs || [],
+    worksFor: {
+      "@type": "Organization",
+      name: "GeoAnalyzer",
+      url: baseUrl,
+    },
+  };
+}
+
 export function generateSoftwareApplicationSchema() {
   return {
     "@context": "https://schema.org",
@@ -117,6 +144,13 @@ export function generateBlogPostingSchema(post: {
   description: string;
   datePublished: string;
   slug: string;
+  author?: {
+    slug: string;
+    name: string;
+    role?: string;
+    sameAs?: string[];
+    knowsAbout?: string[];
+  };
 }) {
   const url = `${baseUrl}/blog/${post.slug}`;
   return {
@@ -127,10 +161,20 @@ export function generateBlogPostingSchema(post: {
     image: `${baseUrl}/og-image.png`,
     datePublished: post.datePublished,
     dateModified: post.datePublished,
-    author: {
-      "@type": "Organization",
-      name: "GeoAnalyzer",
-    },
+    author: post.author
+      ? {
+          "@type": "Person",
+          "@id": `${baseUrl}/authors/${post.author.slug}`,
+          name: post.author.name,
+          url: `${baseUrl}/authors/${post.author.slug}`,
+          jobTitle: post.author.role,
+          knowsAbout: post.author.knowsAbout || [],
+          sameAs: post.author.sameAs || [],
+        }
+      : {
+          "@type": "Organization",
+          name: "GeoAnalyzer",
+        },
     publisher: {
       "@type": "Organization",
       name: "GeoAnalyzer",

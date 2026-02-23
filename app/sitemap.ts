@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { AUTHORS, getAuthorHref } from "@/lib/authors";
 import { blogPosts } from "@/lib/blog-data";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
@@ -35,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/authors`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.55,
     },
     {
       url: `${baseUrl}/about`,
@@ -78,5 +85,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...staticPages, ...categoryPages, ...blogPages];
+  const authorPages: MetadataRoute.Sitemap = AUTHORS.map((author) => ({
+    url: `${baseUrl}${getAuthorHref(author.slug)}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  return [...staticPages, ...categoryPages, ...authorPages, ...blogPages];
 }
